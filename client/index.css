@@ -1,0 +1,27 @@
+html {
+  height: 100vh;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0px;
+}
+
+#app, #leticia-app {
+/*#app, #leticia-app, #leticia-content {*/
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+}
+
+.loading-modal {
+  text-align: center;
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.modal-open .modal,
+.modal-backdrop {
+  top: 56px !important;
+}

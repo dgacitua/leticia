@@ -102,3 +102,13 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Parcel Bundler
+.cache/
+dist/
+
+# Node.js builds
+build/
+
+# Macbook files
+.DS_Store
