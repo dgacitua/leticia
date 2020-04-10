@@ -1,4 +1,4 @@
-function keydown(evt) {
+const keydown = (evt) => {
   let message = {
     type      : 'KeyDown',
     source    : 'Window',
@@ -9,9 +9,12 @@ function keydown(evt) {
     charCode  : evt.charCode,
     key       : evt.key
   };
+
+  window.dispatchEvent(new CustomEvent('leticia-track', { detail: message }));
+  //console.log(message.type, `KEY: ${message.key}`, `TS: ${message.timestamp}`);
 }
 
-function keyup(evt) {
+const keyup = (evt) => {
   let message = {
     type      : 'KeyUp',
     source    : 'Window',
@@ -21,11 +24,13 @@ function keyup(evt) {
     keyCode   : evt.keyCode,
     charCode  : evt.charCode,
     key       : evt.key
-    // chr: evt.key
   };
+
+  window.dispatchEvent(new CustomEvent('leticia-track', { detail: message }));
+  //console.log(message.type, `KEY: ${message.key}`, `TS: ${message.timestamp}`);
 }
 
-function keypress(evt) {
+const keypress = (evt) =>  {
   let message = {
     type      : 'KeyPress',
     source    : 'Window',
@@ -35,10 +40,20 @@ function keypress(evt) {
     keyCode   : evt.keyCode,
     charCode  : evt.charCode,
     key       : evt.key
-    // chr: evt.key
   };
+
+  window.dispatchEvent(new CustomEvent('leticia-track', { detail: message }));
+  //console.log(message.type, `KEY: ${message.key}`, `TS: ${message.timestamp}`);
 }
 
-window.addEventListener('keydown' , keydown);
-window.addEventListener('keyup' , keyup);
-window.addEventListener('keypress' , keypress);
+export const bindTracker = () => {
+  window.addEventListener('keydown' , keydown);
+  window.addEventListener('keyup' , keyup);
+  window.addEventListener('keypress' , keypress);
+};
+
+export const unbindTracker = () => {
+  window.removeEventListener('keydown' , keydown);
+  window.removeEventListener('keyup' , keyup);
+  window.removeEventListener('keypress' , keypress);
+};
