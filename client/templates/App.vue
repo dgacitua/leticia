@@ -7,7 +7,7 @@
 
 <script>
 //import WebSocket from '../services/WebSocket';
-import Navbar from './Navbar.vue';
+import Navbar from './Navbar';
 import axios from 'axios';
 
 import * as KeystrokeTracker from '../trackers/keystroke';
@@ -27,10 +27,6 @@ export default {
     window.addEventListener('leticia-track', (e) => {
       this.captureTrack(e.detail);
     });
-  },
-
-  mounted() {
-    // TODO
   },
 
   beforeDestroy() {
@@ -61,7 +57,7 @@ export default {
       }
 
       if (true) { // Add login check
-        console.log(`[CaptureTrack]`, `TYPE: ${message.type}`, `TS: ${message.timestamp}`, message);
+        //console.log(`[CaptureTrack]`, `TYPE: ${message.type}`, `TS: ${message.timestamp}`, message);
 
         let restByType = {
           'KeyDown': 'keystrokes',
