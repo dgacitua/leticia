@@ -18,6 +18,12 @@ export default {
   components: {
     navbar: Navbar
   },
+
+  computed: {
+    remainingTime() {
+      return this.$store.state.remainingTime
+    }
+  },
   
   beforeMount() {
     KeystrokeTracker.bindTracker();
@@ -27,6 +33,10 @@ export default {
     window.addEventListener('leticia-track', (e) => {
       this.captureTrack(e.detail);
     });
+  },
+
+  mounted() {
+    console.log(`Remaining time: ${this.remainingTime}`);
   },
 
   beforeDestroy() {

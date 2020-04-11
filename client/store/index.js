@@ -11,7 +11,8 @@ const vuexLocal = new VuexPersistence({
 export default new Vuex.Store({
   state: {
     query: null,
-    documents: []
+    documents: [],
+    remainingTime: 120
   },
   mutations: {
     setQuery(state, query) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     setDocuments(state, documents) {
       state.documents = documents;
     },
+    decreaseTime(state) {
+      state.remainingTime--;
+    }
   },
   actions: {
 
