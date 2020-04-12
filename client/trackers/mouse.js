@@ -12,8 +12,8 @@ const mouseclick = (evt) => {
     h_win : window.innerHeight,
     x_doc : evt.pageX,
     y_doc : evt.pageY,
-    w_doc : document.body.clientWidth,
-    h_doc : document.body.clientHeight
+    w_doc : document.documentElement.scrollWidth,
+    h_doc : document.documentElement.scrollHeight
   };
   
   window.dispatchEvent(new CustomEvent('leticia-track', { detail: message }));
@@ -32,8 +32,8 @@ const mousemove = (evt) => {
     h_win : window.innerHeight,
     x_doc : evt.pageX,
     y_doc : evt.pageY,
-    w_doc : document.body.clientWidth,
-    h_doc : document.body.clientHeight
+    w_doc : document.documentElement.scrollWidth,
+    h_doc : document.documentElement.scrollHeight
   };
 
   window.dispatchEvent(new CustomEvent('leticia-track', { detail: message }));

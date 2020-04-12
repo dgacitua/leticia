@@ -6,12 +6,12 @@ const scroll = (evt) => {
     source: 'Window',
     url   : window.document.URL,
     clientTimestamp: Date.now(),
-    x_scr : document.scrollX,
-    y_scr : document.scrollY,
+    x_scr : window.scrollX,
+    y_scr : window.scrollY,
     w_win : window.innerWidth,
     h_win : window.innerHeight,
-    w_doc : document.body.clientWidth,
-    h_doc : document.body.clientHeight
+    w_doc : document.documentElement.scrollWidth,
+    h_doc : document.documentElement.scrollHeight
   };
 
   window.dispatchEvent(new CustomEvent('leticia-track', { detail: message }));
