@@ -3,7 +3,7 @@ const keydown = (evt) => {
     type      : 'KeyDown',
     source    : 'Window',
     url       : window.document.URL,
-    timestamp : Date.now(),
+    clientTimestamp : Date.now(),
     which     : evt.which,
     keyCode   : evt.keyCode,
     charCode  : evt.charCode,
@@ -11,7 +11,7 @@ const keydown = (evt) => {
   };
 
   window.dispatchEvent(new CustomEvent('leticia-track', { detail: message }));
-  //console.log(message.type, `KEY: ${message.key}`, `TS: ${message.timestamp}`);
+  //console.log(message.type, `KEY: ${message.key}`, `TS: ${message.clientTimestamp}`);
 }
 
 const keyup = (evt) => {
@@ -19,7 +19,7 @@ const keyup = (evt) => {
     type      : 'KeyUp',
     source    : 'Window',
     url       : window.document.URL,
-    timestamp : Date.now(),
+    clientTimestamp : Date.now(),
     which     : evt.which,
     keyCode   : evt.keyCode,
     charCode  : evt.charCode,
@@ -27,7 +27,7 @@ const keyup = (evt) => {
   };
 
   window.dispatchEvent(new CustomEvent('leticia-track', { detail: message }));
-  //console.log(message.type, `KEY: ${message.key}`, `TS: ${message.timestamp}`);
+  //console.log(message.type, `KEY: ${message.key}`, `TS: ${message.clientTimestamp}`);
 }
 
 const keypress = (evt) =>  {
@@ -35,7 +35,7 @@ const keypress = (evt) =>  {
     type      : 'KeyPress',
     source    : 'Window',
     url       : window.document.URL,
-    timestamp : Date.now(),
+    clientTimestamp : Date.now(),
     which     : evt.which,
     keyCode   : evt.keyCode,
     charCode  : evt.charCode,
@@ -43,7 +43,7 @@ const keypress = (evt) =>  {
   };
 
   window.dispatchEvent(new CustomEvent('leticia-track', { detail: message }));
-  //console.log(message.type, `KEY: ${message.key}`, `TS: ${message.timestamp}`);
+  //console.log(message.type, `KEY: ${message.key}`, `TS: ${message.clientTimestamp}`);
 }
 
 export const bindTracker = () => {

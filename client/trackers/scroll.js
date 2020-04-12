@@ -5,7 +5,7 @@ const scroll = (evt) => {
     type  : 'Scroll',
     source: 'Window',
     url   : window.document.URL,
-    timestamp: Date.now(),
+    clientTimestamp: Date.now(),
     x_scr : document.scrollX,
     y_scr : document.scrollY,
     w_win : window.innerWidth,
@@ -15,7 +15,7 @@ const scroll = (evt) => {
   };
 
   window.dispatchEvent(new CustomEvent('leticia-track', { detail: message }));
-  //console.log(message.type, `X: ${message.x_scr}`, `Y: ${message.y_scr}`, `TS: ${message.timestamp}`);
+  //console.log(message.type, `X: ${message.x_scr}`, `Y: ${message.y_scr}`, `TS: ${message.clientTimestamp}`);
 }
 
 export const bindTracker = () => {

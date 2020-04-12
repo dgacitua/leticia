@@ -8,6 +8,7 @@ import bodyParser from 'body-parser';
 import SockJS from 'sockjs';
 
 //import api1 from './api1';
+import { redirectInteraction } from './websocketRouter';
 
 const app = express();
 const port = 3001;
@@ -24,11 +25,7 @@ app.use(cors());
 
 // WebSocket event handler
 echo.on('connection', (conn) => {
-  conn.on('data', (message) => {
-    let msg = JSON.parse(message);
-    msg.serverTimestamp = Date.now();
-    console.log(msg);
-  });
+  conn.on('data', (message) => { redirectInteraction(message) });
   conn.on('close', () => {});
 });
 

@@ -36,7 +36,7 @@ export default {
         type  : 'QueryFocus',
         source: 'Window',
         url   : window.document.URL,
-        timestamp: Date.now(),
+        clientTimestamp: Date.now(),
         textboxName: evt.target.name
       };
 
@@ -47,7 +47,7 @@ export default {
         type  : 'QueryBlur',
         source: 'Window',
         url   : window.document.URL,
-        timestamp: Date.now(),
+        clientTimestamp: Date.now(),
         textboxName: evt.target.name
       };
 

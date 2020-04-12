@@ -14,6 +14,11 @@ export default new Vuex.Store({
     documents: [],
     remainingTime: 120
   },
+  getters: {
+    remainingTime: (state) => {
+      return state.remainingTime;
+    }
+  },
   mutations: {
     setQuery(state, query) {
       state.query = query;
@@ -23,10 +28,18 @@ export default new Vuex.Store({
     },
     decreaseTime(state) {
       state.remainingTime--;
+    },
+    changeTime(state, payload) {
+      state.remainingTime += payload.amount;
     }
   },
   actions: {
-
+    changeTime(context) {
+      return new Promise((resolve, reject) => {
+        context.commit({ type: 'changeType', amount: -1 });
+        resolve();
+      });
+    }
   },
   plugins: [
     vuexLocal.plugin

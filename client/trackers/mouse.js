@@ -5,7 +5,7 @@ const mouseclick = (evt) => {
     type  : 'MouseClick',
     source: 'Window',
     url   : window.document.URL,
-    timestamp: Date.now(),
+    clientTimestamp: Date.now(),
     x_win : evt.clientX,
     y_win : evt.clientY,
     w_win : window.innerWidth,
@@ -17,7 +17,7 @@ const mouseclick = (evt) => {
   };
   
   window.dispatchEvent(new CustomEvent('leticia-track', { detail: message }));
-  //console.log(message.type, `X: ${message.x_win}`, `Y: ${message.y_win}`, `TS: ${message.timestamp}`);
+  //console.log(message.type, `X: ${message.x_win}`, `Y: ${message.y_win}`, `TS: ${message.clientTimestamp}`);
 }
 
 const mousemove = (evt) => {
@@ -25,7 +25,7 @@ const mousemove = (evt) => {
     type  : 'MouseMovement',
     source: 'Window',
     url   : window.document.URL,
-    timestamp: Date.now(),
+    clientTimestamp: Date.now(),
     x_win : evt.clientX,
     y_win : evt.clientY,
     w_win : window.innerWidth,
@@ -37,7 +37,7 @@ const mousemove = (evt) => {
   };
 
   window.dispatchEvent(new CustomEvent('leticia-track', { detail: message }));
-  //console.log(message.type, `X: ${message.x_win}`, `Y: ${message.y_win}`, `TS: ${message.timestamp}`);
+  //console.log(message.type, `X: ${message.x_win}`, `Y: ${message.y_win}`, `TS: ${message.clientTimestamp}`);
 }
 
 export const bindTracker = () => {

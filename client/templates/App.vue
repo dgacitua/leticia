@@ -6,13 +6,15 @@
 </template>
 
 <script>
-//import WebSocket from '../services/WebSocket';
-import Navbar from './Navbar';
 import axios from 'axios';
+
+import WebSocket from '../services/WebSocket';
 
 import * as KeystrokeTracker from '../trackers/keystroke';
 import * as MouseTracker from '../trackers/mouse';
 import * as ScrollTracker from '../trackers/scroll';
+
+import Navbar from './Navbar';
 
 export default {
   components: {
@@ -67,7 +69,7 @@ export default {
       }
 
       if (true) { // Add login check
-        //console.log(`[CaptureTrack]`, `TYPE: ${message.type}`, `TS: ${message.timestamp}`, message);
+        //console.log(`[CaptureTrack]`, `TYPE: ${message.type}`, `TS: ${message.clientTimestamp}`, message);
 
         let restByType = {
           'KeyDown': 'keystrokes',
@@ -79,6 +81,8 @@ export default {
         };
 
         if (restByType[message.type]) {
+          WebSocket.sendMessage(message);
+
           // Tracks will be saved only when the extension is open.
           /*
           axios.post(`http://localhost:3001/v1/${restByType[message.type]}/`, message)
