@@ -82,17 +82,6 @@ export default {
 
         if (restByType[message.type]) {
           WebSocket.sendMessage(message);
-
-          // Tracks will be saved only when the extension is open.
-          /*
-          axios.post(`http://localhost:3001/v1/${restByType[message.type]}/`, message)
-            .then(response => {
-              // console.log(`[${Date.now()}] track saved`, response.data);
-            })
-            .catch(error => {
-              console.log(JSON.stringify(error));
-            });
-          */
         }
       }
     }

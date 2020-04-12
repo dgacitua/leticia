@@ -32,7 +32,7 @@ const scrollActionSchema = Mongoose.Schema({
     type: Number,
     required: false,
   },
-  y_src: {
+  y_scr: {
     type: Number,
     required: false,
   },
