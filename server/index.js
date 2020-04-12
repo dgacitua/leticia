@@ -7,7 +7,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import SockJS from 'sockjs';
 
-//import api1 from './api1';
+import api1 from './api1';
 import { redirectInteraction } from './websocketRouter';
 
 const app = express();
@@ -20,8 +20,9 @@ app.use(bodyParser.json());
 
 // CORS support
 app.use(cors());
+
 // Add routes
-//app.use('/v1', api1);
+app.use('/v1', api1);
 
 // WebSocket event handler
 echo.on('connection', (conn) => {

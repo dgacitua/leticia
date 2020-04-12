@@ -1,7 +1,11 @@
 <template>
   <div>
     <div>
-      Ingresa tus consultas acá:
+      <b>{{ props.title }}</b>
+      <span v-if="props.required" class="form-asterisk">*</span>
+    </div>
+    <div v-if="props.hint" class="help-block">
+      {{ props.hint }}
     </div>
     <div v-for="q in scale" :key="q.queryNum">
       <b-form-input

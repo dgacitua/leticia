@@ -4,9 +4,10 @@ import express from 'express';
 //import search from './routes/search';
 //import interactions from './routes/interactions';
 //import bookmarks from './routes/bookmarks';
-import keystrokes from './routes/keystrokes';
+//import keystrokes from './routes/keystrokes';
 //import mousetrack from './routes/mousetrack';
 //import scrolltrack from './routes/scrolltrack';
+import forms from './routes/forms';
 
 const router = express.Router();
 
@@ -14,8 +15,9 @@ const router = express.Router();
 //router.use('/search', search);
 //router.use('/interactions', interactions);
 //router.use('/bookmarks', bookmarks);
-router.use('/keystrokes', keystrokes);
+//router.use('/keystrokes', keystrokes);
 //router.use('/mousetracks', mousetrack);
 //router.use('/scrolltracks', scrolltrack);
+router.use('/form', forms);
 
 export default router;
