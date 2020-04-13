@@ -9,7 +9,7 @@ const router = express.Router();
 
 const getForm = async (request, response, next) => {
   try {
-    const { id } = request.query;
+    const { id } = request.params;
     const form = await Form.findOne({ formId: id });
     
     const fn1 = async (arr) => Promise.all(arr.map(el => Question.findOne({ questionId: el })));
@@ -23,6 +23,6 @@ const getForm = async (request, response, next) => {
   }
 }
 
-router.get('/', getForm);
+router.get('/:id', getForm);
 
 export default router;

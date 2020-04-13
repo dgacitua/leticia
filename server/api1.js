@@ -8,6 +8,7 @@ import express from 'express';
 //import mousetrack from './routes/mousetrack';
 //import scrolltrack from './routes/scrolltrack';
 import forms from './routes/forms';
+import tasks from './routes/tasks';
 
 const router = express.Router();
 
@@ -18,6 +19,7 @@ const router = express.Router();
 //router.use('/keystrokes', keystrokes);
 //router.use('/mousetracks', mousetrack);
 //router.use('/scrolltracks', scrolltrack);
-router.use('/form', forms);
+router.use('/forms', forms);
+router.use('/tasks', tasks);
 
 export default router;

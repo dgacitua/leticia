@@ -7,16 +7,17 @@
       <span>{{ task.description }}</span>
     </b-row>
     <b-row class="space-bottom">
+      <div>Respecto a la tarea seleccionada, responde las siguientes preguntas:</div>
+    </b-row>
+    <b-row class="space-bottom">
       <b-form id="app" @submit="onSubmit">
         <b-row v-for="q in questions" :key="q.questionId">
-          <!--
           <b-row v-if="q.type==='likert'">
             <likertscale :props="q"></likertscale>
           </b-row>
           <b-row v-if="q.type==='paragraph'">
             <paragraph :props="q"></paragraph>
           </b-row>
-          -->
           <b-row v-if="q.type==='multiquery'">
             <multiquery :props="q"></multiquery>
           </b-row>
@@ -87,7 +88,13 @@ export default {
 
       console.log(response);  // TODO Store answer in backend
 
-      this.$router.push({ path: 'taskform', query: { task: this.$route.query.task, form: Constants.posttaskForm }});
+      if (formId === Constants.pretaskForm) {
+        this.$router.push({ path: 'query', query: { task: this.$route.query.task, form: Constants.queryForm }});
+      }
+      else {
+        this.$store.commit({ type: 'setTaskAsDone', taskId: taskId });
+        this.$router.push({ path: 'tasks' });
+      }
     }
   }
 }

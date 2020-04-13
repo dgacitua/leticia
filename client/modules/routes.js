@@ -9,6 +9,7 @@ import Home from '../templates/Home.vue';
 import InformedConsent from '../templates/InformedConsent.vue';
 import Instructions from '../templates/Instructions.vue';
 //import Login from '../templates/Login.vue';
+import TaskForm from '../templates/queryPlanning/TaskForm.vue';
 import TaskSelector from '../templates/queryPlanning/TaskSelector.vue';
 import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
 import NotFound from '../templates/NotFound.vue';
@@ -59,6 +60,14 @@ export const router = new VueRouter({
       path: '/tasks',
       name: 'tasks',
       component: TaskSelector,
+      meta: {
+        auth: false
+      }
+    },
+    {
+      path: '/taskform',
+      name: 'taskform',
+      component: TaskForm,
       meta: {
         auth: false
       }

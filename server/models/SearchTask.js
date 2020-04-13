@@ -16,6 +16,6 @@ const searchTaskSchema = Mongoose.Schema({
   }
 });
 
-const SearchTask = Mongoose.model('SearchTask', searchTaskSchema);
+const SearchTask = Mongoose.model('Task', searchTaskSchema);
 
 export default SearchTask;

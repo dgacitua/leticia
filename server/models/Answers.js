@@ -13,6 +13,10 @@ const answerSchema = Mongoose.Schema({
   taskId: {
     type: String,
     required: true
+  },
+  answers: {
+    type: [ Object ],
+    required: true
   }
 }, { strict: false });
 

@@ -13,7 +13,8 @@ export default new Vuex.Store({
     query: null,
     documents: [],
     remainingTime: 120,
-    tasks: []
+    tasks: [],
+    currentRoute: {}
   },
   getters: {
     remainingTime: (state) => {
@@ -35,6 +36,14 @@ export default new Vuex.Store({
     },
     setTasks(state, payload) {
       state.tasks = payload.tasks;
+    },
+    setTaskAsDone(state, payload) {
+      let taskIdx = state.tasks.findIndex(t => { return t.searchTaskId === payload.taskId });
+      state.tasks[taskIdx].completed = true;
+    },
+    eraseAll(state) {
+      state.remainingTime = 120;
+      state.tasks = [];
     }
   },
   actions: {

@@ -81,7 +81,7 @@ export default {
 }
 
 .query-box {
-  max-width: 75%;
-  margin-bottom: 5px;
+  max-width: 100%;
+  margin-bottom: 10px;
 }
 </style>
