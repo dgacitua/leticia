@@ -6,8 +6,11 @@ import VueAxios from 'vue-axios';
 import * as Constants from '../services/Constants';
 
 import Home from '../templates/Home.vue';
+import InformedConsent from '../templates/InformedConsent.vue';
+import Instructions from '../templates/Instructions.vue';
 //import Login from '../templates/Login.vue';
-//import PageFrame from '../templates/PageFrame.vue';
+import TaskSelector from '../templates/queryPlanning/TaskSelector.vue';
+import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
 import NotFound from '../templates/NotFound.vue';
 
 Vue.use(VueRouter);
@@ -36,16 +39,38 @@ export const router = new VueRouter({
         auth: false
       }
     },
-    /*
     {
-      path: '/result-page',
-      name: 'page-frame',
-      component: PageFrame,
+      path: '/consent',
+      name: 'consent',
+      component: InformedConsent,
       meta: {
-        auth: true
+        auth: false
       }
     },
-    */
+    {
+      path: '/instructions',
+      name: 'instructions',
+      component: Instructions,
+      meta: {
+        auth: false
+      }
+    },
+    {
+      path: '/tasks',
+      name: 'tasks',
+      component: TaskSelector,
+      meta: {
+        auth: false
+      }
+    },
+    {
+      path: '/query',
+      name: 'query',
+      component: QueryWriter,
+      meta: {
+        auth: false
+      }
+    },
     {
       path: '*',
       name: 'not-found',

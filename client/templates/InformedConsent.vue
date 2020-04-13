@@ -1,20 +1,20 @@
 <template>
   <b-container>
     <b-row>
-      <h1>Instrucciones</h1>
+      <h1>Consentimiento Informado</h1>
     </b-row>
     <b-row>
-      TODO Instrucciones
+      TODO Consentimiento Informado
     </b-row>
     <b-row>
-      <b-link to="tasks">Ir a la tarea</b-link>
+      <b-link to="instructions">Acepto participar en el estudio</b-link>
     </b-row>
   </b-container>
 </template>
 
 <script>
 export default {
-  name: 'instructions'
+  name: 'informed-consent'
 }
 </script>
 

@@ -12,7 +12,8 @@ export default new Vuex.Store({
   state: {
     query: null,
     documents: [],
-    remainingTime: 120
+    remainingTime: 120,
+    tasks: []
   },
   getters: {
     remainingTime: (state) => {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     },
     changeTime(state, payload) {
       state.remainingTime += payload.amount;
+    },
+    setTasks(state, payload) {
+      state.tasks = payload.tasks;
     }
   },
   actions: {
