@@ -8,7 +8,7 @@ import VueAuth from '@websanova/vue-auth';
 
 import App from './templates/App.vue';
 import { router } from './modules/routes';
-import store from './store/index';
+import store from './modules/store';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
