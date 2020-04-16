@@ -1,29 +1,34 @@
 <template>
-  <div>
-    <div>
-      <b>{{ props.title }}</b>
-      <span v-if="props.required" class="form-asterisk">*</span>
-    </div>
-    <div v-if="props.hint" class="help-block">
-      {{ props.hint }}
-    </div>
-    <div v-for="q in scale" :key="q.queryNum">
-      <b-form-input
-        v-model="props.answer[q.queryNum]"
-        :name="`query-${props.questionId}-${q.queryNum}`"
-        :required="setRequiredQuery(q.queryNum)"
-        @focus="focusTrack"
-        @blur="blurTrack"
-        class="query-box">
-      </b-form-input>
-    </div>
-    <div>
-      <b-button @click="addQuery">
-        Ingresar otra consulta
-      </b-button>
-    </div>
-    <br>
-  </div>
+  <b-row class="zero-margin">
+    <b-col>
+      <b-row>
+        <b>{{ props.title }} <span v-if="props.required" class="form-asterisk">*</span></b>
+      </b-row>
+      <br>
+      <b-row>
+        <b-col>
+          <b-row v-if="props.hint" id="hint" class="help-block">
+            {{ props.hint }}
+          </b-row>
+          <b-row v-for="q in scale" :key="q.queryNum">
+            <b-form-input
+              v-model="props.answer[q.queryNum]"
+              :name="`query-${props.questionId}-${q.queryNum}`"
+              :required="setRequiredQuery(q.queryNum)"
+              @focus="focusTrack"
+              @blur="blurTrack"
+              class="query-box">
+            </b-form-input>
+          </b-row>
+          <b-row>
+            <b-button @click="addQuery">
+              Ingresar otra consulta
+            </b-button>
+          </b-row>
+        </b-col>
+      </b-row>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
@@ -105,5 +110,9 @@ export default {
 .query-box {
   max-width: 100%;
   margin-bottom: 10px;
+}
+
+.zero-margin {
+  margin: 0px 0px 0px 0px;
 }
 </style>

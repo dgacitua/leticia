@@ -3,11 +3,13 @@
     <b-row>
       <h1>Instrucciones</h1>
     </b-row>
+    <br>
     <b-row>
       TODO Instrucciones
     </b-row>
+    <br>
     <b-row>
-      <b-link to="tasks">Ir a la tarea</b-link>
+      <b-button to="tasks" variant="success">Ir a la tarea</b-button>
     </b-row>
   </b-container>
 </template>

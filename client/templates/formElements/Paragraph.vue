@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="zero-margin">
     <div>
       <b>{{ props.title }}</b>
       <span v-if="props.required" class="form-asterisk">*</span>
@@ -77,5 +77,9 @@ export default {
 
 .text-right {
   text-align: right;
+}
+
+.zero-margin {
+  margin: 0px 0px 0px 0px;
 }
 </style>

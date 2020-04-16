@@ -7,7 +7,7 @@ import * as Constants from '../services/Constants';
 
 import Home from '../templates/Home.vue';
 import InformedConsent from '../templates/InformedConsent.vue';
-import Baseline from '../templates/Baseline.vue';
+import Demographic from '../templates/Demographic.vue';
 import Instructions from '../templates/Instructions.vue';
 //import Login from '../templates/Login.vue';
 import TaskForm from '../templates/queryPlanning/TaskForm.vue';
@@ -51,9 +51,9 @@ export const router = new VueRouter({
       }
     },
     {
-      path: '/baseline',
-      name: 'baseline',
-      component: Baseline,
+      path: '/demographic',
+      name: 'demographic',
+      component: Demographic,
       meta: {
         auth: false
       }

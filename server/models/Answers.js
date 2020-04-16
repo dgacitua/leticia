@@ -14,6 +14,14 @@ const answerSchema = Mongoose.Schema({
     type: String,
     required: true
   },
+  clientTimestamp: {
+    type: Number,
+    required: true
+  },
+  serverTimestamp: {
+    type: Number,
+    required: true
+  },
   answers: {
     type: [ Object ],
     required: true

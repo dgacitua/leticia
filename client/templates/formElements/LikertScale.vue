@@ -1,37 +1,40 @@
 <template>
-  <div>
-    <div>
-      <b>{{ props.title }}</b>
-      <span v-if="props.required" class="form-asterisk">*</span>
-    </div>
-    <div v-if="props.hint" class="help-block">
-      {{ props.hint }}
-    </div>
-    <div>
-      <table class="table table-borderless table-condensed table-nonfluid">
-        <tbody>
-          <tr>
-            <td class="table-nopadding"></td>
-            <td class="table-nopadding" v-for="op in scale" :key="op.value">{{ op.value }}</td>
-            <td class="table-nopadding"></td>
-          </tr>
-          <tr>
-            <td class="table-nopadding text-right">{{ props.minLabel }}</td>
-            <td class="table-nopadding text-center scale-choice" v-for="op in scale" :key="op.value">
-              <b-form-radio
-                v-model="props.answer"
-                :value="op.value"
-                :required="props.required"
-                :name="props.questionId">
-              </b-form-radio>
-            </td>
-            <td class="table-nopadding text-left">{{ props.maxLabel }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <b-row class="zero-margin">
+    <b-col>
+      <b-row>
+        <b>{{ props.title }} <span v-if="props.required" class="form-asterisk">*</span></b>
+      </b-row>
+      <b-row v-if="props.hint" class="help-block">
+        {{ props.hint }}
+      </b-row>
+      <b-row>
+        <b-col>
+          <table class="table table-borderless table-condensed table-nonfluid">
+            <tbody>
+              <tr>
+                <td class="table-nopadding"></td>
+                <td class="table-nopadding" v-for="op in scale" :key="op.value">{{ op.value }}</td>
+                <td class="table-nopadding"></td>
+              </tr>
+              <tr>
+                <td class="table-nopadding text-right">{{ props.minLabel }}</td>
+                <td class="table-nopadding text-center scale-choice" v-for="op in scale" :key="op.value">
+                  <b-form-radio
+                    v-model="props.answer"
+                    :value="op.value"
+                    :required="props.required"
+                    :name="props.questionId">
+                  </b-form-radio>
+                </td>
+                <td class="table-nopadding text-left">{{ props.maxLabel }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </b-col>
+      </b-row>
+    </b-col>
     <br>
-  </div>
+  </b-row>
 </template>
 
 <script>
@@ -97,5 +100,9 @@ export default {
 
 .text-right {
   text-align: right;
+}
+
+.zero-margin {
+  margin: 0px 0px 0px 0px;
 }
 </style>

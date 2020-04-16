@@ -3,11 +3,18 @@
     <b-row>
       <h1>Consentimiento Informado</h1>
     </b-row>
+    <br>
     <b-row>
       TODO Consentimiento Informado
     </b-row>
+    <br>
     <b-row>
-      <b-link to="instructions">Acepto participar en el estudio</b-link>
+      <b-col>
+        <b-button to="demographic" variant="success">Acepto participar en el estudio</b-button>
+      </b-col>
+      <b-col>
+        <b-button to="/" variant="danger">No acepto participar en el estudio</b-button>
+      </b-col>
     </b-row>
   </b-container>
 </template>

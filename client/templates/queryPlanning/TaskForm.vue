@@ -6,26 +6,30 @@
     <b-row class="space-bottom">
       <span>{{ task.description }}</span>
     </b-row>
+    <br>
     <b-row class="space-bottom">
       <div>Respecto a la tarea seleccionada, responde las siguientes preguntas:</div>
     </b-row>
     <b-row class="space-bottom">
-      <b-form id="app" @submit="onSubmit">
-        <b-row v-for="q in questions" :key="q.questionId">
-          <b-row v-if="q.type==='likert'">
-            <likertscale :props="q"></likertscale>
+      <b-col>
+        <b-form id=taskform @submit="onSubmit" class="full-width">
+          <b-row v-for="q in questions" :key="q.questionId"  class="zero-margin">
+            <b-row v-if="q.type==='likert'" :id="q.questionId" class="zero-margin">
+              <likertscale :props="q"></likertscale>
+            </b-row>
+            <b-row v-if="q.type==='paragraph'" :id="q.questionId" class="zero-margin">
+              <paragraph :props="q"></paragraph>
+            </b-row>
+            <b-row v-if="q.type==='multiquery'" :id="q.questionId" class="zero-margin">
+              <multiquery :props="q"></multiquery>
+            </b-row>
           </b-row>
-          <b-row v-if="q.type==='paragraph'">
-            <paragraph :props="q"></paragraph>
+          <br>
+          <b-row  class="zero-margin">
+            <b-button type="submit" variant="success">Enviar respuesta</b-button>
           </b-row>
-          <b-row v-if="q.type==='multiquery'">
-            <multiquery :props="q"></multiquery>
-          </b-row>
-        </b-row>
-        <b-row>
-          <input type="submit" value="Enviar respuesta">
-        </b-row>
-      </b-form>
+        </b-form>
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -87,18 +91,26 @@ export default {
         userId: '',
         taskId: taskId,
         formId: formId,
+        clientTimestamp: Date.now(),
         answers: answers
       }
 
-      console.log(response);  // TODO Store answer in backend
+      // console.log(response);
 
-      if (formId === Constants.pretaskForm) {
-        this.$router.push({ path: 'query', query: { task: this.$route.query.task, form: Constants.queryForm }});
-      }
-      else {
-        this.$store.commit({ type: 'setTaskAsDone', taskId: taskId });
-        this.$router.push({ path: 'tasks' });
-      }
+      Axios.post(`${Constants.backendApiUrl}/answers`, response)
+        .then((res) => {
+          if (formId === Constants.pretaskForm) {
+            this.$router.push({ path: 'query', query: { task: this.$route.query.task, form: Constants.queryForm }});
+          }
+          else {
+            this.$store.commit({ type: 'setTaskAsDone', taskId: taskId });
+            this.$router.push({ path: 'tasks' });
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          alert('Ha ocurrido un error');
+        });
     }
   }
 }
@@ -107,5 +119,13 @@ export default {
 <style scoped>
 .space-bottom {
   margin-bottom: 10px;
+}
+
+.zero-margin {
+  margin: 0px 0px 0px 0px;
+}
+
+.full-width {
+  max-width: 100%;
 }
 </style>
