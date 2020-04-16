@@ -7,11 +7,13 @@ import * as Constants from '../services/Constants';
 
 import Home from '../templates/Home.vue';
 import InformedConsent from '../templates/InformedConsent.vue';
+import Baseline from '../templates/Baseline.vue';
 import Instructions from '../templates/Instructions.vue';
 //import Login from '../templates/Login.vue';
 import TaskForm from '../templates/queryPlanning/TaskForm.vue';
 import TaskSelector from '../templates/queryPlanning/TaskSelector.vue';
 import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
+import End from '../templates/End.vue';
 import NotFound from '../templates/NotFound.vue';
 
 Vue.use(VueRouter);
@@ -49,6 +51,14 @@ export const router = new VueRouter({
       }
     },
     {
+      path: '/baseline',
+      name: 'baseline',
+      component: Baseline,
+      meta: {
+        auth: false
+      }
+    },
+    {
       path: '/instructions',
       name: 'instructions',
       component: Instructions,
@@ -76,6 +86,14 @@ export const router = new VueRouter({
       path: '/query',
       name: 'query',
       component: QueryWriter,
+      meta: {
+        auth: false
+      }
+    },
+    {
+      path: '/end',
+      name: 'end',
+      component: End,
       meta: {
         auth: false
       }

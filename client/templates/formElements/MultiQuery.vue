@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import { cloneVariable } from '../../services/Utils';
+
 export default {
   name: 'multiquery',
 
@@ -47,8 +49,7 @@ export default {
   },
 
   mounted() {
-    // dgacitua: Dirty hack to deep copy a variable
-    this.minQueries = Object.assign({}, { value: this.props.queries }).value;
+    this.minQueries = cloneVariable(this.props.queries);
   },
 
   methods: {

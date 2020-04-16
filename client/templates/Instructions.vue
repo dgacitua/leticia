@@ -14,7 +14,11 @@
 
 <script>
 export default {
-  name: 'instructions'
+  name: 'instructions',
+
+  beforeMount() {
+    this.$store.commit({ type: 'setCurrentRoute', route: { path: 'instructions' }});
+  }
 }
 </script>
 

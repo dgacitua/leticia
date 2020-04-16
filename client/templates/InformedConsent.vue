@@ -14,7 +14,11 @@
 
 <script>
 export default {
-  name: 'informed-consent'
+  name: 'informed-consent',
+
+  beforeMount() {
+    this.$store.commit({ type: 'setCurrentRoute', route: { path: 'consent' }});
+  }
 }
 </script>
 

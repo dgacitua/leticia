@@ -41,6 +41,9 @@ export default new Vuex.Store({
       let taskIdx = state.tasks.findIndex(t => { return t.searchTaskId === payload.taskId });
       state.tasks[taskIdx].completed = true;
     },
+    setCurrentRoute(state, payload) {
+      state.currentRoute = payload.route;
+    },
     eraseAll(state) {
       state.remainingTime = 120;
       state.tasks = [];
@@ -49,7 +52,7 @@ export default new Vuex.Store({
   actions: {
     changeTime(context) {
       return new Promise((resolve, reject) => {
-        context.commit({ type: 'changeType', amount: -1 });
+        context.commit({ type: 'changeTime', amount: -1 });
         resolve();
       });
     }

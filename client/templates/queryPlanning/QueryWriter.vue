@@ -40,7 +40,7 @@ import MultiQuery from '../formElements/MultiQuery.vue';
 import Paragraph from '../formElements/Paragraph.vue';
 
 export default {
-  name: 'questionnaire',
+  name: 'query-planning',
 
   components: {
     likertscale: LikertScale,
@@ -53,6 +53,10 @@ export default {
       task: {},
       questions: []
     }
+  },
+
+  beforeMount() {
+    this.$store.commit({ type: 'setCurrentRoute', route: { path: 'query', query: { task: this.$route.query.task, form: this.$route.query.form }}});
   },
 
   mounted() {

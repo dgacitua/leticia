@@ -45,6 +45,10 @@ export default {
     }
   },
 
+  beforeMount() {
+    this.$store.commit({ type: 'setCurrentRoute', route: { type: 'setCurrentRoute', route: { path: 'tasks' }}});
+  },
+
   mounted() {
     if (this.searchTasks.length <= 0) {
       Axios.get(`${Constants.backendApiUrl}/tasks`)

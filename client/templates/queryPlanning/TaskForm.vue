@@ -56,6 +56,10 @@ export default {
     }
   },
 
+  beforeMount() {
+    this.$store.commit({ type: 'setCurrentRoute', route: { path: 'taskform', query: { task: this.$route.query.task, form: this.$route.query.form }}});
+  },
+
   mounted() {
     let taskId = this.$route.query.task;
     let formId = this.$route.query.form;
