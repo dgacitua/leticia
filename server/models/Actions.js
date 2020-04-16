@@ -1,7 +1,7 @@
 import Mongoose from 'mongoose';
 import './db';
 
-const interactionSchema = Mongoose.Schema({
+const actionSchema = Mongoose.Schema({
   userId: {
     type: String,
     required: false // TODO Login
@@ -28,12 +28,12 @@ const interactionSchema = Mongoose.Schema({
     type: Number,
     required: true
   },
-  description: {
+  details: {
     type: Object,
     required: false
   }
 }, { strict: false });
 
-const Interaction = Mongoose.model('Interaction', interactionSchema);
+const Action = Mongoose.model('Action', actionSchema);
 
-export default Interaction;
+export default Action;

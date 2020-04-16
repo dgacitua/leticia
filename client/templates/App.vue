@@ -1,13 +1,14 @@
 <template>
   <div id="leticia-app">
     <navbar id="leticia-navbar"></navbar>
-    <router-view id="leticia-content" @interaction="captureInteraction"></router-view>
+    <router-view id="leticia-content"></router-view>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import Axios from 'axios';
 
+import * as Constants from '../services/Constants';
 import WebSocket from '../services/WebSocket';
 
 import * as KeystrokeTracker from '../trackers/keystroke';
@@ -35,6 +36,10 @@ export default {
     window.addEventListener('leticia-track', (e) => {
       this.captureTrack(e.detail);
     });
+
+    window.addEventListener('leticia-action', (e) => {
+      this.captureAction(e.detail);
+    });
   },
 
   mounted() {
@@ -49,18 +54,25 @@ export default {
     window.removeEventListener('leticia-track', (e) => {
       this.captureTrack(e.detail);
     });
+
+    window.removeEventListener('leticia-action', (e) => {
+      this.captureAction(e.detail);
+    });
   },
 
   methods: {
-    captureInteraction(event) {
-      console.log(`[CaptureEvent]`, event);
-      // axios.post(`${process.env.VUE_APP_BACKEND_API}interactions/`, event)
-      // .then(response => {
-      //   console.log(`[${Date.now()}] interaction saved`, event);
-      // })
-      // .catch(error => {
-      //   console.log(error);
-      // });
+    captureAction(event) {
+      // console.log(`[CaptureAction]`, event);
+     
+      if (true) { // TODO Login
+        Axios.post(`${Constants.backendApiUrl}/actions`, event)
+          .then ((response) => {
+            // console.log(`Action saved!`, response.data.timestamp, event);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     },
 
     captureTrack(message, sender, sendResponse) {
@@ -68,21 +80,10 @@ export default {
         return;
       }
 
-      if (true) { // Add login check
-        //console.log(`[CaptureTrack]`, `TYPE: ${message.type}`, `TS: ${message.clientTimestamp}`, message);
+      if (true) { // TODO Login
+        // console.log(`[CaptureTrack]`, `TYPE: ${message.type}`, `TS: ${message.clientTimestamp}`, message);
 
-        let restByType = {
-          'KeyDown': 'keystrokes',
-          'KeyUp': 'keystrokes',
-          'KeyPress': 'keystrokes',
-          'MouseClick': 'mousemoves',
-          'MouseMovement': 'mousemoves',
-          'Scroll': 'scrolltracks',
-        };
-
-        if (restByType[message.type]) {
-          WebSocket.sendMessage(message);
-        }
+        WebSocket.sendMessage(message);
       }
     }
   }

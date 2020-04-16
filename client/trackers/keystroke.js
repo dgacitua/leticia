@@ -50,10 +50,12 @@ export const bindTracker = () => {
   window.addEventListener('keydown' , keydown);
   window.addEventListener('keyup' , keyup);
   window.addEventListener('keypress' , keypress);
+  console.log('Keystroke Tracker ON!');
 };
 
 export const unbindTracker = () => {
   window.removeEventListener('keydown' , keydown);
   window.removeEventListener('keyup' , keyup);
   window.removeEventListener('keypress' , keypress);
+  console.log('Keystroke Tracker OFF!');
 };

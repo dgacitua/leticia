@@ -43,9 +43,11 @@ const mousemove = (evt) => {
 export const bindTracker = () => {
   window.addEventListener('click', mouseclick);
   window.addEventListener('mousemove', throttle(mousemove, 250));
+  console.log('Mouse Tracker ON!');
 }
 
 export const unbindTracker = () => {
   window.removeEventListener('click', mouseclick);
   window.removeEventListener('mousemove', throttle(mousemove, 250));
+  console.log('Mouse Tracker OFF!');
 }

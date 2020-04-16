@@ -64,7 +64,7 @@ export default {
     let p2 = Axios.get(`${Constants.backendApiUrl}/forms/${formId}`);
 
     Promise.all([p1, p2])
-      .then((values) =>{ 
+      .then((values) => { 
         this.task = values[0].data;
         this.questions = values[1].data;
       })

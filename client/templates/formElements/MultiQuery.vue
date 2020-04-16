@@ -11,6 +11,7 @@
       <b-form-input
         v-model="props.answer[q.queryNum]"
         :name="`query-${props.questionId}-${q.queryNum}`"
+        :required="setRequiredQuery(q.queryNum)"
         @focus="focusTrack"
         @blur="blurTrack"
         class="query-box">
@@ -33,10 +34,21 @@ export default {
     'props'
   ],
 
+  data() {
+    return {
+      minQueries: 0
+    }
+  },
+
   computed: {
     scale() {
       return this.createArray(this.props.queries);
     }
+  },
+
+  mounted() {
+    // dgacitua: Dirty hack to deep copy a variable
+    this.minQueries = Object.assign({}, { value: this.props.queries }).value;
   },
 
   methods: {
@@ -48,16 +60,22 @@ export default {
       for (let i=1; i<=num; i++) result.push({ queryNum: i });
       return result;
     },
+    setRequiredQuery(queryNum) {
+      return (queryNum <= this.minQueries);
+    },
     focusTrack(evt) {
       let message = {
         type  : 'QueryFocus',
         source: 'Window',
         url   : window.document.URL,
         clientTimestamp: Date.now(),
-        textboxName: evt.target.name
+        details: {
+          textboxName: evt.target.name
+        }
       };
 
-      console.log('QueryFocus', message);
+      window.dispatchEvent(new CustomEvent('leticia-action', { detail: message }));
+      //console.log('QueryFocus', message);
     },
     blurTrack(evt) {
       let message = {
@@ -65,10 +83,13 @@ export default {
         source: 'Window',
         url   : window.document.URL,
         clientTimestamp: Date.now(),
-        textboxName: evt.target.name
+        details: {
+          textboxName: evt.target.name
+        }
       };
 
-      console.log('QueryBlur', message);
+      window.dispatchEvent(new CustomEvent('leticia-action', { detail: message }));
+      //console.log('QueryBlur', message);
     }
   }
 }

@@ -20,8 +20,10 @@ const scroll = (evt) => {
 
 export const bindTracker = () => {
   window.addEventListener('scroll', throttle(scroll, 250));
+  console.log('Scroll Tracker ON!');
 }
 
 export const unbindTracker = () => {
   window.removeEventListener('scroll', throttle(scroll, 250));
+  console.log('Scroll Tracker OFF!');
 }

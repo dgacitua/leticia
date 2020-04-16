@@ -9,6 +9,8 @@ import express from 'express';
 //import scrolltrack from './routes/scrolltrack';
 import forms from './routes/forms';
 import tasks from './routes/tasks';
+import actions from './routes/actions';
+import answers from './routes/answers';
 
 const router = express.Router();
 
@@ -21,5 +23,7 @@ const router = express.Router();
 //router.use('/scrolltracks', scrolltrack);
 router.use('/forms', forms);
 router.use('/tasks', tasks);
+router.use('/actions', actions);
+router.use('/answers', answers);
 
 export default router;
