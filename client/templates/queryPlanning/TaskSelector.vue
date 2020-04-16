@@ -46,7 +46,7 @@ export default {
   },
 
   beforeMount() {
-    this.$store.commit({ type: 'setCurrentRoute', route: { type: 'setCurrentRoute', route: { path: 'tasks' }}});
+    this.$store.commit({ type: 'setCurrentRoute', route: { path: 'tasks' }});
   },
 
   mounted() {
