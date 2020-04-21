@@ -14,8 +14,8 @@ const getTask = async (request, response, next) => {
     response.status(200).send(task);
   }
   catch (err) {
-    consoleError(err);
-    response.status(500).send(err);
+    consoleError({ statusCode: 500, errorMsg: 'Error while fetching Tasks', errorObj: err });
+    response.status(500).send({ statusCode: 500, errorMsg: 'Error while fetching Tasks', errorObj: err });
   }
 }
 
@@ -25,8 +25,8 @@ const getAllTasks = async (request, response, next) => {
     response.status(200).send(tasks);
   }
   catch (err) {
-    consoleError(err);
-    response.status(500).send(err);
+    consoleError({ statusCode: 500, errorMsg: 'Error while fetching Tasks', errorObj: err });
+    response.status(500).send({ statusCode: 500, errorMsg: 'Error while fetching Tasks', errorObj: err });
   }
 }
 

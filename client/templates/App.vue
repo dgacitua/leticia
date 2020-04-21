@@ -66,7 +66,7 @@ export default {
      
       if (true) { // TODO Login
         Axios.post(`${Constants.backendApiUrl}/actions`, event)
-          .then ((response) => {
+          .then ((res) => {
             // console.log(`Action saved!`, response.data.timestamp, event);
           })
           .catch((err) => {

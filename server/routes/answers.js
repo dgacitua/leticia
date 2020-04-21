@@ -18,7 +18,7 @@ const storeAnswer = async (request, response, next) => {
   }
   catch (err) {
     consoleError(err);
-    response.status(500).send(err);
+    response.status(500).send({ statusCode: 500, errorMsg: 'Error while storing Answers', errorObj: err });
   }
 }
 

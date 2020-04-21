@@ -10,7 +10,7 @@
     <br>
     <b-row>
       <b-col>
-        <b-button to="demographic" variant="success">Acepto participar en el estudio</b-button>
+        <b-button @click="createParticipant" variant="success">Acepto participar en el estudio</b-button>
       </b-col>
       <b-col>
         <b-button to="/" variant="danger">No acepto participar en el estudio</b-button>
@@ -24,7 +24,20 @@ export default {
   name: 'informed-consent',
 
   beforeMount() {
-    this.$store.commit({ type: 'setCurrentRoute', route: { path: 'consent' }});
+    // this.$store.commit({ type: 'setCurrentRoute', route: { path: 'consent' }});
+  },
+
+  methods: {
+    createParticipant() {
+      this.$store.dispatch({ type: 'createParticipant' })
+        .then((res) => {
+          this.$router.push({ path: 'instructions' });
+        })
+        .catch((err) => {
+          console.error(err);
+          alert('Ha ocurrido un error al iniciar el estudio');
+        });
+    }
   }
 }
 </script>

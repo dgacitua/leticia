@@ -18,8 +18,13 @@
 export default {
   name: 'demographic',
 
+  data() {
+    return {
+    }
+  },
+
   beforeMount() {
-    this.$store.commit({ type: 'setCurrentRoute', route: { path: 'demographic'}});
+    this.$store.commit({ type: 'setCurrentRoute', route: { path: 'demographic' }});
   }
 }
 </script>

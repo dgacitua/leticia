@@ -5,22 +5,20 @@
     </b-row>
     <br>
     <b-row>
-      <b-button to="consent">Ingresar</b-button>
+      <b-button-group>
+        <!--
+        <b-button to="register">Registrarse</b-button>
+        <b-button to="login">Iniciar sesión</b-button>
+        -->
+        <b-button to="consent">Participar del estudio</b-button>
+      </b-button-group>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import Questionnaire from './Questionnaire.vue';
-import TaskSelector from './queryPlanning/TaskSelector.vue';
-
 export default {
-  name: 'home',
-
-  components: {
-    questionnaire: Questionnaire,
-    taskselector: TaskSelector
-  }
+  name: 'home'
 }
 </script>
 

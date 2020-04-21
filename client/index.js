@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import VueAuth from '@websanova/vue-auth';
+import VueAuthBearer from '@websanova/vue-auth/drivers/auth/bearer.js';
+import VueAuthHttp from '@websanova/vue-auth/drivers/http/axios.1.x.js';
+import VueAuthRouter from '@websanova/vue-auth/drivers/router/vue-router.2.x.js';
 
 import App from './templates/App.vue';
 import { router } from './modules/routes';
@@ -22,11 +25,10 @@ Vue.use(BootstrapVue);
 
 Vue.router = router;
 
-/*
 Vue.use(VueAuth, {
-  auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
-  http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
-  router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
+  auth: VueAuthBearer,
+  http: VueAuthHttp,
+  router: VueAuthRouter,
   refreshData: {
     enabled: false,
     interval: 0
@@ -35,11 +37,10 @@ Vue.use(VueAuth, {
     return data
   }
 });
-*/
 
 new Vue({
   el: '#app',
-  router,
   store,
+  router,
   render: h => h(App)
 });
