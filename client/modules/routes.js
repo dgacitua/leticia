@@ -5,7 +5,7 @@ import VueAxios from 'vue-axios';
 
 import * as Constants from '../services/Constants';
 import store from './store';
-import { getVueObject } from '../services/Utils';
+import { getVueObject, isEmptyObject } from '../services/Utils';
 
 import Home from '../templates/Home.vue';
 import InformedConsent from '../templates/InformedConsent.vue';
@@ -133,9 +133,9 @@ export const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const currentRoute = getVueObject(store.state.currentRoute);
-  //console.log('BE', currentRoute, to, from);
+  console.log('BE', currentRoute, to, from);
 
-  if (currentRoute && isFirstTransition && to.name !== currentRoute.name) {
+  if (currentRoute && !isEmptyObject(currentRoute) && isFirstTransition && to.name !== currentRoute.name) {
     next(currentRoute);
   }
   else {
@@ -144,7 +144,7 @@ router.beforeEach((to, from, next) => {
       // if not, redirect to login page.
       if (!store.getters.isValidParticipant) {
         next({
-          path: '/home',
+          path: '/',
           query: { redirect: to.fullPath }
         });
       }

@@ -2,6 +2,7 @@ import hrrs from 'human-readable-random-string';
 
 export const getVueObject = (obj) => { return Object.assign({}, obj) };
 export const getVueArray = (arr) => { return arr.map(el => Object.assign({}, el)) };
+export const isEmptyObject = (obj) => { return Object.keys(obj).length === 0 && obj.constructor === Object };
 
 // dgacitua: Dirty hack to deep copy a variable
 export const cloneVariable = (value) => {
