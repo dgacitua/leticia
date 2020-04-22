@@ -61,7 +61,7 @@ export default {
   },
 
   beforeMount() {
-    this.$store.commit({ type: 'setCurrentRoute', route: { path: 'taskform', query: { task: this.$route.query.task, form: this.$route.query.form }}});
+    //this.$store.commit({ type: 'setCurrentRoute', route: { path: 'taskform', query: { task: this.$route.query.task, form: this.$route.query.form }}});
   },
 
   mounted() {

@@ -5,6 +5,7 @@ import VueAxios from 'vue-axios';
 
 import * as Constants from '../services/Constants';
 import store from './store';
+import { getVueObject } from '../services/Utils';
 
 import Home from '../templates/Home.vue';
 import InformedConsent from '../templates/InformedConsent.vue';
@@ -22,6 +23,8 @@ Vue.use(VueRouter);
 Vue.use(VueAxios, Axios);
 
 Axios.defaults.baseURL = `${Constants.backendApiUrl}/`;
+
+let isFirstTransition = true;
 
 export const router = new VueRouter({
   mode: 'history',
@@ -129,20 +132,39 @@ export const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.isParticipant)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
-    if (!store.getters.isValidParticipant) {
-      next({
-        path: '/home',
-        query: { redirect: to.fullPath }
-      });
+  const currentRoute = getVueObject(store.state.currentRoute);
+  //console.log('BE', currentRoute, to, from);
+
+  if (currentRoute && isFirstTransition && to.name !== currentRoute.name) {
+    next(currentRoute);
+  }
+  else {
+    if (to.matched.some(record => record.meta.isParticipant)) {
+      // this route requires auth, check if logged in
+      // if not, redirect to login page.
+      if (!store.getters.isValidParticipant) {
+        next({
+          path: '/home',
+          query: { redirect: to.fullPath }
+        });
+      }
+      else {
+        next();
+      }
     }
     else {
       next();
     }
   }
-  else {
-    next(); // make sure to always call next()!
+
+  isFirstTransition = false;
+});
+
+router.afterEach((to, from) => {
+  if (store.getters.isValidParticipant) {
+    store.commit({ type: 'setCurrentRoute', route: to });
+    
+    //const currentRoute = getVueObject(store.state.currentRoute);
+    //console.log('AE', currentRoute);
   }
 });

@@ -1,4 +1,4 @@
-import { createHash } from 'crc-hash';
+import hrrs from 'human-readable-random-string';
 
 export const getVueObject = (obj) => { return Object.assign({}, obj) };
 export const getVueArray = (arr) => { return arr.map(el => Object.assign({}, el)) };
@@ -8,9 +8,9 @@ export const cloneVariable = (value) => {
   return Object.assign({}, { data: value }).data;
 };
 
-// dgacitua: Create a CRC32 hash from a string
-export const crc32hash = (string) => {
-  return createHash('crc32').update(string).digest('hex');
+// dgacitua: Generate a random UserId string
+export const generateUserId = () => {
+  return hrrs(8);
 };
 
 // dgacitua: Remove all nullish values from array
@@ -23,8 +23,8 @@ export const cleanArray = (arr) => {
 // https://stackoverflow.com/a/6274381
 export const shuffleArray = (a) => {
   for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
   }
   
   return a;

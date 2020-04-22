@@ -12,7 +12,7 @@ const storeParticipant = async (request, response, next) => {
 
     await Participant.create(participant);
     
-    response.status(200).send({ status: 'Participant Saved!', timestamp: Date.now() });
+    response.status(200).send({ status: 'Participant Saved!', timestamp: Date.now(), participantData: participant });
   }
   catch (err) {
     consoleError(err);

@@ -4,7 +4,7 @@ import VuexPersistence from 'vuex-persist';
 import Axios from 'axios';
 
 import * as Constants from '../services/Constants';
-import { crc32hash } from '../services/Utils'
+import { generateUserId } from '../services/Utils'
 
 Vue.use(Vuex);
 
@@ -25,7 +25,7 @@ export default new Vuex.Store({
     isValidParticipant: (state) => {
       return (state.isParticipant && !state.finished);
     },
-    userData: (state) => {
+    getUserData: (state) => {
       return {
         isParticipant: state.isParticipant,
         userId: state.userId,
@@ -52,7 +52,7 @@ export default new Vuex.Store({
       state.currentRoute = payload.route;
     },
     setUserId(state, payload) {
-      state.userId = payload.userId;
+      state.userId = payload.id;
     },
     setParticipantStatus(state, payload) {
       state.isParticipant = payload.status;
@@ -78,16 +78,17 @@ export default new Vuex.Store({
     },
     createParticipant(context) {
       return new Promise((resolve, reject) => {
-        let newParticipant = {
-          userId: crc32hash(Date.now().toString()),
-          registerDate: new Date()
-        };
+        const userId = generateUserId();
+        const registerDate = new Date();
+        const newParticipant = { userId, registerDate };
 
         Axios.post(`${Constants.backendApiUrl}/participants`, newParticipant)
           .then((res) => {
-            console.log(`New Participant!`, newParticipant);
+            const response = res.data.participantData;
+            console.log(`New Participant!`, response);
 
-            context.commit({ type: 'setUserId', userId: newParticipant.userId });
+            context.commit({ type: 'eraseAll' });
+            context.commit({ type: 'setUserId', id: response.userId });
             context.commit({ type: 'setParticipantStatus', status: true });
             context.commit({ type: 'setFinishedStatus', status: false });
 

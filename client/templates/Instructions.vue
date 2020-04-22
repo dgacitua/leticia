@@ -19,7 +19,7 @@ export default {
   name: 'instructions',
 
   beforeMount() {
-    this.$store.commit({ type: 'setCurrentRoute', route: { path: 'instructions' }});
+    //this.$store.commit({ type: 'setCurrentRoute', route: { path: 'instructions' }});
   }
 }
 </script>
