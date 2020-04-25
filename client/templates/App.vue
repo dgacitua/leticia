@@ -23,8 +23,11 @@ export default {
   },
 
   computed: {
+    userId() {
+      return this.$store.state.userId;
+    },
     remainingTime() {
-      return this.$store.state.remainingTime
+      return this.$store.state.remainingTime;
     }
   },
   
@@ -62,11 +65,12 @@ export default {
 
   methods: {
     captureAction(event) {
-      // console.log(`[CaptureAction]`, event);
-     
-      if (true) { // TODO Login
+      if (this.$store.getters.isValidParticipant) {
+        event.userId = this.userId;
+        // console.log(`[CaptureAction]`, event);
+
         Axios.post(`${Constants.backendApiUrl}/actions`, event)
-          .then ((res) => {
+          .then((res) => {
             // console.log(`Action saved!`, response.data.timestamp, event);
           })
           .catch((err) => {
@@ -75,15 +79,11 @@ export default {
       }
     },
 
-    captureTrack(message, sender, sendResponse) {
-      if (message.type && message.type === 'SIGN_CONNECT') {
-        return;
-      }
-
-      if (true) { // TODO Login
-        // console.log(`[CaptureTrack]`, `TYPE: ${message.type}`, `TS: ${message.clientTimestamp}`, message);
-
-        WebSocket.sendMessage(message);
+    captureTrack(event) {
+      if (this.$store.getters.isValidParticipant) {
+        event.userId = this.userId;
+        // console.log(`[CaptureTrack]`, `TYPE: ${event.type}`, `TS: ${event.clientTimestamp}`, event);
+        WebSocket.sendMessage(event);
       }
     }
   }

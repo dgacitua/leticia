@@ -27,9 +27,10 @@
 
 <script>
 import Axios from 'axios';
+import { merge } from 'lodash';
 
 import * as Constants from '../../services/Constants';
-import { shuffleArray } from '../../services/Utils';
+import { shuffleArray, deepCopy } from '../../services/Utils';
 
 export default {
   name: 'task-selector',
@@ -42,19 +43,20 @@ export default {
 
   computed: {
     searchTasks() {
-      return this.$store.state.tasks;
+      return this.$store.getters.tasks;
     }
-  },
-
-  beforeMount() {
-    //this.$store.commit({ type: 'setCurrentRoute', route: { path: 'tasks' }});
   },
 
   mounted() {
     if (this.searchTasks.length <= 0) {
-      Axios.get(`${Constants.backendApiUrl}/tasks`)
-      .then((res) => { this.$store.commit({ type: 'setTasks', tasks: shuffleArray(res.data) })})
-      .catch((err) => { console.error(err) });
+      this.$store.dispatch({ type: 'fetchTasks' })
+        .then((res) => {
+          console.log('Search Tasks loaded!');
+        })
+        .catch((err) => {
+          console.error(err);
+          alert('Ha ocurrido un error');
+        });
     }
   }
 }

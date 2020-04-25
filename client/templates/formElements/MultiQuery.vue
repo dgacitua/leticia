@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { cloneVariable } from '../../services/Utils';
+import { deepCopy } from '../../services/Utils';
 
 export default {
   name: 'multiquery',
@@ -54,7 +54,7 @@ export default {
   },
 
   mounted() {
-    this.minQueries = cloneVariable(this.props.queries);
+    this.minQueries = deepCopy(this.props.queries);
   },
 
   methods: {

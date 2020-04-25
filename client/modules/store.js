@@ -4,15 +4,16 @@ import VuexPersistence from 'vuex-persist';
 import Axios from 'axios';
 
 import * as Constants from '../services/Constants';
-import { generateUserId } from '../services/Utils'
+import { generateUserId, findIndexInArray, shuffleArray, deepCopy } from '../services/Utils';
 
 Vue.use(Vuex);
 
 const vuexLocal = new VuexPersistence({
+  key: 'leticia',
   storage: window.localStorage
 });
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     isParticipant: false,
     userId: null,
@@ -23,15 +24,18 @@ export default new Vuex.Store({
   },
   getters: {
     isValidParticipant: (state) => {
-      return (state.isParticipant && !state.finished);
+      return (state.isParticipant && state.userId && !state.finished);
     },
-    getUserData: (state) => {
+    userData: (state) => {
       return {
         isParticipant: state.isParticipant,
         userId: state.userId,
         finished: state.finished,
-        remainingTime: remainingTime
+        remainingTime: state.remainingTime
       };
+    },
+    tasks: (state) => {
+      return state.tasks;
     }
   },
   mutations: {
@@ -42,14 +46,12 @@ export default new Vuex.Store({
       state.remainingTime += payload.amount;
     },
     setTasks(state, payload) {
-      state.tasks = payload.tasks;
+      state.tasks = [];
+      state.tasks = [ ...payload.tasks ];
     },
     setTaskAsDone(state, payload) {
-      let taskIdx = state.tasks.findIndex(t => { return t.searchTaskId === payload.taskId });
+      let taskIdx = findIndexInArray(state.tasks, (t) => { return t.searchTaskId === payload.id });
       state.tasks[taskIdx].completed = true;
-    },
-    setCurrentRoute(state, payload) {
-      state.currentRoute = payload.route;
     },
     setUserId(state, payload) {
       state.userId = payload.id;
@@ -76,6 +78,19 @@ export default new Vuex.Store({
         resolve();
       });
     },
+    fetchTasks(context) {
+      return new Promise((resolve, reject) => {
+        Axios.get(`${Constants.backendApiUrl}/tasks`)
+          .then((res) => {
+            const newTasks = deepCopy(shuffleArray(res.data));
+            context.commit({ type: 'setTasks', tasks: newTasks });
+            resolve();
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
     createParticipant(context) {
       return new Promise((resolve, reject) => {
         const userId = generateUserId();
@@ -95,7 +110,6 @@ export default new Vuex.Store({
             resolve();
           })
           .catch((err) => {
-            console.error(err);
             reject(err);
           });
       });
@@ -105,3 +119,5 @@ export default new Vuex.Store({
     vuexLocal.plugin
   ]
 });
+
+export { store };

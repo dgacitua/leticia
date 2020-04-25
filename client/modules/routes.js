@@ -4,8 +4,8 @@ import Axios from 'axios';
 import VueAxios from 'vue-axios';
 
 import * as Constants from '../services/Constants';
-import store from './store';
-import { getVueObject, isEmptyObject } from '../services/Utils';
+import { store } from './store';
+import { isEmptyObject } from '../services/Utils';
 
 import Home from '../templates/Home.vue';
 import InformedConsent from '../templates/InformedConsent.vue';
@@ -26,7 +26,7 @@ Axios.defaults.baseURL = `${Constants.backendApiUrl}/`;
 
 let isFirstTransition = true;
 
-export const router = new VueRouter({
+const router = new VueRouter({
   mode: 'history',
   routes: [
     {
@@ -132,9 +132,10 @@ export const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const currentRoute = getVueObject(store.state.currentRoute);
-  console.log('BE', currentRoute, to, from);
-
+  // dagacitua: Redirect to last known route
+  // https://css-tricks.com/storing-and-using-the-last-known-route-in-vue/
+  const currentRoute = JSON.parse(localStorage.getItem('leticia-route'));
+  
   if (currentRoute && !isEmptyObject(currentRoute) && isFirstTransition && to.name !== currentRoute.name) {
     next(currentRoute);
   }
@@ -160,11 +161,11 @@ router.beforeEach((to, from, next) => {
   isFirstTransition = false;
 });
 
+
 router.afterEach((to, from) => {
   if (store.getters.isValidParticipant) {
-    store.commit({ type: 'setCurrentRoute', route: to });
-    
-    //const currentRoute = getVueObject(store.state.currentRoute);
-    //console.log('AE', currentRoute);
+    localStorage.setItem('leticia-route', JSON.stringify(to));
   }
 });
+
+export { router };

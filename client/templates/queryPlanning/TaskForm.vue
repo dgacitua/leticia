@@ -38,7 +38,7 @@
 import Axios from 'axios';
 
 import * as Constants from '../../services/Constants';
-import { getVueArray } from '../../services/Utils';
+import { getVueArray, deepCopy } from '../../services/Utils';
 
 import LikertScale from '../formElements/LikertScale.vue';
 import MultiQuery from '../formElements/MultiQuery.vue';
@@ -60,8 +60,10 @@ export default {
     }
   },
 
-  beforeMount() {
-    //this.$store.commit({ type: 'setCurrentRoute', route: { path: 'taskform', query: { task: this.$route.query.task, form: this.$route.query.form }}});
+  computed: {
+    userId() {
+      return this.$store.state.userId;
+    }
   },
 
   mounted() {
@@ -83,34 +85,36 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
 
-      let taskId = this.$route.query.task;
-      let formId = this.$route.query.form;
-      let answers = getVueArray(this.questions).map(el => { return { questionId: el.questionId, answer: el.answer }});
+      if (this.$store.getters.isValidParticipant) {
+        let taskId = deepCopy(this.$route.query.task);
+        let formId = deepCopy(this.$route.query.form);
+        let answers = getVueArray(this.questions).map(el => { return { questionId: el.questionId, answer: el.answer }});
 
-      let response = {
-        userId: '',
-        taskId: taskId,
-        formId: formId,
-        clientTimestamp: Date.now(),
-        answers: answers
+        let response = {
+          userId: this.userId,
+          taskId: taskId,
+          formId: formId,
+          clientTimestamp: Date.now(),
+          answers: answers
+        }
+
+        console.log('Form Answer', response);
+
+        Axios.post(`${Constants.backendApiUrl}/answers`, response)
+          .then((res) => {
+            if (formId === Constants.pretaskForm) {
+              this.$router.push({ path: 'query', query: { task: this.$route.query.task, form: Constants.queryForm }});
+            }
+            else {
+              this.$store.commit({ type: 'setTaskAsDone', id: taskId });
+              this.$router.push({ path: 'tasks' });
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+            alert('Ha ocurrido un error');
+          });
       }
-
-      // console.log(response);
-
-      Axios.post(`${Constants.backendApiUrl}/answers`, response)
-        .then((res) => {
-          if (formId === Constants.pretaskForm) {
-            this.$router.push({ path: 'query', query: { task: this.$route.query.task, form: Constants.queryForm }});
-          }
-          else {
-            this.$store.commit({ type: 'setTaskAsDone', taskId: taskId });
-            this.$router.push({ path: 'tasks' });
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          alert('Ha ocurrido un error');
-        });
     }
   }
 }

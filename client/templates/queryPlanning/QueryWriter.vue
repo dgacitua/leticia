@@ -49,10 +49,6 @@ export default {
     }
   },
 
-  beforeMount() {
-    //this.$store.commit({ type: 'setCurrentRoute', route: { path: 'query', query: { task: this.$route.query.task, form: this.$route.query.form }}});
-  },
-
   mounted() {
     let taskId = this.$route.query.task;
     let formId = this.$route.query.form;
@@ -65,7 +61,10 @@ export default {
         this.task = values[0].data;
         this.questions = values[1].data;
       })
-      .catch((err) => { console.error(err) });
+      .catch((err) => {
+        console.error(err);
+        alert('Ha ocurrido un error');
+      });
   },
 
   methods: {

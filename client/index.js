@@ -11,7 +11,7 @@ import VueAuthRouter from '@websanova/vue-auth/drivers/router/vue-router.2.x.js'
 
 import App from './templates/App.vue';
 import { router } from './modules/routes';
-import store from './modules/store';
+import { store } from './modules/store';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -40,7 +40,7 @@ Vue.use(VueAuth, {
 
 new Vue({
   el: '#app',
-  store,
   router,
+  store,
   render: h => h(App)
 });
