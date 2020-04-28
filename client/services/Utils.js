@@ -1,4 +1,5 @@
 import { cloneDeep, findIndex } from 'lodash';
+import { parse, stringify } from 'flatted/esm';
 import hrrs from 'human-readable-random-string';
 
 export const getVueObject = (obj) => { return Object.assign({}, obj) };
@@ -6,6 +7,7 @@ export const getVueArray = (arr) => { return arr.map(el => Object.assign({}, el)
 export const isEmptyObject = (obj) => { return Object.keys(obj).length === 0 && obj.constructor === Object };
 export const deepCopy = (value) => { return cloneDeep(value) };
 export const findIndexInArray = (arr, matchFn) => { return findIndex(arr, matchFn) };
+export const parseCircularObject = (circObj) => { return parse(stringify(circObj)) };
 
 // dgacitua: Generate a random UserId string
 export const generateUserId = () => {

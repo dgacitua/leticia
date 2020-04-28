@@ -9,7 +9,7 @@ import { generateUserId, findIndexInArray, shuffleArray, deepCopy } from '../ser
 Vue.use(Vuex);
 
 const vuexLocal = new VuexPersistence({
-  key: 'leticia',
+  key: 'leticia-vuex',
   storage: window.localStorage
 });
 
@@ -44,6 +44,9 @@ const store = new Vuex.Store({
     },
     changeTime(state, payload) {
       state.remainingTime += payload.amount;
+    },
+    setCurrentRoute(state, payload) {
+      state.currentRoute = payload.route;
     },
     setTasks(state, payload) {
       state.tasks = [];

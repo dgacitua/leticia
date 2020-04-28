@@ -5,7 +5,7 @@ import VueAxios from 'vue-axios';
 
 import * as Constants from '../services/Constants';
 import { store } from './store';
-import { isEmptyObject } from '../services/Utils';
+import { isEmptyObject, parseCircularObject } from '../services/Utils';
 
 import Home from '../templates/Home.vue';
 import InformedConsent from '../templates/InformedConsent.vue';
@@ -132,10 +132,10 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  // dagacitua: Redirect to last known route
+  // dgacitua: Redirect to last known route
   // https://css-tricks.com/storing-and-using-the-last-known-route-in-vue/
-  const currentRoute = JSON.parse(localStorage.getItem('leticia-route'));
-  
+  const currentRoute = store.state.currentRoute;
+
   if (currentRoute && !isEmptyObject(currentRoute) && isFirstTransition && to.name !== currentRoute.name) {
     next(currentRoute);
   }
@@ -164,7 +164,7 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach((to, from) => {
   if (store.getters.isValidParticipant) {
-    localStorage.setItem('leticia-route', JSON.stringify(to));
+    store.commit({ type: 'setCurrentRoute', route: parseCircularObject(to) });
   }
 });
 
