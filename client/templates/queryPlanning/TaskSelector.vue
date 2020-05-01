@@ -15,7 +15,8 @@
             <b-link
               :to="{ path: 'taskform', query: { task: task.searchTaskId, form: formId }}"
               class="card-link"
-              v-if="!task.completed">
+              v-if="!task.completed"
+              replace>
                 Seleccionar tarea
             </b-link>
           </b-card>

@@ -22,10 +22,10 @@ const storeParticipant = async (request, response, next) => {
 
 const updateParticipant = async (request, response, next) => {
   try {
-    let userId = request.userId;
+    let userId = request.params.userId;
     let participant = request.body;
 
-    await Participant.update({ userId: userId }, participant);
+    await Participant.updateOne({ userId: userId }, participant);
     
     response.status(200).send({ status: 'Participant Updated!', timestamp: Date.now() });
   }

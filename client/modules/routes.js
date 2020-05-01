@@ -116,7 +116,7 @@ const router = new VueRouter({
       component: End,
       meta: {
         auth: false,
-        isParticipant: true
+        isParticipant: false
       }
     },
     {
@@ -160,7 +160,6 @@ router.beforeEach((to, from, next) => {
 
   isFirstTransition = false;
 });
-
 
 router.afterEach((to, from) => {
   if (store.getters.isValidParticipant) {

@@ -87,7 +87,8 @@ export default {
 
       Axios.post(`${Constants.backendApiUrl}/answers`, response)
         .then((res) => {
-          this.$router.push({ path: 'taskform', query: { task: this.$route.query.task, form: Constants.posttaskForm }});
+          // dgacitua: https://stackoverflow.com/a/57183854
+          this.$router.replace({ path: 'taskform', query: { task: this.$route.query.task, form: Constants.posttaskForm }});
         })
         .catch((err) => {
           console.error(err);

@@ -16,6 +16,9 @@ const participantSchema = Mongoose.Schema({
   finished: {
     type: Boolean,
     default: false
+  },
+  finishedReason: {
+    type: String
   }
 });
 

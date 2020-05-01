@@ -9,7 +9,7 @@
     </b-row>
     <br>
     <b-row>
-      <b-button to="tasks" variant="success">Ir a la tarea</b-button>
+      <b-button @click="goToTask" variant="success">Ir a la tarea</b-button>
     </b-row>
   </b-container>
 </template>
@@ -20,6 +20,13 @@ export default {
 
   beforeMount() {
     //this.$store.commit({ type: 'setCurrentRoute', route: { path: 'instructions' }});
+  },
+
+  methods: {
+    goToTask() {
+      // dgacitua: https://stackoverflow.com/a/57183854
+      this.$router.replace({ path: 'tasks' });
+    }
   }
 }
 </script>

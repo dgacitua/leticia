@@ -27,6 +27,10 @@
           <b-dropdown-item @click="logout">Salir</b-dropdown-item>
       </b-navbar-nav>
       -->
+
+      <b-navbar-nav v-if="isValidParticipant">
+        <b-button @click="finalize" variant="success">Finalizar</b-button>
+      </b-navbar-nav>
     </b-navbar>
   </div>
 </template>
@@ -35,7 +39,25 @@
 export default {
   name: 'navbar',
 
+  computed: {
+    isValidParticipant() {
+      return this.$store.getters.isValidParticipant;
+    }
+  },
+
   methods: {
+    finalize() {
+      this.$store.dispatch({ type: 'finishParticipant', reason: 'VoluntaryQuit' })
+      .then((res) => {
+        // dgacitua: https://stackoverflow.com/a/57183854
+        this.$router.replace({ path: 'end' });
+      })
+      .catch((err) => {
+        console.error(err);
+        alert('Ha ocurrido un error');
+      });
+    }
+
     /*
     logout() {
       this.$auth.logout({

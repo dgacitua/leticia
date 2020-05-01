@@ -118,6 +118,29 @@ const store = new Vuex.Store({
             reject(err);
           });
       });
+    },
+    finishParticipant(context, payload) {
+      return new Promise((resolve, reject) => {
+        context.commit({ type: 'setFinishedStatus', status: true });
+        context.commit({ type: 'setParticipantStatus', status: false });
+
+        const participant = {
+          userId: context.state.userId,
+          finished: context.state.finished,
+          finishedReason: payload.reason || ''
+        };
+
+        console.log(participant);
+
+        Axios.put(`${Constants.backendApiUrl}/participants/${participant.userId}`, participant)
+          .then((res) => {
+            context.commit({ type: 'eraseAll' });
+            resolve();
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
     }
   },
   plugins: [

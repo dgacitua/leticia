@@ -103,11 +103,13 @@ export default {
         Axios.post(`${Constants.backendApiUrl}/answers`, response)
           .then((res) => {
             if (formId === Constants.pretaskForm) {
-              this.$router.push({ path: 'query', query: { task: this.$route.query.task, form: Constants.queryForm }});
+              // dgacitua: https://stackoverflow.com/a/57183854
+              this.$router.replace({ path: 'query', query: { task: this.$route.query.task, form: Constants.queryForm }});
             }
             else {
+              // dgacitua: https://stackoverflow.com/a/57183854
               this.$store.commit({ type: 'setTaskAsDone', id: taskId });
-              this.$router.push({ path: 'tasks' });
+              this.$router.replace({ path: 'tasks' });
             }
           })
           .catch((err) => {
