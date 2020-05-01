@@ -9,7 +9,7 @@
     </b-row>
     <br>
     <b-row>
-      <b-button @click="goToTask" variant="success">Ir a la tarea</b-button>
+      <b-button @click="nextStage" variant="success">Ir a la tarea</b-button>
     </b-row>
   </b-container>
 </template>
@@ -23,7 +23,7 @@ export default {
   },
 
   methods: {
-    goToTask() {
+    nextStage() {
       // dgacitua: https://stackoverflow.com/a/57183854
       this.$router.replace({ path: 'tasks' });
     }

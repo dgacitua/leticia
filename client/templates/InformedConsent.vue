@@ -31,7 +31,7 @@ export default {
     createParticipant() {
       this.$store.dispatch({ type: 'createParticipant' })
         .then((res) => {
-          this.$router.push({ path: 'instructions' });
+          this.$router.push({ path: 'demographic' });
         })
         .catch((err) => {
           console.error(err);

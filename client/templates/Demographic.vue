@@ -5,11 +5,59 @@
     </b-row>
     <br>
     <b-row>
-      TODO Demográfico
-    </b-row>
-    <br>
-    <b-row>
-      <b-button to="instructions" variant="success">Continuar</b-button>
+      <b-form id="demographic" @submit="submitDemographic">
+        <b-form-group
+          id="input-group-1"
+          label="Edad"
+          label-for="input-1"
+          description="Edad actual (en años)"
+        >
+          <b-form-input
+            id="input-1"
+            v-model="form.age"
+            type="number"
+            min="0"
+            required
+          >
+          </b-form-input>
+        </b-form-group>
+        <b-form-group id="input-group-2" label="Género" label-for="input-2">
+          <b-form-select
+            id="input-2"
+            v-model="form.gender"
+            :options="genders"
+            required
+          >
+          </b-form-select>
+        </b-form-group>
+        <b-form-group
+          id="input-group-3"
+          label="Nivel Educacional"
+          label-for="input-3"
+          description="Indicar nivel en curso, o bien, último nivel cursado"
+        >
+          <b-form-select
+            id="input-3"
+            v-model="form.education"
+            :options="educationLevels"
+            required
+          >
+          </b-form-select>
+        </b-form-group>
+        <b-form-group
+          id="input-group-4"
+          label="Carrera"
+          label-for="input-4"
+          description="En caso de indicar nivel educacional Superior o Universitario, indicar la carrera en curso (o cursada)"
+        >
+          <b-form-input
+            id="input-4"
+            v-model="form.career"
+          >
+          </b-form-input>
+        </b-form-group>
+        <b-button type="submit" variant="primary">Enviar</b-button>
+      </b-form>
     </b-row>
   </b-container>
 </template>
@@ -20,11 +68,38 @@ export default {
 
   data() {
     return {
+      form: {},
+      educationLevels: [
+        { text: 'Enseñanza Básica/Primaria', value: 'ElementarySchool' },
+        { text: 'Enseñanza Media/Secundaria', value: 'HighSchool' },
+        { text: 'Enseñanza Superior Técnica (CFT)', value: 'TechSchool' },
+        { text: 'Enseñanza Superior Profesional (IP)', value: 'ProfessionalSchool' },
+        { text: 'Enseñanza Universitaria Pregrado', value: 'UndergraduateSchool' },
+        { text: 'Enseñanza Universitaria Postgrado', value: 'GraduateSchool' },
+        { text: 'Ninguna de las anteriores', value: 'NA' }
+      ],
+      genders: [
+        { text: 'Masculino', value: 'Male' },
+        { text: 'Femenino', value: 'Female' },
+        { text: 'Prefiero no decirlo', value: 'NA' }
+      ]
     }
   },
 
   beforeMount() {
     //this.$store.commit({ type: 'setCurrentRoute', route: { path: 'demographic' }});
+  },
+
+  methods: {
+    submitDemographic(evt) {
+      evt.preventDefault();
+      
+      // TODO Save Demographic on DB
+      console.log('Demographic SUBMIT!', this.form);
+      
+      // dgacitua: https://stackoverflow.com/a/57183854
+      this.$router.replace({ path: 'instructions' });
+    }
   }
 }
 </script>
