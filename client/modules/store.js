@@ -18,7 +18,8 @@ const store = new Vuex.Store({
     isParticipant: false,
     userId: null,
     finished: false,
-    remainingTime: 120,
+    remainingTime: -1,
+    globalRemainingTime: -1,
     tasks: [],
     currentRoute: {}
   },
@@ -31,7 +32,8 @@ const store = new Vuex.Store({
         isParticipant: state.isParticipant,
         userId: state.userId,
         finished: state.finished,
-        remainingTime: state.remainingTime
+        remainingTime: state.remainingTime,
+        globalRemainingTime: state.globalRemainingTime
       };
     },
     tasks: (state) => {
@@ -39,11 +41,17 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    decreaseTime(state) {
-      state.remainingTime--;
+    setTime(state, payload) {
+      state.remainingTime = payload.time;
+    },
+    setGlobalTime(state, payload) {
+      state.globalRemainingTime = payload.time;
     },
     changeTime(state, payload) {
       state.remainingTime += payload.amount;
+    },
+    changeGlobalTime(state, payload) {
+      state.globalRemainingTime += payload.amount;
     },
     setCurrentRoute(state, payload) {
       state.currentRoute = payload.route;
@@ -75,12 +83,6 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    changeTime(context) {
-      return new Promise((resolve, reject) => {
-        context.commit({ type: 'changeTime', amount: -1 });
-        resolve();
-      });
-    },
     fetchTasks(context) {
       return new Promise((resolve, reject) => {
         Axios.get(`${Constants.backendApiUrl}/tasks`)

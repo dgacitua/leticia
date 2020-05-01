@@ -10,6 +10,7 @@ import Axios from 'axios';
 
 import * as Constants from '../services/Constants';
 import WebSocket from '../services/WebSocket';
+import Timer from '../services/Timer';
 
 import * as KeystrokeTracker from '../trackers/keystroke';
 import * as MouseTracker from '../trackers/mouse';
@@ -20,6 +21,13 @@ import Navbar from './Navbar';
 export default {
   components: {
     navbar: Navbar
+  },
+
+  data() {
+    return {
+      timer: null,
+      globalTimer: null
+    }
   },
 
   computed: {
@@ -43,10 +51,21 @@ export default {
     window.addEventListener('leticia-action', (e) => {
       this.captureAction(e.detail);
     });
+
+    window.addEventListener('leticia-time', (e) => {
+      this.timeEvent(e.detail);
+    });
   },
 
   mounted() {
-    console.log(`Remaining time: ${this.remainingTime}`);
+    // Timer examples
+    /*
+    this.timer = new Timer(15, 5);
+    this.timer.start();
+
+    this.globalTimer = new Timer (25, 5, true);
+    this.globalTimer.start();
+    */
   },
 
   beforeDestroy() {
@@ -60,6 +79,10 @@ export default {
 
     window.removeEventListener('leticia-action', (e) => {
       this.captureAction(e.detail);
+    });
+
+    window.removeEventListener('leticia-time', (e) => {
+      this.timeEvent(e.detail);
     });
   },
 
@@ -85,6 +108,10 @@ export default {
         // console.log(`[CaptureTrack]`, `TYPE: ${event.type}`, `TS: ${event.clientTimestamp}`, event);
         WebSocket.sendMessage(event);
       }
+    },
+
+    timeEvent(event) {
+      console.log('Time Event!', event);
     }
   }
 }
