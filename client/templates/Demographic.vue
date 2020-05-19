@@ -63,6 +63,11 @@
 </template>
 
 <script>
+import Axios from 'axios';
+
+import * as Constants from '../services/Constants';
+import { getVueObject } from '../services/Utils';
+
 export default {
   name: 'demographic',
 
@@ -86,19 +91,39 @@ export default {
     }
   },
 
-  beforeMount() {
-    //this.$store.commit({ type: 'setCurrentRoute', route: { path: 'demographic' }});
+  computed: {
+    userId() {
+      return this.$store.state.userId;
+    }
   },
 
   methods: {
     submitDemographic(evt) {
       evt.preventDefault();
-      
-      // TODO Save Demographic on DB
-      console.log('Demographic SUBMIT!', this.form);
-      
-      // dgacitua: https://stackoverflow.com/a/57183854
-      this.$router.replace({ path: 'instructions' });
+
+      if (this.$store.getters.isValidParticipant) {
+        let type = 'Demographic';
+        let answers = Object.entries(getVueObject(this.form)).map(([question, answer]) => ({question, answer}));  // dgacitua: https://stackoverflow.com/a/49629733 
+
+        let response = {
+          userId: this.userId,
+          type: type,
+          clientTimestamp: Date.now(),
+          answers: answers
+        }
+
+        console.log('Demographic Answer', response);
+
+        Axios.post(`${Constants.backendApiUrl}/demographic`, response)
+          .then((res) => {
+            // dgacitua: https://stackoverflow.com/a/57183854
+            this.$router.replace({ path: 'instructions' });
+          })
+          .catch((err) => {
+            console.error(err);
+            alert('Ha ocurrido un error');
+          });
+      }
     }
   }
 }
