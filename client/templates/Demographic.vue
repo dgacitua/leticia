@@ -21,11 +21,11 @@
           >
           </b-form-input>
         </b-form-group>
-        <b-form-group id="input-group-2" label="Género" label-for="input-2">
+        <b-form-group id="input-group-2" label="Sexo" label-for="input-2">
           <b-form-select
             id="input-2"
-            v-model="form.gender"
-            :options="genders"
+            v-model="form.sex"
+            :options="sex"
             required
           >
           </b-form-select>
@@ -83,10 +83,9 @@ export default {
         { text: 'Enseñanza Universitaria Postgrado', value: 'GraduateSchool' },
         { text: 'Ninguna de las anteriores', value: 'NA' }
       ],
-      genders: [
+      sex: [
         { text: 'Masculino', value: 'Male' },
-        { text: 'Femenino', value: 'Female' },
-        { text: 'Prefiero no decirlo', value: 'NA' }
+        { text: 'Femenino', value: 'Female' }
       ]
     }
   },
