@@ -1,4 +1,5 @@
 import express from 'express';
+import UserAgent from 'useragent';
 
 import { consoleError } from '../utils';
 
@@ -9,6 +10,23 @@ const router = express.Router();
 const storeParticipant = async (request, response, next) => {
   try {
     let participant = request.body;
+
+    let ipAddress = (request.headers['x-forwarded-for'] || '').split(',').pop().trim() || 
+      request.connection.remoteAddress || 
+      request.socket.remoteAddress || 
+      request.connection.socket.remoteAddress;
+
+    let rua = request.get('User-Agent');  // raw user agent
+    let oua = UserAgent.parse(rua);       // object user agent
+    let browser = oua ? oua.toAgent() : 'undefined';
+    let os = oua ? oua.os.toString() : 'undefined';
+    let device = oua ? oua.device.toString() : 'undefined';
+
+    participant.ipAddress = ipAddress;
+    participant.userAgent = rua;
+    participant.browser = browser;
+    participant.operatingSystem = os;
+    participant.device = device;
 
     await Participant.create(participant);
     

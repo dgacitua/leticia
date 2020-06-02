@@ -13,6 +13,21 @@ const participantSchema = Mongoose.Schema({
     type: Date,
     required: true
   },
+  ipAddress: {
+    type: String
+  },
+  userAgent: {
+    type: String
+  },
+  browser: {
+    type: String
+  },
+  operatingSystem: {
+    type: String
+  },
+  device: {
+    type: String
+  },
   finished: {
     type: Boolean,
     default: false

@@ -46,6 +46,7 @@
     "random-username-generator": "^1.0.4",
     "sockjs": "^0.3.20",
     "sockjs-client": "^1.4.0",
+    "useragent": "^2.3.0",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
     "vue-hot-reload-api": "^2.3.4",
