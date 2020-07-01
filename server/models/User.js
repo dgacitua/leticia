@@ -1,10 +1,40 @@
+// Adapted from https://bezkoder.com/node-js-mongodb-auth-jwt/
+import Mongoose from 'mongoose';
+
+//import './db';
+
+const userSchema = Mongoose.Schema({
+  username: {
+    type: String
+  },
+  email: {
+    type: String
+  },
+  password: {
+    type: String
+  },
+  roles: [
+    {
+      type: Mongoose.Schema.Types.ObjectId,
+      ref: 'Role'
+    }
+  ]
+});
+
+const User = Mongoose.model('User', userSchema);
+
+export default User;
+
+
+// Old Code
+/*
 import Mongoose from 'mongoose';
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken';
 
 import { jwtKey } from '../constants';
 
-import './db';
+//import './db';
 
 const userSchema = Mongoose.Schema({
   name: {
@@ -86,3 +116,4 @@ userSchema.statics.findByName = async (name) => {
 const User = Mongoose.model('User', userSchema);
 
 export default User;
+*/

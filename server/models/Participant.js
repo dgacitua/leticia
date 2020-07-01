@@ -1,6 +1,6 @@
 import Mongoose from 'mongoose';
 
-import './db';
+//import './db';
 
 const participantSchema = Mongoose.Schema({
   userId: {

@@ -7,6 +7,8 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import SockJS from 'sockjs';
 
+import './db';
+
 import api1 from './api1';
 import { redirectInteraction } from './websocketRouter';
 
@@ -15,14 +17,23 @@ const port = 3001;
 const wsPort = 3002;
 const echo = SockJS.createServer();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+let corsOptions = {
+  origin: "http://localhost:3000"
+};
+
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // CORS support
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Add routes
 app.use('/v1', api1);
+
+// simple route
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to LeTiCiA API!' });
+});
 
 // WebSocket event handler
 echo.on('connection', (conn) => {

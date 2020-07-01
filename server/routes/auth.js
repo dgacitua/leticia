@@ -1,3 +1,59 @@
+// Adapted from https://bezkoder.com/node-js-mongodb-auth-jwt/
+import express from 'express';
+
+import middlewares from '../middlewares/index';
+import * as controller from '../controllers/auth';
+
+const router = express.Router();
+
+const checkHeader = (request, response, next) => {
+  response.header(
+    'Access-Control-Allow-Headers',
+    'x-access-token, Origin, Content-Type, Accept'
+  );
+  next();
+};
+
+router.post('/register',
+  checkHeader,
+  [
+    middlewares.verifySignup.checkDuplicateUsernameOrEmail,
+    middlewares.verifySignup.checkRolesExisted
+  ],
+  controller.signup
+);
+
+router.post('/login', checkHeader, controller.signin);
+
+export default router;
+
+/*
+const auth = (app) => {
+  app.use((req, res, next) => {
+    res.header(
+      'Access-Control-Allow-Headers',
+      'x-access-token, Origin, Content-Type, Accept'
+    );
+    next();
+  });
+
+  app.post(
+    '/auth/signup',
+    [
+      verifySignUp.checkDuplicateUsernameOrEmail,
+      verifySignUp.checkRolesExisted
+    ],
+    controller.signup
+  );
+
+  app.post('/auth/signin', controller.signin);
+};
+
+export default auth;
+*/
+
+// Old Code
+/*
 import express from 'express';
 
 import { string2hash } from '../utils';
@@ -43,7 +99,7 @@ const logout = async (request, response) => {
 };
 
 const user = (request, response) => {
-  /* remove private info */
+  // remove private info
   let user = {
     name: request.user.name,
     userId: request.user.userId
@@ -95,3 +151,4 @@ router.get('/user', auth, user);
 router.get('/refresh', auth, refresh);
 
 export default router;
+*/

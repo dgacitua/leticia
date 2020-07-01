@@ -1,5 +1,5 @@
 import Mongoose from 'mongoose';
-import './db';
+//import './db';
 
 const formSchema = Mongoose.Schema({
   formId: {
