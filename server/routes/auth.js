@@ -6,16 +6,8 @@ import * as controller from '../controllers/auth';
 
 const router = express.Router();
 
-const checkHeader = (request, response, next) => {
-  response.header(
-    'Access-Control-Allow-Headers',
-    'x-access-token, Origin, Content-Type, Accept'
-  );
-  next();
-};
-
 router.post('/register',
-  checkHeader,
+  middlewares.checkHeader,
   [
     middlewares.verifySignup.checkDuplicateUsernameOrEmail,
     middlewares.verifySignup.checkRolesExisted
@@ -23,6 +15,6 @@ router.post('/register',
   controller.signup
 );
 
-router.post('/login', checkHeader, controller.signin);
+router.post('/login', middlewares.checkHeader, controller.signin);
 
 export default router;
