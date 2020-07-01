@@ -1,5 +1,4 @@
 import Mongoose from 'mongoose';
-//import './db';
 
 const mouseActionSchema = Mongoose.Schema({
   userId: {
