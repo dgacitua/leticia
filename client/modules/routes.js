@@ -16,6 +16,9 @@ import Register from '../templates/Register.vue';
 import TaskForm from '../templates/queryPlanning/TaskForm.vue';
 import TaskSelector from '../templates/queryPlanning/TaskSelector.vue';
 import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
+import Profile from '../templates/Profile.vue';
+import UserHub from '../templates/hubs/UserHub.vue';
+import AdminHub from '../templates/hubs/AdminHub.vue';
 import End from '../templates/End.vue';
 import NotFound from '../templates/NotFound.vue';
 
@@ -30,12 +33,21 @@ const router = new VueRouter({
   mode: 'history',
   routes: [
     {
+      path: '/',
+      name: 'home',
+      component: Home,
+      meta: {
+        auth: false,
+        //isParticipant: false
+      }
+    },
+    {
       path: '/login',
       name: 'login',
       component: Login,
       meta: {
         auth: false,
-        isParticipant: false
+        //isParticipant: false
       }
     },
     {
@@ -44,16 +56,15 @@ const router = new VueRouter({
       component: Register,
       meta: {
         auth: false,
-        isParticipant: false
+        //isParticipant: false
       }
     },
     {
-      path: '/',
-      name: 'home',
-      component: Home,
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
       meta: {
-        auth: false,
-        isParticipant: false
+        auth: true
       }
     },
     {
@@ -62,7 +73,7 @@ const router = new VueRouter({
       component: InformedConsent,
       meta: {
         auth: false,
-        isParticipant: false
+        //isParticipant: false
       }
     },
     {
@@ -70,8 +81,8 @@ const router = new VueRouter({
       name: 'demographic',
       component: Demographic,
       meta: {
-        auth: false,  // TODO Login
-        isParticipant: true
+        auth: true,
+        //isParticipant: true
       }
     },
     {
@@ -79,8 +90,8 @@ const router = new VueRouter({
       name: 'instructions',
       component: Instructions,
       meta: {
-        auth: false,
-        isParticipant: true
+        auth: true,
+        //isParticipant: true
       }
     },
     {
@@ -88,8 +99,8 @@ const router = new VueRouter({
       name: 'tasks',
       component: TaskSelector,
       meta: {
-        auth: false,
-        isParticipant: true
+        auth: true,
+        //isParticipant: true
       }
     },
     {
@@ -97,8 +108,8 @@ const router = new VueRouter({
       name: 'taskform',
       component: TaskForm,
       meta: {
-        auth: false,
-        isParticipant: true
+        auth: true,
+        //isParticipant: true
       }
     },
     {
@@ -106,8 +117,25 @@ const router = new VueRouter({
       name: 'query',
       component: QueryWriter,
       meta: {
-        auth: false,
-        isParticipant: true
+        auth: true,
+        //isParticipant: true
+      }
+    },
+    {
+      path: '/user-hub',
+      name: 'user-hub',
+      component: UserHub,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/admin-hub',
+      name: 'admin-hub',
+      component: AdminHub,
+      meta: {
+        auth: true,
+        admin: true
       }
     },
     {
@@ -115,8 +143,8 @@ const router = new VueRouter({
       name: 'end',
       component: End,
       meta: {
-        auth: false,
-        isParticipant: false
+        auth: true,
+        //isParticipant: false
       }
     },
     {
@@ -124,8 +152,8 @@ const router = new VueRouter({
       name: 'not-found',
       component: NotFound,
       meta: {
-        auth: false,
-        isParticipant: false
+        auth: true,
+        //isParticipant: false
       }
     }
   ]
@@ -135,23 +163,16 @@ router.beforeEach((to, from, next) => {
   // dgacitua: Redirect to last known route
   // https://css-tricks.com/storing-and-using-the-last-known-route-in-vue/
   const currentRoute = store.state.currentRoute;
+  const loggedIn = localStorage.getItem('leticia-user');
 
   if (currentRoute && !isEmptyObject(currentRoute) && isFirstTransition && to.name !== currentRoute.name) {
     next(currentRoute);
   }
   else {
-    if (to.matched.some(record => record.meta.isParticipant)) {
-      // this route requires auth, check if logged in
-      // if not, redirect to login page.
-      if (!store.getters.isValidParticipant) {
-        next({
-          path: '/',
-          query: { redirect: to.fullPath }
-        });
-      }
-      else {
-        next();
-      }
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    if (to.matched.some(record => record.meta.auth) && !loggedIn) {
+      next('/login');
     }
     else {
       next();
@@ -162,7 +183,9 @@ router.beforeEach((to, from, next) => {
 });
 
 router.afterEach((to, from) => {
-  if (store.getters.isValidParticipant) {
+  const loggedIn = localStorage.getItem('leticia-user');
+
+  if (loggedIn) {
     store.commit({ type: 'setCurrentRoute', route: parseCircularObject(to) });
   }
 });

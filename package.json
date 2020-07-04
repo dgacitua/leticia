@@ -22,9 +22,9 @@
     "clean": "rimraf ./.cache && rimraf ./build && rimraf ./dist"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.28",
-    "@fortawesome/free-solid-svg-icons": "^5.13.0",
-    "@fortawesome/vue-fontawesome": "^0.1.9",
+    "@fortawesome/fontawesome-svg-core": "^1.2.29",
+    "@fortawesome/free-solid-svg-icons": "^5.13.1",
+    "@fortawesome/vue-fontawesome": "^0.1.10",
     "@websanova/vue-auth": "^3.0.5-beta",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
@@ -47,6 +47,7 @@
     "sockjs": "^0.3.20",
     "sockjs-client": "^1.4.0",
     "useragent": "^2.3.0",
+    "vee-validate": "^2.2.15",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
     "vue-hot-reload-api": "^2.3.4",

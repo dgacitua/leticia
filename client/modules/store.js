@@ -5,6 +5,7 @@ import Axios from 'axios';
 
 import * as Constants from '../services/Constants';
 import { generateUserId, findIndexInArray, shuffleArray, deepCopy } from '../services/Utils';
+import { auth } from './auth';
 
 Vue.use(Vuex);
 
@@ -141,11 +142,17 @@ const store = new Vuex.Store({
             reject(err);
           });
       });
+    },
+    eraseAll(context) {
+      context.commit({ type: 'eraseAll' });
     }
   },
   plugins: [
     vuexLocal.plugin
-  ]
+  ],
+  modules: {
+    auth
+  }
 });
 
 export { store };

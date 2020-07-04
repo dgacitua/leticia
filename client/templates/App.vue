@@ -36,6 +36,12 @@ export default {
     },
     remainingTime() {
       return this.$store.state.remainingTime;
+    },
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+    currentUser() {
+      return this.$store.state.auth.user;
     }
   },
   
@@ -88,9 +94,9 @@ export default {
 
   methods: {
     captureAction(event) {
-      if (this.$store.getters.isValidParticipant) {
-        event.userId = this.userId;
-        // console.log(`[CaptureAction]`, event);
+      if (this.loggedIn) { //(this.$store.getters.isValidParticipant) {
+        event.userId = this.currentUser.username;
+        //console.log(`[CaptureAction]`, event);
 
         Axios.post(`${Constants.backendApiUrl}/actions`, event)
           .then((res) => {
@@ -103,15 +109,16 @@ export default {
     },
 
     captureTrack(event) {
-      if (this.$store.getters.isValidParticipant) {
-        event.userId = this.userId;
-        // console.log(`[CaptureTrack]`, `TYPE: ${event.type}`, `TS: ${event.clientTimestamp}`, event);
-        WebSocket.sendMessage(event);
+      if (this.loggedIn) { //(this.$store.getters.isValidParticipant) {
+        event.userId = this.currentUser.username;
+        // TODO Enable captureTrack
+        //console.log(`[CaptureTrack]`, `TYPE: ${event.type}`, `TS: ${event.clientTimestamp}`, event);
+        //WebSocket.sendMessage(event);
       }
     },
 
     timeEvent(event) {
-      console.log('Time Event!', event);
+      console.log('[TimeEvent]', event);
     }
   }
 }
