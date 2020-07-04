@@ -37,8 +37,7 @@ const router = new VueRouter({
       name: 'home',
       component: Home,
       meta: {
-        auth: false,
-        //isParticipant: false
+        auth: false
       }
     },
     {
@@ -46,8 +45,7 @@ const router = new VueRouter({
       name: 'login',
       component: Login,
       meta: {
-        auth: false,
-        //isParticipant: false
+        auth: false
       }
     },
     {
@@ -55,8 +53,7 @@ const router = new VueRouter({
       name: 'register',
       component: Register,
       meta: {
-        auth: false,
-        //isParticipant: false
+        auth: false
       }
     },
     {
@@ -72,8 +69,7 @@ const router = new VueRouter({
       name: 'consent',
       component: InformedConsent,
       meta: {
-        auth: false,
-        //isParticipant: false
+        auth: false
       }
     },
     {
@@ -81,8 +77,7 @@ const router = new VueRouter({
       name: 'demographic',
       component: Demographic,
       meta: {
-        auth: true,
-        //isParticipant: true
+        auth: true
       }
     },
     {
@@ -90,8 +85,7 @@ const router = new VueRouter({
       name: 'instructions',
       component: Instructions,
       meta: {
-        auth: true,
-        //isParticipant: true
+        auth: true
       }
     },
     {
@@ -99,8 +93,7 @@ const router = new VueRouter({
       name: 'tasks',
       component: TaskSelector,
       meta: {
-        auth: true,
-        //isParticipant: true
+        auth: true
       }
     },
     {
@@ -108,8 +101,7 @@ const router = new VueRouter({
       name: 'taskform',
       component: TaskForm,
       meta: {
-        auth: true,
-        //isParticipant: true
+        auth: true
       }
     },
     {
@@ -117,8 +109,7 @@ const router = new VueRouter({
       name: 'query',
       component: QueryWriter,
       meta: {
-        auth: true,
-        //isParticipant: true
+        auth: true
       }
     },
     {
@@ -143,8 +134,7 @@ const router = new VueRouter({
       name: 'end',
       component: End,
       meta: {
-        auth: true,
-        //isParticipant: false
+        auth: true
       }
     },
     {
@@ -152,8 +142,7 @@ const router = new VueRouter({
       name: 'not-found',
       component: NotFound,
       meta: {
-        auth: true,
-        //isParticipant: false
+        auth: true
       }
     }
   ]

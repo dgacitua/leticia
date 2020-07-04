@@ -23,10 +23,6 @@
 export default {
   name: 'informed-consent',
 
-  beforeMount() {
-    // this.$store.commit({ type: 'setCurrentRoute', route: { path: 'consent' }});
-  },
-
   methods: {
     createParticipant() {
       this.$store.dispatch({ type: 'createParticipant' })

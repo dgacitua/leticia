@@ -31,9 +31,6 @@ export default {
   },
 
   computed: {
-    userId() {
-      return this.$store.state.userId;
-    },
     remainingTime() {
       return this.$store.state.remainingTime;
     },

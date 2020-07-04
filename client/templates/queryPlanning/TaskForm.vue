@@ -61,9 +61,6 @@ export default {
   },
 
   computed: {
-    userId() {
-      return this.$store.state.userId;
-    },
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
     },

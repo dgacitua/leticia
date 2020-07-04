@@ -18,10 +18,6 @@
 export default {
   name: 'instructions',
 
-  beforeMount() {
-    //this.$store.commit({ type: 'setCurrentRoute', route: { path: 'instructions' }});
-  },
-
   methods: {
     nextStage() {
       // dgacitua: https://stackoverflow.com/a/57183854

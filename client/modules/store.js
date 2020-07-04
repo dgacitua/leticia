@@ -16,23 +16,14 @@ const vuexLocal = new VuexPersistence({
 
 const store = new Vuex.Store({
   state: {
-    isParticipant: false,
-    userId: null,
-    finished: false,
     remainingTime: -1,
     globalRemainingTime: -1,
     tasks: [],
     currentRoute: {}
   },
   getters: {
-    isValidParticipant: (state) => {
-      return (state.isParticipant && state.userId && !state.finished);
-    },
     userData: (state) => {
       return {
-        isParticipant: state.isParticipant,
-        userId: state.userId,
-        finished: state.finished,
         remainingTime: state.remainingTime,
         globalRemainingTime: state.globalRemainingTime
       };
@@ -65,19 +56,7 @@ const store = new Vuex.Store({
       let taskIdx = findIndexInArray(state.tasks, (t) => { return t.searchTaskId === payload.id });
       state.tasks[taskIdx].completed = true;
     },
-    setUserId(state, payload) {
-      state.userId = payload.id;
-    },
-    setParticipantStatus(state, payload) {
-      state.isParticipant = payload.status;
-    },
-    setFinishedStatus(state, payload) {
-      state.finished = payload.status;
-    },
     eraseAll(state) {
-      state.isParticipant = false;
-      state.userId = null;
-      state.finished = false;
       state.remainingTime = 120;
       state.tasks = [];
       state.currentRoute = {};
@@ -90,52 +69,6 @@ const store = new Vuex.Store({
           .then((res) => {
             const newTasks = deepCopy(shuffleArray(res.data));
             context.commit({ type: 'setTasks', tasks: newTasks });
-            resolve();
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      });
-    },
-    createParticipant(context) {
-      return new Promise((resolve, reject) => {
-        const userId = generateUserId();
-        const registerDate = new Date();
-        const newParticipant = { userId, registerDate };
-
-        Axios.post(`${Constants.backendApiUrl}/participants`, newParticipant)
-          .then((res) => {
-            const response = res.data.participantData;
-            console.log(`New Participant!`, response);
-
-            context.commit({ type: 'eraseAll' });
-            context.commit({ type: 'setUserId', id: response.userId });
-            context.commit({ type: 'setParticipantStatus', status: true });
-            context.commit({ type: 'setFinishedStatus', status: false });
-
-            resolve();
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      });
-    },
-    finishParticipant(context, payload) {
-      return new Promise((resolve, reject) => {
-        context.commit({ type: 'setFinishedStatus', status: true });
-        context.commit({ type: 'setParticipantStatus', status: false });
-
-        const participant = {
-          userId: context.state.userId,
-          finished: context.state.finished,
-          finishedReason: payload.reason || ''
-        };
-
-        console.log(participant);
-
-        Axios.put(`${Constants.backendApiUrl}/participants/${participant.userId}`, participant)
-          .then((res) => {
-            context.commit({ type: 'eraseAll' });
             resolve();
           })
           .catch((err) => {

@@ -8,9 +8,6 @@
       <b-button-group>
         <b-button to="login" variant="success">Iniciar sesión</b-button>
         <b-button to="register" variant="info">Registrarse</b-button>
-        <!--
-        <b-button to="consent">Participar del estudio</b-button>
-        -->
       </b-button-group>
     </b-row>
   </b-container>
