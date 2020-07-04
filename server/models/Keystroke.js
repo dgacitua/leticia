@@ -1,7 +1,7 @@
 import Mongoose from 'mongoose';
 
 const keystrokeSchema = Mongoose.Schema({
-  userId: {
+  username: {
     type: String,
     required: false // TODO Login
   },

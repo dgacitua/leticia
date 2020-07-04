@@ -93,6 +93,12 @@ export default {
   computed: {
     userId() {
       return this.$store.state.userId;
+    },
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+    currentUser() {
+      return this.$store.state.auth.user;
     }
   },
 
@@ -105,7 +111,7 @@ export default {
         let answers = Object.entries(getVueObject(this.form)).map(([question, answer]) => ({question, answer}));  // dgacitua: https://stackoverflow.com/a/49629733 
 
         let response = {
-          userId: this.userId,
+          username: this.currentUser.username,
           type: type,
           clientTimestamp: Date.now(),
           answers: answers

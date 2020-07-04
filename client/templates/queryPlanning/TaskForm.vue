@@ -63,6 +63,12 @@ export default {
   computed: {
     userId() {
       return this.$store.state.userId;
+    },
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+    currentUser() {
+      return this.$store.state.auth.user;
     }
   },
 
@@ -91,7 +97,7 @@ export default {
         let answers = getVueArray(this.questions).map(el => { return { questionId: el.questionId, answer: el.answer }});
 
         let response = {
-          userId: this.userId,
+          username: this.currentUser.username,
           taskId: taskId,
           formId: formId,
           clientTimestamp: Date.now(),

@@ -49,6 +49,15 @@ export default {
     }
   },
 
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+    currentUser() {
+      return this.$store.state.auth.user;
+    }
+  },
+
   mounted() {
     let taskId = this.$route.query.task;
     let formId = this.$route.query.form;
@@ -76,7 +85,7 @@ export default {
       let formAnswer = getVueArray(this.questions).map(el => { return { questionId: el.questionId, answer: cleanArray(el.answer) }});
 
       let response = {
-        userId: '',
+        username: this.currentUser.username,
         taskId: taskId,
         formId: formId,
         clientTimestamp: Date.now(),

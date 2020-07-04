@@ -95,7 +95,7 @@ export default {
   methods: {
     captureAction(event) {
       if (this.loggedIn) { //(this.$store.getters.isValidParticipant) {
-        event.userId = this.currentUser.username;
+        event.username = this.currentUser.username;
         //console.log(`[CaptureAction]`, event);
 
         Axios.post(`${Constants.backendApiUrl}/actions`, event)
@@ -110,7 +110,7 @@ export default {
 
     captureTrack(event) {
       if (this.loggedIn) { //(this.$store.getters.isValidParticipant) {
-        event.userId = this.currentUser.username;
+        event.username = this.currentUser.username;
         // TODO Enable captureTrack
         //console.log(`[CaptureTrack]`, `TYPE: ${event.type}`, `TS: ${event.clientTimestamp}`, event);
         //WebSocket.sendMessage(event);

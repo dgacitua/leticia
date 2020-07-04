@@ -1,7 +1,7 @@
 import Mongoose from 'mongoose';
 
 const demographicSchema = Mongoose.Schema({
-  userId: {
+  username: {
     type: String,
     required: false // TODO Login
   },
