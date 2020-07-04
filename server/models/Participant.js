@@ -1,5 +1,6 @@
 import Mongoose from 'mongoose';
 
+// DEPRECATED
 const participantSchema = Mongoose.Schema({
   userId: {
     type: String,

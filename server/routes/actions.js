@@ -10,7 +10,6 @@ const storeAction = async (request, response, next) => {
   try {
     let action = request.body;
     action.serverTimestamp = Date.now();
-    // action.userId = request.user._id; // TODO Login
 
     await Action.create(action);
     

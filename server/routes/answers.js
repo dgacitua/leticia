@@ -10,7 +10,6 @@ const storeAnswer = async (request, response, next) => {
   try {
     let answer = request.body;
     answer.serverTimestamp = Date.now();
-    // answer.userId = request.user._id; // TODO Login
 
     await Answer.create(answer);
     
