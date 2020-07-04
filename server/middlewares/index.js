@@ -11,9 +11,9 @@ const checkHeader = (request, response, next) => {
 };
 
 const middlewares = {
+  checkHeader,
   authJWT,
-  verifySignup,
-  checkHeader
+  verifySignup
 };
 
 export default middlewares;
