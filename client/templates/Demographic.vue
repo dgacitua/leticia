@@ -291,8 +291,8 @@ import { ModelSelect } from 'vue-search-select';
 
 import * as Constants from '../services/Constants';
 import { getVueObject } from '../services/Utils';
-import Countries from '../../assets/countries.json';
-import Cities from '../../assets/cities-CL.json';
+import Countries from '../assets/countries.json';
+import Cities from '../assets/cities-CL.json';
 
 export default {
   name: 'demographic',
