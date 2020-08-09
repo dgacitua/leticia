@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import VeeValidate from 'vee-validate';
+import vSelect from 'vue-select'
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+import 'vue-select/dist/vue-select.css';
 
 import App from './templates/App.vue';
 import { router } from './modules/routes';
@@ -17,6 +19,7 @@ library.add(fas);
 
 Vue.use(VeeValidate);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.component('v-select', vSelect);
 
 Vue.use(BootstrapVue);
 

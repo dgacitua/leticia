@@ -10,6 +10,7 @@ import { isEmptyObject, parseCircularObject } from '../services/Utils';
 import Home from '../templates/Home.vue';
 import InformedConsent from '../templates/InformedConsent.vue';
 import Demographic from '../templates/Demographic.vue';
+import TypingTest from '../templates/TypingTest.vue';
 import Instructions from '../templates/Instructions.vue';
 import Login from '../templates/Login.vue';
 import Register from '../templates/Register.vue';
@@ -76,6 +77,14 @@ const router = new VueRouter({
       path: '/demographic',
       name: 'demographic',
       component: Demographic,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/typing',
+      name: 'typing',
+      component: TypingTest,
       meta: {
         auth: true
       }

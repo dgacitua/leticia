@@ -88,7 +88,7 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
 
-      if (this.$store.getters.isValidParticipant) {
+      if (this.loggedIn) {
         let taskId = deepCopy(this.$route.query.task);
         let formId = deepCopy(this.$route.query.form);
         let answers = getVueArray(this.questions).map(el => { return { questionId: el.questionId, answer: el.answer }});

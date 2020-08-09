@@ -20,8 +20,11 @@ export default {
 
   methods: {
     nextStage() {
+      // DEPRECATED
+      /*
       // dgacitua: https://stackoverflow.com/a/57183854
       this.$router.replace({ path: 'tasks' });
+      */
     }
   }
 }

@@ -25,6 +25,8 @@ export default {
 
   methods: {
     createParticipant() {
+      // DEPRECATED
+      /*
       this.$store.dispatch({ type: 'createParticipant' })
         .then((res) => {
           this.$router.push({ path: 'demographic' });
@@ -33,6 +35,7 @@ export default {
           console.error(err);
           alert('Ha ocurrido un error al iniciar el estudio');
         });
+      */
     }
   }
 }
