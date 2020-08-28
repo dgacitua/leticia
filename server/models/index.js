@@ -9,10 +9,10 @@ import Demographic from './Demographic';
 import Forms from './Forms';
 import Keystroke from './Keystroke';
 import MouseAction from './MouseAction';
-//import Participant from './Participant';
 import Questions from './Questions';
 import ScrollAction from './ScrollAction';
 import SearchTask from './SearchTask';
+import Credential from './Credential';
 
 const db = {};
 
@@ -26,10 +26,10 @@ db.demographic = Demographic;
 db.forms = Forms;
 db.keystroke = Keystroke;
 db.mouseaction = MouseAction;
-//db.participant = Participant;
 db.questions = Questions;
 db.scrollaction = ScrollAction;
 db.searchtask = SearchTask;
+db.credential = Credential;
 
 db.ROLES = [ 'user', 'admin' ];
 

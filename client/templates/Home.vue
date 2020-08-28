@@ -32,6 +32,14 @@ export default {
   },
   
   beforeMount() {
+    let userData = this.$cookies.get('jwt');
+    
+    if (userData) {
+      localStorage.setItem('leticia-user', JSON.stringify(userData));
+      this.$store.commit('auth/loginSuccess', userData);
+      this.$cookies.remove('jwt');
+    }
+
     if (this.currentUser) {
       if (this.isAdmin) {
         this.$router.push('/admin-hub');

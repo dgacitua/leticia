@@ -8,11 +8,12 @@
       />
       <form name="form" @submit.prevent="handleRegister">
         <div v-if="!successful">
+          <!--
           <div class="form-group">
             <label for="username">Username</label>
             <input
               v-model="user.username"
-              v-validate="'required|min:3|max:20'"
+              v-validate="'min:3|max:20'"
               type="text"
               class="form-control"
               name="username"
@@ -22,6 +23,7 @@
               class="alert-danger"
             >{{errors.first('username')}}</div>
           </div>
+          -->
           <div class="form-group">
             <label for="email">Email</label>
             <input
@@ -51,7 +53,13 @@
             >{{errors.first('password')}}</div>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary btn-block">Sign Up</button>
+            <button class="btn btn-info btn-block">Sign Up</button>
+          </div>
+          <div>
+            <b-button-group block vertical>
+              <b-button block variant="danger" @click="googleLogin">Registrarse con Google</b-button>
+              <b-button block variant="primary" @click="facebookLogin">Registrarse con Facebook</b-button>
+            </b-button-group>
           </div>
         </div>
       </form>
@@ -66,7 +74,11 @@
 </template>
 
 <script>
+import Axios from 'axios';
+
 import User from '../models/User';
+
+import * as Constants from '../services/Constants';
 
 export default {
   name: 'Register',
@@ -109,6 +121,14 @@ export default {
           );
         }
       });
+    },
+
+    googleLogin() {
+      window.location.href = `${Constants.backendApiUrl}/auth/google`;
+    },
+
+    facebookLogin() {
+      //window.location.href = `${Constants.backendApiUrl}/auth/facebook`;
     }
   }
 };

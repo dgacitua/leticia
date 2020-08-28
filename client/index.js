@@ -3,6 +3,7 @@ import BootstrapVue from 'bootstrap-vue';
 import VeeValidate from 'vee-validate';
 import vSelect from 'vue-select';
 import VueI18n from 'vue-i18n';
+import VueCookies from 'vue-cookies';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
@@ -19,8 +20,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 library.add(fas);
 
 Vue.use(BootstrapVue);
+Vue.use(VueCookies);
 Vue.use(VueI18n);
 Vue.use(VeeValidate);
+
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('v-select', vSelect);

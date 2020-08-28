@@ -1,5 +1,4 @@
 // Adapted from https://bezkoder.com/jwt-vue-vuex-authentication/
-
 import axios from 'axios';
 
 import * as Constants from './Constants';
@@ -10,7 +9,7 @@ class AuthService {
   login(user) {
     return axios
       .post(API_URL + '/login', {
-        username: user.username,
+        email: user.email,
         password: user.password
       })
       .then(response => {
@@ -28,7 +27,6 @@ class AuthService {
 
   register(user) {
     return axios.post(API_URL + '/register', {
-      username: user.username,
       email: user.email,
       password: user.password
     });

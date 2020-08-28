@@ -3,13 +3,8 @@ import Mongoose from 'mongoose';
 
 const userSchema = Mongoose.Schema({
   username: {
-    type: String
-  },
-  email: {
-    type: String
-  },
-  password: {
-    type: String
+    type: String,
+    required: true
   },
   roles: [
     {

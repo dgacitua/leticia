@@ -5,7 +5,9 @@ import http from 'http';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import SockJS from 'sockjs';
+import passport from 'passport';
 
 import './db';
 
@@ -23,6 +25,8 @@ let corsOptions = {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(passport.initialize()); 
 
 // CORS support
 app.use(cors(corsOptions));

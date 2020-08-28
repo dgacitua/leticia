@@ -10,7 +10,7 @@
           <font-awesome-icon icon="user"/>
         </b-nav-item>
         <b-nav-text to="/profile">
-          {{ currentUser.username }}
+          {{ currentUser.email || currentUser.username }}
         </b-nav-text>
         <b-nav-item @click.prevent="logout">
           <font-awesome-icon icon="sign-out-alt" />
