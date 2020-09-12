@@ -112,3 +112,6 @@ build/
 
 # Macbook files
 .DS_Store
+
+# Assets
+assets/

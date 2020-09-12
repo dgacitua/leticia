@@ -22,6 +22,7 @@ import UserHub from '../templates/hubs/UserHub.vue';
 import AdminHub from '../templates/hubs/AdminHub.vue';
 import End from '../templates/End.vue';
 import NotFound from '../templates/NotFound.vue';
+import PdfRender from '../templates/PdfRender.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueAxios, Axios);
@@ -153,7 +154,15 @@ const router = new VueRouter({
       meta: {
         auth: true
       }
-    }
+    },
+    {
+      path: '/pdf',
+      name: 'pdf',
+      component: PdfRender,
+      meta: {
+        auth: false
+      }
+    },
   ]
 });
 

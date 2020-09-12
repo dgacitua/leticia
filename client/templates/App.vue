@@ -122,7 +122,19 @@ export default {
 </script>
 
 <style scoped>
+#leticia-app {
+  min-width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#leticia-navbar {
+  width: 100%;
+}
+
 #leticia-content {
   padding: 5px 5px 5px 5px;
+  flex: 1;
 }
 </style>
