@@ -10,7 +10,7 @@ import { isEmptyObject, parseCircularObject } from '../services/Utils';
 import Home from '../templates/Home.vue';
 import InformedConsent from '../templates/InformedConsent.vue';
 import Demographic from '../templates/Demographic.vue';
-import TypingTest from '../templates/TypingTest.vue';
+import TypingTest from '../templates/questionnaires/TypingTest.vue';
 import Instructions from '../templates/Instructions.vue';
 import Login from '../templates/Login.vue';
 import Register from '../templates/Register.vue';
@@ -22,6 +22,7 @@ import UserHub from '../templates/hubs/UserHub.vue';
 import AdminHub from '../templates/hubs/AdminHub.vue';
 import End from '../templates/End.vue';
 import NotFound from '../templates/NotFound.vue';
+
 import PdfRender from '../templates/PdfRender.vue';
 
 Vue.use(VueRouter);
@@ -162,7 +163,7 @@ const router = new VueRouter({
       meta: {
         auth: false
       }
-    },
+    }
   ]
 });
 

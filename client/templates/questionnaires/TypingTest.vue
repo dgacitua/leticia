@@ -1,5 +1,9 @@
 <template>
-  <div>TODO Test Tipeo</div>
+  <b-container>
+    <b-row>
+      asdf
+    </b-row>
+  </b-container>
 </template>
 
 <script>
