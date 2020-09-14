@@ -10,3 +10,4 @@ db.answers.drop();
 db.demographics.drop();
 db.keystrokes.drop();
 db.mouseactions.drop();
+db.roles.drop();

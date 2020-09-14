@@ -1,10 +1,33 @@
 // $ mongo leticia-pilot populateDatabase.js
 
+db.roles.insertMany([
+  {
+    "_id" : ObjectId("5efcf1932cc0301bfcf92050"),
+    "name" : "user",
+    "__v" : 0
+  },
+  {
+    "_id" : ObjectId("5efcf1932cc0301bfcf92051"),
+    "name" : "admin",
+    "__v" : 0
+  }
+]);
+
+db.credentials.insertOne({
+  "_id" : ObjectId("5f5fdd3dfc5f3248ee340e45"),
+  "email" : "admin@admin.com",
+  "password" : "$2a$08$niMSPaP4VeZAXitLIxhZIeo11I.W.XjU7rJ.zP/Wn5efhqqUsW49i",
+  "user" : ObjectId("5f5fdd3dfc5f3248ee340e44"),
+  "__v" : 0
+});
+
 db.users.insertOne({
-  "username": "admin",
-  "email": "admin@admin.com",
-  "password": "admin",
-  "roles": [ "admin" ]
+  "_id" : ObjectId("5f5fdd3dfc5f3248ee340e44"),
+  "roles" : [ 
+    ObjectId("5efcf1932cc0301bfcf92051")
+  ],
+  "username" : "okuyucoxup",
+  "__v" : 1
 });
 
 db.forms.insertMany([
