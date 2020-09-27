@@ -5,10 +5,21 @@
     </b-row>
     <br>
     <b-row>
-      <b-button-group>
-        <b-button to="consent" variant="info">Participar en el estudio</b-button>
-        <b-button to="login" variant="success">Iniciar sesión</b-button>
-      </b-button-group>
+      <b-col>
+        <b-row align-h="center">
+          <b-button-group>
+            <b-button to="consent" variant="info">Participar en el estudio</b-button>
+            <b-button to="oauth" variant="success">Iniciar sesión</b-button>
+          </b-button-group>
+        </b-row>
+        <br/>
+        <!-- TODO disable Admin Hub -->
+        <b-row align-h="center">
+          <b-button-group>
+            <b-button to="admin-hub" variant="warning">Panel del Administrador</b-button>
+          </b-button-group>
+        </b-row>
+      </b-col>
     </b-row>
   </b-container>
 </template>

@@ -12,8 +12,9 @@ import InformedConsent from '../templates/InformedConsent.vue';
 import Demographic from '../templates/Demographic.vue';
 import TypingTest from '../templates/questionnaires/TypingTest.vue';
 import Instructions from '../templates/Instructions.vue';
-import Login from '../templates/Login.vue';
-import Register from '../templates/Register.vue';
+import Login from '../templates/auth/Login.vue';
+import Register from '../templates/auth/Register.vue';
+import OAuth from '../templates/auth/OAuth.vue';
 import TaskForm from '../templates/queryPlanning/TaskForm.vue';
 import TaskSelector from '../templates/queryPlanning/TaskSelector.vue';
 import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
@@ -55,6 +56,14 @@ const router = new VueRouter({
       path: '/register',
       name: 'register',
       component: Register,
+      meta: {
+        auth: false
+      }
+    },
+    {
+      path: '/oauth',
+      name: 'oauth',
+      component: OAuth,
       meta: {
         auth: false
       }
@@ -136,8 +145,10 @@ const router = new VueRouter({
       name: 'admin-hub',
       component: AdminHub,
       meta: {
+        /*
         auth: true,
         admin: true
+        */
       }
     },
     {

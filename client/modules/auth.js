@@ -23,6 +23,18 @@ export const auth = {
         }
       );
     },
+    simulatedLogin({ commit }) {
+      return AuthService.simulatedLogin().then(
+        user => {
+          commit('loginSuccess', user);
+          return Promise.resolve(user);
+        },
+        error => {
+          commit('loginFailure');
+          return Promise.reject(error);
+        }
+      );
+    },
     logout({ commit }) {
       AuthService.logout();
       commit('logout');

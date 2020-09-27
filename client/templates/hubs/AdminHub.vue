@@ -10,6 +10,7 @@
         </b-row>
         <b-row>
           <b-button-group vertical>
+            <b-button @click="simulateLogin">Simular Login</b-button>
             <b-button to="consent">Consentimiento Informado</b-button>
             <b-button to="demographic">Demográfico</b-button>
             <b-button to="typing">Test Tipeo (baseline)</b-button>
@@ -32,7 +33,12 @@
 
 <script>
 export default {
-
+  name: 'AdminHub',
+  methods: {
+    simulateLogin() {
+      this.$store.dispatch('auth/simulatedLogin');
+    } 
+  }
 }
 </script>
 
