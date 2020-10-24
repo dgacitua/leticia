@@ -176,8 +176,34 @@
           >
           </b-form-input>
         </b-form-group>
-        <!-- HasDyslexia? TODO -->
-        <!-- HasColorBlindness TODO -->
+        <!-- HasDyslexia? -->
+        <b-form-group
+          id="input-group-dyslexia"
+          label="¿Usted tiene Dislexia?"
+          label-for="input-dyslexia"
+          >
+          <b-form-select
+            id="input-dyslexia"
+            v-model="form.hasDyslexia"
+            :options="hasDyslexia"
+            required
+            >
+          </b-form-select>
+        </b-form-group>
+        <!-- HasColorBlindness -->
+        <b-form-group
+          id="input-group-colorblindness"
+          label="¿Usted tiene algún tipo de Daltonismo?"
+          label-for="input-colorblindness"
+          >
+          <b-form-select
+            id="input-colorblindness"
+            v-model="form.hasColorBlindness"
+            :options="hasColorBlindness"
+            required
+            >
+          </b-form-select>
+        </b-form-group>
         <!-- Country -->
         <b-form-group
           id="input-group-country"
@@ -282,6 +308,8 @@
         <b-button type="submit" variant="primary">Enviar</b-button>
       </b-form>
     </b-row>
+    <hr>
+    <pre>{{ form }}</pre>
   </b-container>
 </template>
 
@@ -341,6 +369,14 @@ export default {
       isStudent: [
         { text: 'Si, soy estudiante', value: 'Yes' },
         { text: 'No, ya egresé', value: 'No' }
+      ],
+      hasDyslexia: [
+        { text: 'Si', value: 'Yes' },
+        { text: 'No', value: 'No' }
+      ],
+      hasColorBlindness: [
+        { text: 'Si', value: 'Yes' },
+        { text: 'No', value: 'No' }
       ],
       country: [
         { text: 'Chile', value: '' },
