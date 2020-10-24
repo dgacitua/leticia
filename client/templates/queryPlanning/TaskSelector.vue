@@ -5,6 +5,10 @@
     </b-row>
     <br>
     <b-row>
+      
+    </b-row>
+    <!--
+    <b-row>
       <b-card-group deck>
         <div v-for="task in searchTasks" :key="task.searchTaskId">
           <b-card :title="task.title" class="mb-2 task-card">
@@ -23,6 +27,7 @@
         </div>
       </b-card-group>
     </b-row>
+    -->
   </b-container>
 </template>
 

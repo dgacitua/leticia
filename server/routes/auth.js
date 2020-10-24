@@ -20,8 +20,8 @@ router.post('/register',
 );
 
 // OAuth Authentication, Just going to this URL will open OAuth screens
-router.get('/google', oauth.authenticate('google', { scope: ['profile','email'] }));
-router.get('/facebook', oauth.authenticate('facebook', { scope:'email' }));
+router.get('/google', oauth.authenticate('google', { scope: [ 'profile', 'email' ] }));
+router.get('/facebook', oauth.authenticate('facebook', { scope: 'email' }));
 
 // Oauth user data comes to these redirectURLs
 router.get('/googleRedirect', oauth.authenticate('google'), controller.googleLogin);

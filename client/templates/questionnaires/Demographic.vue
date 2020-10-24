@@ -379,7 +379,7 @@ export default {
         { text: 'No', value: 'No' }
       ],
       country: [
-        { text: 'Chile', value: '' },
+        { text: 'Chile', value: 'Chile' },
         { text: 'Otro', value: 'Other' }
       ],
       allCities: Cities,
