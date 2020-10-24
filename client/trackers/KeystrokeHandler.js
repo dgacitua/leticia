@@ -1,7 +1,6 @@
 class KeystrokeHandler {
   constructor(handlerId) {
     this.handlerId = handlerId;
-    this.keystrokeBuffer = new Array();
   }
 
   keydown(evt) {
@@ -18,7 +17,6 @@ class KeystrokeHandler {
       char      : evt.char
     };
 
-    //this.keystrokeBuffer.push(message);
     console.log(message.type, `TRG: ${message.target}`, `KEY: ${message.key}`, `TS: ${message.clientTimestamp}`);
     return message;
   }
@@ -37,7 +35,6 @@ class KeystrokeHandler {
       char      : evt.char
     };
 
-    //this.keystrokeBuffer.push(message);
     console.log(message.type, `TRG: ${message.target}`, `KEY: ${message.key}`, `TS: ${message.clientTimestamp}`);
     return message;
   }
@@ -57,17 +54,8 @@ class KeystrokeHandler {
       char      : evt.char
     };
 
-    //this.keystrokeBuffer.push(message);
     console.log(message.type, `TRG: ${message.target}`, `KEY: ${message.key}`, `TS: ${message.clientTimestamp}`);
     return message;
-  }
-
-  getBuffer() {
-    return this.keystrokeBuffer;
-  }
-
-  resetBuffer() {
-    this.keystrokeBuffer = [];
   }
 }
 
