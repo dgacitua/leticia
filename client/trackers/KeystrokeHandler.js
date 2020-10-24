@@ -17,7 +17,7 @@ class KeystrokeHandler {
       char      : evt.char
     };
 
-    console.log(message.type, `TRG: ${message.target}`, `KEY: ${message.key}`, `TS: ${message.clientTimestamp}`);
+    //console.log(message.type, `TRG: ${message.target}`, `KEY: ${message.key}`, `TS: ${message.clientTimestamp}`);
     return message;
   }
 
@@ -35,7 +35,7 @@ class KeystrokeHandler {
       char      : evt.char
     };
 
-    console.log(message.type, `TRG: ${message.target}`, `KEY: ${message.key}`, `TS: ${message.clientTimestamp}`);
+    //console.log(message.type, `TRG: ${message.target}`, `KEY: ${message.key}`, `TS: ${message.clientTimestamp}`);
     return message;
   }
 
@@ -54,7 +54,7 @@ class KeystrokeHandler {
       char      : evt.char
     };
 
-    console.log(message.type, `TRG: ${message.target}`, `KEY: ${message.key}`, `TS: ${message.clientTimestamp}`);
+    //console.log(message.type, `TRG: ${message.target}`, `KEY: ${message.key}`, `TS: ${message.clientTimestamp}`);
     return message;
   }
 }
