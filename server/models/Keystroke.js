@@ -3,7 +3,7 @@ import Mongoose from 'mongoose';
 const keystrokeSchema = Mongoose.Schema({
   username: {
     type: String,
-    required: false // TODO Login
+    required: true
   },
   type: {
     type: String,
@@ -15,15 +15,16 @@ const keystrokeSchema = Mongoose.Schema({
     required: true,
     trim: true
   },
+  target: {
+    type: String,
+    required: true,
+    trim: true
+  },
   url: {
     type: String,
     required: true
   },
   clientTimestamp: {
-    type: Number,
-    required: true
-  },
-  serverTimestamp: {
     type: Number,
     required: true
   },
@@ -40,6 +41,10 @@ const keystrokeSchema = Mongoose.Schema({
     required: false
   },
   key: {
+    type: String,
+    required: false
+  },
+  char: {
     type: String,
     required: false
   }

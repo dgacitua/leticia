@@ -8,6 +8,7 @@ import actions from './routes/actions';
 import answers from './routes/answers';
 import demographic from './routes/demographic';
 import participants from './routes/participants';
+import keystrokes from './routes/keystrokes';
 
 const router = express.Router();
 
@@ -19,5 +20,6 @@ router.use('/actions', actions);
 router.use('/answers', answers);
 router.use('/demographic', demographic);
 router.use('/participants', participants);
+router.use('/keystrokes', keystrokes);
 
 export default router;

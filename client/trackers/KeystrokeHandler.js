@@ -6,7 +6,7 @@ class KeystrokeHandler {
   keydown(evt) {
     let message = {
       type      : 'KeyDown',
-      source    : 'Window',
+      source    : this.handlerId,
       target    : evt.target.id,
       url       : window.document.URL,
       clientTimestamp : Date.now(),
@@ -24,7 +24,7 @@ class KeystrokeHandler {
   keyup(evt) {
     let message = {
       type      : 'KeyUp',
-      source    : 'Window',
+      source    : this.handlerId,
       url       : window.document.URL,
       target    : evt.target.id,
       clientTimestamp : Date.now(),
@@ -43,7 +43,7 @@ class KeystrokeHandler {
   keypress(evt) {
     let message = {
       type      : 'KeyPress',
-      source    : 'Window',
+      source    : this.handlerId,
       target    : evt.target.id,
       url       : window.document.URL,
       clientTimestamp : Date.now(),

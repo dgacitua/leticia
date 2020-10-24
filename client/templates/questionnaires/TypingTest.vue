@@ -9,7 +9,7 @@
       </div>
     </b-row>
     <br>
-    <b-form @submit="onSubmit">
+    <b-form @submit="nextSample">
       <b-form-group
         :id="`label-${currentSample.id}`"
         :label="currentSample.text"
@@ -40,7 +40,9 @@
 <script>
 import TypingTestSamples from '../../assets-client/typingTestSamples-es.json';
 
+import ActionSender from '../../services/ActionSender';
 import KeystrokeHandler from '../../trackers/KeystrokeHandler';
+import { deepCopy } from '../../services/Utils';
 
 export default {
   name: 'demographic',
@@ -50,10 +52,9 @@ export default {
       samples: TypingTestSamples,
       sampleIndex: 0,
       handler: new KeystrokeHandler('TypingTest'),
+      sender: new ActionSender('TypingTest'),
       response: [],
-      keystrokeBuffer: [],
-      carouselInterval: 0,
-      lastSlide: false
+      keystrokeBuffer: []
     }
   },
 
@@ -70,36 +71,37 @@ export default {
   },
 
   methods: {
-    getIndex(item, array) {
-      return array.indexOf(item);
-    },
-    getIndexById(id, array) {
-      return array.findIndex(e => id === e.id);
-    },
-    getLastElement(array) {
-      return array.slice(-1);
-    },
     onSubmit(evt) {
       evt.preventDefault();
-      console.log('Response!', this.response);
+
+      let response = deepCopy(this.response);
+
+      this.sender.sendTypingTestResponses(response)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
+
+      // TODO proceed to next stage
     },
     keydown(evt) {
       let ks = this.handler.keydown(evt);
       this.keystrokeBuffer.push(ks);
-      //console.log(this.keystrokeBuffer);
     },
     keyup(evt) {
       let ks = this.handler.keyup(evt);
       this.keystrokeBuffer.push(ks);
-      //console.log(this.keystrokeBuffer);
     },
     nextSample(evt) {
       if (this.isValidInput) {
+        let buffer = deepCopy(this.keystrokeBuffer);
+
+        this.sender.sendKeystrokeBuffer(buffer)
+          .then(res => console.log(res.data))
+          .catch(err => console.error(err));
+        
+        this.keystrokeBuffer.length = 0;
+
         if (!this.isLastSlide) {
           this.sampleIndex++;
-          console.log('KSBuffer!', this.keystrokeBuffer);
-          // TODO send buffer to backend
-          this.keystrokeBuffer.length = 0;
         }
         else {
           this.onSubmit(evt);
@@ -114,9 +116,5 @@ export default {
 #typing-test {
   display: flex;
   flex-direction: row;
-}
-
-.text-carousel {
-  color: #000000;
 }
 </style>
