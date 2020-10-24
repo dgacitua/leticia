@@ -317,10 +317,10 @@
 import Axios from 'axios';
 import { ModelSelect } from 'vue-search-select';
 
-import * as Constants from '../services/Constants';
-import { getVueObject } from '../services/Utils';
-import Countries from '../assets-client/countries.json';
-import Cities from '../assets-client/cities-CL.json';
+import * as Constants from '../../services/Constants';
+import { getVueObject } from '../../services/Utils';
+import Countries from '../../assets-client/countries.json';
+import Cities from '../../assets-client/cities-CL.json';
 
 export default {
   name: 'demographic',

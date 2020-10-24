@@ -9,7 +9,7 @@ import { isEmptyObject, parseCircularObject } from '../services/Utils';
 
 import Home from '../templates/Home.vue';
 import InformedConsent from '../templates/InformedConsent.vue';
-import Demographic from '../templates/Demographic.vue';
+import Demographic from '../templates/questionnaires/Demographic.vue';
 import TypingTest from '../templates/questionnaires/TypingTest.vue';
 import Instructions from '../templates/Instructions.vue';
 import Login from '../templates/auth/Login.vue';
