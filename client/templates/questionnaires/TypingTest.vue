@@ -17,6 +17,9 @@
       >
         <b-form-input
           :id="`input-${currentSample.id}`"
+          :name="`input-${currentSample.id}`"
+          @focus="focus"
+          @blur="blur"
           @keydown="keydown"
           @keyup="keyup"
           @keydown.enter="nextSample"
@@ -41,6 +44,7 @@
 import TypingTestSamples from '../../assets-client/typingTestSamples-es.json';
 
 import ActionSender from '../../services/ActionSender';
+import ActionHandler from '../../trackers/ActionHandler';
 import KeystrokeHandler from '../../trackers/KeystrokeHandler';
 import { deepCopy } from '../../services/Utils';
 
@@ -51,7 +55,8 @@ export default {
     return {
       samples: TypingTestSamples,
       sampleIndex: 0,
-      handler: new KeystrokeHandler('TypingTest'),
+      ksHandler: new KeystrokeHandler('TypingTest'),
+      actionHandler: new ActionHandler('TypingTest'),
       sender: new ActionSender('TypingTest'),
       response: [],
       keystrokeBuffer: []
@@ -82,12 +87,26 @@ export default {
 
       // TODO proceed to next stage
     },
+    focus(evt) {
+      let act = this.actionHandler.focus(evt);
+
+      this.sender.sendGenericAction(act)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
+    },
+    blur(evt) {
+      let act = this.actionHandler.blur(evt);
+
+      this.sender.sendGenericAction(act)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
+    },
     keydown(evt) {
-      let ks = this.handler.keydown(evt);
+      let ks = this.ksHandler.keydown(evt);
       this.keystrokeBuffer.push(ks);
     },
     keyup(evt) {
-      let ks = this.handler.keyup(evt);
+      let ks = this.ksHandler.keyup(evt);
       this.keystrokeBuffer.push(ks);
     },
     nextSample(evt) {

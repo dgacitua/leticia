@@ -13,10 +13,13 @@
           <b-row v-for="q in scale" :key="q.queryNum">
             <b-form-input
               v-model="props.answer[q.queryNum]"
+              :id="`query-${props.questionId}-${q.queryNum}`"
               :name="`query-${props.questionId}-${q.queryNum}`"
               :required="setRequiredQuery(q.queryNum)"
-              @focus="focusTrack"
-              @blur="blurTrack"
+              @focus="focus"
+              @blur="blur"
+              @keydown="keydown"
+              @keyup="keyup"
               class="query-box">
             </b-form-input>
           </b-row>
@@ -32,6 +35,10 @@
 </template>
 
 <script>
+import ActionSender from '../../services/ActionSender';
+import ActionHandler from '../../trackers/ActionHandler';
+import KeystrokeHandler from '../../trackers/KeystrokeHandler';
+
 import { deepCopy } from '../../services/Utils';
 
 export default {
@@ -43,6 +50,9 @@ export default {
 
   data() {
     return {
+      ksHandler: new KeystrokeHandler('QueryPlanning'),
+      actionHandler: new ActionHandler('QueryPlanning'),
+      sender: new ActionSender('QueryPlanning'),
       minQueries: 0
     }
   },
@@ -69,34 +79,34 @@ export default {
     setRequiredQuery(queryNum) {
       return (queryNum <= this.minQueries);
     },
-    focusTrack(evt) {
-      let message = {
-        type  : 'QueryFocus',
-        source: 'Window',
-        url   : window.document.URL,
-        clientTimestamp: Date.now(),
-        details: {
-          textboxName: evt.target.name
-        }
-      };
+    focus(evt) {
+      let act = this.actionHandler.focus(evt);
 
-      window.dispatchEvent(new CustomEvent('leticia-action', { detail: message }));
+      this.sender.sendGenericAction(act)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
+      
+      //window.dispatchEvent(new CustomEvent('leticia-action', { detail: message }));
       //console.log('QueryFocus', message);
     },
-    blurTrack(evt) {
-      let message = {
-        type  : 'QueryBlur',
-        source: 'Window',
-        url   : window.document.URL,
-        clientTimestamp: Date.now(),
-        details: {
-          textboxName: evt.target.name
-        }
-      };
+    blur(evt) {
+      let act = this.actionHandler.blur(evt);
 
-      window.dispatchEvent(new CustomEvent('leticia-action', { detail: message }));
+      this.sender.sendGenericAction(act)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
+
+      //window.dispatchEvent(new CustomEvent('leticia-action', { detail: message }));
       //console.log('QueryBlur', message);
-    }
+    },
+    keydown(evt) {
+      let ks = this.ksHandler.keydown(evt);
+      this.props.keystrokeBuffer.push(ks);
+    },
+    keyup(evt) {
+      let ks = this.ksHandler.keyup(evt);
+      this.props.keystrokeBuffer.push(ks);
+    },
   }
 }
 </script>

@@ -26,6 +26,7 @@
 <script>
 import Axios from 'axios';
 
+import ActionSender from '../../services/ActionSender';
 import * as Constants from '../../services/Constants';
 import { getVueArray, cleanArray } from '../../services/Utils';
 
@@ -45,7 +46,8 @@ export default {
   data() {
     return {
       task: {},
-      questions: []
+      questions: [],
+      sender: new ActionSender('QueryPlanning')
     }
   },
 
@@ -66,9 +68,9 @@ export default {
     let p2 = Axios.get(`${Constants.backendApiUrl}/forms/${formId}`);
 
     Promise.all([p1, p2])
-      .then((values) =>{ 
+      .then((values) => { 
         this.task = values[0].data;
-        this.questions = values[1].data;
+        this.questions = values[1].data.map(el => ({ ...el, keystrokeBuffer: [] }));
       })
       .catch((err) => {
         console.error(err);
@@ -83,6 +85,7 @@ export default {
       let taskId = this.$route.query.task;
       let formId = this.$route.query.form;
       let formAnswer = getVueArray(this.questions).map(el => { return { questionId: el.questionId, answer: cleanArray(el.answer) }});
+      let keystrokeBuffer = getVueArray(this.questions).map(el => el.keystrokeBuffer).reduce((prev, curr) => prev.concat(curr));
 
       let response = {
         username: this.currentUser.username,
@@ -92,8 +95,23 @@ export default {
         answers: formAnswer
       }
 
-      // console.log(response);
+      //console.log(response);
+      //console.log('KSB!', keystrokeBuffer);
 
+      let p1 = Axios.post(`${Constants.backendApiUrl}/answers`, response);  // TODO send answers through ActionSender
+      let p2 = this.sender.sendKeystrokeBuffer(keystrokeBuffer);
+
+      Promise.all([p1, p2])
+        .then((res) => {
+          // dgacitua: https://stackoverflow.com/a/57183854
+          this.$router.replace({ path: 'taskform', query: { task: this.$route.query.task, form: Constants.posttaskForm }});
+        })
+        .catch((err) => {
+          console.error(err);
+          alert('Ha ocurrido un error');
+        });
+
+      /*
       Axios.post(`${Constants.backendApiUrl}/answers`, response)
         .then((res) => {
           // dgacitua: https://stackoverflow.com/a/57183854
@@ -103,6 +121,7 @@ export default {
           console.error(err);
           alert('Ha ocurrido un error');
         });
+      */
     }
   }
 }

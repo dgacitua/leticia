@@ -1,4 +1,4 @@
-import axios from 'axios';
+import Axios from 'axios';
 
 import { store } from '../modules/store';
 import * as Constants from './Constants';
@@ -13,11 +13,11 @@ class ActionSenderService {
 
   sendKeystrokeBuffer(ksBufferArray) {
     let ksba = ksBufferArray.map(ks => ({ ...ks, username: this.username }));
-    return axios.post(API_URL + '/keystrokes', ksba);
+    return Axios.post(API_URL + '/keystrokes', ksba);
   }
 
   sendTypingTestResponses(textArray) {
-    let response = {
+    let message = {
       username: this.username,
       type: 'TypingTestCompleted',
       source: this.senderId,
@@ -26,7 +26,13 @@ class ActionSenderService {
       details: textArray
     }
 
-    return axios.post(API_URL + '/actions', response);
+    return Axios.post(API_URL + '/actions', message);
+  }
+
+  sendGenericAction(message) {
+    message.username = this.username;
+
+    return Axios.post(API_URL + '/actions', message);
   }
 }
 

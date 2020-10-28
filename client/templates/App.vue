@@ -43,6 +43,7 @@ export default {
   },
   
   beforeMount() {
+    /*
     KeystrokeTracker.bindTracker();
     MouseTracker.bindTracker();
     ScrollTracker.bindTracker();
@@ -58,6 +59,7 @@ export default {
     window.addEventListener('leticia-time', (e) => {
       this.timeEvent(e.detail);
     });
+    */
   },
 
   mounted() {
@@ -72,6 +74,7 @@ export default {
   },
 
   beforeDestroy() {
+    /*
     KeystrokeTracker.unbindTracker();
     MouseTracker.unbindTracker();
     ScrollTracker.unbindTracker();
@@ -87,6 +90,7 @@ export default {
     window.removeEventListener('leticia-time', (e) => {
       this.timeEvent(e.detail);
     });
+    */
   },
 
   methods: {
