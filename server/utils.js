@@ -13,4 +13,15 @@ export const consoleError = (...msg) => { console.error(`[${currentDate()}]`, ..
 // https://odino.org/generating-the-md5-hash-of-a-string-in-nodejs/
 export const string2hash = (string) => {
   return crypto.createHash('md5').update(string).digest('hex');
-}
+};
+
+// dgacitua: Randomly order elements in an array
+// https://stackoverflow.com/a/6274381
+export const shuffleArray = (a) => {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  
+  return a;
+};

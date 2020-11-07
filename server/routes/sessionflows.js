@@ -6,7 +6,6 @@ import SessionFlow from '../models/SessionFlows';
 
 const router = express.Router();
 
-// TODO fix GET request
 const getSessionFlow = async (request, response, next) => {
   try {
     const id = request.query.id || 'short';
