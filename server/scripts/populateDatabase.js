@@ -139,13 +139,43 @@ db.tasks.insertMany([
     "description": 'Has notado que servicios en línea como Facebook han reemplazado las comunicaciones cara a cara. Puedes ver las ventajas de este estilo de comunicación, pero tu hermano argumenta que la gente está perdiendo su habilidad de comunicarse cara a cara. En general, ¿el uso de computadores para comunicación tiene un impacto positivo o negativo en las habilidades sociales cara a cara de la gente?'
   },
   {
-    "searchTaskId": 'test01',
-    "title": 'Título TEST1',
-    "description": 'Descipción TEST1'
+    "searchTaskId": 'task03',
+    "title": 'Punto Triple',
+    "description": '¿Cuál es el punto triple del elemento que forma la mayoría de lo que estás inhalando ahora (en grados C)?'
   },
   {
-    "searchTaskId": 'test02',
-    "title": 'Título TEST2',
-    "description": 'Descripción TEST2'
+    "searchTaskId": 'task04',
+    "title": 'Tratamiento con MMS',
+    "description": 'A una amiga que tiene un diagnóstico de diabetes le sugirieron que probara un tratamiento alternativo basado en la MMS, pero no está segura de su efectividad, por lo que decides ayudarla para tomar la decisión correcta. Al respecto, ¿qué es el MMS y cómo está compuesto? ¿Puede tratar los síntomas de la diabetes? ¿Está científicamente probada su efectividad?'
+  },
+  {
+    "searchTaskId": 'task05',
+    "title": 'Redes 5G',
+    "description": 'Los vecinos de tu barrio están comentando que se está evaluando la opción de instalar una antena 5G en el sector, como parte de un programa piloto para mejorar el servicio de telefonía móvil. Para tener una opinión informada del tema, decides buscar al respecto: ¿Qué es una red 5G? ¿Cuáles son sus ventajas y desventajas? ¿Es seguro instalar una antena 5G en un barrio residencial?'
   }
+]);
+
+db.sessionflows.insertMany([
+  {
+    "sessionFlowId": 'short',
+    "stages": [
+      { name: 'demographic', timeLimit: -1 },
+      { name: 'typing', timeLimit: -1 },
+      { name: 'instructions', params: 'short', timeLimit: -1 },
+      { name: 'composite', timeLimit: 15, stages: [] },
+      { name: 'exitSurvey', timeLimit: -1 },
+      { name: 'end', timeLimit: -1 }
+    ]
+  },
+  {
+    "sessionFlowId": 'extended',
+    "stages": [
+      { name: 'demographic', timeLimit: -1 },
+      { name: 'typing', timeLimit: -1 },
+      { name: 'instructions', params: 'extended', timeLimit: -1 },
+      { name: 'composite', timeLimit: 25, stages: [] },
+      { name: 'exitSurvey', timeLimit: -1 },
+      { name: 'end', timeLimit: -1 }
+    ]
+  },
 ]);

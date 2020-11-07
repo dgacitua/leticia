@@ -9,6 +9,7 @@ import answers from './routes/answers';
 import demographic from './routes/demographic';
 import participants from './routes/participants';
 import keystrokes from './routes/keystrokes';
+import sessionflows from './routes/sessionflows';
 
 const router = express.Router();
 
@@ -21,5 +22,6 @@ router.use('/answers', answers);
 router.use('/demographic', demographic);
 router.use('/participants', participants);
 router.use('/keystrokes', keystrokes);
+router.use('/flows', sessionflows);
 
 export default router;
