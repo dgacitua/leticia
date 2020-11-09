@@ -104,7 +104,8 @@ export default {
       Promise.all([p1, p2])
         .then((res) => {
           // dgacitua: https://stackoverflow.com/a/57183854
-          this.$router.replace({ path: 'taskform', query: { task: this.$route.query.task, form: Constants.posttaskForm }});
+          //this.$router.replace({ path: 'taskform', query: { task: this.$route.query.task, form: Constants.posttaskForm }});
+          window.dispatchEvent(new CustomEvent('leticia-next-stage'));
         })
         .catch((err) => {
           console.error(err);

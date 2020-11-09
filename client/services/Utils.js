@@ -1,5 +1,5 @@
 import { cloneDeep, findIndex } from 'lodash';
-import { parse, stringify } from 'flatted/esm';
+import { parse, stringify } from 'flatted';
 
 export const getVueObject = (obj) => { return Object.assign({}, obj) };
 export const getVueArray = (arr) => { return arr.map(el => Object.assign({}, el)) };
@@ -23,4 +23,10 @@ export const shuffleArray = (a) => {
   }
   
   return a;
+};
+
+// dgacitua: Check if array doesn't exist or is empty
+// https://www.geeksforgeeks.org/check-if-an-array-is-empty-or-not-in-javascript/
+export const isEmptyArray = (arr) => {
+  return (typeof arr === 'undefined' || arr === null || arr.length === null || arr.length <= 0);
 };

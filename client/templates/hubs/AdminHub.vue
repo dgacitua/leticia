@@ -16,6 +16,7 @@
             <b-button to="typing">Test Tipeo (baseline)</b-button>
             <b-button to="instructions">Instrucciones Generales</b-button>
             <b-button to="tasks">Query Planning</b-button>
+            <b-button to="short-challenge">Desafío Corto</b-button>
           </b-button-group>
         </b-row>
       </b-col>

@@ -18,7 +18,9 @@ const store = new Vuex.Store({
   state: {
     remainingTime: -1,
     globalRemainingTime: -1,
+    stageIndex: null,
     tasks: [],
+    stages: [],
     currentRoute: {}
   },
   getters: {
@@ -30,6 +32,12 @@ const store = new Vuex.Store({
     },
     tasks: (state) => {
       return state.tasks;
+    },
+    stages: (state) => {
+      return state.stages;
+    },
+    stageIndex: (state) => {
+      return state.stageIndex;
     }
   },
   mutations: {
@@ -52,17 +60,31 @@ const store = new Vuex.Store({
       state.tasks = [];
       state.tasks = [ ...payload.tasks ];
     },
+    setStages(state, payload) {
+      state.stages = [];
+      state.stages = [ ...payload.stages ];
+    },
+    setStageIndex(state, payload) {
+      state.stageIndex = payload.amount;
+    },
+    nextStageIndex(state) {
+      state.stageIndex++;
+    },
     setTaskAsDone(state, payload) {
       let taskIdx = findIndexInArray(state.tasks, (t) => { return t.searchTaskId === payload.id });
       state.tasks[taskIdx].completed = true;
     },
     eraseAll(state) {
-      state.remainingTime = 120;
+      state.remainingTime = -1;
+      state.globalRemainingTime = -1;
+      state.stageIndex = null;
       state.tasks = [];
+      state.stages = [];
       state.currentRoute = {};
     }
   },
   actions: {
+    // DEPRECATED
     fetchTasks(context) {
       return new Promise((resolve, reject) => {
         Axios.get(`${Constants.backendApiUrl}/tasks`)

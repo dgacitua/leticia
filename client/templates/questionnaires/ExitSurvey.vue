@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'demographic',
+  name: 'exit-survey',
 
   data() {
     return {
@@ -26,9 +26,10 @@ export default {
   },
 
   methods: {
-    submitDemographic(evt) {
+    submitSurvey(evt) {
       evt.preventDefault();
-      this.$router.replace({ path: 'end' });
+      // TODO enviar encuesta
+      this.$router.replace({ path: '/end' });
     }
   }
 }

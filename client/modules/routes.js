@@ -10,15 +10,19 @@ import { isEmptyObject, parseCircularObject } from '../services/Utils';
 import Home from '../templates/Home.vue';
 import InformedConsent from '../templates/InformedConsent.vue';
 import Demographic from '../templates/questionnaires/Demographic.vue';
+import ExitSurvey from '../templates/questionnaires/ExitSurvey.vue';
 import TypingTest from '../templates/questionnaires/TypingTest.vue';
 import Instructions from '../templates/Instructions.vue';
 import Login from '../templates/auth/Login.vue';
 import Register from '../templates/auth/Register.vue';
 import OAuth from '../templates/auth/OAuth.vue';
+import Redirect from '../templates/queryPlanning/Redirect.vue';
+import TaskDescription from '../templates/queryPlanning/TaskDescription.vue';
 import TaskForm from '../templates/queryPlanning/TaskForm.vue';
 import TaskSelector from '../templates/queryPlanning/TaskSelector.vue';
 import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
 import Profile from '../templates/Profile.vue';
+import ShortChallenge from '../templates/ShortChallenge.vue';
 import UserHub from '../templates/hubs/UserHub.vue';
 import AdminHub from '../templates/hubs/AdminHub.vue';
 import End from '../templates/End.vue';
@@ -141,6 +145,31 @@ const router = new VueRouter({
       }
     },
     {
+      path: '/short-challenge',
+      component: ShortChallenge,
+      meta: {
+        auth: true
+      },
+      children: [
+        {
+          path: '',
+          component: Redirect,
+        },
+        {
+          path: 'description',
+          component: TaskDescription,
+        },
+        {
+          path: 'taskform',
+          component: TaskForm,
+        },
+        {
+          path: 'query',
+          component: QueryWriter,
+        }
+      ]
+    },
+    {
       path: '/admin-hub',
       name: 'admin-hub',
       component: AdminHub,
@@ -149,6 +178,14 @@ const router = new VueRouter({
         auth: true,
         admin: true
         */
+      }
+    },
+    {
+      path: '/exit-survey',
+      name: 'exit-survey',
+      component: ExitSurvey,
+      meta: {
+        auth: true
       }
     },
     {
@@ -191,7 +228,7 @@ router.beforeEach((to, from, next) => {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
     if (to.matched.some(record => record.meta.auth) && !loggedIn) {
-      next('/login');
+      next('/oauth');
     }
     else {
       next();
@@ -205,7 +242,7 @@ router.afterEach((to, from) => {
   const loggedIn = localStorage.getItem('leticia-user');
 
   if (loggedIn) {
-    store.commit({ type: 'setCurrentRoute', route: parseCircularObject(to) });
+    //store.commit({ type: 'setCurrentRoute', route: parseCircularObject(to) });
   }
 });
 

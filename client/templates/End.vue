@@ -7,6 +7,10 @@
 <script>
 export default {
   name: 'end',
+
+  mounted() {
+    this.$store.commit({ type: 'eraseAll' })
+  }
 }
 </script>
 

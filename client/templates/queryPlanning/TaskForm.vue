@@ -107,13 +107,14 @@ export default {
           .then((res) => {
             if (formId === Constants.pretaskForm) {
               // dgacitua: https://stackoverflow.com/a/57183854
-              this.$router.replace({ path: 'query', query: { task: this.$route.query.task, form: Constants.queryForm }});
+              //this.$router.replace({ path: 'query', query: { task: this.$route.query.task, form: Constants.queryForm }});
             }
             else {
               // dgacitua: https://stackoverflow.com/a/57183854
               this.$store.commit({ type: 'setTaskAsDone', id: taskId });
-              this.$router.replace({ path: 'tasks' });
+              //this.$router.replace({ path: 'tasks' });
             }
+            window.dispatchEvent(new CustomEvent('leticia-next-stage'));
           })
           .catch((err) => {
             console.error(err);

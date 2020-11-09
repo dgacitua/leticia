@@ -26,7 +26,7 @@ export default {
   methods: {
     acceptConsent() {
       // dgacitua: https://stackoverflow.com/a/57183854
-      this.$router.replace({ path: 'register' });
+      this.$router.replace({ path: 'oauth' });
     }
   }
 }
