@@ -1,8 +1,16 @@
 <template>
   <div>
-    <h2>{{ currentTask.title }}</h2>
-    <div>{{ currentTask.description }}</div>
-    <b-button @click="nextStage">Continuar</b-button>
+    <b-row>
+      <b-card :header="currentTask.title" class="text-center">
+        <b-card-text>{{ currentTask.description }}</b-card-text>
+      </b-card>
+    </b-row>
+    <br>
+    <b-row class="text-right">
+      <b-col>
+        <b-button @click="nextStage" variant="success">Continuar</b-button>
+      </b-col>
+    </b-row>
   </div>
 </template>
 

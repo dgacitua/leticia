@@ -1,10 +1,9 @@
 <template>
   <b-container>
-    <b-row>
-      <h2>{{ task.title }}</h2>
-    </b-row>
     <b-row class="space-bottom">
-      <span>{{ task.description }}</span>
+      <b-card :header="task.title" class="text-center">
+        <b-card-text>{{ task.description }}</b-card-text>
+      </b-card>
     </b-row>
     <br>
     <b-row class="space-bottom">
@@ -15,8 +14,10 @@
           </b-row>
         </b-row>
         <br>
-        <b-row  class="zero-margin">
-          <b-button type="submit" variant="success">Enviar respuesta</b-button>
+        <b-row class="zero-margin text-right">
+          <b-col>
+            <b-button type="submit" variant="success">Enviar respuesta</b-button>
+          </b-col>
         </b-row>
       </b-form>
     </b-row>
