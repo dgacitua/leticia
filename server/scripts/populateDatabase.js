@@ -158,6 +158,7 @@ db.tasks.insertMany([
 db.sessionflows.insertMany([
   {
     "sessionFlowId": 'short',
+    "instructions": 'Instrucciones desafío corto',
     "stages": [
       { name: 'demographic', timeLimit: -1 },
       { name: 'typing', timeLimit: -1 },
@@ -169,6 +170,7 @@ db.sessionflows.insertMany([
   },
   {
     "sessionFlowId": 'extended',
+    "instructions": 'Instrucciones desafío extendido',
     "stages": [
       { name: 'demographic', timeLimit: -1 },
       { name: 'typing', timeLimit: -1 },

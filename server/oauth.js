@@ -65,13 +65,13 @@ passportAgent.use(new FacebookStrategy({
 
 // These functions are required for getting data To/from JSON returned from Providers
 passportAgent.serializeUser((user, callback) => {
-    //console.log('I should have jack ')
-    callback(null, user)
+    //console.log('I should have jack');
+    callback(null, user);
 });
 
 passportAgent.deserializeUser((obj, callback) => {
-    //console.log('I wont have jack shit')
-    callback(null, obj)
+    //console.log('I wont have jack shit');
+    callback(null, obj);
 });
 
 export default passportAgent;
