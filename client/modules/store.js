@@ -16,12 +16,13 @@ const vuexLocal = new VuexPersistence({
 
 const store = new Vuex.Store({
   state: {
-    remainingTime: -1,
-    globalRemainingTime: -1,
+    remainingTime: null,
+    globalRemainingTime: null,
     stageIndex: null,
     tasks: [],
     stages: [],
-    currentRoute: {}
+    currentRoute: {},
+    sessionFlow: {}
   },
   getters: {
     userData: (state) => {
@@ -75,12 +76,13 @@ const store = new Vuex.Store({
       state.tasks[taskIdx].completed = true;
     },
     eraseAll(state) {
-      state.remainingTime = -1;
-      state.globalRemainingTime = -1;
+      state.remainingTime = null;
+      state.globalRemainingTime = null;
       state.stageIndex = null;
       state.tasks = [];
       state.stages = [];
       state.currentRoute = {};
+      state.sessionFlow = {};
     }
   },
   actions: {
