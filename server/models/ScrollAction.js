@@ -25,7 +25,7 @@ const scrollActionSchema = Mongoose.Schema({
   },
   serverTimestamp: {
     type: Number,
-    required: true
+    required: false
   },
   x_scr: {
     type: Number,

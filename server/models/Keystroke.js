@@ -28,6 +28,10 @@ const keystrokeSchema = Mongoose.Schema({
     type: Number,
     required: true
   },
+  serverTimestamp: {
+    type: Number,
+    required: false
+  },
   which: {
     type: Number,
     required: false
