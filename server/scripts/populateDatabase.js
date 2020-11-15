@@ -163,7 +163,7 @@ db.sessionflows.insertMany([
       { name: 'demographic', timeLimit: -1 },
       { name: 'typing', timeLimit: -1 },
       { name: 'instructions', params: 'short', timeLimit: -1 },
-      { name: 'composite', timeLimit: 15, stages: [] },
+      { name: 'short-challenge', timeLimit: 15 },
       { name: 'exitSurvey', timeLimit: -1 },
       { name: 'end', timeLimit: -1 }
     ]
@@ -175,7 +175,7 @@ db.sessionflows.insertMany([
       { name: 'demographic', timeLimit: -1 },
       { name: 'typing', timeLimit: -1 },
       { name: 'instructions', params: 'extended', timeLimit: -1 },
-      { name: 'composite', timeLimit: 25, stages: [] },
+      { name: 'extended-challenge', timeLimit: 25 },
       { name: 'exitSurvey', timeLimit: -1 },
       { name: 'end', timeLimit: -1 }
     ]
