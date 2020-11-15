@@ -319,6 +319,8 @@ import { ModelSelect } from 'vue-search-select';
 
 import * as Constants from '../../services/Constants';
 import { getVueObject } from '../../services/Utils';
+import EventBus from '../../modules/eventBus';
+
 import Countries from '../../assets-client/countries.json';
 import Cities from '../../assets-client/cities-CL.json';
 
@@ -428,11 +430,7 @@ export default {
             // dgacitua: https://stackoverflow.com/a/57183854
             // this.$router.replace({ path: 'instructions' });
 
-            console.log('Next Challenge Stage!');
-            this.$store.commit({ type: 'nextFlowIndex' });
-            
-            let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].name;
-            this.$router.replace(nextFlowStage);
+            EventBus.$emit('leticia-next-stage');
           })
           .catch((err) => {
             console.error(err);

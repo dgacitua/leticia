@@ -44,8 +44,8 @@ export default {
   
   beforeMount() {
     let jwtData = this.$cookies.get('jwt');
-    let userData = this.$cookies.get('userdata');
-    let sessionFlow = this.$cookies.get('sessionflow');
+    let userData = this.$cookies.get('userdata') || {};
+    let sessionFlow = this.$cookies.get('sessionflow') || {};
     
     if (jwtData) {
       localStorage.setItem('leticia-user', JSON.stringify(jwtData));

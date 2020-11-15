@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import EventBus from '../../modules/eventBus';
+
 export default {
   name: 'exit-survey',
 
@@ -30,11 +32,7 @@ export default {
       evt.preventDefault();
       // TODO enviar encuesta
       
-      console.log('Next Challenge Stage!');
-      this.$store.commit({ type: 'nextFlowIndex' });
-      
-      let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].name;
-      this.$router.replace(nextFlowStage);
+      EventBus.$emit('leticia-next-stage');
     }
   }
 }

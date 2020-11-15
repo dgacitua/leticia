@@ -23,15 +23,21 @@ export default {
       if (this.$store.getters.flowIndex >= 0) {
         console.log('Resuming Challenge!');
             
-        let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].name;
-        this.$router.replace(nextFlowStage);
+        let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].path;
+        let nextFlowParams = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].params;
+        let nextFlowTimeLimit = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].timeLimit;
+
+        this.$router.replace({ path: nextFlowStage });
       }
       else {
         console.log('Starting Challenge!');
         this.$store.commit({ type: 'setFlowIndex', amount: 0 });
         
-        let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].name;
-        this.$router.replace(nextFlowStage);
+        let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].path;
+        let nextFlowParams = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].params;
+        let nextFlowTimeLimit = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].timeLimit;
+
+        this.$router.replace({ path: nextFlowStage });
       }
     }
   }

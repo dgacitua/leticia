@@ -39,7 +39,7 @@ import Axios from 'axios';
 
 import * as Constants from '../../services/Constants';
 import { getVueArray, deepCopy } from '../../services/Utils';
-import EventBus from "../../modules/eventBus";
+import EventBus from '../../modules/eventBus';
 
 import LikertScale from '../formElements/LikertScale.vue';
 import MultiQuery from '../formElements/MultiQuery.vue';
@@ -116,7 +116,7 @@ export default {
               //this.$router.replace({ path: 'tasks' });
             }
 
-            EventBus.$emit('leticia-next-stage');
+            EventBus.$emit('leticia-next-challenge');
           })
           .catch((err) => {
             console.error(err);

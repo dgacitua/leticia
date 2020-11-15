@@ -24,7 +24,7 @@
 <script>
 import Axios from 'axios';
 
-import EventBus from "../modules/eventBus";
+import EventBus from '../modules/eventBus';
 import * as Constants from '../services/Constants';
 import { deepCopy, isEmptyArray } from '../services/Utils';
 import Timer from '../services/Timer';
@@ -53,8 +53,8 @@ export default {
   },
 
   created() {
-    EventBus.$on('leticia-next-stage', () => {
-      console.log('Leticia Next Stage!');
+    EventBus.$on('leticia-next-challenge', () => {
+      console.log('LeTiCiA Next Challenge!');
 
       this.nextChallenge();
       this.loadChallenge();
@@ -131,11 +131,7 @@ export default {
         this.$router.replace(nextStage);
       }
       else {
-        console.log('Next Challenge Stage!');
-        this.$store.commit({ type: 'nextFlowIndex' });
-        
-        let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].name;
-        this.$router.replace(nextFlowStage);
+        EventBus.$emit('leticia-next-stage');
       }
     }
   }
@@ -143,5 +139,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

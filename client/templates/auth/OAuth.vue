@@ -33,7 +33,7 @@ import User from '../../models/User';
 import * as Constants from '../../services/Constants';
 
 export default {
-  name: 'Register',
+  name: 'OAuth',
   data() {
     return {
       user: new User('', '', ''),
@@ -49,7 +49,7 @@ export default {
   },
   mounted() {
     if (this.loggedIn) {
-      this.$router.push('/profile');
+      this.$router.push('/user-hub');
     }
   },
   methods: {

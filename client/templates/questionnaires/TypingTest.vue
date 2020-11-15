@@ -46,6 +46,8 @@ import TypingTestSamples from '../../assets-client/typingTestSamples-es.json';
 import ActionSender from '../../services/ActionSender';
 import ActionHandler from '../../trackers/ActionHandler';
 import KeystrokeHandler from '../../trackers/KeystrokeHandler';
+
+import EventBus from '../../modules/eventBus';
 import { deepCopy } from '../../services/Utils';
 
 export default {
@@ -84,12 +86,7 @@ export default {
       this.sender.sendTypingTestResponses(response)
         .then(res => {
           console.log(res.data);
-          
-          console.log('Next Challenge Stage!');
-          this.$store.commit({ type: 'nextFlowIndex' });
-          
-          let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].name;
-          this.$router.replace(nextFlowStage);
+          EventBus.$emit('leticia-next-stage');
         })
         .catch(err => {
           console.error(err);

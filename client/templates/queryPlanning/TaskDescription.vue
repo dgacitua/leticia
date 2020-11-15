@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import EventBus from "../../modules/eventBus";
+import EventBus from '../../modules/eventBus';
 
 export default {
   data() {
@@ -34,8 +34,7 @@ export default {
 
   methods: {
     nextStage() {
-      //window.dispatchEvent(new CustomEvent('leticia-next-stage'));
-      EventBus.$emit('leticia-next-stage');
+      EventBus.$emit('leticia-next-challenge');
     }
   }
 }

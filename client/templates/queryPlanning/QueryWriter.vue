@@ -30,7 +30,7 @@ import Axios from 'axios';
 import ActionSender from '../../services/ActionSender';
 import * as Constants from '../../services/Constants';
 import { getVueArray, cleanArray } from '../../services/Utils';
-import EventBus from "../../modules/eventBus";
+import EventBus from '../../modules/eventBus';
 
 import LikertScale from '../formElements/LikertScale.vue';
 import MultiQuery from '../formElements/MultiQuery.vue';
@@ -107,8 +107,7 @@ export default {
         .then((res) => {
           // dgacitua: https://stackoverflow.com/a/57183854
           //this.$router.replace({ path: 'taskform', query: { task: this.$route.query.task, form: Constants.posttaskForm }});
-          //window.dispatchEvent(new CustomEvent('leticia-next-stage'));
-          EventBus.$emit('leticia-next-stage');
+          EventBus.$emit('leticia-next-challenge');
         })
         .catch((err) => {
           console.error(err);

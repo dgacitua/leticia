@@ -10,6 +10,7 @@ import Axios from 'axios';
 
 import * as Constants from '../services/Constants';
 import WebSocket from '../services/WebSocket';
+import EventBus from '../modules/eventBus';
 import Timer from '../services/Timer';
 
 import * as KeystrokeTracker from '../trackers/keystroke';
@@ -40,6 +41,19 @@ export default {
     currentUser() {
       return this.$store.state.auth.user;
     }
+  },
+
+  created() {
+    EventBus.$on('leticia-next-stage', () => {
+      console.log('LeTiCiA Next Stage!');
+      this.$store.commit({ type: 'nextFlowIndex' });
+      
+      let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].path;
+      let nextFlowParams = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].params;
+      let nextFlowTimeLimit = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].timeLimit;
+
+      this.$router.replace({ path: nextFlowStage });
+    });
   },
   
   beforeMount() {
