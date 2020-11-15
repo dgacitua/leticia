@@ -24,7 +24,7 @@ const saveUserData = async (request, response, next) => {
     const userdata = request.body;
     const username = request.params.username;
 
-    await UserData.create(userdata);
+    await UserData.findOneAndUpdate({ username: username }, userdata, { new: true, upsert: true });
 
     response.status(200).send({ status: 'UserData Saved!', timestamp: Date.now(), username: username });
   }
