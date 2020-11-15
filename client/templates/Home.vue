@@ -43,12 +43,18 @@ export default {
   },
   
   beforeMount() {
-    let userData = this.$cookies.get('jwt');
+    let jwtData = this.$cookies.get('jwt');
+    let userData = this.$cookies.get('userdata');
+    let sessionFlow = this.$cookies.get('sessionflow');
     
-    if (userData) {
-      localStorage.setItem('leticia-user', JSON.stringify(userData));
-      this.$store.commit('auth/loginSuccess', userData);
+    if (jwtData) {
+      localStorage.setItem('leticia-user', JSON.stringify(jwtData));
+      this.$store.commit('auth/loginSuccess', jwtData);
+      this.$store.commit({ type: 'setUserData', data: userData });
+      this.$store.commit({ type: 'setSessionFlow', sessionFlow: sessionFlow });
       this.$cookies.remove('jwt');
+      this.$cookies.remove('userdata');
+      this.$cookies.remove('sessionflow');
     }
 
     if (this.currentUser) {

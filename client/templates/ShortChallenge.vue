@@ -24,6 +24,7 @@
 <script>
 import Axios from 'axios';
 
+import EventBus from "../modules/eventBus";
 import * as Constants from '../services/Constants';
 import { deepCopy, isEmptyArray } from '../services/Utils';
 import Timer from '../services/Timer';
@@ -45,12 +46,32 @@ export default {
     }
   },
 
-  beforeMount() {
-    window.addEventListener('leticia-next-stage', () => {
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    }
+  },
+
+  created() {
+    EventBus.$on('leticia-next-stage', () => {
+      console.log('Leticia Next Stage!');
+
       this.nextChallenge();
       this.loadChallenge();
-    });
 
+      let userdata = {
+        username: this.currentUser.username,
+        state: this.$store.getters.userData,
+        sessionFlow: this.$store.getters.sessionFlow
+      };
+
+      Axios.post(`${Constants.backendApiUrl}/userdata/${this.currentUser.username}`, userdata)
+        .then(res => console.log('UserData saved on server!'))
+        .catch(err => console.error('Error while saving UserData on server', err));
+    });
+  },
+
+  beforeMount() {
     if (!this.$store.getters.stageIndex) {
       this.importTasks()
         .then(() => {
@@ -110,8 +131,11 @@ export default {
         this.$router.replace(nextStage);
       }
       else {
-        // TODO change for flow action
-        this.$router.replace({ path: '/exit-survey' });
+        console.log('Next Challenge Stage!');
+        this.$store.commit({ type: 'nextFlowIndex' });
+        
+        let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].name;
+        this.$router.replace(nextFlowStage);
       }
     }
   }

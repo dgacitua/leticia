@@ -39,6 +39,7 @@ import Axios from 'axios';
 
 import * as Constants from '../../services/Constants';
 import { getVueArray, deepCopy } from '../../services/Utils';
+import EventBus from "../../modules/eventBus";
 
 import LikertScale from '../formElements/LikertScale.vue';
 import MultiQuery from '../formElements/MultiQuery.vue';
@@ -114,7 +115,8 @@ export default {
               this.$store.commit({ type: 'setTaskAsDone', id: taskId });
               //this.$router.replace({ path: 'tasks' });
             }
-            window.dispatchEvent(new CustomEvent('leticia-next-stage'));
+
+            EventBus.$emit('leticia-next-stage');
           })
           .catch((err) => {
             console.error(err);

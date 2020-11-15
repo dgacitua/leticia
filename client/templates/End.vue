@@ -9,7 +9,7 @@ export default {
   name: 'end',
 
   mounted() {
-    this.$store.commit({ type: 'eraseAll' })
+    //this.$store.commit({ type: 'eraseAll' })
   }
 }
 </script>

@@ -36,6 +36,7 @@
 <script>
 export default {
   name: 'AdminHub',
+  
   methods: {
     simulateLogin() {
       this.$store.dispatch('auth/simulatedLogin');

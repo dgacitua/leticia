@@ -19,6 +19,7 @@ const store = new Vuex.Store({
     remainingTime: null,
     globalRemainingTime: null,
     stageIndex: null,
+    flowIndex: null,
     tasks: [],
     stages: [],
     currentRoute: {},
@@ -28,7 +29,12 @@ const store = new Vuex.Store({
     userData: (state) => {
       return {
         remainingTime: state.remainingTime,
-        globalRemainingTime: state.globalRemainingTime
+        globalRemainingTime: state.globalRemainingTime,
+        currentRoute: state.currentRoute,
+        tasks: state.tasks,
+        stages: state.stages,
+        stageIndex: state.stageIndex,
+        flowIndex: state.flowIndex
       };
     },
     tasks: (state) => {
@@ -39,6 +45,12 @@ const store = new Vuex.Store({
     },
     stageIndex: (state) => {
       return state.stageIndex;
+    },
+    flowIndex: (state) => {
+      return state.flowIndex;
+    },
+    sessionFlow: (state) => {
+      return state.sessionFlow;
     }
   },
   mutations: {
@@ -71,14 +83,33 @@ const store = new Vuex.Store({
     nextStageIndex(state) {
       state.stageIndex++;
     },
+    setFlowIndex(state, payload) {
+      state.flowIndex = payload.amount;
+    },
+    nextFlowIndex(state) {
+      state.flowIndex++;
+    },
     setTaskAsDone(state, payload) {
       let taskIdx = findIndexInArray(state.tasks, (t) => { return t.searchTaskId === payload.id });
       state.tasks[taskIdx].completed = true;
+    },
+    setUserData(state, payload) {
+      state.remainingTime = payload.data.remainingTime;
+      state.globalRemainingTime = payload.data.globalRemainingTime;
+      state.stageIndex = payload.data.stageIndex;
+      state.flowIndex = payload.data.flowIndex;
+      state.tasks = payload.data.tasks;
+      state.stages = payload.data.stages;
+      state.currentRoute = payload.data.currentRoute;
+    },
+    setSessionFlow(state, payload) {
+      state.sessionFlow = payload.sessionFlow;
     },
     eraseAll(state) {
       state.remainingTime = null;
       state.globalRemainingTime = null;
       state.stageIndex = null;
+      state.flowIndex = null;
       state.tasks = [];
       state.stages = [];
       state.currentRoute = {};
