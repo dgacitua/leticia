@@ -410,9 +410,7 @@ export default {
     submitDemographic(evt) {
       evt.preventDefault();
 
-      //if (this.$store.getters.isValidParticipant) {
-      //if (this.checkSearchSelectors()) {
-      if (true) {
+      if (this.loggedIn) {
         let type = 'Demographic';
         let answers = Object.entries(getVueObject(this.form)).map(([question, answer]) => ({question, answer}));  // dgacitua: https://stackoverflow.com/a/49629733 
 
@@ -428,7 +426,13 @@ export default {
         Axios.post(`${Constants.backendApiUrl}/demographic`, response)
           .then((res) => {
             // dgacitua: https://stackoverflow.com/a/57183854
-            this.$router.replace({ path: 'instructions' });
+            // this.$router.replace({ path: 'instructions' });
+
+            console.log('Next Challenge Stage!');
+            this.$store.commit({ type: 'nextFlowIndex' });
+            
+            let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].name;
+            this.$router.replace(nextFlowStage);
           })
           .catch((err) => {
             console.error(err);

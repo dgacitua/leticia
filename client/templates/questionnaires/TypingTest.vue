@@ -29,7 +29,7 @@
         ></b-form-input>
       </b-form-group>
       <b-button v-if="!isLastSlide" variant="primary" :disabled="!isValidInput" @click="nextSample">Siguiente</b-button>
-      <b-button v-if="isLastSlide" type="submit" variant="success">Finalizar</b-button>
+      <b-button v-if="isLastSlide" variant="success" :disabled="!isValidInput" type="submit">Finalizar</b-button>
     </b-form>
     <!--
     <hr>
@@ -82,10 +82,19 @@ export default {
       let response = deepCopy(this.response);
 
       this.sender.sendTypingTestResponses(response)
-        .then(res => console.log(res.data))
-        .catch(err => console.error(err));
-
-      // TODO proceed to next stage
+        .then(res => {
+          console.log(res.data);
+          
+          console.log('Next Challenge Stage!');
+          this.$store.commit({ type: 'nextFlowIndex' });
+          
+          let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].name;
+          this.$router.replace(nextFlowStage);
+        })
+        .catch(err => {
+          console.error(err);
+          alert('Ha ocurrido un error al guardar las respuestas');
+        });
     },
     focus(evt) {
       let act = this.actionHandler.focus(evt);

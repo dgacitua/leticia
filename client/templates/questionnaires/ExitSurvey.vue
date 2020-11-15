@@ -29,7 +29,12 @@ export default {
     submitSurvey(evt) {
       evt.preventDefault();
       // TODO enviar encuesta
-      this.$router.replace({ path: '/end' });
+      
+      console.log('Next Challenge Stage!');
+      this.$store.commit({ type: 'nextFlowIndex' });
+      
+      let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].name;
+      this.$router.replace(nextFlowStage);
     }
   }
 }

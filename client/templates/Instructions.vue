@@ -20,11 +20,11 @@ export default {
 
   methods: {
     nextStage() {
-      // DEPRECATED
-      /*
-      // dgacitua: https://stackoverflow.com/a/57183854
-      this.$router.replace({ path: 'tasks' });
-      */
+      console.log('Next Challenge Stage!');
+      this.$store.commit({ type: 'nextFlowIndex' });
+      
+      let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].name;
+      this.$router.replace(nextFlowStage);
     }
   }
 }
