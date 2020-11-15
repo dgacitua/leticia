@@ -12,3 +12,4 @@ db.roles.drop();
 db.sessionflows.drop();
 db.tasks.drop();
 db.users.drop();
+db.userdatas.drop();

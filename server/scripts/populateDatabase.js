@@ -160,24 +160,24 @@ db.sessionflows.insertMany([
     "sessionFlowId": 'short',
     "instructions": 'Instrucciones desafío corto',
     "stages": [
-      { name: 'demographic', timeLimit: -1 },
-      { name: 'typing', timeLimit: -1 },
-      { name: 'instructions', params: 'short', timeLimit: -1 },
-      { name: 'short-challenge', timeLimit: 15 },
-      { name: 'exitSurvey', timeLimit: -1 },
-      { name: 'end', timeLimit: -1 }
+      { path: '/demographic', timeLimit: -1 },
+      { path: '/typing', timeLimit: -1 },
+      { path: '/instructions', params: 'short', timeLimit: -1 },
+      { path: '/short-challenge', timeLimit: 15 },
+      { path: '/exit-survey', timeLimit: -1 },
+      { path: '/end', timeLimit: -1 }
     ]
   },
   {
     "sessionFlowId": 'extended',
     "instructions": 'Instrucciones desafío extendido',
     "stages": [
-      { name: 'demographic', timeLimit: -1 },
-      { name: 'typing', timeLimit: -1 },
-      { name: 'instructions', params: 'extended', timeLimit: -1 },
-      { name: 'extended-challenge', timeLimit: 25 },
-      { name: 'exitSurvey', timeLimit: -1 },
-      { name: 'end', timeLimit: -1 }
+      { path: '/demographic', timeLimit: -1 },
+      { path: '/typing', timeLimit: -1 },
+      { path: '/instructions', params: 'extended', timeLimit: -1 },
+      { path: '/extended-challenge', timeLimit: 25 },
+      { path: '/exit-survey', timeLimit: -1 },
+      { path: '/end', timeLimit: -1 }
     ]
   },
 ]);
