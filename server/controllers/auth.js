@@ -10,8 +10,10 @@ import * as Constants from '../constants';
 import { consoleError } from '../utils';
 
 const User = db.user;
+const UserData = db.userdata;
 const Role = db.role;
 const Credential = db.credential;
+const SessionFlow = db.sessionflow;
 
 export const register = async (req, res) => {
   try {
@@ -156,8 +158,15 @@ export const googleLogin = async (req, res) => {
 
         let token = jwt.sign({ data: jwtData }, config.secret, { expiresIn: '24h' });
         jwtData.accessToken = token;
-        
+
+        let sessionFlowId = Constants.currentSessionFlow;
+        let sessionFlow = await SessionFlow.findOne({ sessionFlowId: sessionFlowId });
+        let userdata = await UserData.findOne({ username: jwtData.username }).state;
+
         res.cookie('jwt', JSON.stringify(jwtData));
+        res.cookie('sessionflow', JSON.stringify(sessionFlow));
+        res.cookie('userdata', JSON.stringify(userdata));
+
         return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
         //return res.status(200).send(jwtData);
       }
@@ -206,7 +215,12 @@ export const googleLogin = async (req, res) => {
       let token = jwt.sign({ data: jwtData }, config.secret, { expiresIn: '24h' });
       jwtData.accessToken = token;
 
+      let sessionFlowId = Constants.currentSessionFlow;
+      let sessionFlow = await SessionFlow.findOne({ sessionFlowId: sessionFlowId });
+      
       res.cookie('jwt', JSON.stringify(jwtData));
+      res.cookie('sessionflow', JSON.stringify(sessionFlow));
+      
       return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
       //return res.status(200).send(jwtData);
     }

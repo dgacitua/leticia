@@ -13,7 +13,7 @@ const storeAction = async (request, response, next) => {
 
     await Action.create(action);
     
-    response.status(200).send({ status: 'Action Saved!', timestamp: action.serverTimestamp });
+    response.status(200).send({ status: 'Action Saved!', timestamp: action.serverTimestamp, type: action.type, source: action.source });
   }
   catch (err) {
     consoleError(err);

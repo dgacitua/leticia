@@ -13,6 +13,8 @@ import Questions from './Questions';
 import ScrollAction from './ScrollAction';
 import SearchTask from './SearchTask';
 import Credential from './Credential';
+import UserData from './UserData';
+import SessionFlow from './SessionFlows';
 
 const db = {};
 
@@ -30,6 +32,8 @@ db.questions = Questions;
 db.scrollaction = ScrollAction;
 db.searchtask = SearchTask;
 db.credential = Credential;
+db.userdata = UserData;
+db.sessionflow = SessionFlow;
 
 db.ROLES = [ 'user', 'admin' ];
 
