@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-row>
-      <h2>TODO Encuesta de Salida</h2>
+      <h2>Encuesta</h2>
     </b-row>
     <b-row>
       <b-form id="exit-survey" @submit="submitSurvey">

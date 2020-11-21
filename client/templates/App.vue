@@ -33,7 +33,7 @@ export default {
 
   computed: {
     remainingTime() {
-      return this.$store.state.remainingTime;
+      return this.$store.state.timerTime;
     },
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
@@ -52,7 +52,30 @@ export default {
       let nextFlowParams = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].params;
       let nextFlowTimeLimit = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].timeLimit;
 
+      let userdata = {
+        username: this.currentUser.username,
+        state: this.$store.getters.userData,
+        sessionFlow: this.$store.getters.sessionFlow
+      };
+
+      Axios.post(`${Constants.backendApiUrl}/userdata/${this.currentUser.username}`, userdata)
+        .then(res => console.log('UserData saved on server!'))
+        .catch(err => console.error('Error while saving UserData on server', err));
+
+      if (nextFlowTimeLimit > 0) {
+        EventBus.$emit('leticia-timer-create', { totalTime: 2 * 60 });
+      }
+
       this.$router.replace({ path: nextFlowStage });
+    });
+
+    EventBus.$on('leticia-time', (detail) => {
+      
+    });
+
+    EventBus.$on('leticia-timeout', (detail) => {
+      alert('Se ha acabado el tiempo!')
+      EventBus.$emit('leticia-next-stage');
     });
   },
   
@@ -79,9 +102,9 @@ export default {
   mounted() {
     // Timer examples
     /*
-    this.timer = new Timer(15, 5);
+    this.timer = new Timer(15, 1);
     this.timer.start();
-
+    
     this.globalTimer = new Timer (25, 5, true);
     this.globalTimer.start();
     */

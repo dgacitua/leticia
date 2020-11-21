@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { getVueArray } from '../services/Utils'
+import { getVueArray } from '../services/Utils';
 
 import LikertScale from './formElements/LikertScale';
 import MultiQuery from './formElements/MultiQuery';

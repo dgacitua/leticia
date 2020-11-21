@@ -160,12 +160,12 @@ export const googleLogin = async (req, res) => {
         jwtData.accessToken = token;
 
         let sessionFlowId = Constants.currentSessionFlow;
-        let sessionFlow = await SessionFlow.findOne({ sessionFlowId: sessionFlowId });
-        let userdata = await UserData.findOne({ username: jwtData.username }).state;
+        let sessionFlow = await SessionFlow.findOne({ sessionFlowId: sessionFlowId }).exec();
+        let userdata = await UserData.findOne({ username: jwtData.username }).exec();
 
         res.cookie('jwt', JSON.stringify(jwtData));
         res.cookie('sessionflow', JSON.stringify(sessionFlow));
-        res.cookie('userdata', JSON.stringify(userdata));
+        res.cookie('userdata', JSON.stringify(userdata.state));
 
         return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
         //return res.status(200).send(jwtData);
@@ -216,7 +216,7 @@ export const googleLogin = async (req, res) => {
       jwtData.accessToken = token;
 
       let sessionFlowId = Constants.currentSessionFlow;
-      let sessionFlow = await SessionFlow.findOne({ sessionFlowId: sessionFlowId });
+      let sessionFlow = await SessionFlow.findOne({ sessionFlowId: sessionFlowId }).exec();
       
       res.cookie('jwt', JSON.stringify(jwtData));
       res.cookie('sessionflow', JSON.stringify(sessionFlow));

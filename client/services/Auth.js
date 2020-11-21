@@ -29,6 +29,7 @@ class AuthService {
 
   logout() {
     localStorage.removeItem('leticia-user');
+    localStorage.removeItem('leticia-vuex');
   }
 
   register(user) {

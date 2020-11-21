@@ -1,16 +1,10 @@
+<!-- DEPRECATED COMPONENT -->
 <template>
   <b-container>
     <b-row>
       <h2>Selecciona una tarea a realizar:</h2>
     </b-row>
     <br>
-    <!--
-    <b-row>
-      <div v-for="task in searchTasks" :key="task.searchTaskId">
-
-      </div>
-    </b-row>
-    -->
     <b-row>
       <b-card-group deck>
         <div v-for="task in searchTasks" :key="task.searchTaskId">

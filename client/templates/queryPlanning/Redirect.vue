@@ -6,11 +6,6 @@
 
 <script>
 export default {
-  mounted() {
-    //window.dispatchEvent(new CustomEvent('leticia-start-challenge'));
-    //let nextStage = this.$store.getters.stages[this.$store.getters.stageIndex];
-    //this.$router.replace(nextStage);
-  }
 }
 </script>
 

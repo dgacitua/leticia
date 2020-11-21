@@ -4,6 +4,7 @@ import Axios from 'axios';
 import VueAxios from 'vue-axios';
 
 import * as Constants from '../services/Constants';
+import EventBus from './eventBus';
 import { store } from './store';
 import { isEmptyObject, parseCircularObject } from '../services/Utils';
 
@@ -243,6 +244,21 @@ router.afterEach((to, from) => {
 
   if (loggedIn) {
     //store.commit({ type: 'setCurrentRoute', route: parseCircularObject(to) });
+
+    // dgacitua: https://itnext.io/yes-this-is-how-vue-router-guards-work-when-to-use-them-ed7e34946211
+    let newRoute = to.path;
+    console.log('afterEach!', newRoute);
+
+    if (newRoute === '/' || newRoute === '/consent' || newRoute === '/oauth' || newRoute === '/user-hub' || newRoute === '/admin-hub') {
+      if (store.getters.timer.status === 'running') {
+        EventBus.$emit('leticia-timer-pause');
+      }
+    }
+    else {
+      if (store.getters.timer.status === 'paused') {
+        EventBus.$emit('leticia-timer-resume');
+      }
+    }
   }
 });
 

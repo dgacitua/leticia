@@ -49,9 +49,11 @@ export default {
     
     if (jwtData) {
       localStorage.setItem('leticia-user', JSON.stringify(jwtData));
+      
       this.$store.commit('auth/loginSuccess', jwtData);
       this.$store.commit({ type: 'setUserData', data: userData });
       this.$store.commit({ type: 'setSessionFlow', sessionFlow: sessionFlow });
+
       this.$cookies.remove('jwt');
       this.$cookies.remove('userdata');
       this.$cookies.remove('sessionflow');

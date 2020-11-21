@@ -49,7 +49,7 @@ export default {
   },
   mounted() {
     if (this.loggedIn) {
-      this.$router.push('/user-hub');
+      this.$router.replace('/user-hub');
     }
   },
   methods: {

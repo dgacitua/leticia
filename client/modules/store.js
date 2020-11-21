@@ -5,7 +5,9 @@ import Axios from 'axios';
 
 import * as Constants from '../services/Constants';
 import { generateUserId, findIndexInArray, shuffleArray, deepCopy } from '../services/Utils';
+
 import { auth } from './auth';
+import Timer from '../services/Timer';
 
 Vue.use(Vuex);
 
@@ -16,8 +18,9 @@ const vuexLocal = new VuexPersistence({
 
 const store = new Vuex.Store({
   state: {
-    remainingTime: null,
-    globalRemainingTime: null,
+    timerTime: null,
+    timerDuration: null,
+    timerStatus: null,
     stageIndex: null,
     flowIndex: null,
     tasks: [],
@@ -28,14 +31,22 @@ const store = new Vuex.Store({
   getters: {
     userData: (state) => {
       return {
-        remainingTime: state.remainingTime,
-        globalRemainingTime: state.globalRemainingTime,
+        timerTime: state.timerTime,
+        timerDuration: state.timerDuration,
+        timerStatus: state.timerStatus,
         currentRoute: state.currentRoute,
         tasks: state.tasks,
         stages: state.stages,
         stageIndex: state.stageIndex,
         flowIndex: state.flowIndex
       };
+    },
+    timer: (state) => {
+      return {
+        time: state.timerTime,
+        duration: state.timerDuration,
+        status: state.timerStatus
+      }
     },
     tasks: (state) => {
       return state.tasks;
@@ -54,17 +65,14 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    setTime(state, payload) {
-      state.remainingTime = payload.time;
+    setTimerTime(state, payload) {
+      state.timerTime = payload.time;
     },
-    setGlobalTime(state, payload) {
-      state.globalRemainingTime = payload.time;
+    setTimerDuration(state, payload) {
+      state.timerDuration = payload.time;
     },
-    changeTime(state, payload) {
-      state.remainingTime += payload.amount;
-    },
-    changeGlobalTime(state, payload) {
-      state.globalRemainingTime += payload.amount;
+    setTimerStatus(state, payload) {
+      state.timerStatus = payload.status;
     },
     setCurrentRoute(state, payload) {
       state.currentRoute = payload.route;
@@ -94,8 +102,9 @@ const store = new Vuex.Store({
       state.tasks[taskIdx].completed = true;
     },
     setUserData(state, payload) {
-      state.remainingTime = payload.data.remainingTime;
-      state.globalRemainingTime = payload.data.globalRemainingTime;
+      state.timerTime = payload.data.timerTime;
+      state.timerDuration = payload.data.timerDuration;
+      state.timerStatus = payload.data.timerStatus;
       state.stageIndex = payload.data.stageIndex;
       state.flowIndex = payload.data.flowIndex;
       state.tasks = payload.data.tasks;
@@ -106,8 +115,9 @@ const store = new Vuex.Store({
       state.sessionFlow = payload.sessionFlow;
     },
     eraseAll(state) {
-      state.remainingTime = null;
-      state.globalRemainingTime = null;
+      state.timerTime = null;
+      state.timerDuration = null;
+      state.timerStatus = null;
       state.stageIndex = null;
       state.flowIndex = null;
       state.tasks = [];

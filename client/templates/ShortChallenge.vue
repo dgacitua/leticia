@@ -25,9 +25,10 @@
 import Axios from 'axios';
 
 import EventBus from '../modules/eventBus';
+import Timer from '../services/Timer';
+
 import * as Constants from '../services/Constants';
 import { deepCopy, isEmptyArray } from '../services/Utils';
-import Timer from '../services/Timer';
 
 export default {
   data() {
@@ -72,6 +73,7 @@ export default {
   },
 
   beforeMount() {
+    // Begin the challenge from start
     if (!this.$store.getters.stageIndex) {
       this.importTasks()
         .then(() => {
@@ -79,6 +81,7 @@ export default {
           this.startChallenge();
         });
     }
+    // If user has already begun the challenge
     else {
       this.loadChallenge();
     }

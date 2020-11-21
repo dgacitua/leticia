@@ -1,10 +1,9 @@
 <template>
   <b-container>
     <b-row>
-      <h2>{{ task.title }}</h2>
-    </b-row>
-    <b-row class="space-bottom">
-      <span>{{ task.description }}</span>
+      <b-card :header="task.title" class="text-center">
+        <b-card-text>{{ task.description }}</b-card-text>
+      </b-card>
     </b-row>
     <br>
     <b-row class="space-bottom">

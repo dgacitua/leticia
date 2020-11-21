@@ -5,6 +5,12 @@
         <b-navbar-brand tag="h1" class="mb-0">LeTiCiA <sub>PILOT</sub></b-navbar-brand>
       </router-link>
 
+      <b-navbar-nav v-if="currentTimer">
+        <b-nav-text>
+          <b>{{ currentTimer }}</b>
+        </b-nav-text>
+      </b-navbar-nav>
+
      <b-navbar-nav v-if="currentUser">
         <b-nav-item>
           <font-awesome-icon icon="user"/>
@@ -21,8 +27,18 @@
 </template>
 
 <script>
+import EventBus from '../modules/eventBus';
+import Timer from '../services/Timer';
+import { toHHMMSS } from '../services/Utils';
+
 export default {
   name: 'navbar',
+
+  data() {
+    return {
+      timer: null
+    }
+  },
 
   computed: {
     currentUser() {
@@ -35,14 +51,48 @@ export default {
       else {
         return false;
       }
+    },
+    currentTimer() {
+      if (Number.isInteger(this.$store.state.timerTime) && this.$store.state.timerTime >= 0) {
+        return toHHMMSS(this.$store.state.timerTime);
+      }
+      else {
+        return null;
+      }
     }
+  },
+
+  created() {
+    EventBus.$on('leticia-timer-create', (data) => {
+      this.timer = new Timer(data.totalTime);
+      this.timer.start();
+    });
+
+    EventBus.$on('leticia-timer-stop', () => {
+      if (this.timer) {
+        this.timer.stop();
+        this.timer = null;
+      }
+    });
+
+    EventBus.$on('leticia-timer-pause', () => {
+      if (this.timer) {
+        this.timer.pause();
+      }
+    });
+
+    EventBus.$on('leticia-timer-resume', () => {
+      if (this.timer) {
+        this.timer.resume();
+      }
+    });
   },
 
   methods: {
     logout() {
       this.$store.dispatch('auth/logout');
-      this.$store.dispatch('eraseAll');
-      this.$router.push('/');
+      //this.$store.dispatch('eraseAll');
+      this.$router.replace('/');
     }
   }
 }
