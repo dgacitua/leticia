@@ -1,18 +1,19 @@
 <template>
-  <b-container>
-    <b-row>
-      <h1>¡Bienvenido(a) a LeTiCiA!</h1>
+  <b-container id="home" class="full-height">
+    <b-row class="text-center">
+      <b-col>
+        <h1>¡Bienvenido(a) a LeTiCiA!</h1>
+      </b-col>
     </b-row>
     <br>
-    <b-row>
+    <b-row class="full-height text-center" align-v="center">
       <b-col>
         <b-row align-h="center">
           <b-button-group>
             <b-button to="consent" variant="info">Participar en el estudio</b-button>
-            <b-button to="oauth" variant="success">Iniciar sesión</b-button>
           </b-button-group>
         </b-row>
-        <br/>
+        <br>
         <!-- TODO disable Admin Hub -->
         <b-row align-h="center">
           <b-button-group>
@@ -72,5 +73,7 @@ export default {
 </script>
 
 <style scoped>
-
+.full-height {
+  height: 100%;
+}
 </style>

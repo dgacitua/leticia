@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <h1>¡Gracias por participar!</h1>
-  </div>
+  <b-container>
+    <b-row class="text-center" align-v="center">
+      <b-col>
+        <h1>¡Gracias por participar!</h1>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>

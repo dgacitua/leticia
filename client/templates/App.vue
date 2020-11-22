@@ -1,8 +1,8 @@
 <template>
-  <div id="leticia-app">
+  <b-container fluid id="leticia-app">
     <navbar id="leticia-navbar"></navbar>
     <router-view id="leticia-content"></router-view>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -164,10 +164,7 @@ export default {
 
 <style scoped>
 #leticia-app {
-  min-width: 100%;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
+  padding: 0px;
 }
 
 #leticia-navbar {
@@ -175,7 +172,8 @@ export default {
 }
 
 #leticia-content {
+  width: 100%;
+  height: 100%;
   padding: 5px 5px 5px 5px;
-  flex: 1;
 }
 </style>
