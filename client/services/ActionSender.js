@@ -29,6 +29,19 @@ class ActionSenderService {
     return Axios.post(API_URL + '/actions', message);
   }
 
+  sendVisitedPage(details, isEnter = true) {
+    let message = {
+      username: this.username,
+      type: isEnter ? 'PageEnter' : 'PageExit',
+      source: this.senderId,
+      url: window.document.URL,
+      clientTimestamp: Date.now(),
+      details: details
+    }
+
+    return Axios.post(API_URL + '/actions', message);
+  }
+
   sendGenericAction(message) {
     message.username = this.username;
 

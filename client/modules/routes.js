@@ -7,6 +7,7 @@ import * as Constants from '../services/Constants';
 import EventBus from './eventBus';
 import { store } from './store';
 import { isEmptyObject, parseCircularObject } from '../services/Utils';
+import ActionSender from '../services/ActionSender';
 
 import Home from '../templates/Home.vue';
 import InformedConsent from '../templates/InformedConsent.vue';
@@ -222,6 +223,18 @@ router.beforeEach((to, from, next) => {
   const currentRoute = store.state.currentRoute;
   const loggedIn = localStorage.getItem('leticia-user');
 
+  if (loggedIn) {
+    const sender = new ActionSender('Router');
+    let oldRoute = from.path;
+
+    let msg = {
+      route: oldRoute
+    };
+
+    sender.sendVisitedPage(msg, false)
+      .then((res) => { console.log('PageExit Sent!', oldRoute) });
+  }
+  
   if (currentRoute && !isEmptyObject(currentRoute) && isFirstTransition && to.name !== currentRoute.name) {
     next(currentRoute);
   }
@@ -245,10 +258,17 @@ router.afterEach((to, from) => {
   if (loggedIn) {
     //store.commit({ type: 'setCurrentRoute', route: parseCircularObject(to) });
 
-    // dgacitua: https://itnext.io/yes-this-is-how-vue-router-guards-work-when-to-use-them-ed7e34946211
+    const sender = new ActionSender('Router');
     let newRoute = to.path;
-    console.log('afterEach!', newRoute);
 
+    let msg = {
+      route: newRoute
+    };
+
+    sender.sendVisitedPage(msg, true)
+      .then((res) => { console.log('PageEnter Sent!', newRoute) });
+
+    // dgacitua: https://itnext.io/yes-this-is-how-vue-router-guards-work-when-to-use-them-ed7e34946211
     if (newRoute === '/' || newRoute === '/consent' || newRoute === '/oauth' || newRoute === '/user-hub' || newRoute === '/admin-hub') {
       if (store.getters.timer.status === 'running') {
         EventBus.$emit('leticia-timer-pause');
