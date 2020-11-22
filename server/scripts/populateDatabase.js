@@ -42,6 +42,10 @@ db.forms.insertMany([
   {
     "formId": "query",
     "questions": [ "query" ]
+  },
+  {
+    "formId": "exit",
+    "questions": [ "exit1", "exit2", "exit3", "exit4", "exit5", "exit6", "exit7", "exit8", "exit9", "exit10", "exitComment" ]
   }
 ]);
 
@@ -124,6 +128,133 @@ db.questions.insertMany([
     "title": 'Ingresa al menos 3 consultas que puedan obtener información útil para resolver la tarea',
     "queries": 3,
     "answer": []
+  },
+  {
+    "questionId": 'exit1',
+    "type": 'likert',
+    "title": 'Creo que usaría esta plataforma frecuentemente',
+    "start": 1,
+    "stop": 5,
+    "step": 1,
+    "minLabel": 'Totalmente en desacuerdo',
+    "maxLabel": 'Totalmente de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'exit2',
+    "type": 'likert',
+    "title": 'Encuentro esta plataforma innecesariamente complejo',
+    "start": 1,
+    "stop": 5,
+    "step": 1,
+    "minLabel": 'Totalmente en desacuerdo',
+    "maxLabel": 'Totalmente de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'exit3',
+    "type": 'likert',
+    "title": 'Creo que la plataforma fue fácil de usar',
+    "start": 1,
+    "stop": 5,
+    "step": 1,
+    "minLabel": 'Totalmente en desacuerdo',
+    "maxLabel": 'Totalmente de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'exit4',
+    "type": 'likert',
+    "title": 'Creo que necesitaría ayuda de una persona con conocimientos técnicos para usar esta plataforma',
+    "start": 1,
+    "stop": 5,
+    "step": 1,
+    "minLabel": 'Totalmente en desacuerdo',
+    "maxLabel": 'Totalmente de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'exit5',
+    "type": 'likert',
+    "title": 'Las funciones de esta plataforma están bien integradas',
+    "start": 1,
+    "stop": 5,
+    "step": 1,
+    "minLabel": 'Totalmente en desacuerdo',
+    "maxLabel": 'Totalmente de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'exit6',
+    "type": 'likert',
+    "title": 'Creo que la plataforma es muy inconsistente',
+    "start": 1,
+    "stop": 5,
+    "step": 1,
+    "minLabel": 'Totalmente en desacuerdo',
+    "maxLabel": 'Totalmente de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'exit7',
+    "type": 'likert',
+    "title": 'Imagino que la mayoría de la gente aprendería a usar esta plataforma de forma muy rápida',
+    "start": 1,
+    "stop": 5,
+    "step": 1,
+    "minLabel": 'Totalmente en desacuerdo',
+    "maxLabel": 'Totalmente de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'exit8',
+    "type": 'likert',
+    "title": 'Encuentro que la plataforma es muy difícil de usar',
+    "start": 1,
+    "stop": 5,
+    "step": 1,
+    "minLabel": 'Totalmente en desacuerdo',
+    "maxLabel": 'Totalmente de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'exit9',
+    "type": 'likert',
+    "title": 'Me siento confiado(a) al usar esta plataforma',
+    "start": 1,
+    "stop": 5,
+    "step": 1,
+    "minLabel": 'Totalmente en desacuerdo',
+    "maxLabel": 'Totalmente de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'exit10',
+    "type": 'likert',
+    "title": 'Necesité aprender muchas cosas antes de ser capaz de usar esta plataforma',
+    "start": 1,
+    "stop": 5,
+    "step": 1,
+    "minLabel": 'Totalmente en desacuerdo',
+    "maxLabel": 'Totalmente de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'exitComment',
+    "type": 'paragraph',
+    "title": 'Escribe en el siguiente espacio cualquier comentario que quisieras realizar sobre el estudio en el que acabas de participar',
+    "required": false,
+    "answer": null
   }
 ]);
 

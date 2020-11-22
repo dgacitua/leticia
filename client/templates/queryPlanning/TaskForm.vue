@@ -11,7 +11,7 @@
     </b-row>
     <b-row class="space-bottom">
       <b-col>
-        <b-form id=taskform @submit="onSubmit" class="full-width">
+        <b-form id="taskform" @submit="onSubmit" class="full-width">
           <b-row v-for="q in questions" :key="q.questionId"  class="zero-margin">
             <b-row v-if="q.type==='likert'" :id="q.questionId" class="zero-margin">
               <likertscale :props="q"></likertscale>
@@ -80,8 +80,12 @@ export default {
       .then((values) => { 
         this.task = values[0].data;
         this.questions = values[1].data;
+        console.log('TaskForm Questions Loaded!', this.questions);
       })
-      .catch((err) => { console.error(err) });
+      .catch((err) => {
+        console.error(err);
+        alert('Ha ocurrido un error al cargar las preguntas');
+      });
   },
 
   methods: {
