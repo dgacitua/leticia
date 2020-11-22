@@ -25,6 +25,7 @@ router.get('/facebook', oauth.authenticate('facebook', { scope: 'email' }));
 
 // Oauth user data comes to these redirectURLs
 router.get('/googleRedirect', oauth.authenticate('google'), controller.googleLogin);
+router.get('/facebookRedirect', oauth.authenticate('facebook', { scope: 'email' }), controller.facebookLogin);
 
 
 export default router;

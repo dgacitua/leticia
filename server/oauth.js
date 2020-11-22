@@ -48,7 +48,6 @@ passportAgent.use(new GoogleStrategy({
   }
 ));
 
-/*
 passportAgent.use(new FacebookStrategy({
     clientID: Constants.facebookClientId,
     clientSecret: Constants.facebookClientSecret,
@@ -61,7 +60,6 @@ passportAgent.use(new FacebookStrategy({
     return callback(null, profile);
   }
 ));
-*/
 
 // These functions are required for getting data To/from JSON returned from Providers
 passportAgent.serializeUser((user, callback) => {

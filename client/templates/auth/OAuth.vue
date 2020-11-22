@@ -58,7 +58,7 @@ export default {
     },
 
     facebookLogin() {
-      //window.location.href = `${Constants.backendApiUrl}/auth/facebook`;
+      window.location.href = `${Constants.backendApiUrl}/auth/facebook`;
     }
   }
 };

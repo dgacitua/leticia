@@ -14,10 +14,19 @@
 </template>
 
 <script>
+import Axios from 'axios';
+
+import * as Constants from '../../services/Constants';
 import EventBus from '../../modules/eventBus';
 
 export default {
   name: 'UserHub',
+
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    }
+  },
 
   methods: {
     resumeStudy() {
@@ -33,6 +42,7 @@ export default {
           EventBus.$emit('leticia-timer-create', { totalTime: this.$store.state.timerTime });
         }
 
+        this.saveUserData();
         this.$router.replace({ path: nextFlowStage });
       }
       // Start new challenge
@@ -48,8 +58,20 @@ export default {
           EventBus.$emit('leticia-timer-create', { totalTime: nextFlowTimeLimit });
         }
 
+        this.saveUserData();
         this.$router.replace({ path: nextFlowStage });
       }
+    },
+    saveUserData() {
+      let userdata = {
+        username: this.currentUser.username,
+        state: this.$store.getters.userData,
+        sessionFlow: this.$store.getters.sessionFlow
+      };
+
+      Axios.post(`${Constants.backendApiUrl}/userdata/${this.currentUser.username}`, userdata)
+        .then(res => console.log('UserData saved on server!'))
+        .catch(err => console.error('Error while saving UserData on server', err));
     }
   }
 }

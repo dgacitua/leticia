@@ -59,16 +59,7 @@ export default {
 
       this.nextChallenge();
       this.loadChallenge();
-
-      let userdata = {
-        username: this.currentUser.username,
-        state: this.$store.getters.userData,
-        sessionFlow: this.$store.getters.sessionFlow
-      };
-
-      Axios.post(`${Constants.backendApiUrl}/userdata/${this.currentUser.username}`, userdata)
-        .then(res => console.log('UserData saved on server!'))
-        .catch(err => console.error('Error while saving UserData on server', err));
+      this.saveUserData();
     });
   },
 
@@ -136,6 +127,17 @@ export default {
       else {
         EventBus.$emit('leticia-next-stage');
       }
+    },
+    saveUserData() {
+      let userdata = {
+        username: this.currentUser.username,
+        state: this.$store.getters.userData,
+        sessionFlow: this.$store.getters.sessionFlow
+      };
+
+      Axios.post(`${Constants.backendApiUrl}/userdata/${this.currentUser.username}`, userdata)
+        .then(res => console.log('UserData saved on server!'))
+        .catch(err => console.error('Error while saving UserData on server', err));
     }
   }
 }
