@@ -1,11 +1,16 @@
 <template>
   <b-container>
     <b-row>
-      <h1>Instrucciones</h1>
+      <h1>Instrucciones del desafío</h1>
     </b-row>
     <br>
     <b-row>
-      TODO Instrucciones
+      <!-- TODO replace placekitten -->
+      <b-card img-src="https://placekitten.com/300/300" img-alt="Card image" img-right>
+        <b-card-text>
+          {{ instructions }}
+        </b-card-text>
+      </b-card>
     </b-row>
     <br>
     <b-row>
@@ -19,6 +24,16 @@ import EventBus from '../modules/eventBus';
 
 export default {
   name: 'instructions',
+
+  data() {
+    return {
+      instructions: ''
+    }
+  },
+
+  mounted() {
+    this.instructions = this.$store.getters.sessionFlow.instructions || 'No hay instrucciones';
+  },
 
   methods: {
     nextStage() {
