@@ -3,7 +3,7 @@ import Mongoose from 'mongoose';
 const demographicSchema = Mongoose.Schema({
   username: {
     type: String,
-    required: false // TODO Login
+    required: true
   },
   type: {
     type: String,

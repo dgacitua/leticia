@@ -3,7 +3,7 @@ import Mongoose from 'mongoose';
 const answerSchema = Mongoose.Schema({
   username: {
     type: String,
-    required: false // TODO Login
+    required: true
   },
   formId: {
     type: String,
