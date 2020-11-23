@@ -100,7 +100,7 @@ export default {
       //console.log(response);
       //console.log('KSB!', keystrokeBuffer);
 
-      let p1 = Axios.post(`${Constants.backendApiUrl}/answers`, response);  // TODO send answers through ActionSender
+      let p1 = Axios.post(`${Constants.backendApiUrl}/answers`, response);
       let p2 = this.sender.sendKeystrokeBuffer(keystrokeBuffer);
 
       Promise.all([p1, p2])

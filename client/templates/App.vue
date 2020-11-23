@@ -63,14 +63,10 @@ export default {
         .catch(err => console.error('Error while saving UserData on server', err));
 
       if (nextFlowTimeLimit > 0) {
-        EventBus.$emit('leticia-timer-create', { totalTime: 2 * 60 });
+        EventBus.$emit('leticia-timer-create', { totalTime: nextFlowTimeLimit * 60 });
       }
 
       this.$router.replace({ path: nextFlowStage });
-    });
-
-    EventBus.$on('leticia-time', (detail) => {
-      
     });
 
     EventBus.$on('leticia-timeout', (detail) => {
@@ -78,87 +74,6 @@ export default {
       EventBus.$emit('leticia-next-stage');
     });
   },
-  
-  beforeMount() {
-    /*
-    KeystrokeTracker.bindTracker();
-    MouseTracker.bindTracker();
-    ScrollTracker.bindTracker();
-
-    window.addEventListener('leticia-track', (e) => {
-      this.captureTrack(e.detail);
-    });
-
-    window.addEventListener('leticia-action', (e) => {
-      this.captureAction(e.detail);
-    });
-
-    window.addEventListener('leticia-time', (e) => {
-      this.timeEvent(e.detail);
-    });
-    */
-  },
-
-  mounted() {
-    // Timer examples
-    /*
-    this.timer = new Timer(15, 1);
-    this.timer.start();
-    
-    this.globalTimer = new Timer (25, 5, true);
-    this.globalTimer.start();
-    */
-  },
-
-  beforeDestroy() {
-    /*
-    KeystrokeTracker.unbindTracker();
-    MouseTracker.unbindTracker();
-    ScrollTracker.unbindTracker();
-
-    window.removeEventListener('leticia-track', (e) => {
-      this.captureTrack(e.detail);
-    });
-
-    window.removeEventListener('leticia-action', (e) => {
-      this.captureAction(e.detail);
-    });
-
-    window.removeEventListener('leticia-time', (e) => {
-      this.timeEvent(e.detail);
-    });
-    */
-  },
-
-  methods: {
-    captureAction(event) {
-      if (this.loggedIn) { //(this.$store.getters.isValidParticipant) {
-        event.username = this.currentUser.username;
-        //console.log(`[CaptureAction]`, event);
-
-        Axios.post(`${Constants.backendApiUrl}/actions`, event)
-          .then((res) => {
-            // console.log(`Action saved!`, response.data.timestamp, event);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    },
-
-    captureTrack(event) {
-      if (this.loggedIn) { //(this.$store.getters.isValidParticipant) {
-        event.username = this.currentUser.username;
-        // TODO Enable captureTrack
-        //console.log(`[CaptureTrack]`, `TYPE: ${event.type}`, `TS: ${event.clientTimestamp}`, event);
-        //WebSocket.sendMessage(event);
-      }
-    },
-
-    timeEvent(event) {
-      console.log('[TimeEvent]', event);
-    }
-  }
 }
 </script>
 

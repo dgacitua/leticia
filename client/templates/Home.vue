@@ -1,6 +1,7 @@
 <template>
   <b-container id="home" class="full-height">
     <b-row class="text-center">
+      <!-- TODO put image -->
       <b-col>
         <h1>¡Bienvenido(a) a LeTiCiA!</h1>
       </b-col>
