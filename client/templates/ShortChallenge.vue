@@ -125,6 +125,7 @@ export default {
         this.$router.replace(nextStage);
       }
       else {
+        EventBus.$emit('leticia-timer-stop');
         EventBus.$emit('leticia-next-stage');
       }
     },
