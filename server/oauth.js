@@ -39,7 +39,7 @@ passportAgent.use(new JwtStrategy(opts, (jwtPayload, callback) => {
 passportAgent.use(new GoogleStrategy({
     clientID: Constants.googleClientId,
     clientSecret: Constants.googleClientSecret,
-    callbackURL: "http://localhost:3001/v1/auth/googleRedirect"
+    callbackURL: `${Constants.leticiaProtocol}://${Constants.leticiaHost}:${Constants.leticiaPort}/v1/auth/googleRedirect`
   },
   (accessToken, refreshToken, profile, callback) => {
     //console.log(accessToken, refreshToken, profile);
@@ -51,7 +51,7 @@ passportAgent.use(new GoogleStrategy({
 passportAgent.use(new FacebookStrategy({
     clientID: Constants.facebookClientId,
     clientSecret: Constants.facebookClientSecret,
-    callbackURL: "http://localhost:3001/v1/auth/facebookRedirect",
+    callbackURL: `${Constants.leticiaProtocol}://${Constants.leticiaHost}:${Constants.leticiaPort}/v1/auth/facebookRedirect`,
     profileFields: ['id', 'displayName', 'email', 'picture']
   },
   (accessToken, refreshToken, profile, callback) => {

@@ -4,6 +4,7 @@ dotenv.config();
 
 export const isProductionMode = (process.env.NODE_ENV === 'production');
 export const leticiaHost = process.env.LETICIA_HOST || 'localhost';
+export const leticiaProtocol = process.env.LETICIA_PROTOCOL || 'http';
 export const frontendPort = process.env.FRONTEND_PORT || 3000;
 export const leticiaPort = process.env.REST_PORT || 3001;
 export const websocketPort = process.env.WEBSOCKET_PORT || 3002;
