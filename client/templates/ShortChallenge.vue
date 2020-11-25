@@ -6,6 +6,7 @@
     <b-row>
       <router-view id="current-stage"></router-view>
     </b-row>
+    <!--
     <hr>
     <b-row>
       <div>
@@ -18,6 +19,7 @@
         <pre>{{ currentStages }}</pre>
       </div>
     </b-row>
+    -->
   </b-container>
 </template>
 

@@ -308,8 +308,10 @@
         <b-button type="submit" variant="primary">Enviar</b-button>
       </b-form>
     </b-row>
+    <!--
     <hr>
     <pre>{{ form }}</pre>
+    -->
   </b-container>
 </template>
 
