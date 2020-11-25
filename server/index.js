@@ -10,6 +10,7 @@ import SockJS from 'sockjs';
 import passport from 'passport';
 
 import './db';
+import * as Constants from './constants';
 
 import api1 from './api1';
 import { redirectInteraction } from './websocketRouter';
@@ -20,7 +21,7 @@ const wsPort = 3002;
 const echo = SockJS.createServer();
 
 let corsOptions = {
-  origin: "http://localhost:3000"
+  origin: Constants.isProductionMode ? `${Constants.corsUrl}` : 'http://localhost:3000'
 };
 
 app.use(bodyParser.urlencoded({ extended: true }));

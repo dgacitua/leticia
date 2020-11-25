@@ -16,3 +16,6 @@ export const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET || '';
 export const facebookClientId = process.env.FACEBOOK_CLIENT_ID || '';
 export const facebookClientSecret = process.env.FACEBOOK_CLIENT_SECRET || '';
 export const currentSessionFlow = process.env.CURRENT_SESSION_FLOW || 'short';
+
+export const corsPort = frontendPort === 80 ? '' : `:${frontendPort}`;
+export const corsUrl = `${leticiaProtocol}://${leticiaHost}${corsPort}`;
