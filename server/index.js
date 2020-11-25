@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use(passport.initialize()); 
 
 // CORS support
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Add routes
 app.use('/v1', api1);
