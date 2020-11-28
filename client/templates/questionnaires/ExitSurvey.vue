@@ -23,7 +23,11 @@
           <br>
         </b-row>
         <!-- Submit -->
-        <b-button type="submit" variant="primary">Enviar respuesta</b-button>
+        <b-row>
+          <b-col class="text-right">
+            <b-button type="submit" variant="success">Enviar respuesta</b-button>
+          </b-col>
+        </b-row>
       </b-form>
     </b-row>
     <!--

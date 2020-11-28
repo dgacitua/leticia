@@ -24,8 +24,10 @@
             </b-row>
           </b-row>
           <br>
-          <b-row  class="zero-margin">
-            <b-button type="submit" variant="success">Enviar respuesta</b-button>
+          <b-row>
+            <b-col class="text-right zero-margin">
+              <b-button type="submit" variant="success">Enviar respuesta</b-button>
+            </b-col>
           </b-row>
         </b-form>
       </b-col>

@@ -1,7 +1,7 @@
 <template>
   <b-container id="short-challenge">
     <b-row>
-      <div><h1>Short Challenge!</h1><div>
+      <div><h1>¡Desafío Corto!</h1><div>
     </b-row>
     <b-row>
       <router-view id="current-stage"></router-view>

@@ -3,11 +3,9 @@
     <b-row>
       <h1>Panel del usuario</h1>
     </b-row>
-    <b-row>
+    <b-row class="text-center">
       <b-col>
-        <b-button-group vertical>
-            <b-button @click="resumeStudy" variant="success">Iniciar/Continuar</b-button>            
-          </b-button-group>
+        <b-button @click="resumeStudy" variant="success">Iniciar/Continuar</b-button>            
       </b-col>
     </b-row>
   </b-container>

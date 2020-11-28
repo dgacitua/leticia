@@ -28,8 +28,14 @@
           required
         ></b-form-input>
       </b-form-group>
-      <b-button v-if="!isLastSlide" variant="primary" :disabled="!isValidInput" @click="nextSample">Siguiente</b-button>
-      <b-button v-if="isLastSlide" variant="success" :disabled="!isValidInput" type="submit">Finalizar</b-button>
+      <b-row>
+        <b-col>
+          <b-button v-if="!isLastSlide" variant="primary" :disabled="!isValidInput" @click="nextSample">Siguiente</b-button>
+        </b-col>
+        <b-col class="text-right">
+          <b-button v-if="isLastSlide" variant="success" :disabled="!isValidInput" type="submit">Finalizar</b-button>
+        </b-col>
+      </b-row>
     </b-form>
     <!--
     <hr>
