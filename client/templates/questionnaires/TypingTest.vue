@@ -10,11 +10,11 @@
     </b-row>
     <br>
     <b-form @submit="nextSample">
-      <b-form-group
-        :id="`label-${currentSample.id}`"
-        :label="currentSample.text"
-        :label-for="`input-${currentSample.id}`"
-      >
+      <div id="sample-text">
+        {{ currentSample.text }}
+      </div>
+      <br>
+      <b-form-group :id="`label-${currentSample.id}`">
         <b-form-input
           :id="`input-${currentSample.id}`"
           :name="`input-${currentSample.id}`"
@@ -28,6 +28,7 @@
           required
         ></b-form-input>
       </b-form-group>
+      <br>
       <b-row>
         <b-col>
           <b-button v-if="!isLastSlide" variant="primary" :disabled="!isValidInput" @click="nextSample">Siguiente</b-button>
@@ -47,6 +48,8 @@
 </template>
 
 <script>
+import Mark from 'mark.js';
+
 import TypingTestSamples from '../../assets-client/typingTestSamples-es.json';
 
 import ActionSender from '../../services/ActionSender';
@@ -54,7 +57,7 @@ import ActionHandler from '../../trackers/ActionHandler';
 import KeystrokeHandler from '../../trackers/KeystrokeHandler';
 
 import EventBus from '../../modules/eventBus';
-import { deepCopy } from '../../services/Utils';
+import { deepCopy, findNextWordPosition, getWordBoundsAtPosition } from '../../services/Utils';
 
 export default {
   name: 'demographic',
@@ -67,7 +70,8 @@ export default {
       actionHandler: new ActionHandler('TypingTest'),
       sender: new ActionSender('TypingTest'),
       response: [],
-      keystrokeBuffer: []
+      keystrokeBuffer: [],
+      highlightedText: ''
     }
   },
 
@@ -120,6 +124,7 @@ export default {
     keyup(evt) {
       let ks = this.ksHandler.keyup(evt);
       this.keystrokeBuffer.push(ks);
+      //this.callHighlight(evt);
     },
     nextSample(evt) {
       if (this.isValidInput) {
@@ -138,12 +143,78 @@ export default {
           this.onSubmit(evt);
         }
       }
+    },
+    callHighlight(evt) {
+      // TODO fix highlight
+      let value = evt.target.value;
+      let cursorIdx = evt.target.selectionStart;
+      let bounds = getWordBoundsAtPosition(value, cursorIdx);
+      let text = this.currentSample.text;
+      let nextWord = text.substring(bounds[1], text.length).split(' ')[1];
+
+      let hlStart = bounds[0];
+      let hlLength = bounds[1] - bounds[0];
+
+      console.log('hlExp', value, findNextWordPosition(text, value));
+
+      let hl1 = findNextWordPosition(text, value)[0];
+      let hl2 = findNextWordPosition(text, value)[1];
+
+      //console.log('hlCall', nextWord, hlStart, hlLength);
+      
+      this.highlightSampleText('', hl1, hl2);
+    },
+    highlightSampleText(snip, start = 0, length = 0) {
+      let snippet = snip || '';
+      let searchables = document.querySelector('#sample-text');
+      
+      //console.log('hlFn', snippet, start, length);
+
+      const markInstance = new Mark(searchables);
+
+      let markText = () => {
+        markInstance.mark(snippet, {
+          accurracy: 'exactly',
+          iframes: true,
+          acrossElements: true,
+          separateWordSearch: true,
+          className: 'highlight'
+        })
+      };
+
+      let markRegExp = () => {
+        markInstance.markRegExp(snippet, {
+          iframes: true,
+          acrossElements: true,
+          className: 'highlight'
+        })
+      };
+
+      let markRanges = () => {
+        markInstance.markRanges([{ start: start, length: length }], {
+          iframes: true,
+          acrossElements: true,
+          className: 'highlight'
+        })
+      };
+
+      markInstance.unmark({
+        iframes: true,
+        done: markRanges
+      });
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
+.highlight {
+  font-weight: bold;
+  color: #000000;
+  background-color: #E0FBFF;
+  text-decoration: none;
+}
+
 #typing-test {
   display: flex;
   flex-direction: row;

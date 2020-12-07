@@ -44,3 +44,62 @@ export const toHHMMSS = (secs) => {
     .filter((v,i) => v !== "00" || i > 0)
     .join(":");
 };
+
+// dgacitua: Get word bounds at position
+// https://stackoverflow.com/a/58403800
+export const getWordBoundsAtPosition = (str, position) => {
+  const isSpace = (c) => /\s/.exec(c);
+  let start = position - 1;
+  let end = position;
+
+  while (start >= 0 && !isSpace(str[start])) {
+    start -= 1;
+  }
+  start = Math.max(0, start + 1);
+
+  while (end < str.length && !isSpace(str[end])) {
+    end += 1;
+  }
+  end = Math.max(start, end);
+
+  return [start, end];
+};
+
+/*
+export const findNextWordPosition = (text, snippet) => {
+  let indexOf = text.indexOf(snippet);
+  let lastWordLength = snippet.split(' ').splice(-1).length;
+
+  if (indexOf >= 0) {
+    return getWordBoundsAtPosition(text, indexOf + lastWordLength + 1);
+  }
+  else {
+    return getWordBoundsAtPosition(text, 0);
+  }
+};
+*/
+
+// https://stackoverflow.com/a/12661863
+export const findNextWordPosition = (needle, haystack) => {
+  if (!needle || !haystack) {
+      return [0, 0];
+  }
+  else {
+      let re = new RegExp('((\\S+[\\b\\s]?)' + needle + '([\\b\\s]?\\S+))', 'i');
+      let matches = haystack.match(re);
+
+      //console.log('matches', matches);
+      
+      if (matches) {
+          let foundWords = haystack.match(re)[0];
+          let lastWordPos = getWordBoundsAtPosition(haystack, foundWords.length);
+          
+          console.log('lwp', lastWordPos);
+
+          return lastWordPos;
+      }
+      else {
+          return [0, 0];
+      }
+  }
+}

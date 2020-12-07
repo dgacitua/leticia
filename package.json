@@ -43,6 +43,7 @@
     "jquery": "^3.5.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
+    "mark.js": "^8.11.1",
     "mongoose": "^5.9.20",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
