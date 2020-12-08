@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import ActionSender from '../services/ActionSender';
 import EventBus from '../modules/eventBus';
 
 export default {
@@ -28,6 +29,12 @@ export default {
   data() {
     return {
       instructions: ''
+    }
+  },
+
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
     }
   },
 

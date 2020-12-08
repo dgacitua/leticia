@@ -15,23 +15,28 @@
           </b-button-group>
         </b-row>
         <br>
-        <!--
+
         <b-row align-h="center">
           <b-button-group>
             <b-button to="admin-hub" variant="warning">Panel del Administrador</b-button>
           </b-button-group>
         </b-row>
-        -->
+
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
+import ActionSender from '../services/ActionSender';
+
 export default {
   name: 'home',
 
   computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
     currentUser() {
       return this.$store.state.auth.user;
     },
@@ -45,7 +50,7 @@ export default {
     }
   },
   
-  beforeMount() {
+  created() {
     let jwtData = this.$cookies.get('jwt');
     let userData = this.$cookies.get('userdata') || {};
     let sessionFlow = this.$cookies.get('sessionflow') || {};
@@ -70,7 +75,7 @@ export default {
         this.$router.push('/user-hub');
       }
     }
-  },
+  }
 }
 </script>
 

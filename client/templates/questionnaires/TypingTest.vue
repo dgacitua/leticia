@@ -76,6 +76,9 @@ export default {
   },
 
   computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
     currentSample() {
       return this.samples[this.sampleIndex];
     },

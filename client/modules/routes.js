@@ -228,11 +228,12 @@ router.beforeEach((to, from, next) => {
     let oldRoute = from.path;
 
     let msg = {
-      route: oldRoute
+      path: from.path,
+      fullPath: from.fullPath
     };
 
     sender.sendVisitedPage(msg, false)
-      .then((res) => { console.log('PageExit Sent!', oldRoute) });
+      .then((res) => { console.log('PageExit Sent!', oldRoute, res.data.message) });
   }
   
   if (currentRoute && !isEmptyObject(currentRoute) && isFirstTransition && to.name !== currentRoute.name) {
@@ -262,11 +263,12 @@ router.afterEach((to, from) => {
     let newRoute = to.path;
 
     let msg = {
-      route: newRoute
+      path: to.path,
+      fullPath: to.fullPath
     };
 
     sender.sendVisitedPage(msg, true)
-      .then((res) => { console.log('PageEnter Sent!', newRoute) });
+      .then((res) => { console.log('PageEnter Sent!', newRoute, res.data.message) });
 
     // dgacitua: https://itnext.io/yes-this-is-how-vue-router-guards-work-when-to-use-them-ed7e34946211
     if (newRoute === '/' || newRoute === '/consent' || newRoute === '/oauth' || newRoute === '/user-hub' || newRoute === '/admin-hub') {

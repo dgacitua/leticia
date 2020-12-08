@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import ActionSender from '../services/ActionSender';
 import { getVueArray } from '../services/Utils';
 
 import LikertScale from './formElements/LikertScale';
@@ -78,6 +79,12 @@ export default {
           answer: []
         }
       ],
+    }
+  },
+
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
     }
   },
 

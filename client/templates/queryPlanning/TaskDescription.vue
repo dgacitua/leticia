@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import ActionSender from '../../services/ActionSender';
 import EventBus from '../../modules/eventBus';
 
 export default {
@@ -22,6 +23,12 @@ export default {
     return {
       currentStage: this.$store.getters.stages[this.$store.getters.stageIndex],
       currentTask: {}
+    }
+  },
+
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
     }
   },
 

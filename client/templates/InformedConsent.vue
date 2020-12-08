@@ -20,8 +20,19 @@
 </template>
 
 <script>
+import ActionSender from '../services/ActionSender';
+
 export default {
   name: 'informed-consent',
+
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+    currentUser() {
+      return this.$store.state.auth.user;
+    },
+  },
 
   methods: {
     acceptConsent() {

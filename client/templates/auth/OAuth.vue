@@ -31,6 +31,7 @@ import Axios from 'axios';
 import User from '../../models/User';
 
 import * as Constants from '../../services/Constants';
+import ActionSender from '../../services/ActionSender';
 
 export default {
   name: 'OAuth',
@@ -42,16 +43,19 @@ export default {
       message: ''
     };
   },
+
   computed: {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
     }
   },
+
   mounted() {
     if (this.loggedIn) {
       this.$router.replace('/user-hub');
     }
   },
+
   methods: {
     googleLogin() {
       window.location.href = `${Constants.backendApiUrl}/auth/google`;

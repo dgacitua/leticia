@@ -325,6 +325,7 @@ import { ModelSelect } from 'vue-search-select';
 
 import * as Constants from '../../services/Constants';
 import { getVueObject } from '../../services/Utils';
+import ActionSender from '../../services/ActionSender';
 import EventBus from '../../modules/eventBus';
 
 import Countries from '../../assets-client/countries.json';

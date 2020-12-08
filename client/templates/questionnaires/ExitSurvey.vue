@@ -42,6 +42,7 @@ import Axios from 'axios';
 
 import * as Constants from '../../services/Constants';
 import { getVueArray, deepCopy } from '../../services/Utils';
+import ActionSender from '../../services/ActionSender';
 import EventBus from '../../modules/eventBus';
 
 import LikertScale from '../formElements/LikertScale';

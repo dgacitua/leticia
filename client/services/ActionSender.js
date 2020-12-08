@@ -1,5 +1,6 @@
 import Axios from 'axios';
 
+import { router } from '../modules/routes';
 import { store } from '../modules/store';
 import * as Constants from './Constants';
 
@@ -21,10 +22,10 @@ class ActionSenderService {
       username: this.username,
       type: 'TypingTestCompleted',
       source: this.senderId,
-      url: window.document.URL,
+      url: router.currentRoute.fullPath,
       clientTimestamp: Date.now(),
       details: textArray
-    }
+    };
 
     return Axios.post(API_URL + '/actions', message);
   }
@@ -34,16 +35,23 @@ class ActionSenderService {
       username: this.username,
       type: isEnter ? 'PageEnter' : 'PageExit',
       source: this.senderId,
-      url: window.document.URL,
+      url: router.currentRoute.fullPath,
       clientTimestamp: Date.now(),
       details: details
-    }
+    };
 
     return Axios.post(API_URL + '/actions', message);
   }
 
-  sendGenericAction(message) {
-    message.username = this.username;
+  sendGenericAction(originalMsg) {
+    let message = {
+      username: this.username,
+      type: originalMsg.type || 'GenericAction',
+      source: originalMsg.source || this.senderId,
+      url: router.currentRoute.fullPath,
+      clientTimestamp: Date.now(),
+      details: originalMsg.details || {}
+    };
 
     return Axios.post(API_URL + '/actions', message);
   }

@@ -26,6 +26,7 @@
 <script>
 import Axios from 'axios';
 
+import ActionSender from '../services/ActionSender';
 import EventBus from '../modules/eventBus';
 import Timer from '../services/Timer';
 
@@ -52,6 +53,9 @@ export default {
   computed: {
     currentUser() {
       return this.$store.state.auth.user;
+    },
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
     }
   },
 
@@ -65,7 +69,7 @@ export default {
     });
   },
 
-  beforeMount() {
+  mounted() {
     // Begin the challenge from start
     if (!this.$store.getters.stageIndex) {
       this.importTasks()

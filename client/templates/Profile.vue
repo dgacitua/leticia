@@ -25,13 +25,20 @@
 </template>
 
 <script>
+import ActionSender from '../services/ActionSender';
+
 export default {
   name: 'Profile',
+
   computed: {
     currentUser() {
       return this.$store.state.auth.user;
+    },
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
     }
   },
+
   mounted() {
     if (!this.currentUser) {
       this.$router.push('/login');

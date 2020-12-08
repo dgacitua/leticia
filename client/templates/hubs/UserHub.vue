@@ -15,12 +15,16 @@
 import Axios from 'axios';
 
 import * as Constants from '../../services/Constants';
+import ActionSender from '../../services/ActionSender';
 import EventBus from '../../modules/eventBus';
 
 export default {
   name: 'UserHub',
 
   computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
     currentUser() {
       return this.$store.state.auth.user;
     }
