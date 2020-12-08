@@ -27,7 +27,9 @@
 </template>
 
 <script>
+import ActionSender from '../services/ActionSender';
 import EventBus from '../modules/eventBus';
+
 import Timer from '../services/Timer';
 import { toHHMMSS } from '../services/Utils';
 
@@ -91,6 +93,10 @@ export default {
   methods: {
     logout() {
       EventBus.$emit('leticia-timer-stop');
+
+      const sender = new ActionSender('UserLog');
+      sender.userLog(false);
+
       this.$store.dispatch('auth/logout');
       //this.$store.dispatch('eraseAll');
       this.$router.replace('/');

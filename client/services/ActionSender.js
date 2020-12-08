@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import { UAParser } from 'ua-parser-js';
 
 import { router } from '../modules/routes';
 import { store } from '../modules/store';
@@ -40,6 +41,31 @@ class ActionSenderService {
       details: details
     };
 
+    return Axios.post(API_URL + '/actions', message);
+  }
+
+  userLog(isLogin = true) {
+    let userAgent = navigator.userAgent;
+    let parsedUserAgent = UAParser(userAgent);
+
+    let message = {
+      username: this.username,
+      type: isLogin ? 'Login' : 'Logout',
+      source: 'UserLog',
+      url: router.currentRoute.fullPath,
+      clientTimestamp: Date.now(),
+      details: {
+        // dgacitua: Remember to split by whitespace when processing
+        // TODO get IP address
+        ipAddress: '',
+        userAgent: userAgent,
+        device: `${parsedUserAgent.device.type} ${parsedUserAgent.device.vendor} ${parsedUserAgent.device.model}`,
+        operatingSystem: `${parsedUserAgent.os.name} ${parsedUserAgent.os.version}`,
+        browser: `${parsedUserAgent.browser.name} ${parsedUserAgent.browser.version}`
+      }
+    };
+
+    console.log('UserLog', message);
     return Axios.post(API_URL + '/actions', message);
   }
 

@@ -65,6 +65,9 @@ export default {
       this.$cookies.remove('jwt');
       this.$cookies.remove('userdata');
       this.$cookies.remove('sessionflow');
+
+      const sender = new ActionSender('UserLog');
+      sender.userLog(true);
     }
 
     if (this.currentUser) {
