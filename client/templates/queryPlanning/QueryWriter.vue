@@ -1,25 +1,33 @@
 <template>
   <b-container>
     <b-row class="space-bottom">
-      <b-card :header="task.title" class="text-center">
-        <b-card-text>{{ task.description }}</b-card-text>
-      </b-card>
+      <b-col>
+        <b-card :header="task.title" class="text-center">
+          <b-card-text>{{ task.description }}</b-card-text>
+        </b-card>
+      </b-col>
     </b-row>
     <br>
     <b-row class="space-bottom">
-      <b-form id="query-writer" @submit="onSubmit" class="full-width">
-        <b-row v-for="q in questions" :key="q.questionId" class="zero-margin">
-          <b-row v-if="q.type==='multiquery'" class="zero-margin">
-            <multiquery :props="q"></multiquery>
+      <b-col>
+        <b-form id="query-writer" @submit="onSubmit" class="full-width">
+          <b-row v-for="q in questions" :key="q.questionId" class="zero-margin">
+            <b-col>
+              <b-row v-if="q.type==='multiquery'" class="zero-margin">
+                <b-col>
+                  <multiquery :props="q"></multiquery>
+                </b-col>
+              </b-row>
+            </b-col>
           </b-row>
-        </b-row>
-        <br>
-        <b-row class="zero-margin text-right">
-          <b-col>
-            <b-button type="submit" variant="success">Enviar respuesta</b-button>
-          </b-col>
-        </b-row>
-      </b-form>
+          <br>
+          <b-row class="zero-margin text-right">
+            <b-col>
+              <b-button type="submit" variant="success">Enviar respuesta</b-button>
+            </b-col>
+          </b-row>
+        </b-form>
+      </b-col>
     </b-row>
   </b-container>
 </template>

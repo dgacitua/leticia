@@ -20,6 +20,7 @@ import Register from '../templates/auth/Register.vue';
 import OAuth from '../templates/auth/OAuth.vue';
 import Redirect from '../templates/queryPlanning/Redirect.vue';
 import TaskDescription from '../templates/queryPlanning/TaskDescription.vue';
+import TaskReady from '../templates/queryPlanning/TaskReady.vue';
 import TaskForm from '../templates/queryPlanning/TaskForm.vue';
 import TaskSelector from '../templates/queryPlanning/TaskSelector.vue';
 import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
@@ -114,6 +115,7 @@ const router = new VueRouter({
         auth: true
       }
     },
+    /*
     {
       path: '/tasks',
       name: 'tasks',
@@ -138,6 +140,7 @@ const router = new VueRouter({
         auth: true
       }
     },
+    */
     {
       path: '/user-hub',
       name: 'user-hub',
@@ -156,6 +159,10 @@ const router = new VueRouter({
         {
           path: '',
           component: Redirect,
+        },
+        {
+          path: 'ready',
+          component: TaskReady,
         },
         {
           path: 'description',

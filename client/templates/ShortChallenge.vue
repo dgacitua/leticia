@@ -37,6 +37,7 @@ export default {
   data() {
     return {
       stageOrder: [
+        { path: '/short-challenge/ready', query: { task: '' }},
         { path: '/short-challenge/description', query: { task: '' }},
         { path: '/short-challenge/taskform', query: { task: '', form: Constants.pretaskForm }},
         { path: '/short-challenge/query', query: { task: '', form: Constants.queryForm }},

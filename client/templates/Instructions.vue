@@ -14,7 +14,9 @@
     </b-row>
     <br>
     <b-row>
-      <b-button @click="nextStage" variant="success">Ir a la tarea</b-button>
+      <b-col class="text-right">
+        <b-button @click="nextStage" variant="success">Ir al desafío</b-button>
+      </b-col>
     </b-row>
   </b-container>
 </template>

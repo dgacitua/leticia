@@ -380,12 +380,13 @@ export default {
         { text: 'No, ya egresé', value: 'No' }
       ],
       hasDyslexia: [
+        { text: 'No', value: 'No' },
         { text: 'Si', value: 'Yes' },
-        { text: 'No', value: 'No' }
+        
       ],
       hasColorBlindness: [
-        { text: 'Si', value: 'Yes' },
-        { text: 'No', value: 'No' }
+        { text: 'No', value: 'No' },
+        { text: 'Si', value: 'Yes' }
       ],
       country: [
         { text: 'Chile', value: 'Chile' },

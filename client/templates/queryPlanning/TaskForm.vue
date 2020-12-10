@@ -1,27 +1,37 @@
 <template>
   <b-container>
-    <b-row>
-      <b-card :header="task.title" class="text-center">
-        <b-card-text>{{ task.description }}</b-card-text>
-      </b-card>
+    <b-row class="space-bottom">
+      <b-col>
+        <b-card :header="task.title" class="text-center">
+          <b-card-text>{{ task.description }}</b-card-text>
+        </b-card>
+      </b-col>
     </b-row>
     <br>
     <b-row class="space-bottom">
-      <div>Respecto a la tarea seleccionada, responde las siguientes preguntas:</div>
+      <div>Respecto a la tarea asignada, responde las siguientes preguntas:</div>
     </b-row>
     <b-row class="space-bottom">
       <b-col>
         <b-form id="taskform" @submit="onSubmit" class="full-width">
-          <b-row v-for="q in questions" :key="q.questionId"  class="zero-margin">
-            <b-row v-if="q.type==='likert'" :id="q.questionId" class="zero-margin">
-              <likertscale :props="q"></likertscale>
-            </b-row>
-            <b-row v-if="q.type==='paragraph'" :id="q.questionId" class="zero-margin">
-              <paragraph :props="q"></paragraph>
-            </b-row>
-            <b-row v-if="q.type==='multiquery'" :id="q.questionId" class="zero-margin">
-              <multiquery :props="q"></multiquery>
-            </b-row>
+          <b-row v-for="q in questions" :key="q.questionId" class="zero-margin">
+            <b-col>
+              <b-row v-if="q.type==='likert'" :id="q.questionId" class="zero-margin">
+                <b-col>
+                  <likertscale :props="q"></likertscale>
+                </b-col>
+              </b-row>
+              <b-row v-if="q.type==='paragraph'" :id="q.questionId" class="zero-margin">
+                <b-col>
+                  <paragraph :props="q"></paragraph>
+                </b-col>
+              </b-row>
+              <b-row v-if="q.type==='multiquery'" :id="q.questionId" class="zero-margin">
+                <b-col>
+                  <multiquery :props="q"></multiquery>
+                </b-col>
+              </b-row>
+            </b-col>
           </b-row>
           <br>
           <b-row>

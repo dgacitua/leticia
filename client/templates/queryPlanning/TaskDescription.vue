@@ -1,9 +1,11 @@
 <template>
   <div>
     <b-row>
-      <b-card :header="currentTask.title" class="text-center">
-        <b-card-text>{{ currentTask.description }}</b-card-text>
-      </b-card>
+      <b-col>
+        <b-card :header="currentTask.title" class="text-center">
+          <b-card-text>{{ currentTask.description }}</b-card-text>
+        </b-card>
+      </b-col>
     </b-row>
     <br>
     <b-row class="text-right">
