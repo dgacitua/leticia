@@ -3,13 +3,11 @@
 db.roles.insertMany([
   {
     "_id" : ObjectId("5efcf1932cc0301bfcf92050"),
-    "name" : "user",
-    "__v" : 0
+    "name" : "user"
   },
   {
     "_id" : ObjectId("5efcf1932cc0301bfcf92051"),
-    "name" : "admin",
-    "__v" : 0
+    "name" : "admin"
   }
 ]);
 
@@ -17,8 +15,7 @@ db.credentials.insertOne({
   "_id" : ObjectId("5f5fdd3dfc5f3248ee340e45"),
   "email" : "admin@admin.com",
   "password" : "$2a$08$niMSPaP4VeZAXitLIxhZIeo11I.W.XjU7rJ.zP/Wn5efhqqUsW49i",
-  "user" : ObjectId("5f5fdd3dfc5f3248ee340e44"),
-  "__v" : 0
+  "user" : ObjectId("5f5fdd3dfc5f3248ee340e44")
 });
 
 db.users.insertOne({
@@ -26,8 +23,7 @@ db.users.insertOne({
   "roles" : [ 
     ObjectId("5efcf1932cc0301bfcf92051")
   ],
-  "username" : "okuyucoxup",
-  "__v" : 1
+  "username" : "okuyucoxup"
 });
 
 db.forms.insertMany([
