@@ -4,6 +4,7 @@
       <!-- TODO put image -->
       <b-col>
         <h1>¡Bienvenido(a) a LeTiCiA!</h1>
+        <h5><i>tooL for Task diffiCulty Assessment</i></h5>
       </b-col>
     </b-row>
     <br>
