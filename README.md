@@ -8,12 +8,21 @@ This is LeTiCiA's main repository.
 
 1. Install latest LTS version for Node.js
 2. Download or clone this repository
-3. Copy `.env.example`, rename it as `.env` and customize Environment Variables (if needed)
-3. On LeTiCiA's repository root directory, run `npm install`, then run `npm run dev`
+3. On LeTiCiA's repository root directory, copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
+4. On root directory, run `npm install` and then run `npm run dev`
+
+#### Installing Node.js
+
+Run these commands for installing latest Node.js LTS on Ubuntu:
+
+```
+curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
 
 #### Installing Solr for development
 
-1. Solr requires Java 8 JDK or greater to run. Run the following commands to install Solr on Linux distributions:
+1. Solr requires Java 8 JDK or greater to run. Run the following commands to install Solr on Ubuntu:
 
         $ cd /tmp
         $ wget https://archive.apache.org/dist/lucene/solr/8.7.0/solr-8.7.0.tgz
