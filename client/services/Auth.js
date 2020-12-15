@@ -22,9 +22,16 @@ class AuthService {
   }
 
   simulatedLogin() {
-    let simulatedUser = '{"id":"test1234","username":"test1234","email":"test@test.org","roles":["ROLE_USER"],"accessToken":"test1234"}';
-    localStorage.setItem('leticia-user', simulatedUser);
-    return Promise.resolve(JSON.parse(simulatedUser));
+    let simulatedUser = {
+      id: 'test1234',
+      username: 'test1234',
+      email: 'test@test.org',
+      roles: [ 'ROLE_USER' ],
+      accessToken: 'test1234'
+    };
+
+    localStorage.setItem('leticia-user', JSON.stringify(simulatedUser));
+    return Promise.resolve(simulatedUser);
   }
 
   logout() {
