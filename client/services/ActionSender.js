@@ -51,6 +51,22 @@ class ActionSenderService {
     let message = {
       username: this.username,
       type: isLogin ? 'Login' : 'Logout',
+      ipAddress: '',
+      userAgent: userAgent,
+      device: `${parsedUserAgent.device.type} ${parsedUserAgent.device.vendor} ${parsedUserAgent.device.model}`,
+      operatingSystem: `${parsedUserAgent.os.name} ${parsedUserAgent.os.version}`,
+      browser: `${parsedUserAgent.browser.name} ${parsedUserAgent.browser.version}`,
+      clientTimestamp: Date.now(),
+      details: {}
+    };
+
+    console.log('UserLog', message);
+    return Axios.post(API_URL + '/userlog', message);
+
+    /*
+    let message = {
+      username: this.username,
+      type: isLogin ? 'Login' : 'Logout',
       source: 'UserLog',
       url: router.currentRoute.fullPath,
       clientTimestamp: Date.now(),
@@ -67,6 +83,7 @@ class ActionSenderService {
 
     console.log('UserLog', message);
     return Axios.post(API_URL + '/actions', message);
+    */
   }
 
   sendGenericAction(originalMsg) {

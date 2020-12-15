@@ -11,6 +11,7 @@ import participants from './routes/participants';
 import keystrokes from './routes/keystrokes';
 import sessionflows from './routes/sessionflows';
 import userdata from './routes/userdata';
+import userlog from './routes/userlog';
 
 const router = express.Router();
 
@@ -25,5 +26,6 @@ router.use('/participants', participants);
 router.use('/keystrokes', keystrokes);
 router.use('/flows', sessionflows);
 router.use('/userdata', userdata);
+router.use('/userlog', userlog);
 
 export default router;

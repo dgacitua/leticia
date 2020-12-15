@@ -29,10 +29,14 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(passport.initialize()); 
 
+// Proxy support
+// https://stackoverflow.com/a/14631683
+app.set('trust proxy', true);
+
 // CORS support
 app.use(cors());
 
-// Add routes
+// Add REST routes
 app.use('/v1', api1);
 
 // simple route

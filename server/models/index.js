@@ -15,6 +15,7 @@ import SearchTask from './SearchTask';
 import Credential from './Credential';
 import UserData from './UserData';
 import SessionFlow from './SessionFlows';
+import UserLog from './UserLog';
 
 const db = {};
 
@@ -34,6 +35,7 @@ db.searchtask = SearchTask;
 db.credential = Credential;
 db.userdata = UserData;
 db.sessionflow = SessionFlow;
+db.userlog = UserLog;
 
 db.ROLES = [ 'user', 'admin' ];
 
