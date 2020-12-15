@@ -9,6 +9,10 @@ export const frontendPort = process.env.FRONTEND_PORT || 3000;
 export const leticiaPort = process.env.REST_PORT || 3001;
 export const websocketPort = process.env.WEBSOCKET_PORT || 3002;
 
+export const solrHost = process.env.SOLR_HOST || 'localhost';
+export const solrPort = process.env.SOLR_PORT || 8983;
+export const solrCore = process.env.SOLR_CORE || 'leticia';
+
 export const mongoUrl = process.env.MONGODB_URL || 'Your MongoDB URI here';
 export const jwtKey = process.env.JWT_KEY || 'Your JWT key';
 export const googleClientId = process.env.GOOGLE_CLIENT_ID || '';
