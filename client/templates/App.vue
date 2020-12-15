@@ -9,7 +9,7 @@
 import Axios from 'axios';
 
 import * as Constants from '../services/Constants';
-import WebSocket from '../services/WebSocket';
+// import WebSocket from '../services/WebSocket';
 import EventBus from '../modules/eventBus';
 import Timer from '../services/Timer';
 

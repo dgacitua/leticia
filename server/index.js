@@ -53,5 +53,5 @@ echo.on('connection', (conn) => {
 const server = http.createServer();
 echo.installHandlers(server, { prefix: '/ws' });
 
-app.listen(port, () => console.log(`Backend REST API listening on port ${port}!`));
-server.listen(wsPort, '0.0.0.0', () => console.log(`Backend WebSocket API listening on port ${wsPort}!`));
+app.listen(port, '0.0.0.0', () => console.log(`Backend REST API listening on port ${port}!`));
+// server.listen(wsPort, '0.0.0.0', () => console.log(`Backend WebSocket API listening on port ${wsPort}!`));
