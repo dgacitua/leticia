@@ -1,7 +1,5 @@
 import Mongoose from 'mongoose';
 
-// TODO
-
 const userLogSchema = Mongoose.Schema({
   username: {
     type: String,
@@ -44,7 +42,7 @@ const userLogSchema = Mongoose.Schema({
     type: Object,
     required: false
   }
-}, { strict: false });
+});
 
 const UserLog = Mongoose.model('UserLog', userLogSchema);
 
