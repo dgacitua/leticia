@@ -12,6 +12,7 @@ import keystrokes from './routes/keystrokes';
 import sessionflows from './routes/sessionflows';
 import userdata from './routes/userdata';
 import userlog from './routes/userlog';
+import consent from './routes/consent';
 
 const router = express.Router();
 
@@ -27,5 +28,6 @@ router.use('/keystrokes', keystrokes);
 router.use('/flows', sessionflows);
 router.use('/userdata', userdata);
 router.use('/userlog', userlog);
+router.use('/consent', consent);
 
 export default router;

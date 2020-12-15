@@ -15,6 +15,6 @@ const userDataSchema = Mongoose.Schema({
   }
 });
 
-const UserData = Mongoose.model('UserData', userDataSchema);
+const UserData = Mongoose.model('UserData', userDataSchema, 'userdata');
 
 export default UserData;
