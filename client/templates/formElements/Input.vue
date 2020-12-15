@@ -22,6 +22,10 @@
 </template>
 
 <script>
+import ActionSender from '../../services/ActionSender';
+import ActionHandler from '../../trackers/ActionHandler';
+import KeystrokeHandler from '../../trackers/KeystrokeHandler';
+
 export default {
   name: 'input',
 
@@ -29,29 +33,28 @@ export default {
     'props'
   ],
 
+  data() {
+    return {
+      ksHandler: new KeystrokeHandler('FormElement'),
+      actionHandler: new ActionHandler('FormElement'),
+      sender: new ActionSender('FormElement')
+    }
+  },
+
   methods: {
-    // TODO Action Sender integration
-    focusTrack(evt) {
-      let message = {
-        type  : 'QueryFocus',
-        source: 'Window',
-        url   : window.document.URL,
-        clientTimestamp: Date.now(),
-        textboxName: evt.target.name
-      };
+    focus(evt) {
+      let act = this.actionHandler.focus(evt);
 
-      console.log('QueryFocus', message);
+      this.sender.sendGenericAction(act)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
     },
-    blurTrack(evt) {
-      let message = {
-        type  : 'QueryBlur',
-        source: 'Window',
-        url   : window.document.URL,
-        clientTimestamp: Date.now(),
-        textboxName: evt.target.name
-      };
+    blur(evt) {
+      let act = this.actionHandler.blur(evt);
 
-      console.log('QueryBlur', message);
+      this.sender.sendGenericAction(act)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
     }
   }
 }
