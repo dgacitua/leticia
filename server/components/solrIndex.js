@@ -1,7 +1,7 @@
 import Solr from 'solr-client';
 import Axios from 'axios';
 
-import { consoleLog, consoleError } from './utils';
+import { consoleLog, consoleError } from '../utils';
 
 let exampleDocument = {
   docId_s: 'doc1',
@@ -13,7 +13,9 @@ let exampleDocument = {
   url_s: 'www.myexample.com'
 };
 
+const DOCS_PER_PAGE = 10;
 
+// dgacitua: http://lbdremy.github.io/solr-node-client/
 class SolrIndex {
   constructor(options) {
     consoleLog('Connecting to Solr Index!');
@@ -45,11 +47,23 @@ class SolrIndex {
   }
 
   addOne(docObj) {
-    // TODO addOne
+    let docs = [ docObj ];
+
+    return new Promise((resolve, reject) => {
+      this.client.add(docs, (err, res) => {
+        if (err) { reject(err) }
+        else { resolve(res) }
+      });
+    });
   }
 
   addMany(docArray) {
-    // TODO addMany
+    return new Promise((resolve, reject) => {
+      this.client.add(docArray, (err, res) => {
+        if (err) { reject(err) }
+        else { resolve(res) }
+      });
+    });
   }
 
   deleteAll() {
@@ -58,26 +72,37 @@ class SolrIndex {
 
     return new Promise((resolve, reject) => {
       this.client.delete(field, query, (err, res) => {
-        if (err) {
-          consoleError('Error while deleting all on Solr Index!');
-          reject(err);
-        }
-        else {
-          consoleLog('All documents deleted on Solr Index!');
-          resolve(res);
-        }
+        if (err) { reject(err) }
+        else { resolve(res) }
       });
     });
   }
 
-  query(queryString) {
-    // TODO query
+  search(queryString, pageStart = 1) {
+    // dgacitua: IMPORTANT! Query strings must be URI encoded
+    let start = (pageStart - 1) * DOCS_PER_PAGE;
+    let searchQuery = `title_t:${queryString} OR body_t:${queryString} OR keywords_t:${queryString}`;
+    let hlQuery = encodeURI(`hl=on&hl.q=${queryString}&hl.fl=body_t&hl.snippets=3&hl.simple.pre=<em class="hl">&hl.simple.post=</em>&hl.fragmenter=regex&hl.regex.slop=0.2`);
+
+    let query = this.client.createQuery()
+      .q(searchQuery)
+      //.q({ title_t: queryString, body_t: queryString, keywords_t: queryString })
+      .set(hlQuery)
+      .start(start)
+      .rows(DOCS_PER_PAGE);
+
+    return new Promise((resolve, reject) => {
+      this.client.search(query, (err, res) => {
+        if (err) { reject(err) }
+        else { resolve(res) }
+      });
+    }); 
   }
 
-  changeLocale(localeCode, addOperation = true) {
+  changeLocale(localeCode, addOperation) {
     let solrUrl = `http://${this.options.host}:${this.options.port}/solr/${this.options.core}/schema/fields?wt=json`;
     let locale = `text_${localeCode}`;
-    let operation = addOperation ? 'add-field' : 'replace-field';
+    let operation = (!!addOperation) ? 'add-field' : 'replace-field';
 
     let query = {
       [operation]: [
@@ -111,14 +136,8 @@ class SolrIndex {
 
     return new Promise((resolve, reject) => {
       Axios.post(solrUrl, query)
-        .then((res) => {
-          consoleLog('Changed locale on Solr Index!', locale);
-          resolve(res.data);
-        })
-        .catch((err) => {
-          consoleError('Error while changing locale on Solr Index!');
-          reject(err);
-        });
+        .then((res) => { resolve(res.data) })
+        .catch((err) => { reject(err) });
     });
   }
 }

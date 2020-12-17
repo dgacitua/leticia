@@ -13,6 +13,7 @@ import sessionflows from './routes/sessionflows';
 import userdata from './routes/userdata';
 import userlog from './routes/userlog';
 import consent from './routes/consent';
+import search from './routes/search';
 
 const router = express.Router();
 
@@ -29,5 +30,6 @@ router.use('/flows', sessionflows);
 router.use('/userdata', userdata);
 router.use('/userlog', userlog);
 router.use('/consent', consent);
+router.use('/search', search);
 
 export default router;

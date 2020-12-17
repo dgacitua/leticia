@@ -13,7 +13,6 @@ import './db';
 import * as Constants from './constants';
 
 import api1 from './api1';
-import SolrIndex from './solrIndex';
 import { redirectInteraction } from './websocketRouter';
 
 const app = express();
@@ -24,16 +23,6 @@ const echo = SockJS.createServer();
 let corsOptions = {
   origin: Constants.isProductionMode ? `${Constants.corsUrl}` : 'http://localhost:3000'
 };
-
-let solrOptions = {
-  host: Constants.solrHost,
-  port: Constants.solrPort,
-  core: Constants.solrCore
-};
-
-const index = new SolrIndex(solrOptions);
-// index.ping();
-// index.changeLocale('es');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
