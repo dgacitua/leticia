@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 const demographicSchema = Mongoose.Schema({
   username: {
     type: String,
@@ -23,6 +25,6 @@ const demographicSchema = Mongoose.Schema({
   }
 }, { strict: false });
 
-const Demographic = Mongoose.model('Demographic', demographicSchema);
+const Demographic = dataDb.model('Demographic', demographicSchema);
 
 export default Demographic;

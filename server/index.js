@@ -9,10 +9,11 @@ import cookieParser from 'cookie-parser';
 import SockJS from 'sockjs';
 import passport from 'passport';
 
-import './db';
+import { dataDb, userDb } from './db';
 import * as Constants from './constants';
 
 import api1 from './api1';
+import { consoleLog, consoleError } from './utils';
 import { redirectInteraction } from './websocketRouter';
 
 const app = express();
@@ -51,7 +52,7 @@ echo.on('connection', (conn) => {
 });
 
 const server = http.createServer();
-echo.installHandlers(server, { prefix: '/ws' });
+//echo.installHandlers(server, { prefix: '/ws' });
 
-app.listen(port, '0.0.0.0', () => console.log(`Backend REST API listening on port ${port}!`));
-// server.listen(wsPort, '0.0.0.0', () => console.log(`Backend WebSocket API listening on port ${wsPort}!`));
+app.listen(port, '0.0.0.0', () => consoleLog(`Backend REST API listening on port ${port}!`));
+// server.listen(wsPort, '0.0.0.0', () => consoleLog(`Backend WebSocket API listening on port ${wsPort}!`));

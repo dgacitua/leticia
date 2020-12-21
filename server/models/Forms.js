@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 const formSchema = Mongoose.Schema({
   formId: {
     type: String,
@@ -11,6 +13,6 @@ const formSchema = Mongoose.Schema({
   }
 });
 
-const Form = Mongoose.model('Form', formSchema);
+const Form = dataDb.model('Form', formSchema);
 
 export default Form;

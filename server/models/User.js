@@ -1,6 +1,8 @@
 // Adapted from https://bezkoder.com/node-js-mongodb-auth-jwt/
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 const userSchema = Mongoose.Schema({
   username: {
     type: String,
@@ -14,6 +16,6 @@ const userSchema = Mongoose.Schema({
   ]
 });
 
-const User = Mongoose.model('User', userSchema);
+const User = dataDb.model('User', userSchema);
 
 export default User;

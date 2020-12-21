@@ -13,7 +13,8 @@ export const solrHost = process.env.SOLR_HOST || 'localhost';
 export const solrPort = process.env.SOLR_PORT || 8983;
 export const solrCore = process.env.SOLR_CORE || 'leticia';
 
-export const mongoUrl = process.env.MONGODB_URL || 'Your MongoDB URI here';
+export const mongoDataUrl = process.env.MONGODB_DATA_URL || 'Your MongoDB URI here';
+export const mongoUserUrl = process.env.MONGODB_USER_URL || 'Your MongoDB URI here';
 export const jwtKey = process.env.JWT_KEY || 'Your JWT key';
 export const googleClientId = process.env.GOOGLE_CLIENT_ID || '';
 export const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET || '';

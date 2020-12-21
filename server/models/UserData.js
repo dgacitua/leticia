@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 const userDataSchema = Mongoose.Schema({
   username: {
     type: String,
@@ -15,6 +17,6 @@ const userDataSchema = Mongoose.Schema({
   }
 });
 
-const UserData = Mongoose.model('UserData', userDataSchema, 'userdata');
+const UserData = dataDb.model('UserData', userDataSchema, 'userdata');
 
 export default UserData;

@@ -1,47 +1,38 @@
 import Mongoose from 'mongoose';
-import { mongoUrl } from './constants';
 
-import db from './models/index';
+import { consoleLog, consoleError } from './utils';
+import { mongoDataUrl, mongoUserUrl } from './constants';
 
-const Role = db.role;
-
-Mongoose.connect(mongoUrl, {
+const dataDb = Mongoose.createConnection(mongoDataUrl, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
   useFindAndModify: false
-})
+});
+
+const userDb = Mongoose.createConnection(mongoUserUrl, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+});
+
+dataDb
   .then(() => {
-    console.log('Successfully connect to MongoDB!');
-    initial();
+    consoleLog('Successfully connect to Data database in MongoDB!');
   })
   .catch((err) => {
-    console.error('MongoDB connection error', err);
+    consoleError('MongoDB connection error', err);
     process.exit();
   });
 
-const initial = () => {
-  Role.estimatedDocumentCount((err, count) => {
-    if (!err && count === 0) {
-      new Role({
-        name: 'user'
-      }).save((err) => {
-        if (err) {
-          console.error('error', err);
-        }
-
-        console.log("Added 'user' to roles collection");
-      });
-
-      new Role({
-        name: 'admin'
-      }).save((err) => {
-        if (err) {
-          console.error('error', err);
-        }
-
-        console.log("Added 'admin' to roles collection");
-      });
-    }
+userDb
+  .then(() => {
+    consoleLog('Successfully connect to User database in MongoDB!');
+  })
+  .catch((err) => {
+    consoleError('MongoDB connection error', err);
+    process.exit();
   });
-}
+
+export { dataDb, userDb };

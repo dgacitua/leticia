@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 const keystrokeSchema = Mongoose.Schema({
   username: {
     type: String,
@@ -54,6 +56,6 @@ const keystrokeSchema = Mongoose.Schema({
   }
 });
 
-const Keystroke = Mongoose.model('Keystroke', keystrokeSchema);
+const Keystroke = dataDb.model('Keystroke', keystrokeSchema);
 
 export default Keystroke;

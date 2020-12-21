@@ -1,6 +1,9 @@
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 // DEPRECATED
+/*
 const participantSchema = Mongoose.Schema({
   userId: {
     type: String,
@@ -36,6 +39,7 @@ const participantSchema = Mongoose.Schema({
   }
 });
 
-const Participant = Mongoose.model('participant', participantSchema);
+const Participant = userDb.model('participant', participantSchema);
 
 export default Participant;
+*/

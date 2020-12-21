@@ -3,10 +3,11 @@ import UserAgent from 'useragent';
 
 import { consoleError } from '../utils';
 
-import Participant from '../models/Participant';
+//import Participant from '../models/Participant';
 
 const router = express.Router();
 
+/*
 const storeParticipant = async (request, response, next) => {
   try {
     let participant = request.body;
@@ -57,3 +58,4 @@ router.post('/', storeParticipant);
 router.put('/:userId', updateParticipant);
 
 export default router;
+*/

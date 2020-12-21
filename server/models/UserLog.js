@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 const userLogSchema = Mongoose.Schema({
   username: {
     type: String,
@@ -44,6 +46,6 @@ const userLogSchema = Mongoose.Schema({
   }
 });
 
-const UserLog = Mongoose.model('UserLog', userLogSchema);
+const UserLog = dataDb.model('UserLog', userLogSchema);
 
 export default UserLog;

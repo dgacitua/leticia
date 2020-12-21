@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 const questionSchema = Mongoose.Schema({
   questionId: {
     type: String,
@@ -15,6 +17,6 @@ const questionSchema = Mongoose.Schema({
   },
 }, { strict: false });
 
-const Question = Mongoose.model('Question', questionSchema);
+const Question = dataDb.model('Question', questionSchema);
 
 export default Question;

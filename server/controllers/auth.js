@@ -24,7 +24,7 @@ export const register = async (req, res) => {
     let credential = new Credential({
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 8),
-      user: user
+      username: user.username
     });
   
     await user.save();
@@ -180,7 +180,7 @@ export const googleLogin = async (req, res) => {
       let credential = new Credential({
         email: oauthUser.email,
         provider: oauthUser.provider,
-        user: user
+        username: user.username
       });
     
       await user.save();
@@ -310,7 +310,7 @@ export const facebookLogin = async (req, res) => {
       let credential = new Credential({
         email: oauthUser.email,
         provider: oauthUser.provider,
-        user: user
+        username: user.username
       });
     
       await user.save();

@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 const actionSchema = Mongoose.Schema({
   username: {
     type: String,
@@ -33,6 +35,6 @@ const actionSchema = Mongoose.Schema({
   }
 }, { strict: false });
 
-const Action = Mongoose.model('Action', actionSchema);
+const Action = dataDb.model('Action', actionSchema);
 
 export default Action;

@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 const searchTaskSchema = Mongoose.Schema({
   searchTaskId: {
     type: String,
@@ -15,6 +17,6 @@ const searchTaskSchema = Mongoose.Schema({
   }
 });
 
-const SearchTask = Mongoose.model('Task', searchTaskSchema);
+const SearchTask = dataDb.model('Task', searchTaskSchema);
 
 export default SearchTask;

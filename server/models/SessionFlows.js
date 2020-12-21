@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 const sessionFlowSchema = Mongoose.Schema({
   sessionFlowId: {
     type: String,
@@ -12,6 +14,6 @@ const sessionFlowSchema = Mongoose.Schema({
   }
 });
 
-const SessionFlow = Mongoose.model('SessionFlow', sessionFlowSchema);
+const SessionFlow = dataDb.model('SessionFlow', sessionFlowSchema);
 
 export default SessionFlow;

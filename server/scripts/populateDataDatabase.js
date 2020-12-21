@@ -1,4 +1,4 @@
-// $ mongo leticia-pilot populateDatabase.js
+// $ mongo leticia-data populateDataDatabase.js
 
 db.roles.insertMany([
   {
@@ -11,19 +11,12 @@ db.roles.insertMany([
   }
 ]);
 
-db.credentials.insertOne({
-  "_id" : ObjectId("5f5fdd3dfc5f3248ee340e45"),
-  "email" : "admin@admin.com",
-  "password" : "$2a$08$niMSPaP4VeZAXitLIxhZIeo11I.W.XjU7rJ.zP/Wn5efhqqUsW49i",
-  "user" : ObjectId("5f5fdd3dfc5f3248ee340e44")
-});
-
 db.users.insertOne({
   "_id" : ObjectId("5f5fdd3dfc5f3248ee340e44"),
   "roles" : [ 
     ObjectId("5efcf1932cc0301bfcf92051")
   ],
-  "username" : "okuyucoxup"
+  "username" : "Admin"
 });
 
 db.forms.insertMany([

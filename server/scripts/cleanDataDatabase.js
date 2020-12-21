@@ -1,15 +1,16 @@
-// $ mongo leticia-pilot cleanDatabase.js
+// $ mongo leticia-data cleanDataDatabase.js
 
 db.actions.drop();
 db.answers.drop();
-db.credentials.drop();
 db.demographics.drop();
 db.forms.drop();
 db.keystrokes.drop();
 db.mouseactions.drop();
 db.questions.drop();
 db.roles.drop();
+db.scrollactions.drop();
+db.searchtasks.drop();
 db.sessionflows.drop();
-db.tasks.drop();
 db.users.drop();
-db.userdatas.drop();
+db.userdata.drop();
+db.userlogs.drop();

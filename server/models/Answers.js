@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 const answerSchema = Mongoose.Schema({
   username: {
     type: String,
@@ -27,6 +29,6 @@ const answerSchema = Mongoose.Schema({
   }
 }, { strict: false });
 
-const Answer = Mongoose.model('Answer', answerSchema);
+const Answer = dataDb.model('Answer', answerSchema);
 
 export default Answer;

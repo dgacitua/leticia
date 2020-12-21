@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 const scrollActionSchema = Mongoose.Schema({
   username: {
     type: String,
@@ -53,6 +55,6 @@ const scrollActionSchema = Mongoose.Schema({
   }
 });
 
-const ScrollAction = Mongoose.model('ScrollAction', scrollActionSchema);
+const ScrollAction = dataDb.model('ScrollAction', scrollActionSchema);
 
 export default ScrollAction;

@@ -1,6 +1,8 @@
 // Adapted from https://bezkoder.com/node-js-mongodb-auth-jwt/
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 import User from './User';
 import Role from './Role';
 import Actions from './Actions';
@@ -21,6 +23,8 @@ import Consent from './Consent';
 const db = {};
 
 db.mongoose = Mongoose;
+db.dataDb = dataDb;
+db.userDb = userDb;
 
 db.user = User;
 db.role = Role;
@@ -40,5 +44,33 @@ db.userlog = UserLog;
 db.consent = Consent;
 
 db.ROLES = [ 'user', 'admin' ];
+
+const initial = () => {
+  Role.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      new Role({
+        name: 'user'
+      }).save((err) => {
+        if (err) {
+          console.error('error', err);
+        }
+
+        console.log("Added 'user' to roles collection");
+      });
+
+      new Role({
+        name: 'admin'
+      }).save((err) => {
+        if (err) {
+          console.error('error', err);
+        }
+
+        console.log("Added 'admin' to roles collection");
+      });
+    }
+  });
+};
+
+initial();
 
 export default db;

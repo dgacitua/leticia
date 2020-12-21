@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 const mouseActionSchema = Mongoose.Schema({
   username: {
     type: String,
@@ -61,6 +63,6 @@ const mouseActionSchema = Mongoose.Schema({
   }
 });
 
-const MouseAction = Mongoose.model('MouseAction', mouseActionSchema);
+const MouseAction = dataDb.model('MouseAction', mouseActionSchema);
 
 export default MouseAction;

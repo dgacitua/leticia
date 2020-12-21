@@ -1,5 +1,7 @@
 import Mongoose from 'mongoose';
 
+import { dataDb, userDb } from '../db';
+
 const consentSchema = Mongoose.Schema({
   name: {
     type: String,
@@ -24,6 +26,6 @@ const consentSchema = Mongoose.Schema({
   }
 });
 
-const Consent = Mongoose.model('Consent', consentSchema);
+const Consent = userDb.model('Consent', consentSchema);
 
 export default Consent;
