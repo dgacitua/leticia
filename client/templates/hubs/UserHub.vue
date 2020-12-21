@@ -31,7 +31,7 @@ export default {
   },
 
   methods: {
-    resumeStudy() {
+    resumeStudy(evt) {
       // Resume stage from challenge
       if (this.$store.getters.flowIndex >= 0) {
         console.log('Resuming Challenge!');

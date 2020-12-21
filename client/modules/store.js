@@ -26,7 +26,8 @@ const store = new Vuex.Store({
     tasks: [],
     stages: [],
     currentRoute: {},
-    sessionFlow: {}
+    sessionFlow: {},
+    hasAcceptedConsent: false
   },
   getters: {
     userData: (state) => {
@@ -38,7 +39,8 @@ const store = new Vuex.Store({
         tasks: state.tasks,
         stages: state.stages,
         stageIndex: state.stageIndex,
-        flowIndex: state.flowIndex
+        flowIndex: state.flowIndex,
+        hasAcceptedConsent: state.hasAcceptedConsent
       };
     },
     timer: (state) => {
@@ -101,6 +103,9 @@ const store = new Vuex.Store({
       let taskIdx = findIndexInArray(state.tasks, (t) => { return t.searchTaskId === payload.id });
       state.tasks[taskIdx].completed = true;
     },
+    setAcceptedConsent(state, payload) {
+      state.hasAcceptedConsent = payload.state;
+    },
     setUserData(state, payload) {
       state.timerTime = payload.data.timerTime;
       state.timerDuration = payload.data.timerDuration;
@@ -110,6 +115,7 @@ const store = new Vuex.Store({
       state.tasks = payload.data.tasks;
       state.stages = payload.data.stages;
       state.currentRoute = payload.data.currentRoute;
+      state.hasAcceptedConsent = payload.data.hasAcceptedConsent;
     },
     setSessionFlow(state, payload) {
       state.sessionFlow = payload.sessionFlow;
@@ -124,6 +130,7 @@ const store = new Vuex.Store({
       state.stages = [];
       state.currentRoute = {};
       state.sessionFlow = {};
+      state.hasAcceptedConsent = false;
     }
   },
   actions: {

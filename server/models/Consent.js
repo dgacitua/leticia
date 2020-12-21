@@ -11,6 +11,10 @@ const consentSchema = Mongoose.Schema({
     type: String,
     required: true
   },
+  username: {
+    type: String,
+    required: true
+  },
   clientTimestamp: {
     type: Number,
     required: true

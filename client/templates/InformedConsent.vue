@@ -100,20 +100,23 @@ export default {
     acceptConsent(evt) {
       evt.preventDefault();
 
-      let message = {
-        name: this.form.name || '',
-        email: this.form.email || '',
-        clientTimestamp: Date.now()
-      };
+      if (this.loggedIn) {
+        let message = {
+          name: this.form.name || '',
+          email: this.form.email || '',
+          username: this.currentUser.username,
+          clientTimestamp: Date.now()
+        };
 
-      Axios.post(API_URL + '/consent', message)
-        .then((res) => {
-          // dgacitua: https://stackoverflow.com/a/57183854
-          this.$router.replace({ path: 'oauth' });
-        })
-        .catch((err) => {
-          alert('Ha ocurrido un error al aceptar el Consentimiento Informado');
-        });
+        Axios.post(API_URL + '/consent', message)
+          .then((res) => {
+            // dgacitua: https://stackoverflow.com/a/57183854
+            this.$router.replace({ path: 'user-hub' });
+          })
+          .catch((err) => {
+            alert('Ha ocurrido un error al aceptar el Consentimiento Informado');
+          });
+      }
     }
   }
 }

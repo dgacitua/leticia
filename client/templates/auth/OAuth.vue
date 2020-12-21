@@ -52,7 +52,12 @@ export default {
 
   mounted() {
     if (this.loggedIn) {
-      this.$router.replace('/user-hub');
+      if (this.acceptedConsent) {
+        this.$router.replace('/user-hub');
+      }
+      else {
+        this.$router.replace('consent');
+      }
     }
   },
 

@@ -12,7 +12,7 @@
       <b-col>
         <b-row align-h="center">
           <b-button-group>
-            <b-button to="consent" variant="info">Participar en el estudio</b-button>
+            <b-button to="oauth" variant="info">Participar en el estudio</b-button>
           </b-button-group>
         </b-row>
         <br>
@@ -47,6 +47,9 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn;
+    },
+    acceptedConsent() {
+      return this.$store.state.hasAcceptedConsent;
     },
     currentUser() {
       return this.$store.state.auth.user;
@@ -83,10 +86,15 @@ export default {
 
     if (this.currentUser) {
       if (this.isAdmin) {
-        this.$router.push('/admin-hub');
+        this.$router.replace('/admin-hub');
       }
       else {
-        this.$router.push('/user-hub');
+        if (this.acceptedConsent) {
+          this.$router.replace('/user-hub');
+        }
+        else {
+          this.$router.replace('consent');
+        }
       }
     }
   }
