@@ -1,10 +1,19 @@
 <template>
   <b-container id="home" class="full-height">
     <b-row class="text-center">
-      <!-- TODO put image -->
       <b-col>
-        <h1>¡Bienvenido(a) a LeTiCiA!</h1>
-        <h5><i>tooL for Task diffiCulty Assessment</i></h5>
+        <b-carousel
+          id="carousel-header"
+          background="#ababab"
+          img-width="1024"
+          img-height="480"
+          style="text-shadow: 1px 1px 2px #333;"
+        >
+          <b-carousel-slide :img-src="headerImage">
+            <h1>¡Bienvenido(a) a LeTiCiA!</h1>
+            <h5><i>tooL for Task diffiCulty Assessment</i></h5>
+          </b-carousel-slide>
+        </b-carousel>
       </b-col>
     </b-row>
     <br>
@@ -41,8 +50,16 @@
 <script>
 import ActionSender from '../services/ActionSender';
 
+import HeaderImage from '../assets-client/image01.jpg';
+
 export default {
   name: 'home',
+
+  data() {
+    return {
+      headerImage: HeaderImage
+    }
+  },
 
   computed: {
     loggedIn() {

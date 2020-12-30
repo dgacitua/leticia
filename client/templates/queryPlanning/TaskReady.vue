@@ -1,8 +1,7 @@
 <template>
   <b-container>
     <b-row>
-      <!-- TODO replace placekitten -->
-      <b-card img-src="https://placekitten.com/300/300" img-right>
+      <b-card :img-src="image" img-right>
         <b-card-text>A continuación se te presentará una nueva tarea de búsqueda. Léela con atención y realiza las actividades indicadas. Cuando estés listo(a), presiona Siguiente para continuar.</b-card-text>
       </b-card>
     </b-row>
@@ -18,7 +17,15 @@
 <script>
 import EventBus from '../../modules/eventBus';
 
+import Image from '../../assets-client/image03.jpg';
+
 export default {
+  data() {
+    return {
+      image: Image
+    }
+  },
+
   methods: {
     nextStage(evt) {
       evt.preventDefault();

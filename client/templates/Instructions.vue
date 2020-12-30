@@ -5,8 +5,7 @@
     </b-row>
     <br>
     <b-row>
-      <!-- TODO replace placekitten -->
-      <b-card img-src="https://placekitten.com/300/300" img-alt="Card image" img-right>
+      <b-card :img-src="image" img-right>
         <b-card-text>
           {{ instructions }}
         </b-card-text>
@@ -25,12 +24,15 @@
 import ActionSender from '../services/ActionSender';
 import EventBus from '../modules/eventBus';
 
+import Image from '../assets-client/image02.jpg';
+
 export default {
   name: 'instructions',
 
   data() {
     return {
-      instructions: ''
+      instructions: '',
+      image: Image
     }
   },
 

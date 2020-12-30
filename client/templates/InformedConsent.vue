@@ -8,7 +8,7 @@
     </b-row>
     <br>
     <b-row>
-      TODO Consentimiento Informado (PDF)
+      <b-embed type="iframe" :src="consentDocument"></b-embed>
     </b-row>
     <br>
     <b-row>
@@ -48,25 +48,39 @@
                 </div>
                 <br>
               </div>
+              <!-- Acepto -->
+              <div class="zero-margin">
+                <b-form-checkbox
+                  id="checkbox-accept"
+                  name="checkbox-accept"
+                  v-model="form.accept"
+                  required
+                  :value="true"
+                  :unchecked-value="false"
+                >
+                  <b>Acepto participar en el estudio</b>
+                  <span class="form-asterisk">*</span>
+                </b-form-checkbox>
+              </div>
             </b-col>
           </b-row>
           <br>
           <!-- Buttons -->
           <b-row>
             <b-col class="text-center">
-              <b-button type="submit" variant="success">Acepto participar en el estudio</b-button>
+              <b-button type="submit" variant="success">Continuar</b-button>
             </b-col>
             <b-col class="text-center">
-              <b-button to="/" variant="danger">No acepto participar en el estudio</b-button>
+              <b-button to="/" variant="danger">Volver</b-button>
             </b-col>
           </b-row>
         </b-form>
       </b-col>
     </b-row>
-    
+    <!--
     <hr>
     <pre>{{ form }}</pre>
-    
+    -->
   </b-container>
 </template>
 
@@ -74,6 +88,8 @@
 import Axios from 'axios';
 
 import * as Constants from '../services/Constants';
+
+import ConsentDocument from '../assets-client/consent.pdf';
 
 const API_URL = `${Constants.backendApiUrl}`;
 
@@ -83,7 +99,8 @@ export default {
   data() {
     return {
       form: {},
-      error: {}
+      error: {},
+      consentDocument: ConsentDocument
     }
   },
 
