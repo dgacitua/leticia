@@ -12,8 +12,8 @@
         v-model="props.answer"
         :required="props.required"
         :name="`paragraph-${props.questionId}`"
-        @focus="focusTrack"
-        @blur="blurTrack"
+        @focus="focus"
+        @blur="blur"
         class="paragraph-box"
         rows="5">
       </b-form-textarea>

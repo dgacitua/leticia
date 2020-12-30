@@ -12,8 +12,8 @@
         v-model="props.answer"
         :required="props.required"
         :name="`input-${props.questionId}`"
-        @focus="focusTrack"
-        @blur="blurTrack"
+        @focus="focus"
+        @blur="blur"
         class="input-box">
       </b-form-input>
     </div>
