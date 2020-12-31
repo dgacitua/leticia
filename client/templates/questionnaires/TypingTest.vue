@@ -3,7 +3,7 @@
     <b-row>
       <div><h1>Test de Escritura</h1><div>
       <div>
-        <p>Copia cada extracto de texto en el campo de entrada.<br>
+        <p>Tipea cada extracto de texto en el campo de entrada tal cual como está escrito.<br>
         Presiona Enter o Siguiente para continuar con el siguiente texto.<br>
         Presiona Finalizar para terminar la actividad.</p>
       </div>
@@ -23,6 +23,7 @@
           @keydown="keydown"
           @keyup="keyup"
           @keydown.enter="nextSample"
+          @paste.prevent
           v-model="response[sampleIndex]"
           type="text"
           required
@@ -49,6 +50,8 @@
 
 <script>
 import Mark from 'mark.js';
+import StringSimilarity from 'string-similarity';   // Based on Sørensen–Dice coefficient
+// import { distance } from 'fastest-levenshtein';  // Based on Levenshtein distance
 
 import TypingTestSamples from '../../assets-client/typingTestSamples-es.json';
 
@@ -82,8 +85,15 @@ export default {
     currentSample() {
       return this.samples[this.sampleIndex];
     },
+    currentResponse() {
+      return this.response[this.sampleIndex] || '';
+    },
     isValidInput() {
-      return (!!this.response[this.sampleIndex]) && (this.response[this.sampleIndex].length > 0);
+      let cond1 = !!this.currentResponse;
+      let cond2 = this.currentResponse.length > 0;
+      let cond3 = StringSimilarity.compareTwoStrings(this.currentSample.text, this.currentResponse) >= 0.75;
+      // let cond3 = distance(this.currentSample.text, this.currentResponse) <= (this.currentSample.text.length * 0.75);
+      return cond1 && cond2 && cond3;
     },
     isLastSlide() {
       return this.sampleIndex >= (this.samples.length - 1);
