@@ -25,11 +25,13 @@
           </b-button-group>
         </b-row>
         <br>
+        <!--
         <b-row align-h="center">
           <b-button-group>
             <b-button to="admin-hub" variant="warning">Panel del Administrador</b-button>
           </b-button-group>
         </b-row>
+        -->
       </b-col>
     </b-row>
     <br>
