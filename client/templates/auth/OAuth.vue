@@ -6,15 +6,11 @@
           <b-row align-h="center">
             <b-button-group block vertical>
               <b-button block variant="danger" @click="googleLogin">
-                <b-icon>
-                  <font-awesome-icon :icon="['fab', 'google']" />
-                </b-icon>
+                <font-awesome-icon :icon="['fab', 'google']"></font-awesome-icon>
                 Registrarse con Google
               </b-button>
               <b-button block variant="primary" @click="facebookLogin">
-                <b-icon>
-                  <font-awesome-icon :icon="['fab', 'facebook']" />
-                </b-icon>
+                <font-awesome-icon :icon="['fab', 'facebook']"></font-awesome-icon>
                 Registrarse con Facebook
               </b-button>
             </b-button-group>
