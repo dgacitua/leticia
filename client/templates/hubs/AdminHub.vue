@@ -27,7 +27,12 @@
           <h2>Etapas Estudio Extendido</h2>
         </b-row>
         <b-row>
-          TODO
+          <b-button-group vertical>
+            <b-button @click="simulateLogin">Simular Login</b-button>
+            <b-button to="/extended-challenge/search">Búsqueda</b-button>
+            <b-button to="extended-challenge">Desafío Extendido</b-button>
+            <b-button to="consent">Experimento Extendido</b-button>
+          </b-button-group>
         </b-row>
       </b-col>
     </b-row>

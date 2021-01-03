@@ -18,14 +18,18 @@ import Instructions from '../templates/Instructions.vue';
 import Login from '../templates/auth/Login.vue';
 import Register from '../templates/auth/Register.vue';
 import OAuth from '../templates/auth/OAuth.vue';
-import Redirect from '../templates/queryPlanning/Redirect.vue';
+import Redirect1 from '../templates/queryPlanning/Redirect.vue';
 import TaskDescription from '../templates/queryPlanning/TaskDescription.vue';
 import TaskReady from '../templates/queryPlanning/TaskReady.vue';
 import TaskForm from '../templates/queryPlanning/TaskForm.vue';
-import TaskSelector from '../templates/queryPlanning/TaskSelector.vue';
+//import TaskSelector from '../templates/queryPlanning/TaskSelector.vue';
 import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
+import Search from "../templates/Search.vue";
+import Redirect2 from '../templates/search/Redirect.vue';
+import QueryBox from "../templates/search/QueryBox.vue";
 import Profile from '../templates/Profile.vue';
 import ShortChallenge from '../templates/ShortChallenge.vue';
+import ExtendedChallenge from '../templates/ExtendedChallenge.vue';
 import UserHub from '../templates/hubs/UserHub.vue';
 import AdminHub from '../templates/hubs/AdminHub.vue';
 import End from '../templates/End.vue';
@@ -115,32 +119,6 @@ const router = new VueRouter({
         auth: true
       }
     },
-    /*
-    {
-      path: '/tasks',
-      name: 'tasks',
-      component: TaskSelector,
-      meta: {
-        auth: true
-      }
-    },
-    {
-      path: '/taskform',
-      name: 'taskform',
-      component: TaskForm,
-      meta: {
-        auth: true
-      }
-    },
-    {
-      path: '/query',
-      name: 'query',
-      component: QueryWriter,
-      meta: {
-        auth: true
-      }
-    },
-    */
     {
       path: '/user-hub',
       name: 'user-hub',
@@ -158,7 +136,7 @@ const router = new VueRouter({
       children: [
         {
           path: '',
-          component: Redirect,
+          component: Redirect1,
         },
         {
           path: 'ready',
@@ -176,6 +154,46 @@ const router = new VueRouter({
           path: 'query',
           component: QueryWriter,
         }
+      ]
+    },
+    {
+      path: '/extended-challenge',
+      component: ExtendedChallenge,
+      meta: {
+        auth: false
+      },
+      children: [
+        {
+          path: '',
+          component: Redirect2,
+        },
+        {
+          path: 'search',
+          component: Search,
+          children: [
+            {
+              path: '',
+              component: QueryBox
+            }
+          ]
+        },
+        /*{
+          path: 'ready',
+          component: TaskReady,
+        },
+        {
+          path: 'description',
+          component: TaskDescription,
+        },
+        {
+          path: 'taskform',
+          component: TaskForm,
+        },
+        {
+          path: 'query',
+          component: QueryWriter,
+        }
+        */
       ]
     },
     {
