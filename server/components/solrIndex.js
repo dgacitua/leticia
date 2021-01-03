@@ -93,8 +93,42 @@ class SolrIndex {
 
     return new Promise((resolve, reject) => {
       this.client.search(query, (err, res) => {
-        if (err) { reject(err) }
-        else { resolve(res) }
+        if (err) { 
+          reject(err);
+        }
+        else {
+          let finalResponse = {};
+          let respDocs = [];
+
+          let searchResponse = res;
+          let searchStart = searchResponse.response.start;
+          let searchNum = searchResponse.response.numFound;
+          let searchDocs = searchResponse.response.docs;
+          let searchHl = searchResponse.highlighting;
+
+          searchDocs.forEach((doc) => {
+            let docId = doc.id;
+            let docObj = doc; // TODO: Documents.findOne({_id: docId});
+
+            docObj.searchSnippet = '';
+
+            if (searchHl[docId] && searchHl[docId].body_t) {
+              searchHl[docId].body_t.forEach((snip, idx, arr) => {
+                docObj.searchSnippet += snip;
+                if (idx < arr.length-1) docObj.searchSnippet += ' ... ';
+              });
+            }
+            
+
+            respDocs.push(docObj);
+          });
+
+          finalResponse.numFound = searchNum;
+          finalResponse.start = searchStart;
+          finalResponse.docs = respDocs;
+
+          resolve(finalResponse);
+        }
       });
     }); 
   }
