@@ -1,10 +1,135 @@
 <template>
-  <h1>Query Box</h1>
+  <b-container>
+    <br>
+    <div id="full-search" v-if="displayFullSearch">
+      <b-row class="text-center" align-h="center">
+        <b-col>
+          <b-img fluid :src="logo"></b-img>
+        </b-col>
+      </b-row>
+      <br>
+      <b-row class="text-center" align-h="center">
+        <b-col cols="10">
+          <b-input-group size="lg">
+            <!-- TODO Add trackers -->
+            <b-form-input id="query-box" v-model="query" @keydown.enter="searchQuery"></b-form-input>
+            <b-button variant="success" @click="searchQuery">
+              <font-awesome-icon :icon="['fas', 'search']"></font-awesome-icon>
+              Buscar
+            </b-button>
+          </b-input-group>
+        </b-col>
+      </b-row>
+    </div>
+    <div id="serp-search" v-if="!displayFullSearch">
+      <b-row class="text-center" align-v="center">
+        <b-col cols="3">
+          <b-img fluid :src="logo"></b-img>
+        </b-col>
+        <b-col cols="9">
+          <b-input-group size="lg">
+            <!-- TODO Add trackers -->
+            <b-form-input id="query-box" v-model="query" @keydown.enter="searchQuery"></b-form-input>
+            <b-button variant="success" @click="searchQuery">
+              <font-awesome-icon :icon="['fas', 'search']"></font-awesome-icon>
+              Buscar
+            </b-button>
+          </b-input-group>
+        </b-col>
+      </b-row>
+      <br>
+      <hr>
+      <br>
+      <div id="serp-empty" v-if="serpStatus === 'empty'">
+        <b-row class="text-center">
+          <b-col>
+            <h3>No se han encontrado resultados de búsqueda</h3>
+          </b-col>
+        </b-row>
+      </div>
+      <div id="serp-loading" v-else-if="serpStatus === 'loading'">
+        <b-row class="text-center">
+          <b-col>
+            <font-awesome-icon :icon="['fas', 'spinner']" size="3x" spin></font-awesome-icon>
+          </b-col>
+        </b-row>
+      </div>
+      <div id="serp-results" v-else-if="serpStatus === 'results'">
+        <b-row v-for="(doc, index) in searchResults" :key="index">
+          <b-col>
+            <pre>{{ doc }}</pre>
+          </b-col>
+        </b-row>
+      </div>
+      <div id="serp-other" v-else>
+        <b-row class="text-center">
+          <b-col>
+            <h3>Cargando...</h3>
+          </b-col>
+        </b-row>
+      </div>
+    </div>
+  </b-container>
 </template>
 
 <script>
+import Axios from 'axios';
+
+import * as Constants from '../../services/Constants';
+
+import Logo from '../../assets-client/leticia-logo-search.png';
+
 export default {
-  
+  name: 'QueryBox',
+
+  data() {
+    return {
+      logo: Logo,
+      query: '',
+      displayFullSearch: false,
+      serpStatus: 'results',
+      searchResults: [],
+      numResults: 0,
+      numStart: 0
+    }
+  },
+
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+    currentUser() {
+      return this.$store.state.auth.user;
+    }
+  },
+
+  methods: {
+    searchQuery() {
+      let query = this.query;
+
+      if (query.length > 0) {
+        this.serpStatus = 'loading';
+        
+        Axios.get(`${Constants.backendApiUrl}/search?q=${query}`)
+          .then((res) => {
+            this.displayFullSearch = false;
+            this.numResults = res.data.result.numFound || 0;
+            this.numStart = res.data.result.start || 0;
+            this.searchResults = res.data.result.docs || [];
+
+            console.log(this.searchResults);
+
+            if (this.searchResults.length > 0) this.serpStatus = 'results';
+            else this.serpStatus = 'empty';
+          })
+          .catch((err) => {
+            console.error(err);
+            alert('Ha ocurrido un error al hacer la búsqueda');
+            this.serpStatus = 'empty'
+          });
+      }
+    }
+  }
 }
 </script>
 
