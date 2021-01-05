@@ -7,7 +7,7 @@ import config from '../config/auth';
 import db from '../models/index';
 
 import * as Constants from '../constants';
-import { consoleError } from '../utils';
+import { consoleError, consoleLog } from '../utils';
 
 const User = db.user;
 const UserData = db.userdata;
@@ -120,7 +120,7 @@ export const login = async (req, res) => {
 
 export const googleLogin = async (req, res) => {
   try {
-    //console.log('Redirected from Google', req.user);
+    //consoleLog('Redirected from Google', req.user);
 
     let oauthUser = {
       displayName: req.user.displayName,
@@ -139,10 +139,13 @@ export const googleLogin = async (req, res) => {
         return res.status(404).send({ message: 'User Not Found' });
       }
       else {
-        await credential.populate('user').execPopulate();
-        await credential.user.populate('roles').execPopulate();
-  
-        let user = credential.user;
+        //await credential.populate('user').execPopulate();
+        //await credential.user.populate('roles').execPopulate();
+
+        let user = await User.findOne({ username: credential.username });
+
+        await user.populate('roles').execPopulate();
+
         let authorities = [];
 
         for (let i = 0; i < user.roles.length; i++) {
@@ -166,6 +169,8 @@ export const googleLogin = async (req, res) => {
         res.cookie('jwt', JSON.stringify(jwtData));
         res.cookie('sessionflow', JSON.stringify(sessionFlow));
         res.cookie('userdata', JSON.stringify(userdata.state));
+
+        //consoleLog('OAuthLogin', 'Google', jwtData, sessionFlow, userdata.state);
 
         return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
         //return res.status(200).send(jwtData);
@@ -221,6 +226,8 @@ export const googleLogin = async (req, res) => {
       res.cookie('jwt', JSON.stringify(jwtData));
       res.cookie('sessionflow', JSON.stringify(sessionFlow));
       
+      //consoleLog('OAuthRegister', 'Google', jwtData, sessionFlow, userdata.state);
+
       return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
       //return res.status(200).send(jwtData);
     }
@@ -233,7 +240,7 @@ export const googleLogin = async (req, res) => {
 
 export const facebookLogin = async (req, res) => {
   try {
-    console.log('Redirected from Facebook')//, req.user);
+    //consoleLog('Redirected from Facebook', req.user);
 
     let oauthUser = {
       displayName: req.user.displayName,
@@ -246,19 +253,19 @@ export const facebookLogin = async (req, res) => {
 
     // User exists on database
     if (userExists) {
-      console.log('User exists in DB!');
       let credential = await Credential.findOne({ email: oauthUser.email }).exec();
 
       if (!credential) {
-        console.log('not credential')
         return res.status(404).send({ message: 'User Not Found' });
       }
       else {
-        console.log('yes credential')
-        await credential.populate('user').execPopulate();
-        await credential.user.populate('roles').execPopulate();
-  
-        let user = credential.user;
+        //await credential.populate('user').execPopulate();
+        //await credential.user.populate('roles').execPopulate();
+
+        let user = await User.findOne({ username: credential.username });
+        
+        await user.populate('roles').execPopulate();
+
         let authorities = [];
 
         for (let i = 0; i < user.roles.length; i++) {
@@ -275,25 +282,16 @@ export const facebookLogin = async (req, res) => {
         let token = jwt.sign({ data: jwtData }, config.secret, { expiresIn: '24h' });
         jwtData.accessToken = token;
 
-        console.log('token', jwtData)
-
         let sessionFlowId = Constants.currentSessionFlow;
-        console.log('1')
 
         let sessionFlow = await SessionFlow.findOne({ sessionFlowId: sessionFlowId }).exec();
-        console.log('2')
         let userdata = await UserData.findOne({ username: jwtData.username }).exec();
-
-        console.log('3')
-        console.log('4', userdata)
-
-        console.log('Data ready to push! 1', jwtData, sessionFlow, userdata.state);
 
         res.cookie('jwt', JSON.stringify(jwtData));
         res.cookie('sessionflow', JSON.stringify(sessionFlow));
         res.cookie('userdata', JSON.stringify(userdata.state));
 
-        console.log('Data ready to push! 2', jwtData, sessionFlow, userdata.state);
+        //consoleLog('OAuthLogin', 'Facebook', jwtData, sessionFlow, userdata.state);
 
         return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
         //return res.status(200).send(jwtData);
@@ -351,7 +349,7 @@ export const facebookLogin = async (req, res) => {
       res.cookie('jwt', JSON.stringify(jwtData));
       res.cookie('sessionflow', JSON.stringify(sessionFlow));
 
-      console.log('Data ready to push!', jwtData, sessionFlow);
+      //consoleLog('OAuthRegister', 'Facebook', jwtData, sessionFlow);
       
       return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
       //return res.status(200).send(jwtData);
@@ -365,7 +363,7 @@ export const facebookLogin = async (req, res) => {
 
 export const checkUser = async (userData) => {
   try {
-    //console.log('Checking User!', userData);
+    //consoleLog('Checking User!', userData);
     let credential = await Credential.findOne({ email: userData.email }).exec();
     
     if (credential) {
