@@ -4,18 +4,35 @@
       <b-col cols="6" offset="3">
         <b-card>
           <b-row align-h="center">
-            <b-button-group block vertical>
-              <b-button block variant="danger" @click="googleLogin">
-                <font-awesome-icon :icon="['fab', 'google']"></font-awesome-icon>
-                Registrarse con Google
-              </b-button>
-              <b-button block variant="primary" @click="facebookLogin">
-                <font-awesome-icon :icon="['fab', 'facebook']"></font-awesome-icon>
-                Registrarse con Facebook
-              </b-button>
-            </b-button-group>
+            <b-col>
+              <div class="text-center">
+                <b>Para comenzar, inicia sesión con alguna cuenta</b>
+              </div>
+              <br>
+              <div class="text-center">
+                LeTiCiA registrará únicamente el correo electrónico de la cuenta utlizada. No se almacenarán otros datos personales.
+              </div>
+              <br>
+            </b-col>
+          </b-row>
+          <b-row align-h="center">
+            <b-button block variant="danger" @click="googleLogin">
+              <font-awesome-icon :icon="['fab', 'google']"></font-awesome-icon>
+              Registrarse con Google
+            </b-button>
+            <b-button block variant="primary" @click="facebookLogin">
+              <font-awesome-icon :icon="['fab', 'facebook']"></font-awesome-icon>
+              Registrarse con Facebook
+            </b-button>
           </b-row>
         </b-card>
+        <b-row class="text-center">
+          <b-col>
+            <b-button variant="link" to="/">
+              Volver
+            </b-button>
+          </b-col>
+        </b-row>
       </b-col>
     </b-row>
   </b-container>
