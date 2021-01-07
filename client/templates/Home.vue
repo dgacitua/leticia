@@ -17,6 +17,22 @@
       </b-col>
     </b-row>
     <br>
+    <b-row>
+      <b-col>
+        <div>
+          <b>Consideraciones para participar:</b>
+        </div>
+        <ul>
+          <li>Debes ser mayor de edad (18+)</li>
+          <li>Debes usar un computador de escritorio o laptop</li>
+          <li>Sitio web no compatible con dispositivos móviles (teléfonos y tablets)</li>
+          <li>Métodos de entrada compatibles: Teclado y ratón</li>
+          <li>Se recomienda utilizar un navegador web actualizado (como puede ser Chrome, Firefox o Edge)</li>
+          <li>Resolución de pantalla recomedada: 1366x768 (o superior)</li>
+        </ul>
+      </b-col>
+    </b-row>
+    <br>
     <b-row class="full-height text-center" align-v="center">
       <b-col>
         <b-row align-h="center">
@@ -32,18 +48,6 @@
           </b-button-group>
         </b-row>
         -->
-      </b-col>
-    </b-row>
-    <br>
-    <b-row>
-      <b-col>
-        <div>
-          <b>Para participar debes:</b>
-        </div>
-        <ul>
-          <li>Ser mayor de edad (18+)</li>
-          <li>Usar un computador de escritorio o laptop</li>
-        </ul>
       </b-col>
     </b-row>
   </b-container>
