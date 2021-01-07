@@ -27,7 +27,7 @@ let corsOptions = {
 };
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '5mb' }));
 app.use(cookieParser());
 app.use(passport.initialize()); 
 
