@@ -19,6 +19,7 @@ import UserData from './UserData';
 import SessionFlow from './SessionFlows';
 import UserLog from './UserLog';
 import Consent from './Consent';
+import Document from './Document';
 
 const db = {};
 
@@ -42,6 +43,7 @@ db.userdata = UserData;
 db.sessionflow = SessionFlow;
 db.userlog = UserLog;
 db.consent = Consent;
+db.document = Document;
 
 db.ROLES = [ 'user', 'admin' ];
 

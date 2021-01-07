@@ -2,6 +2,7 @@ import "core-js/stable";
 import "regenerator-runtime/runtime";
 
 import http from 'http';
+import path from 'path';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
@@ -37,6 +38,9 @@ app.set('trust proxy', true);
 // CORS support
 app.use(cors());
 
+// Static assets support
+app.use('/assets', express.static(Constants.assetPath));
+
 // Add REST routes
 app.use('/v1', api1);
 
@@ -46,10 +50,12 @@ app.get('/', (req, res) => {
 });
 
 // WebSocket event handler
+/*
 echo.on('connection', (conn) => {
   conn.on('data', (message) => { redirectInteraction(message) });
   conn.on('close', () => {});
 });
+*/
 
 const server = http.createServer();
 //echo.installHandlers(server, { prefix: '/ws' });

@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import path from 'path';
 
 dotenv.config();
 
@@ -24,3 +25,7 @@ export const currentSessionFlow = process.env.CURRENT_SESSION_FLOW || 'short';
 
 export const corsPort = frontendPort === 80 ? '' : `:${frontendPort}`;
 export const corsUrl = `${leticiaProtocol}://${leticiaHost}${corsPort}`;
+
+export const assetPath = path.join(__dirname, '/assets');
+export const documentPath = path.join(__dirname, '/assets/documents');
+export const previewPath = path.join(__dirname, '/assets/preview');
