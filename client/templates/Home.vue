@@ -52,7 +52,7 @@
 <script>
 import ActionSender from '../services/ActionSender';
 
-import HeaderImage from '../assets-client/image01.jpg';
+import HeaderImage from '../assets/image01.jpg';
 
 export default {
   name: 'home',

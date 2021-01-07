@@ -24,7 +24,7 @@
 import ActionSender from '../services/ActionSender';
 import EventBus from '../modules/eventBus';
 
-import Image from '../assets-client/image02.jpg';
+import Image from '../assets/image02.jpg';
 
 export default {
   name: 'instructions',

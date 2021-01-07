@@ -53,7 +53,7 @@ import Mark from 'mark.js';
 import StringSimilarity from 'string-similarity';   // Based on Sørensen–Dice coefficient
 // import { distance } from 'fastest-levenshtein';  // Based on Levenshtein distance
 
-import TypingTestSamples from '../../assets-client/typingTestSamples-es.json';
+import TypingTestSamples from '../../assets/typingTestSamples-es.json';
 
 import ActionSender from '../../services/ActionSender';
 import ActionHandler from '../../trackers/ActionHandler';

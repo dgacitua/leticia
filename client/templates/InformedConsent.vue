@@ -89,7 +89,7 @@ import Axios from 'axios';
 
 import * as Constants from '../services/Constants';
 
-import ConsentDocument from '../assets-client/consent.pdf';
+import ConsentDocument from '../assets/consent.pdf';
 
 const API_URL = `${Constants.backendApiUrl}`;
 

@@ -328,8 +328,8 @@ import { getVueObject } from '../../services/Utils';
 import ActionSender from '../../services/ActionSender';
 import EventBus from '../../modules/eventBus';
 
-import Countries from '../../assets-client/countries.json';
-import Cities from '../../assets-client/cities-CL.json';
+import Countries from '../../assets/countries.json';
+import Cities from '../../assets/cities-CL.json';
 
 export default {
   name: 'demographic',

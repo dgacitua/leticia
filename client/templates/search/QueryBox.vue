@@ -77,7 +77,7 @@ import Axios from 'axios';
 
 import * as Constants from '../../services/Constants';
 
-import Logo from '../../assets-client/leticia-logo-search.png';
+import Logo from '../../assets/leticia-logo-search.png';
 
 export default {
   name: 'QueryBox',

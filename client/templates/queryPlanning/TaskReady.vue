@@ -17,7 +17,7 @@
 <script>
 import EventBus from '../../modules/eventBus';
 
-import Image from '../../assets-client/image03.jpg';
+import Image from '../../assets/image03.jpg';
 
 export default {
   data() {
