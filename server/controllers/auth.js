@@ -15,6 +15,7 @@ const Role = db.role;
 const Credential = db.credential;
 const SessionFlow = db.sessionflow;
 
+/* MANUAL REGISTER */
 export const register = async (req, res) => {
   try {
     let user = new User({
@@ -63,12 +64,12 @@ export const register = async (req, res) => {
     return res.status(200).send(jwtData);
   }
   catch (err) {
-    consoleError(err);
-    res.status(500).send({ message: err.toString() });
-    return;
+    consoleError('RegisterError', err);
+    return res.status(500).send({ message: err });
   }
 };
 
+/* MANUAL LOGIN */
 export const login = async (req, res) => {
   try {
     let credential = await Credential.findOne({ email: req.body.email }).exec();
@@ -112,19 +113,19 @@ export const login = async (req, res) => {
     }
   }
   catch (err) {
-    consoleError(err);
-    res.status(500).send({ message: err.toString() });
-    return;
+    consoleError('LoginError', err);
+    return res.status(500).send({ message: err });
   }
 };
 
+/* GOOGLE LOGIN */
 export const googleLogin = async (req, res) => {
   try {
     //consoleLog('Redirected from Google', req.user);
 
     let oauthUser = {
-      displayName: req.user.displayName,
-      name: req.user.name.givenName,
+      //displayName: req.user.displayName,
+      //name: req.user.name.givenName,
       email: req.user._json.email,
       provider: req.user.provider
     };
@@ -170,7 +171,7 @@ export const googleLogin = async (req, res) => {
         res.cookie('sessionflow', JSON.stringify(sessionFlow));
         res.cookie('userdata', JSON.stringify(userdata.state));
 
-        //consoleLog('OAuthLogin', 'Google', jwtData, sessionFlow, userdata.state);
+        consoleLog('OAuthLogin', 'Google', jwtData, sessionFlow, userdata.state);
 
         return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
         //return res.status(200).send(jwtData);
@@ -226,25 +227,26 @@ export const googleLogin = async (req, res) => {
       res.cookie('jwt', JSON.stringify(jwtData));
       res.cookie('sessionflow', JSON.stringify(sessionFlow));
       
-      //consoleLog('OAuthRegister', 'Google', jwtData, sessionFlow, userdata.state);
+      consoleLog('OAuthRegister', 'Google', jwtData, sessionFlow);
 
       return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
       //return res.status(200).send(jwtData);
     }
   }
   catch (err) {
-    res.status(500).send({ message: err });
-    return;
+    consoleError('GoogleAuthError', err);
+    return res.status(500).send({ message: err });
   }
 };
 
+/* FACEBOOK LOGIN */
 export const facebookLogin = async (req, res) => {
   try {
     //consoleLog('Redirected from Facebook', req.user);
 
     let oauthUser = {
-      displayName: req.user.displayName,
-      name: req.user._json.name,
+      //displayName: req.user.displayName,
+      //name: req.user._json.name,
       email: req.user._json.email,
       provider: req.user.provider
     };
@@ -291,7 +293,7 @@ export const facebookLogin = async (req, res) => {
         res.cookie('sessionflow', JSON.stringify(sessionFlow));
         res.cookie('userdata', JSON.stringify(userdata.state));
 
-        //consoleLog('OAuthLogin', 'Facebook', jwtData, sessionFlow, userdata.state);
+        consoleLog('OAuthLogin', 'Facebook', jwtData, sessionFlow, userdata.state);
 
         return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
         //return res.status(200).send(jwtData);
@@ -349,18 +351,19 @@ export const facebookLogin = async (req, res) => {
       res.cookie('jwt', JSON.stringify(jwtData));
       res.cookie('sessionflow', JSON.stringify(sessionFlow));
 
-      //consoleLog('OAuthRegister', 'Facebook', jwtData, sessionFlow);
+      consoleLog('OAuthRegister', 'Facebook', jwtData, sessionFlow);
       
       return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
       //return res.status(200).send(jwtData);
     }
   }
   catch (err) {
-    res.status(500).send({ message: err });
-    return;
+    consoleError('FacebookAuthError', err);
+    return res.status(500).send({ message: err });
   }
 };
 
+/* CHECK VALID CREDENTIALS */
 export const checkUser = async (userData) => {
   try {
     //consoleLog('Checking User!', userData);
@@ -378,7 +381,7 @@ export const checkUser = async (userData) => {
     }
   }
   catch (err) {
-    consoleError(err);
+    consoleError('CheckUserError', err);
     return false;
   }
 };

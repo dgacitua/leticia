@@ -46,8 +46,9 @@ export default {
   created() {
     EventBus.$on('leticia-next-stage', () => {
       console.log('LeTiCiA Next Stage!');
-      this.$store.commit({ type: 'nextFlowIndex' });
-      
+      if (this.$store.getters.flowIndex >= 0) this.$store.commit({ type: 'nextFlowIndex' });
+      else this.$store.commit({ type: 'setFlowIndex', amount: 0 });
+
       let nextFlowStage = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].path;
       let nextFlowParams = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].params;
       let nextFlowTimeLimit = this.$store.getters.sessionFlow.stages[this.$store.getters.flowIndex].timeLimit;

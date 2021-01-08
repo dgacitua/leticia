@@ -112,12 +112,15 @@ export default {
         this.$router.replace('/admin-hub');
       }
       else {
+        this.$router.replace('/user-hub');
+        /*
         if (this.acceptedConsent) {
           this.$router.replace('/user-hub');
         }
         else {
           this.$router.replace('consent');
         }
+        */
       }
     }
   }

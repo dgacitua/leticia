@@ -92,7 +92,7 @@ const router = new VueRouter({
       name: 'consent',
       component: InformedConsent,
       meta: {
-        auth: false
+        auth: true
       }
     },
     {
