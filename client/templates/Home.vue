@@ -7,7 +7,7 @@
           background="#ababab"
           img-width="1024"
           img-height="480"
-          style="text-shadow: 1px 1px 2px #333;"
+          style="text-shadow: 3px 3px 3px #000;"
         >
           <b-carousel-slide :img-src="headerImage">
             <h1>¡Bienvenido(a) a LeTiCiA!</h1>
