@@ -1,44 +1,57 @@
 <template>
   <b-container id="typing-test">
     <b-row>
-      <div><h1>Test de Escritura</h1><div>
       <div>
-        <p>Tipea cada extracto de texto en el campo de entrada tal cual como está escrito.<br>
-        Presiona Enter o Siguiente para continuar con el siguiente texto.<br>
-        Presiona Finalizar para terminar la actividad.</p>
+        <h1>Test de Escritura</h1>
+      </div>
+      <div>
+        <p>
+          Tipea cada extracto de texto que veas en el campo de texto tal cual como está escrito.<br>
+          Usa tu velocidad de tipeo natural, no te aceleres.<br>
+          Presiona Enter o Siguiente para continuar con el siguiente texto.
+        </p>
       </div>
     </b-row>
     <br>
-    <b-form @submit="nextSample">
-      <div id="sample-text">
-        {{ currentSample.text }}
-      </div>
-      <br>
-      <b-form-group :id="`label-${currentSample.id}`">
-        <b-form-input
-          :id="`input-${currentSample.id}`"
-          :name="`input-${currentSample.id}`"
-          @focus="focus"
-          @blur="blur"
-          @keydown="keydown"
-          @keyup="keyup"
-          @keydown.enter="nextSample"
-          @paste.prevent
-          v-model="response[sampleIndex]"
-          type="text"
-          required
-        ></b-form-input>
-      </b-form-group>
-      <br>
-      <b-row>
-        <b-col>
-          <b-button v-if="!isLastSlide" variant="primary" :disabled="!isValidInput" @click="nextSample">Siguiente</b-button>
-        </b-col>
-        <b-col class="text-right">
-          <b-button v-if="isLastSlide" variant="success" :disabled="!isValidInput" type="submit">Finalizar</b-button>
-        </b-col>
-      </b-row>
-    </b-form>
+    <b-card>
+      <b-form @submit="nextSample">
+        <div id="sample-text">
+          <i>{{ currentSample.text }}</i>
+        </div>
+        <br>
+        <b-form-group :id="`label-${currentSample.id}`">
+          <b-form-input
+            :id="`input-${currentSample.id}`"
+            :name="`input-${currentSample.id}`"
+            @focus="focus"
+            @blur="blur"
+            @keydown="keydown"
+            @keyup="keyup"
+            @keydown.enter="nextSample"
+            @paste.prevent
+            v-model="response[sampleIndex]"
+            type="text"
+            autocomplete="off"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-row>
+          <b-col cols="9">
+            <b-progress :max="100" height="2rem">
+              <b-progress-bar :value="completedPerc">
+                <span><strong>{{ completedPerc }}%</strong> completado</span>
+              </b-progress-bar>
+            </b-progress>
+          </b-col>
+          <b-col v-if="!isLastSlide" cols="3" class="text-right">
+            <b-button variant="primary" :disabled="!isValidInput" @click="nextSample">Siguiente</b-button>
+          </b-col>
+          <b-col v-if="isLastSlide" cols="3" class="text-right">
+            <b-button variant="success" :disabled="!isValidInput" type="submit">Finalizar</b-button>
+          </b-col>
+        </b-row>
+      </b-form>
+    </b-card>
     <!--
     <hr>
     <b-row>
@@ -97,6 +110,9 @@ export default {
     },
     isLastSlide() {
       return this.sampleIndex >= (this.samples.length - 1);
+    },
+    completedPerc() {
+      return Math.round((this.sampleIndex / this.samples.length) * 100);
     }
   },
 

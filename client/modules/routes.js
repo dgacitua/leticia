@@ -13,6 +13,7 @@ import Home from '../templates/Home.vue';
 import InformedConsent from '../templates/InformedConsent.vue';
 import Demographic from '../templates/questionnaires/Demographic.vue';
 import ExitSurvey from '../templates/questionnaires/ExitSurvey.vue';
+import TypingTestInstructions from '../templates/questionnaires/TypingTestInstructions.vue';
 import TypingTest from '../templates/questionnaires/TypingTest.vue';
 import Instructions from '../templates/Instructions.vue';
 import Login from '../templates/auth/Login.vue';
@@ -107,6 +108,14 @@ const router = new VueRouter({
       path: '/typing',
       name: 'typing',
       component: TypingTest,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/typing-instructions',
+      name: 'typing-instructions',
+      component: TypingTestInstructions,
       meta: {
         auth: true
       }

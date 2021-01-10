@@ -282,6 +282,7 @@ db.sessionflows.insertMany([
     "stages": [
       { path: '/consent', timeLimit: -1 },
       { path: '/demographic', timeLimit: -1 },
+      { path: '/typing-instructions', timeLimit: -1 },
       { path: '/typing', timeLimit: -1 },
       { path: '/instructions', params: 'short', timeLimit: -1 },
       { path: '/short-challenge', timeLimit: 15 },
@@ -295,6 +296,7 @@ db.sessionflows.insertMany([
     "stages": [
       { path: '/consent', timeLimit: -1 },
       { path: '/demographic', timeLimit: -1 },
+      { path: '/typing-instructions', timeLimit: -1 },
       { path: '/typing', timeLimit: -1 },
       { path: '/instructions', params: 'extended', timeLimit: -1 },
       { path: '/extended-challenge', timeLimit: 25 },
