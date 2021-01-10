@@ -5,7 +5,7 @@
     </b-row>
     <b-row class="text-center">
       <b-col>
-        <b-button @click="resumeStudy" variant="success">Iniciar/Continuar</b-button>            
+        <b-button @click="resumeStudy" variant="success">Ir a la prueba</b-button>            
       </b-col>
     </b-row>
   </b-container>
