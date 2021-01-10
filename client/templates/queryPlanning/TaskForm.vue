@@ -11,6 +11,7 @@
     <b-row class="space-bottom">
       <div>Respecto a la tarea asignada, responde las siguientes preguntas:</div>
     </b-row>
+    <br>
     <b-row class="space-bottom">
       <b-col>
         <b-form id="taskform" @submit="onSubmit" class="full-width">
