@@ -11,16 +11,18 @@
       <b-form id="exit-survey" @submit="onSubmit">
         <!-- Questions -->
         <b-row v-for="q in questions" :key="q.questionId"  class="zero-margin">
-          <b-row v-if="q.type==='likert'" :id="q.questionId" class="zero-margin">
-            <likertscale :props="q"></likertscale>
-          </b-row>
-          <b-row v-if="q.type==='paragraph'" :id="q.questionId" class="zero-margin">
-            <paragraph :props="q"></paragraph>
-          </b-row>
-          <b-row v-if="q.type==='multiquery'" :id="q.questionId" class="zero-margin">
-            <multiquery :props="q"></multiquery>
-          </b-row>
-          <br>
+          <b-col>
+            <b-row v-if="q.type==='likert'" :id="q.questionId" class="zero-margin">
+              <likertscale :props="q"></likertscale>
+            </b-row>
+            <b-row v-if="q.type==='paragraph'" :id="q.questionId" class="zero-margin">
+              <paragraph :props="q"></paragraph>
+            </b-row>
+            <b-row v-if="q.type==='multiquery'" :id="q.questionId" class="zero-margin">
+              <multiquery :props="q"></multiquery>
+            </b-row>
+            <br>
+          </b-col>
         </b-row>
         <!-- Submit -->
         <b-row>

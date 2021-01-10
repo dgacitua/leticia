@@ -20,6 +20,7 @@
               @blur="blur"
               @keydown="keydown"
               @keyup="keyup"
+              autocomplete="off"
               class="query-box">
             </b-form-input>
           </b-row>

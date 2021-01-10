@@ -31,6 +31,7 @@
                   <multiquery :props="q"></multiquery>
                 </b-col>
               </b-row>
+              <br>
             </b-col>
           </b-row>
           <br>

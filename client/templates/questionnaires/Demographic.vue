@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-row>
-      <h2>Test Demográfico</h2>
+      <h2>Cuestionario Demográfico</h2>
     </b-row>
     <br>
     <b-row>
