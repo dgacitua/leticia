@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar variant="primary" type="dark" class="d-flex justify-content-between">
+    <b-navbar variant="dark" type="dark" class="d-flex justify-content-between">
       <router-link to="/">
         <b-navbar-brand tag="h1" class="mb-0">LeTiCiA <sub>PILOT</sub></b-navbar-brand>
       </router-link>
