@@ -1,16 +1,18 @@
 <template>
   <b-container id="typing-test">
     <b-row>
-      <div>
-        <h1>Test de Escritura</h1>
-      </div>
-      <div>
-        <p>
-          Tipea cada extracto de texto que veas en el campo de texto tal cual como está escrito.<br>
-          Usa tu velocidad de tipeo natural, no te aceleres.<br>
-          Presiona Enter o Siguiente para continuar con el siguiente texto.
-        </p>
-      </div>
+      <b-col>
+        <div>
+          <h1>Test de Escritura</h1>
+        </div>
+        <div>
+          <p>
+            Tipea cada extracto de texto que veas en el campo de texto tal cual como está escrito.<br>
+            Usa tu velocidad de tipeo natural, no te aceleres.<br>
+            Presiona Enter o Siguiente para continuar con el siguiente texto.
+          </p>
+        </div>
+      </b-col>
     </b-row>
     <br>
     <b-card>

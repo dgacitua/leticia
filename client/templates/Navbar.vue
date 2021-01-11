@@ -6,20 +6,20 @@
       </router-link>
 
       <b-navbar-nav v-if="currentTimer">
-        <b-nav-text>
+        <b-nav-text class="navbar-text">
           <b>{{ currentTimer }}</b>
         </b-nav-text>
       </b-navbar-nav>
 
      <b-navbar-nav v-if="currentUser">
         <b-nav-item>
-          <font-awesome-icon icon="user"/>
+          <font-awesome-icon icon="user"></font-awesome-icon>
         </b-nav-item>
-        <b-nav-text to="/profile">
+        <b-nav-text to="/profile" class="navbar-text">
           {{ currentUser.email || currentUser.username }}
         </b-nav-text>
         <b-nav-item @click.prevent="logout">
-          <font-awesome-icon icon="sign-out-alt" />
+          <font-awesome-icon icon="sign-out-alt"></font-awesome-icon>
         </b-nav-item>
       </b-navbar-nav>
     </b-navbar>
@@ -106,4 +106,7 @@ export default {
 </script>
 
 <style scoped>
+.navbar-text {
+  color: white;
+}
 </style>
