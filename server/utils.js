@@ -1,6 +1,7 @@
 import crypto from 'crypto';
+import formatDate from 'date-fns/format';
 
-export const currentDate = () => { return new Date() };
+export const currentDate = () => { return formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss z') };
 export const cloneObject = (...obj) => { return Object.assign({}, ...obj) };
 export const flattenArray = (arr) => { return [].concat(...arr) };
 export const stringToInt = (stringNumber) => {  return !isNaN(stringNumber) ? parseInt(stringNumber) : null };
@@ -24,4 +25,10 @@ export const shuffleArray = (a) => {
   }
   
   return a;
+};
+
+// dgacitua: Check if variable is a string
+// http://stackoverflow.com/a/9436948
+export const isString = (testStr) => {
+  return (typeof testStr === 'string' || testStr instanceof String);
 };
