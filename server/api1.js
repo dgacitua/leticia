@@ -14,6 +14,7 @@ import userdata from './routes/userdata';
 import userlog from './routes/userlog';
 import consent from './routes/consent';
 import search from './routes/search';
+import document from './routes/document';
 
 const router = express.Router();
 
@@ -31,5 +32,6 @@ router.use('/userdata', userdata);
 router.use('/userlog', userlog);
 router.use('/consent', consent);
 router.use('/search', search);
+router.use('/documents', document);
 
 export default router;

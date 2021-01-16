@@ -1,9 +1,14 @@
 import fs from 'fs-extra';
+import url from 'url';
 import path from 'path';
+import iconv from 'iconv';
+import charset from 'charset';
+import cheerio from 'cheerio';
+import { htmlToText } from 'html-to-text';
 import scrape from 'website-scraper';
 
 import * as Constants from '../constants';
-import { consoleLog, consoleError } from '../utils';
+import { consoleLog, consoleError, isString } from '../utils';
 
 class DocumentDownloader {
   constructor() {
@@ -14,6 +19,7 @@ class DocumentDownloader {
     this.createDownloadDirs();
   }
 
+  // Create download directories (or at least ensure they are created)
   createDownloadDirs() {
     try {
       fs.ensureDirSync(Constants.documentPath);
@@ -21,10 +27,154 @@ class DocumentDownloader {
     }
     catch (err) {
       consoleError('Error while creating document directories!', err);
-      throw(err);
+      throw new Error('Error while creating document directories!', err);
     }
   }
 
+  // Get domain from URL
+  getDomainUrl(originUrl) {
+    if (isString(originUrl)) return url.parse(originUrl).hostname.replace(/^(www\.)(.+)/i, '$2');
+    else return '';
+  }
+
+  // Escape newline characters on a JSON string
+  escapeString(str) {
+    // dgacitua: http://stackoverflow.com/a/9204218
+    return str
+      .replace(/[\\]/g, ' ')
+      .replace(/[\"]/g, ' ')
+      .replace(/[\/]/g, ' ')
+      .replace(/[\b]/g, ' ')
+      .replace(/[\f]/g, ' ')
+      .replace(/[\n]/g, ' ')
+      .replace(/[\r]/g, ' ')
+      .replace(/[\t]/g, ' ');
+  }
+
+  // Read HTML file as string (and convert to UTF-8)
+  readFile(path) {
+    try {
+      // dgacitua: http://stackoverflow.com/a/18711982
+      var htmlBuffer = fs.readFileSync(path),
+          htmlString = htmlBuffer.toString(),
+            encoding = charset([], htmlString);   // || jschardet.detect(htmlString).encoding.toLowerCase();
+
+      if (encoding === 'utf-8' || encoding === 'utf8' || !encoding) {
+        return htmlString;
+      }
+      else {
+        var ic = new iconv.Iconv(encoding, 'UTF-8//TRANSLIT//IGNORE'),
+           buf = ic.convert(htmlBuffer),
+           str = buf.toString('utf-8');
+
+        return str;
+      }
+    }
+    catch (err) {
+      consoleError('Error while reading HTML file!', err);
+      throw new Error('Error while reading HTML file!', err);
+    }
+  }
+
+  // Get readable text (no tags) from HTML
+  getTextFromHtml(path) {
+    try {
+      let htmlString = this.readFile(path);
+ 
+      let options = {
+        wordwrap: false,
+        tags: {
+          'a': { options: { ignoreHref: true } },
+          'img': { format: 'skip' },
+          'ul': { options: { itemPrefix: ' ' } }
+        }
+      };
+
+      let extractedText = htmlToText(htmlString, options);
+      return this.escapeString(extractedText);
+    }
+    catch (err) {
+      consoleError('Error while getting text from HTML file!', err);
+      throw new Error('Error while getting text from HTML file!', err);
+    }
+  }
+
+  // Clean document (remove links, inputs, forms and javascript)
+  cleanDocument(documentPath, originUrl) {
+    try {
+      let relPath = documentPath;
+      let fileDir = path.dirname(relPath);
+      let fileExt = path.extname(relPath);
+      let fileName = path.basename(relPath, fileExt);
+      let newFilename = fileName + fileExt;
+      let pageDomain = this.getDomainUrl(originUrl);
+
+      let htmlFile = this.readFile(relPath);
+      let htmlString = htmlFile.toString();
+      let $ = cheerio.load(htmlFile);
+
+      // dgacitua: Remove onclick attribute from anchor tags
+      $('a').each((i, elem) => {
+        $(elem).removeAttr('onclick');
+      });
+
+      // dgacitua: Remove all external links
+      $('a[href]').each((i, elem) => {
+        $(elem).attr('href', 'javascript:void(0)');
+        $(elem).removeAttr('target');
+      });
+
+      // dgacitua: Remove all iframes and frames
+      $('iframe,frame').each((i, elem) => {
+        $(elem).remove();
+      });
+
+      // dgacitua: Remove javascript
+      $('script').each((i, elem) => {
+        $(elem).remove();
+      });
+
+      // dgacitua: Remove onclick attribute from all tags
+      $('[onclick]').each((i, elem) => {
+        $(elem).removeAttr('onclick');
+      });
+
+      // dgacitua: Disable input elements
+      $('input').each((i, elem) => {
+        $(elem).removeAttr('id');
+        $(elem).attr('disabled', 'true');
+      });
+
+      // dgacitua: Disable button elements
+      $('button').each((i, elem) => {
+        $(elem).removeAttr('id');
+        $(elem).attr('disabled', 'true');
+      });
+
+      // dgacitua: Disable submit
+      $('[type="submit"]').each((i, elem) => {
+        $(elem).removeAttr('type');
+      });
+
+      // dgacitua: Disable form action
+      $('form').each((i, elem) => {
+        $(elem).removeAttr('action');
+        $(elem).removeAttr('method');
+      });
+
+      var cleanedHtml = $.html();
+
+      fs.writeFileSync(path.join(fileDir, newFilename), cleanedHtml);
+    
+      return true;
+    }
+    catch (err) {
+      consoleError('Error while cleaning document!', err);
+      throw new Error('Error while cleaning document!', err);
+    }
+  }
+
+  // Download document to local filesystem
   async downloadDocument(docName, sourceUrl, isIndexable = true) {
     try {
       let downloadPath = isIndexable ? path.join(Constants.documentPath, docName) : path.join(Constants.previewPath, 'currentDocument');
@@ -66,13 +216,16 @@ class DocumentDownloader {
     }
     catch (err) {
       consoleError('Error while downloading document!', err);
-      throw new Error('Error while indexing downloaded document!');
+      throw new Error('Error while downloading document!', err);
     }
   }
 
+  // Download and index document
   async indexDocument(docObj) {
     try {
-      let indexedDocument = {
+      consoleLog('Attempting to download and index document!');
+
+      let docMetadata = {
         docId: docObj.docId,
         locale: docObj.locale || 'en',
         title: docObj.title || 'NewDocument',
@@ -82,17 +235,57 @@ class DocumentDownloader {
         url: docObj.url || ''
       };
 
-      let download = await this.downloadDocument(indexedDocument.docId, indexedDocument.url, true);
+      let download = await this.downloadDocument(docMetadata.docId, docMetadata.url, false);
+      docMetadata.path = download.route;
+      docMetadata.body = this.getTextFromHtml(download.fullPath);
 
-      indexedDocument.path = download.route;
+      consoleLog('Document successfully downloaded!');
 
-      // TODO Clean document
+      this.cleanDocument(download.fullPath, docMetadata.url);
+
+      consoleLog('Document successfully cleaned!');
+
       // TODO Add document to database
       // TODO Add document to inverted index
+
+      return docMetadata;
     }
     catch (err) {
       consoleError('Error while indexing downloaded document!', err);
-      throw new Error('Error while indexing downloaded document!');
+      throw new Error('Error while indexing downloaded document!', err);
+    }
+  }
+
+  // Download document as a preview
+  async previewDocument(docObj) {
+    try {
+      consoleLog('Attempting to download and preview document!');
+
+      let docMetadata = {
+        docId: docObj.docId,
+        locale: docObj.locale || 'en',
+        title: docObj.title || 'NewDocument',
+        snippet: docObj.snippet || '',
+        body: '',
+        keywords: docObj.keywords || [],
+        url: docObj.url || ''
+      };
+
+      let download = await this.downloadDocument(docMetadata.docId, docMetadata.url, false);
+      docMetadata.path = download.route;
+      docMetadata.body = this.getTextFromHtml(download.fullPath);
+
+      consoleLog('Document successfully downloaded!');
+
+      this.cleanDocument(download.fullPath, docMetadata.url);
+
+      consoleLog('Document successfully cleaned!');
+
+      return docMetadata;
+    }
+    catch (err) {
+      consoleError('Error while previewing downloaded document!', err);
+      throw new Error('Error while previewing downloaded document!', err);
     }
   }
 }
