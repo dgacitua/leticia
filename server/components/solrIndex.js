@@ -26,7 +26,7 @@ class SolrIndex {
         host: options.host,
         port: options.port,
         core: options.core,
-        solrVersion: '5.1'
+        solrVersion: '8.0'
       });
   
       this.client.autoCommit = true;
@@ -97,7 +97,7 @@ class SolrIndex {
   search(queryString, pageStart = 1) {
     // dgacitua: IMPORTANT! Query strings must be URI encoded
     let start = (pageStart - 1) * DOCS_PER_PAGE;
-    let searchQuery = `title_t:${queryString} OR body_t:${queryString} OR keywords_t:${queryString}`;
+    let searchQuery = `title_t:${encodeURI(queryString)} OR body_t:${encodeURI(queryString)} OR keywords_t:${encodeURI(queryString)}`;
     let hlQuery = encodeURI(`hl=on&hl.q=${queryString}&hl.fl=body_t&hl.snippets=3&hl.simple.pre=<em class="hl">&hl.simple.post=</em>&hl.fragmenter=regex&hl.regex.slop=0.2`);
 
     let query = this.client.createQuery()
@@ -122,19 +122,23 @@ class SolrIndex {
           let searchDocs = searchResponse.response.docs;
           let searchHl = searchResponse.highlighting;
 
+          consoleLog('New Search!', searchHl);
+
           searchDocs.forEach((doc) => {
             let docId = doc.id;
-            let docObj = doc; // TODO: Documents.findOne({_id: docId});
-
-            docObj.searchSnippet = '';
+            let docObj = doc;
+            let searchSnippet = '';
 
             if (searchHl[docId] && searchHl[docId].body_t) {
               searchHl[docId].body_t.forEach((snip, idx, arr) => {
-                docObj.searchSnippet += snip;
-                if (idx < arr.length-1) docObj.searchSnippet += ' ... ';
+                searchSnippet += snip;
+                if (idx < arr.length-1) searchSnippet += ' ... ';
               });
             }
+
+            docObj.searchSnippet = searchSnippet || docObj.snippet_t;
             
+            delete docObj.body_t;
 
             respDocs.push(docObj);
           });

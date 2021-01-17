@@ -30,7 +30,7 @@ const add = async (request, response, next) => {
 
 const search = async (request, response, next) => {
   try {
-    let queryString = encodeURI(request.query.q);
+    let queryString = request.query.q;
     let pageStart = request.query.p || 1;
 
     let searchResult = await index.search(queryString, pageStart);
