@@ -18,17 +18,22 @@ const DOCS_PER_PAGE = 10;
 // dgacitua: http://lbdremy.github.io/solr-node-client/
 class SolrIndex {
   constructor(options) {
-    consoleLog('Connecting to Solr Index!');
+    try {
+      this.options = options;
 
-    this.options = options;
-
-    this.client = Solr.createClient({
-      host: options.host,
-      port: options.port,
-      core: options.core
-    });
-
-    this.client.autoCommit = true;
+      this.client = Solr.createClient({
+        host: options.host,
+        port: options.port,
+        core: options.core,
+        solrVersion: '5.1'
+      });
+  
+      this.client.autoCommit = true;
+    }
+    catch (err) {
+      consoleError(err);
+      throw new Error(err);
+    }
   }
 
   ping() {
@@ -50,7 +55,7 @@ class SolrIndex {
     let docs = [ docObj ];
 
     return new Promise((resolve, reject) => {
-      this.client.add(docs, (err, res) => {
+      this.client.add(docs, { commit: true }, (err, res) => {
         if (err) { reject(err) }
         else { resolve(res) }
       });
@@ -59,7 +64,18 @@ class SolrIndex {
 
   addMany(docArray) {
     return new Promise((resolve, reject) => {
-      this.client.add(docArray, (err, res) => {
+      this.client.add(docArray, { commit: true }, (err, res) => {
+        if (err) { reject(err) }
+        else { resolve(res) }
+      });
+    });
+  }
+
+  deleteOne(docId) {
+    let query = `docId_s:${docId}`;
+
+    return new Promise((resolve, reject) => {
+      this.client.deleteByQuery(query, { commit: true }, (err, res) => {
         if (err) { reject(err) }
         else { resolve(res) }
       });
@@ -67,11 +83,10 @@ class SolrIndex {
   }
 
   deleteAll() {
-    let field = 'id';
-    let query = '*';
+    let query = `id:*`;
 
     return new Promise((resolve, reject) => {
-      this.client.delete(field, query, (err, res) => {
+      this.client.deleteByQuery(query, { commit: true }, (err, res) => {
         if (err) { reject(err) }
         else { resolve(res) }
       });

@@ -9,12 +9,21 @@ import scrape from 'website-scraper';
 
 import * as Constants from '../constants';
 import { consoleLog, consoleError, isString } from '../utils';
+import Document from '../models/Document';
+import SolrIndex from './solrIndex';
+
+let solrOptions = {
+  host: Constants.solrHost,
+  port: Constants.solrPort,
+  core: Constants.solrCore
+};
 
 class DocumentDownloader {
   constructor() {
     this.queryDocPath = path.join('/assets/documents');
     this.queryPreviewPath = path.join('/assets/preview');
     this.userAgent = 'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.7113.93 Safari/537.36';
+    this.index = new SolrIndex(solrOptions);
 
     this.createDownloadDirs();
   }
@@ -235,7 +244,7 @@ class DocumentDownloader {
         url: docObj.url || ''
       };
 
-      let download = await this.downloadDocument(docMetadata.docId, docMetadata.url, false);
+      let download = await this.downloadDocument(docMetadata.docId, docMetadata.url, true);
       docMetadata.path = download.route;
       docMetadata.body = this.getTextFromHtml(download.fullPath);
 
@@ -245,8 +254,20 @@ class DocumentDownloader {
 
       consoleLog('Document successfully cleaned!');
 
-      // TODO Add document to database
-      // TODO Add document to inverted index
+      let indexedDocument = {
+        docId_s: docMetadata.docId,
+        locale_s: docMetadata.locale,
+        title_t: docMetadata.title,
+        snippet_t: docMetadata.snippet,
+        body_t: docMetadata.body,
+        keywords_t: docMetadata.keywords,
+        url_s: docMetadata.url
+      }
+      
+      await Document.create(docMetadata);
+      await this.index.addOne(indexedDocument);
+
+      consoleLog('Document successfully indexed!');
 
       return docMetadata;
     }
@@ -286,6 +307,62 @@ class DocumentDownloader {
     catch (err) {
       consoleError('Error while previewing downloaded document!', err);
       throw new Error('Error while previewing downloaded document!', err);
+    }
+  }
+
+  // Delete all documents from database and index
+  async deleteOne(docId) {
+    try {
+      let p1 = await Document.deleteOne({ docId: docId });
+      let p2 = await this.index.deleteOne();
+
+      return true;
+    }
+    catch (err) {
+      consoleError('Error while deleting all documents!', err);
+      throw new Error('Error while deleting all documents!', err);
+    }
+  }
+
+  // Delete all documents from database and index
+  async deleteAll() {
+    try {
+      let p1 = await Document.deleteMany({});
+      let p2 = await this.index.deleteAll();
+
+      return true;
+    }
+    catch (err) {
+      consoleError('Error while deleting all documents!', err);
+      throw new Error('Error while deleting all documents!', err);
+    }
+  }
+
+  // Recreates all documents on inverted index (based on database)
+  async reindex() {
+    try {
+      let p1 = await Document.find();
+      let p2 = await this.index.deleteAll();
+
+      let newDocs = p1.map(element => {
+        return {
+          docId_s: element.docId,
+          locale_s: element.locale,
+          title_t: element.title,
+          snippet_t: element.snippet,
+          body_t: element.body,
+          keywords_t: element.keywords,
+          url_s: element.url
+        }
+      });
+
+      let p3 = await this.index.addMany(newDocs);
+
+      return true;
+    }
+    catch (err) {
+      consoleError('Error while reindexing', err);
+      throw new Error('Error while reindexing', err);
     }
   }
 }
