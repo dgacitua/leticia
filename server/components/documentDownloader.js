@@ -261,7 +261,8 @@ class DocumentDownloader {
         snippet_t: docMetadata.snippet,
         body_t: docMetadata.body,
         keywords_t: docMetadata.keywords,
-        url_s: docMetadata.url
+        url_s: docMetadata.url,
+        path_s: docMetadata.path
       }
       
       await Document.create(docMetadata);
@@ -352,7 +353,8 @@ class DocumentDownloader {
           snippet_t: element.snippet,
           body_t: element.body,
           keywords_t: element.keywords,
-          url_s: element.url
+          url_s: element.url,
+          path_s: element.path
         }
       });
 

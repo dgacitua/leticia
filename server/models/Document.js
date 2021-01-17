@@ -5,7 +5,8 @@ import { dataDb, userDb } from '../db';
 const documentSchema = Mongoose.Schema({
   docId: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   locale: {
     type: String,

@@ -10,7 +10,8 @@ let exampleDocument = {
   snippet_t: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   body_t: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum volutpat semper eleifend. Aliquam erat volutpat. Quisque efficitur ullamcorper tortor, nec imperdiet nibh sollicitudin ut. Cras libero quam, porttitor sit amet pellentesque sed, lacinia eget dolor. Nam vulputate non arcu vel viverra. Duis vitae arcu eu lacus accumsan aliquet.',
   keywords_t: [ 'lorem', 'elit' ],
-  url_s: 'www.myexample.com'
+  url_s: 'www.myexample.com',
+  path_s: ''
 };
 
 const DOCS_PER_PAGE = 10;
