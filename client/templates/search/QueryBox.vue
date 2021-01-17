@@ -57,7 +57,10 @@
       <div id="serp-results" v-else-if="serpStatus === 'results'">
         <b-row v-for="(doc, index) in searchResults" :key="index">
           <b-col>
-            <pre>{{ doc }}</pre>
+            <div class="result-url">{{ doc.url_s }}</div>
+            <div class="result-title">{{ doc.title_t }}</div>
+            <div class="result-snippet" v-html="doc.searchSnippet"></div>
+            <br>
           </b-col>
         </b-row>
       </div>
@@ -134,5 +137,25 @@ export default {
 </script>
 
 <style scoped>
+.result-title {
+  font-family: arial, sans-serif;
+  font-size: 20px;
+  color: #1a0dab;
+}
 
+.result-url {
+  font-family: arial, sans-serif;
+  font-size: 14px;
+  color: #5f6368;
+}
+
+.result-snippet {
+  font-family: arial, sans-serif;
+  font-size: 14px;
+  color: #4d5156;
+}
+
+.result-snippet >>> .hl {
+  font-weight: bold;
+}
 </style>
