@@ -25,6 +25,7 @@ import TaskReady from '../templates/queryPlanning/TaskReady.vue';
 import TaskForm from '../templates/queryPlanning/TaskForm.vue';
 //import TaskSelector from '../templates/queryPlanning/TaskSelector.vue';
 import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
+import QueryWriter2 from '../templates/queryPlanning/QueryWriter2.vue';
 import Search from "../templates/Search.vue";
 import Redirect2 from '../templates/search/Redirect.vue';
 import QueryBox from "../templates/search/QueryBox.vue";
@@ -126,6 +127,14 @@ const router = new VueRouter({
       component: Instructions,
       meta: {
         auth: true
+      }
+    },
+    {
+      path: '/query2',
+      name: 'query2',
+      component: QueryWriter2,
+      meta: {
+        auth: false
       }
     },
     {
