@@ -2,7 +2,7 @@ import express from 'express';
 
 import { consoleError } from '../utils';
 
-import Action from '../models/Actions';
+import Action from '../models/Action';
 
 const router = express.Router();
 

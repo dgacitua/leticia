@@ -2,8 +2,8 @@ import express from 'express';
 
 import { consoleError } from '../utils';
 
-import Form from '../models/Forms';
-import Question from '../models/Questions';
+import Form from '../models/Form';
+import Question from '../models/Question';
 
 const router = express.Router();
 

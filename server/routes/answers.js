@@ -2,7 +2,7 @@ import express from 'express';
 
 import { consoleError } from '../utils';
 
-import Answer from '../models/Answers';
+import Answer from '../models/Answer';
 
 const router = express.Router();
 
