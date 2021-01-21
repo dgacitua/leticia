@@ -16,10 +16,13 @@ import ScrollAction from './ScrollAction';
 import SearchTask from './SearchTask';
 import Credential from './Credential';
 import UserData from './UserData';
-import SessionFlow from './SessionFlows';
+import SessionFlow from './SessionFlow';
 import UserLog from './UserLog';
 import Consent from './Consent';
 import Document from './Document';
+import Query from './Query';
+import TaskRequest from './TaskRequest';
+import ServerConfig from './ServerConfig';
 
 const db = {};
 
@@ -44,10 +47,14 @@ db.sessionflow = SessionFlow;
 db.userlog = UserLog;
 db.consent = Consent;
 db.document = Document;
+db.query = Query;
+db.taskrequest = TaskRequest;
+db.serverconfig = ServerConfig;
 
 db.ROLES = [ 'user', 'admin' ];
 
-const initial = () => {
+const initial = async () => {
+  // dgacitua: Create roles
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
       new Role({
@@ -70,6 +77,9 @@ const initial = () => {
         console.log("Added 'admin' to roles collection");
       });
     }
+
+    // dgacitua: Create Server configs
+    ServerConfig.findOneAndUpdate({ configName: 'TaskRequestCount' }, { configName: 'TaskRequestCount' }, { new: true, upsert: true });
   });
 };
 

@@ -87,7 +87,7 @@ export default {
 
   methods: {
     importTasks() {
-      return Axios.get(`${Constants.backendApiUrl}/tasks/shuffle`)
+      return Axios.get(`${Constants.backendApiUrl}/tasks/shuffle?username=${this.currentUser.username}`)
         .then((res) => {
           this.$store.commit({ type: 'setTasks', tasks: res.data });
           console.log('Search Tasks loaded!');
