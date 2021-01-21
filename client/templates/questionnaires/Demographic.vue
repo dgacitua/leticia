@@ -12,14 +12,15 @@
           label="Sexo"
           label-for="input-sex"
           >
-          <b-form-select
+          <b-form-radio-group
             id="input-sex"
             v-model="form.sex"
             :options="sex"
             required
             >
-          </b-form-select>
+          </b-form-radio-group>
         </b-form-group>
+        <br>
         <!-- Age -->
         <b-form-group
           id="input-group-age"
@@ -36,33 +37,35 @@
             >
           </b-form-input>
         </b-form-group>
+        <br>
         <!-- Handedness -->
         <b-form-group
           id="input-group-handedness"
           label="¿Cúal es su mano dominante al escribir?"
           label-for="input-handedness"
         >
-          <b-form-select
+          <b-form-radio-group
             id="input-handedness"
             v-model="form.handedness"
             :options="handedness"
             required
           >
-          </b-form-select>
+          </b-form-radio-group>
         </b-form-group>
+        <br>
         <!-- NativeLanguage -->
         <b-form-group
           id="input-group-language"
           label="¿Cúal es su idioma nativo?"
           label-for="input-language"
         >
-          <b-form-select
+          <b-form-radio-group
             id="input-language"
             v-model="form.language"
             :options="language"
             required
           >
-          </b-form-select>
+          </b-form-radio-group>
         </b-form-group>
         <b-form-group
           v-if="form.language === 'Other'"
@@ -78,19 +81,20 @@
           >
           </b-form-input>
         </b-form-group>
+        <br>
         <!-- KeyboardLayout -->
         <b-form-group
           id="input-group-keyboard"
           label="¿Cúal es la distribución de su teclado?"
           label-for="input-keyboard"
         >
-          <b-form-select
+          <b-form-radio-group
             id="input-keyboard"
             v-model="form.keyboardLayout"
             :options="keyboardLayout"
             required
           >
-          </b-form-select>
+          </b-form-radio-group>
         </b-form-group>
         <b-form-group
           v-if="form.keyboardLayout === 'Other'"
@@ -106,19 +110,20 @@
           >
           </b-form-input>
         </b-form-group>
+        <br>
         <!-- FavoriteSearchEngine -->
         <b-form-group
           id="input-group-searchengine"
           label="¿Cual es su motor de búsqueda web preferido?"
           label-for="input-searchengine"
         >
-          <b-form-select
+          <b-form-radio-group
             id="input-searchengine"
             v-model="form.searchEngine"
             :options="searchEngine"
             required
           >
-          </b-form-select>
+          </b-form-radio-group>
         </b-form-group>
         <b-form-group
           v-if="form.searchEngine === 'Other'"
@@ -134,6 +139,7 @@
           >
           </b-form-input>
         </b-form-group>
+        <br>
         <!-- Education -->
         <b-form-group
           id="input-group-education"
@@ -149,20 +155,7 @@
           >
           </b-form-select>
         </b-form-group>
-        <!-- IsStudent? -->
-        <b-form-group
-          id="input-group-student"
-          label="¿Está estudiando una carrera ahora?"
-          label-for="input-student"
-        >
-          <b-form-select
-            id="input-student"
-            v-model="form.isStudent"
-            :options="isStudent"
-            required
-          >
-          </b-form-select>
-        </b-form-group>
+        <br>
         <!-- Career -->
         <b-form-group
           id="input-group-career"
@@ -176,34 +169,52 @@
           >
           </b-form-input>
         </b-form-group>
+        <br>
+        <!-- IsStudent? -->
+        <b-form-group
+          id="input-group-student"
+          label="¿Está estudiando ahora?"
+          label-for="input-student"
+        >
+          <b-form-radio-group
+            id="input-student"
+            v-model="form.isStudent"
+            :options="isStudent"
+            required
+          >
+          </b-form-radio-group>
+        </b-form-group>
+        <br>
         <!-- HasDyslexia? -->
         <b-form-group
           id="input-group-dyslexia"
           label="¿Usted tiene Dislexia?"
           label-for="input-dyslexia"
           >
-          <b-form-select
+          <b-form-radio-group
             id="input-dyslexia"
             v-model="form.hasDyslexia"
             :options="hasDyslexia"
             required
             >
-          </b-form-select>
+          </b-form-radio-group>
         </b-form-group>
+        <br>
         <!-- HasColorBlindness -->
         <b-form-group
           id="input-group-colorblindness"
           label="¿Usted tiene algún tipo de Daltonismo?"
           label-for="input-colorblindness"
           >
-          <b-form-select
+          <b-form-radio-group
             id="input-colorblindness"
             v-model="form.hasColorBlindness"
             :options="hasColorBlindness"
             required
             >
-          </b-form-select>
+          </b-form-radio-group>
         </b-form-group>
+        <br>
         <!-- Country -->
         <b-form-group
           id="input-group-country"
@@ -226,6 +237,7 @@
             </template>
           </v-select>
         </b-form-group>
+        <br>
         <!-- Region -->
         <b-form-group
           id="input-group-region"
@@ -258,6 +270,7 @@
           >
           </b-form-input>
         </b-form-group>
+        <br>
         <!-- City -->
         <b-form-group
           id="input-group-city"
@@ -290,6 +303,7 @@
           >
           </b-form-input>
         </b-form-group>
+        <br>
         <!-- Town -->
         <b-form-group
           id="input-group-town"
@@ -304,6 +318,7 @@
           >
           </b-form-input>
         </b-form-group>
+        <br>
         <!-- Submit -->
         <b-row>
           <b-col class="text-right">
