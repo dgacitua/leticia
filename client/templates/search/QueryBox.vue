@@ -156,6 +156,7 @@ export default {
 }
 
 .result-snippet >>> .hl {
+  font-style: normal;
   font-weight: bold;
 }
 </style>

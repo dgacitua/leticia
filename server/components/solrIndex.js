@@ -122,8 +122,6 @@ class SolrIndex {
           let searchDocs = searchResponse.response.docs;
           let searchHl = searchResponse.highlighting;
 
-          consoleLog('New Search!', searchHl);
-
           searchDocs.forEach((doc) => {
             let docId = doc.id;
             let docObj = doc;
