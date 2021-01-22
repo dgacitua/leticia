@@ -3,6 +3,18 @@
     <b-row>
       <h1>Panel del usuario</h1>
     </b-row>
+    <br>
+    <b-row>
+      <b-col>
+        Porcentaje del desafío completado:
+        <b-progress :max="100" height="2rem">
+          <b-progress-bar :value="completedPerc">
+            <span><strong>{{ completedPerc }}%</strong> completado</span>
+          </b-progress-bar>
+        </b-progress>
+      </b-col>
+    </b-row>
+    <br>
     <b-row class="text-center">
       <b-col>
         <b-button @click="resumeStudy" variant="success">Ir a la prueba</b-button>            
@@ -27,6 +39,11 @@ export default {
     },
     currentUser() {
       return this.$store.state.auth.user;
+    },
+    completedPerc() {
+      let flowIndex = this.$store.getters.flowIndex || 0;
+      let sessionLength = this.$store.getters.sessionFlow.stages.length || 1;
+      return Math.round((flowIndex / sessionLength) * 100);
     }
   },
 

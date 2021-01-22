@@ -72,7 +72,6 @@ class ActionSenderService {
       clientTimestamp: Date.now(),
       details: {
         // dgacitua: Remember to split by whitespace when processing
-        // TODO get IP address
         ipAddress: '',
         userAgent: userAgent,
         device: `${parsedUserAgent.device.type} ${parsedUserAgent.device.vendor} ${parsedUserAgent.device.model}`,
