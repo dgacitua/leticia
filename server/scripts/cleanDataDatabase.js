@@ -14,3 +14,7 @@ db.sessionflows.drop();
 db.users.drop();
 db.userdata.drop();
 db.userlogs.drop();
+db.documents.drop();
+db.queries.drop();
+db.taskrequests.drop();
+db.serverconfigs.drop();
