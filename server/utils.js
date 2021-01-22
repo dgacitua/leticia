@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import formatDate from 'date-fns/format';
 
-export const currentDate = () => { return formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss z') };
+export const currentDate = () => { return formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss z') };
 export const cloneObject = (...obj) => { return Object.assign({}, ...obj) };
 export const flattenArray = (arr) => { return [].concat(...arr) };
 export const stringToInt = (stringNumber) => {  return !isNaN(stringNumber) ? parseInt(stringNumber) : null };
