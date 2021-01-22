@@ -171,7 +171,7 @@ export const googleLogin = async (req, res) => {
         res.cookie('sessionflow', JSON.stringify(sessionFlow));
         res.cookie('userdata', JSON.stringify(userdata.state));
 
-        consoleLog('OAuthLogin', 'Google', jwtData, sessionFlow, userdata.state);
+        //consoleLog('OAuthLogin', 'Google', jwtData, sessionFlow, userdata.state);
 
         return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
         //return res.status(200).send(jwtData);
@@ -227,7 +227,7 @@ export const googleLogin = async (req, res) => {
       res.cookie('jwt', JSON.stringify(jwtData));
       res.cookie('sessionflow', JSON.stringify(sessionFlow));
       
-      consoleLog('OAuthRegister', 'Google', jwtData, sessionFlow);
+      //consoleLog('OAuthRegister', 'Google', jwtData, sessionFlow);
 
       return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
       //return res.status(200).send(jwtData);
@@ -293,7 +293,7 @@ export const facebookLogin = async (req, res) => {
         res.cookie('sessionflow', JSON.stringify(sessionFlow));
         res.cookie('userdata', JSON.stringify(userdata.state));
 
-        consoleLog('OAuthLogin', 'Facebook', jwtData, sessionFlow, userdata.state);
+        //consoleLog('OAuthLogin', 'Facebook', jwtData, sessionFlow, userdata.state);
 
         return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
         //return res.status(200).send(jwtData);
@@ -351,7 +351,7 @@ export const facebookLogin = async (req, res) => {
       res.cookie('jwt', JSON.stringify(jwtData));
       res.cookie('sessionflow', JSON.stringify(sessionFlow));
 
-      consoleLog('OAuthRegister', 'Facebook', jwtData, sessionFlow);
+      //consoleLog('OAuthRegister', 'Facebook', jwtData, sessionFlow);
       
       return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
       //return res.status(200).send(jwtData);
