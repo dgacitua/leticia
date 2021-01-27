@@ -53,7 +53,7 @@ db.serverconfig = ServerConfig;
 
 db.ROLES = [ 'user', 'admin' ];
 
-const initial = async () => {
+const initial = () => {
   // dgacitua: Create roles
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
