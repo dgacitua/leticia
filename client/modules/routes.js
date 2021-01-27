@@ -23,12 +23,12 @@ import Redirect1 from '../templates/queryPlanning/Redirect.vue';
 import TaskDescription from '../templates/queryPlanning/TaskDescription.vue';
 import TaskReady from '../templates/queryPlanning/TaskReady.vue';
 import TaskForm from '../templates/queryPlanning/TaskForm.vue';
-//import TaskSelector from '../templates/queryPlanning/TaskSelector.vue';
 import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
 import QueryWriter2 from '../templates/queryPlanning/QueryWriter2.vue';
-import Search from "../templates/Search.vue";
+import Search from '../templates/Search.vue';
 import Redirect2 from '../templates/search/Redirect.vue';
-import QueryBox from "../templates/search/QueryBox.vue";
+import QueryBox from '../templates/search/QueryBox.vue';
+import DisplayPage from '../templates/search/DisplayPage.vue'
 import Profile from '../templates/Profile.vue';
 import ShortChallenge from '../templates/ShortChallenge.vue';
 import ExtendedChallenge from '../templates/ExtendedChallenge.vue';
@@ -194,6 +194,10 @@ const router = new VueRouter({
               component: QueryBox
             }
           ]
+        },
+        {
+          path: 'page',
+          component: DisplayPage,
         },
         /*{
           path: 'ready',

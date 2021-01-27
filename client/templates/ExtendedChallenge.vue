@@ -1,13 +1,16 @@
 <template>
-  <b-container id="extended-challenge">
+  <b-container fluid id="extended-challenge">
     <!--
     <b-row>
       <div><h1>¡Desafío Extendido!</h1><div>
     </b-row>
     -->
     <b-row>
-      <router-view id="current-stage"></router-view>
+      <b-col>
+        <router-view id="current-stage"></router-view>
+      </b-col>
     </b-row>
+    <!--
     <hr>
     <b-row>
       <div>
@@ -20,6 +23,7 @@
         <pre>{{ currentStages }}</pre>
       </div>
     </b-row>
+    -->
   </b-container>
 </template>
 
@@ -151,4 +155,9 @@ export default {
 </script>
 
 <style scoped>
+.full-window {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
 </style>

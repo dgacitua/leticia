@@ -58,7 +58,11 @@
         <b-row v-for="(doc, index) in searchResults" :key="index">
           <b-col>
             <div class="result-url">{{ doc.url_s }}</div>
-            <div class="result-title">{{ doc.title_t }}</div>
+            <div class="result-title">
+              <b-link :to="{ path: '/extended-challenge/page', query: { id: doc.docId_s, url: doc.path_s }}">
+                {{ doc.title_t }}
+              </b-link>
+              </div>
             <div class="result-snippet" v-html="doc.searchSnippet"></div>
             <br>
           </b-col>

@@ -1,5 +1,5 @@
 <template>
-  <b-container id="search-stage">
+  <b-container fluid id="search-stage">
     <b-row>
       <b-col>
         <router-view id="search-view"></router-view>
