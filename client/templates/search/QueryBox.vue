@@ -12,8 +12,8 @@
         <b-col cols="10">
           <b-input-group size="lg">
             <!-- TODO Add trackers -->
-            <b-form-input id="query-box" v-model="query" @keydown.enter="searchQuery"></b-form-input>
-            <b-button variant="success" @click="searchQuery">
+            <b-form-input id="query-box" v-model="query" @keydown.enter="doSearch"></b-form-input>
+            <b-button variant="success" @click="doSearch">
               <font-awesome-icon :icon="['fas', 'search']"></font-awesome-icon>
               Buscar
             </b-button>
@@ -29,8 +29,8 @@
         <b-col cols="9">
           <b-input-group size="lg">
             <!-- TODO Add trackers -->
-            <b-form-input id="query-box" v-model="query" @keydown.enter="searchQuery"></b-form-input>
-            <b-button variant="success" @click="searchQuery">
+            <b-form-input id="query-box" v-model="query" @keydown.enter="doSearch"></b-form-input>
+            <b-button variant="success" @click="doSearch">
               <font-awesome-icon :icon="['fas', 'search']"></font-awesome-icon>
               Buscar
             </b-button>
@@ -67,6 +67,20 @@
             <br>
           </b-col>
         </b-row>
+        <b-row>
+          <b-col>
+            <b-pagination-nav
+              v-model="currentPage"
+              :link-gen="queryPage"
+              :number-of-pages="numPages"
+              align="center"
+              first-number
+              last-number
+              use-router
+            >
+            </b-pagination-nav>
+          </b-col>
+        </b-row>
       </div>
       <div id="serp-other" v-else>
         <b-row class="text-center">
@@ -86,6 +100,8 @@ import * as Constants from '../../services/Constants';
 
 import Logo from '../../assets/leticia-logo-search.png';
 
+const DOCS_PER_PAGE = 10;
+
 export default {
   name: 'QueryBox',
 
@@ -93,11 +109,12 @@ export default {
     return {
       logo: Logo,
       query: '',
-      displayFullSearch: false,
-      serpStatus: 'results',
+      displayFullSearch: true,
+      serpStatus: 'loading',
       searchResults: [],
       numResults: 0,
-      numStart: 0
+      currentPage: 1,
+      perPage: DOCS_PER_PAGE
     }
   },
 
@@ -107,17 +124,37 @@ export default {
     },
     currentUser() {
       return this.$store.state.auth.user;
+    },
+    numPages() {
+      return Math.floor(this.numResults / this.perPage) + 1;
     }
   },
 
-  methods: {
-    searchQuery() {
-      let query = this.query;
+  created() {
+    this.doSearch();
+  },
 
-      if (query.length > 0) {
+  methods: {
+    doSearch() {
+      this.query = this.query || '';
+      this.currentPage = this.$route.query.p || 1;
+
+      if (this.query.length > 0) {
+        // dgacitua: https://stackoverflow.com/a/62125496
+        this.$router.push({ path: '/extended-challenge/search', query: { q: this.query, p: (this.currentPage || 1), t: Date.now() }});
+
+        this.searchQuery();
+        this.displayFullSearch = false;
+      }
+      else {
+        this.displayFullSearch = true;
+      }
+    },
+    searchQuery() {
+      if (this.query.length > 0) {
         this.serpStatus = 'loading';
         
-        Axios.get(`${Constants.backendApiUrl}/search?q=${query}`)
+        Axios.get(`${Constants.backendApiUrl}/search?q=${this.query}&p=${this.currentPage || 1}`)
           .then((res) => {
             this.displayFullSearch = false;
             this.numResults = res.data.result.numFound || 0;
@@ -135,6 +172,9 @@ export default {
             this.serpStatus = 'empty'
           });
       }
+    },
+    queryPage(pageNum) {
+      return { path: '/extended-challenge/search', query: { q: this.query, p: pageNum, t: Date.now() }};
     }
   }
 }
