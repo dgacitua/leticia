@@ -27,7 +27,8 @@ const store = new Vuex.Store({
     stages: [],
     currentRoute: {},
     sessionFlow: {},
-    hasAcceptedConsent: false
+    hasAcceptedConsent: false,
+    lastVisitedPageUrl: ''
   },
   getters: {
     userData: (state) => {
@@ -40,7 +41,8 @@ const store = new Vuex.Store({
         stages: state.stages,
         stageIndex: state.stageIndex,
         flowIndex: state.flowIndex,
-        hasAcceptedConsent: state.hasAcceptedConsent
+        hasAcceptedConsent: state.hasAcceptedConsent,
+        lastVisitedPageUrl: state.lastVisitedPageUrl
       };
     },
     timer: (state) => {
@@ -64,6 +66,9 @@ const store = new Vuex.Store({
     },
     sessionFlow: (state) => {
       return state.sessionFlow;
+    },
+    lastVisitedPageUrl: (state) => {
+      return state.lastVisitedPageUrl;
     }
   },
   mutations: {
@@ -119,6 +124,9 @@ const store = new Vuex.Store({
     },
     setSessionFlow(state, payload) {
       state.sessionFlow = payload.sessionFlow;
+    },
+    setLastVisitedPageUrl(state, payload) {
+      state.lastVisitedPageUrl = payload.url;
     },
     eraseAll(state) {
       state.timerTime = null;

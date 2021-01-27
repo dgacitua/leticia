@@ -1,10 +1,10 @@
 <template>
   <b-container fluid id="display-page" class="full-window">
-    <div v-if="pageId==='' && pageUrl===''">
-      <h2>No se puede mostrar la página</h2>
+    <div v-if="renderPage">
+      <b-embed type="iframe" :src="pageUrl"></b-embed>
     </div>
     <div v-else>
-      <b-embed type="iframe" :src="pageUrl"></b-embed>
+      <h2>No se puede mostrar la página</h2>
     </div>
   </b-container>
 </template>
@@ -16,7 +16,8 @@ export default {
   data() {
     return {
       pageUrl: '',
-      pageId: ''
+      pageId: '',
+      renderPage: false
     }
   },
 
@@ -26,9 +27,25 @@ export default {
 
   methods: {
     visitPage() {
-      this.pageUrl = !!(this.$route.query.url) ? `${Constants.backendUrl}${decodeURI(this.$route.query.url)}` : '';
-      this.pageId = !!(this.$route.query.id) ? decodeURI(this.$route.query.id) : '';
+      if (!!this.$route.query.id && !!this.$route.params.url) {
+        this.$store.commit({ type: 'setLastVisitedPageUrl', url: this.$route.params.url });
+        this.pageUrl = `${Constants.backendUrl}${this.$route.params.url}`;
+        this.pageId = this.$route.query.id || '';
+        this.renderPage = true;
+      }
+      else {
+        let lastPage = this.$store.getters.lastVisitedPageUrl;
 
+        if (!!lastPage) {
+          this.pageUrl = `${Constants.backendUrl}${lastPage}`;
+          this.pageId = this.$route.query.id || '';
+          this.renderPage = true;
+        }
+        else {
+          this.renderPage = false;
+        }
+      }
+      
       console.log('Visiting page!', this.pageId, this.pageUrl);
     },
     goBack() {

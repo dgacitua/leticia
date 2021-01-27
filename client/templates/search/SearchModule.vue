@@ -59,7 +59,7 @@
           <b-col>
             <div class="result-url">{{ doc.url_s }}</div>
             <div class="result-title">
-              <b-link :to="{ path: '/extended-challenge/page', query: { id: doc.docId_s, url: doc.path_s }}">
+              <b-link :to="{ name: 'page', query: { id: doc.docId_s }, params: { url: doc.path_s }}">
                 {{ doc.title_t }}
               </b-link>
               </div>

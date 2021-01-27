@@ -19,15 +19,12 @@ import Instructions from '../templates/Instructions.vue';
 import Login from '../templates/auth/Login.vue';
 import Register from '../templates/auth/Register.vue';
 import OAuth from '../templates/auth/OAuth.vue';
-import Redirect1 from '../templates/queryPlanning/Redirect.vue';
 import TaskDescription from '../templates/queryPlanning/TaskDescription.vue';
 import TaskReady from '../templates/queryPlanning/TaskReady.vue';
 import TaskForm from '../templates/queryPlanning/TaskForm.vue';
 import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
 import QueryWriter2 from '../templates/queryPlanning/QueryWriter2.vue';
-import Search from '../templates/Search.vue';
-import Redirect2 from '../templates/search/Redirect.vue';
-import QueryBox from '../templates/search/QueryBox.vue';
+import SearchModule from '../templates/search/SearchModule.vue';
 import DisplayPage from '../templates/search/DisplayPage.vue'
 import Profile from '../templates/Profile.vue';
 import ShortChallenge from '../templates/ShortChallenge.vue';
@@ -147,15 +144,12 @@ const router = new VueRouter({
     },
     {
       path: '/short-challenge',
+      name: 'short-challenge',
       component: ShortChallenge,
       meta: {
         auth: true
       },
       children: [
-        {
-          path: '',
-          component: Redirect1,
-        },
         {
           path: 'ready',
           component: TaskReady,
@@ -176,27 +170,20 @@ const router = new VueRouter({
     },
     {
       path: '/extended-challenge',
+      name: 'extended-challenge',
       component: ExtendedChallenge,
       meta: {
         auth: false
       },
       children: [
         {
-          path: '',
-          component: Redirect2,
-        },
-        {
           path: 'search',
-          component: Search,
-          children: [
-            {
-              path: '',
-              component: QueryBox
-            }
-          ]
+          name: 'search',
+          component: SearchModule,
         },
         {
           path: 'page',
+          name: 'page',
           component: DisplayPage,
         },
         /*{
