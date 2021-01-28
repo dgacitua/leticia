@@ -3,14 +3,16 @@ import { UAParser } from 'ua-parser-js';
 
 import { router } from '../modules/routes';
 import { store } from '../modules/store';
+
 import * as Constants from './Constants';
+import { getNestedValue } from './Utils';
 
 const API_URL = `${Constants.backendApiUrl}`;
 
 class ActionSenderService {
   constructor(senderId) {
     this.senderId = senderId;
-    this.username = store.state.auth.user.username || null;
+    this.username = getNestedValue(store, 'state.auth.user.username') || '';
   }
 
   sendKeystrokeBuffer(ksBufferArray) {
@@ -83,6 +85,18 @@ class ActionSenderService {
     console.log('UserLog', message);
     return Axios.post(API_URL + '/actions', message);
     */
+  }
+
+  sendMouseAction(mouseAction) {
+    let message = {
+      ...mouseAction,
+      username: this.username,
+      source: this.senderId,
+      url: router.currentRoute.fullPath,
+    };
+
+    console.log(message);
+    //return Axios.post(API_URL + '/actions', message);
   }
 
   sendGenericAction(originalMsg) {

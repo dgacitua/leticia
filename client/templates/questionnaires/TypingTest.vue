@@ -78,7 +78,7 @@ import EventBus from '../../modules/eventBus';
 import { deepCopy, findNextWordPosition, getWordBoundsAtPosition } from '../../services/Utils';
 
 export default {
-  name: 'demographic',
+  name: 'typing-test',
 
   data() {
     return {

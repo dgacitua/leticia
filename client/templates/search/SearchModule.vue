@@ -57,13 +57,15 @@
       <div id="serp-results" v-else-if="serpStatus === 'results'">
         <b-row v-for="(doc, index) in searchResults" :key="index">
           <b-col>
-            <div class="result-url">{{ doc.url_s }}</div>
-            <div class="result-title">
-              <b-link :to="{ name: 'page', query: { id: doc.docId_s }, params: { url: doc.path_s }}">
-                {{ doc.title_t }}
-              </b-link>
-              </div>
-            <div class="result-snippet" v-html="doc.searchSnippet"></div>
+            <div :id="`search-result-${doc.ranking}`" @mouseenter="mouseenter($event, doc.ranking)">
+              <div class="result-url">{{ doc.url_s }}</div>
+              <div class="result-title">
+                <b-link :to="{ name: 'page', query: { id: doc.docId_s }, params: { url: doc.path_s }}">
+                  {{ doc.title_t }}
+                </b-link>
+                </div>
+              <div class="result-snippet" v-html="doc.searchSnippet"></div>
+            </div>
             <br>
           </b-col>
         </b-row>
@@ -97,16 +99,26 @@
 import Axios from 'axios';
 
 import * as Constants from '../../services/Constants';
+import ActionHandler from '../../trackers/ActionHandler';
+import MouseHandler from '../../trackers/MouseHandler';
+import KeystrokeHandler from '../../trackers/KeystrokeHandler';
+import ScrollHandler from '../../trackers/ScrollHandler';
+import ActionSender from '../../services/ActionSender';
 
 import Logo from '../../assets/leticia-logo-search.png';
 
 const DOCS_PER_PAGE = 10;
 
 export default {
-  name: 'QueryBox',
+  name: 'search',
 
   data() {
     return {
+      mHandler: new MouseHandler('Search'),
+      ksHandler: new KeystrokeHandler('Search'),
+      scHandler: new ScrollHandler('Search'),
+      actionHandler: new ActionHandler('Search'),
+      sender: new ActionSender('Search'),
       logo: Logo,
       query: '',
       displayFullSearch: true,
@@ -175,6 +187,11 @@ export default {
     },
     queryPage(pageNum) {
       return { path: '/extended-challenge/search', query: { q: this.query, p: pageNum, t: Date.now() }};
+    },
+    mouseenter(evt, ranking) {
+      let me = this.mHandler.enter(evt, ranking);
+
+      this.sender.sendMouseAction(me);
     }
   }
 }
