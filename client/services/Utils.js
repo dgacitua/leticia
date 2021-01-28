@@ -45,6 +45,14 @@ export const toHHMMSS = (secs) => {
     .join(":");
 };
 
+// dgacitua: Export value of nested object where key can be null
+// https://stackoverflow.com/a/23809123
+export const getNestedValue = (obj, key) => {
+  return key.split(".").reduce((o, x) => {
+      return (typeof o == "undefined" || o === null) ? o : o[x];
+  }, obj);
+}
+
 // dgacitua: Get word bounds at position
 // https://stackoverflow.com/a/58403800
 export const getWordBoundsAtPosition = (str, position) => {
