@@ -122,7 +122,7 @@ class SolrIndex {
           let searchDocs = searchResponse.response.docs;
           let searchHl = searchResponse.highlighting;
 
-          searchDocs.forEach((doc) => {
+          searchDocs.forEach((doc, idx, arr) => {
             let docId = doc.id;
             let docObj = doc;
             let searchSnippet = '';
@@ -135,6 +135,7 @@ class SolrIndex {
             }
 
             docObj.searchSnippet = searchSnippet || docObj.snippet_t;
+            docObj.ranking = searchStart + idx + 1;
             
             delete docObj.body_t;
 
