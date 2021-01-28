@@ -11,6 +11,7 @@
       <b-form-textarea
         v-model="props.answer"
         :required="props.required"
+        :id="`paragraph-${props.questionId}`"
         :name="`paragraph-${props.questionId}`"
         @focus="focus"
         @blur="blur"
