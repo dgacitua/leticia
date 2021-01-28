@@ -28,7 +28,7 @@ const store = new Vuex.Store({
     currentRoute: {},
     sessionFlow: {},
     hasAcceptedConsent: false,
-    lastVisitedPageUrl: ''
+    lastVisitedPageUrl: null
   },
   getters: {
     userData: (state) => {
@@ -139,6 +139,7 @@ const store = new Vuex.Store({
       state.currentRoute = {};
       state.sessionFlow = {};
       state.hasAcceptedConsent = false;
+      state.lastVisitedPageUrl = null;
     }
   },
   actions: {
