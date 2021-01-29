@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container id="search-window">
     <br>
     <div id="full-search" v-if="displayFullSearch">
       <b-row class="text-center" align-h="center">
@@ -60,7 +60,10 @@
             <div :id="`search-result-${doc.ranking}`" @mouseenter="mouseenter($event, doc.ranking)">
               <div class="result-url">{{ doc.url_s }}</div>
               <div class="result-title">
-                <b-link :to="{ name: 'page', query: { id: doc.docId_s }, params: { url: doc.path_s }}">
+                <b-link 
+                  :to="{ name: 'page', query: { id: doc.docId_s }, params: { url: doc.path_s }}"
+                  @click.native="searchResultClick($event, doc)"
+                >
                   {{ doc.title_t }}
                 </b-link>
                 </div>
@@ -76,6 +79,7 @@
               :link-gen="queryPage"
               :number-of-pages="numPages"
               align="center"
+              @click.native="pagination($event, currentPage)"
               first-number
               last-number
               use-router
@@ -142,8 +146,13 @@ export default {
     }
   },
 
-  created() {
+  mounted() {
+    this.scHandler.bindTracker();
     this.doSearch();
+  },
+
+  beforeDestroy() {
+    this.scHandler.unbindTracker();
   },
 
   methods: {
@@ -191,7 +200,23 @@ export default {
     mouseenter(evt, ranking) {
       let me = this.mHandler.enter(evt, ranking);
 
-      this.sender.sendMouseAction(me);
+      this.sender.sendMouseAction(me)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
+    },
+    pagination(evt, page) {
+      let act = this.actionHandler.pagination(evt, page);
+
+      this.sender.sendGenericAction(act)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
+    },
+    searchResultClick(evt, doc) {
+      let act = this.actionHandler.searchResultClick(evt, doc);
+
+      this.sender.sendGenericAction(act)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
     }
   }
 }

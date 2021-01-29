@@ -15,6 +15,9 @@ import userlog from './routes/userlog';
 import consent from './routes/consent';
 import search from './routes/search';
 import document from './routes/document';
+import mouseaction from './routes/mouseactions';
+import scrollaction from './routes/scrollactions';
+
 
 const router = express.Router();
 
@@ -33,5 +36,7 @@ router.use('/userlog', userlog);
 router.use('/consent', consent);
 router.use('/search', search);
 router.use('/documents', document);
+router.use('/mouseactions', mouseaction);
+router.use('/scrollactions', scrollaction);
 
 export default router;

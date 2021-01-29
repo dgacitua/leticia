@@ -95,8 +95,20 @@ class ActionSenderService {
       url: router.currentRoute.fullPath,
     };
 
-    console.log(message);
-    //return Axios.post(API_URL + '/actions', message);
+    //console.log(message);
+    return Axios.post(API_URL + '/mouseactions', message);
+  }
+
+  sendScrollAction(scrollAction) {
+    let message = {
+      ...scrollAction,
+      username: this.username,
+      source: this.senderId,
+      url: router.currentRoute.fullPath,
+    };
+
+    //console.log(message);
+    return Axios.post(API_URL + '/scrollactions', message);
   }
 
   sendGenericAction(originalMsg) {

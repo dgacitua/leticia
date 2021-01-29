@@ -5,7 +5,7 @@ import { dataDb, userDb } from '../db';
 const actionSchema = Mongoose.Schema({
   username: {
     type: String,
-    required: true
+    required: false // TODO login required
   },
   type: {
     type: String,

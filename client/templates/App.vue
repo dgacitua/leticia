@@ -67,7 +67,7 @@ export default {
       alert('Se ha acabado el tiempo!')
       EventBus.$emit('leticia-next-stage');
     });
-  },
+  }
 }
 </script>
 
