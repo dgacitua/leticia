@@ -457,7 +457,7 @@ export default {
           })
           .catch((err) => {
             console.error(err);
-            alert('Ha ocurrido un error');
+            alert('Ha ocurrido un error al enviar las respuestas [Código 467]');
           });
       }
     }

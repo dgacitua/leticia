@@ -84,7 +84,7 @@ export default {
       })
       .catch((err) => {
         console.error(err);
-        alert('Ha ocurrido un error');
+        alert('Ha ocurrido un error al cargar la tarea [Código 463]');
       });
   },
 
@@ -119,7 +119,7 @@ export default {
         })
         .catch((err) => {
           console.error(err);
-          alert('Ha ocurrido un error');
+          alert('Ha ocurrido un error al enviar las respuestas [Código 464]');
         });
 
       /*

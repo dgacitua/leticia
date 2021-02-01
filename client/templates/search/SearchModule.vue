@@ -189,7 +189,7 @@ export default {
           })
           .catch((err) => {
             console.error(err);
-            alert('Ha ocurrido un error al hacer la búsqueda');
+            alert('Ha ocurrido un error al hacer la búsqueda [Código 472]');
             this.serpStatus = 'empty'
           });
       }

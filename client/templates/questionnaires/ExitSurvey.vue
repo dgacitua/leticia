@@ -85,7 +85,7 @@ export default {
       })
       .catch((err) => {
         console.error(err);
-        alert('Ha ocurrido un error al cargar las preguntas');
+        alert('Ha ocurrido un error al cargar las preguntas [Código 468]');
       });
   },
 
@@ -113,7 +113,7 @@ export default {
           })
           .catch((err) => {
             console.error(err);
-            alert('Ha ocurrido un error al guardar las respuestas');
+            alert('Ha ocurrido un error al guardar las respuestas [Código 469]');
           });
       }
     }
