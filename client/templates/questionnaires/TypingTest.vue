@@ -106,8 +106,8 @@ export default {
     isValidInput() {
       let cond1 = !!this.currentResponse;
       let cond2 = this.currentResponse.length > 0;
-      let cond3 = StringSimilarity.compareTwoStrings(this.currentSample.text, this.currentResponse) >= 0.75;
-      // let cond3 = distance(this.currentSample.text, this.currentResponse) <= (this.currentSample.text.length * 0.75);
+      let cond3 = StringSimilarity.compareTwoStrings(this.currentSample.text, this.currentResponse) >= 0.9;
+      // let cond3 = distance(this.currentSample.text, this.currentResponse) <= (this.currentSample.text.length * 0.9);
       return cond1 && cond2 && cond3;
     },
     isLastSlide() {
