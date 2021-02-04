@@ -1,7 +1,7 @@
 <template>
   <b-container fluid id="display-page" class="full-window">
-    <div v-if="renderPage">
-      <b-embed type="iframe" :src="pageUrl"></b-embed>
+    <div v-if="renderPage" id="container" class="container-iframe">
+      <iframe id="iframe" class="display-iframe" :src="pageUrl"></iframe>
     </div>
     <div v-else>
       <h2>No se puede mostrar la página</h2>
@@ -58,7 +58,21 @@ export default {
 <style scoped>
 .full-window {
   width: 100%;
+  height: auto;
+  padding: 0;
+}
+
+.container-iframe {
+  display: flex;
+  width: 100%;
   height: 100%;
+  flex-direction: column;
+}
+
+.display-iframe {
+  flex-grow: 1;
+  border: none;
+  margin: 0;
   padding: 0;
 }
 </style>

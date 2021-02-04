@@ -1,15 +1,6 @@
 <template>
   <b-container fluid id="extended-challenge">
-    <!--
-    <b-row>
-      <div><h1>¡Desafío Extendido!</h1><div>
-    </b-row>
-    -->
-    <b-row>
-      <b-col>
-        <router-view id="current-stage"></router-view>
-      </b-col>
-    </b-row>
+    <router-view id="current-stage"></router-view>
     <!--
     <hr>
     <b-row>

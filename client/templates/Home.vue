@@ -33,7 +33,7 @@
       </b-col>
     </b-row>
     <br>
-    <b-row class="full-height text-center" align-v="center">
+    <b-row class="text-center" align-v="center">
       <b-col>
         <b-row align-h="center">
           <b-button-group>
