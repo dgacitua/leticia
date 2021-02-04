@@ -81,10 +81,12 @@
           <b-col>
             <div :id="`search-result-${doc.ranking}`" @mouseenter="mouseenter($event, doc.ranking)">
               <div class="result-url">{{ doc.url_s }}</div>
-              <div class="result-title">
-                <b-link 
+              <div>
+                <b-link
+                  class="result-title"
                   :to="{ name: 'page', query: { id: doc.docId_s }, params: { url: doc.path_s }}"
-                  @click.native="searchResultClick($event, doc)"
+                  @auxclick.prevent.stop
+                  @click="searchResultClick($event, doc)"
                 >
                   {{ doc.title_t }}
                 </b-link>
@@ -101,6 +103,7 @@
               :link-gen="queryPage"
               :number-of-pages="numPages"
               align="center"
+              @auxclick.native.prevent.stop
               @click.native="pagination($event, currentPage)"
               first-number
               last-number
