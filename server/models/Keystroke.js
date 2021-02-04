@@ -5,7 +5,7 @@ import { dataDb, userDb } from '../db';
 const keystrokeSchema = Mongoose.Schema({
   username: {
     type: String,
-    required: true
+    required: false // TODO login
   },
   type: {
     type: String,

@@ -11,8 +11,19 @@
       <b-row class="text-center" align-h="center">
         <b-col cols="10">
           <b-input-group size="lg">
-            <!-- TODO Add trackers -->
-            <b-form-input id="query-box" v-model="query" @keydown.enter="doSearch"></b-form-input>
+            <b-form-input
+              id="query-box"
+              name="query-box-full"
+              @focus="focus"
+              @blur="blur"
+              @keydown="keydown"
+              @keyup="keyup"
+              @keydown.enter="doSearch"
+              @paste.prevent
+              v-model="query"
+              type="text"
+              autocomplete="off"
+            ></b-form-input>
             <b-button variant="success" @click="doSearch">
               <font-awesome-icon :icon="['fas', 'search']"></font-awesome-icon>
               Buscar
@@ -28,8 +39,19 @@
         </b-col>
         <b-col cols="9">
           <b-input-group size="lg">
-            <!-- TODO Add trackers -->
-            <b-form-input id="query-box" v-model="query" @keydown.enter="doSearch"></b-form-input>
+            <b-form-input
+              id="query-box"
+              name="query-box-upper"
+              @focus="focus"
+              @blur="blur"
+              @keydown="keydown"
+              @keyup="keyup"
+              @keydown.enter="doSearch"
+              @paste.prevent
+              v-model="query"
+              type="text"
+              autocomplete="off"
+            ></b-form-input>
             <b-button variant="success" @click="doSearch">
               <font-awesome-icon :icon="['fas', 'search']"></font-awesome-icon>
               Buscar
@@ -101,8 +123,11 @@
 
 <script>
 import Axios from 'axios';
+import { throttle } from 'lodash';
 
 import * as Constants from '../../services/Constants';
+import { deepCopy } from '../../services/Utils';
+
 import ActionHandler from '../../trackers/ActionHandler';
 import MouseHandler from '../../trackers/MouseHandler';
 import KeystrokeHandler from '../../trackers/KeystrokeHandler';
@@ -123,6 +148,8 @@ export default {
       scHandler: new ScrollHandler('Search'),
       actionHandler: new ActionHandler('Search'),
       sender: new ActionSender('Search'),
+      keystrokeBuffer: [],
+      scrollListener: null,
       logo: Logo,
       query: '',
       displayFullSearch: true,
@@ -147,12 +174,16 @@ export default {
   },
 
   mounted() {
-    this.scHandler.bindTracker();
+    this.scrollListener = throttle(this.scroll, 250);
+    window.addEventListener('scroll', this.scrollListener);
+    console.log('Scroll Tracker ON!');
+
     this.doSearch();
   },
 
   beforeDestroy() {
-    this.scHandler.unbindTracker();
+    window.removeEventListener('scroll', this.scrollListener);
+    console.log('Scroll Tracker OFF!');
   },
 
   methods: {
@@ -172,8 +203,22 @@ export default {
       }
     },
     searchQuery() {
+      // dgacitua: Send keystrokes
+      if (this.keystrokeBuffer.length > 0) {
+        let buffer = deepCopy(this.keystrokeBuffer);
+        
+        this.sender.sendKeystrokeBuffer(buffer)
+          .then(res => console.log(res.data))
+          .catch(err => console.error(err));
+
+        this.keystrokeBuffer.length = 0;
+      }
+
+      // dgacitua: Send search request
       if (this.query.length > 0) {
         this.serpStatus = 'loading';
+
+        this.searchAction(this.query);
         
         Axios.get(`${Constants.backendApiUrl}/search?q=${this.query}&p=${this.currentPage || 1}`)
           .then((res) => {
@@ -182,7 +227,7 @@ export default {
             this.numStart = res.data.result.start || 0;
             this.searchResults = res.data.result.docs || [];
 
-            console.log(this.searchResults);
+            //console.log(this.searchResults);
 
             if (this.searchResults.length > 0) this.serpStatus = 'results';
             else this.serpStatus = 'empty';
@@ -196,6 +241,35 @@ export default {
     },
     queryPage(pageNum) {
       return { path: '/extended-challenge/search', query: { q: this.query, p: pageNum, t: Date.now() }};
+    },
+    scroll(evt) {
+      let scr = this.scHandler.scroll(evt);
+
+      this.sender.sendScrollAction(scr)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
+    },
+    focus(evt) {
+      let act = this.actionHandler.focus(evt);
+
+      this.sender.sendGenericAction(act)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
+    },
+    blur(evt) {
+      let act = this.actionHandler.blur(evt);
+
+      this.sender.sendGenericAction(act)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
+    },
+    keydown(evt) {
+      let ks = this.ksHandler.keydown(evt);
+      this.keystrokeBuffer.push(ks);
+    },
+    keyup(evt) {
+      let ks = this.ksHandler.keyup(evt);
+      this.keystrokeBuffer.push(ks);
     },
     mouseenter(evt, ranking) {
       let me = this.mHandler.enter(evt, ranking);
@@ -213,6 +287,21 @@ export default {
     },
     searchResultClick(evt, doc) {
       let act = this.actionHandler.searchResultClick(evt, doc);
+
+      this.sender.sendGenericAction(act)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
+    },
+    searchAction(queryText) {
+      let act = {
+        type: 'SearchQuery',
+        source: 'Search',
+        url: window.document.URL,
+        clientTimestamp: Date.now(),
+        details: {
+          query: queryText
+        }
+      };
 
       this.sender.sendGenericAction(act)
         .then(res => console.log(res.data))

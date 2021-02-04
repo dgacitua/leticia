@@ -25,24 +25,6 @@ class ScrollHandler {
     //console.log(message.type, `X: ${message.x_scr}`, `Y: ${message.y_scr}`, `TS: ${message.clientTimestamp}`);
     return message;
   }
-
-  sendScrollAction(evt) {
-    let scr = this.scroll(evt);
-
-    this.sender.sendScrollAction(scr)
-      .then(res => console.log(res.data))
-      .catch(err => console.error(err));
-  }
-
-  bindTracker() {
-    window.addEventListener('scroll', throttle(this.sendScrollAction.bind(this), 250));
-    console.log('Scroll Tracker ON!');
-  }
-  
-  unbindTracker() {
-    window.removeEventListener('scroll', throttle(this.sendScrollAction.bind(this), 250));
-    console.log('Scroll Tracker OFF!');
-  }
 }
 
 export default ScrollHandler;
