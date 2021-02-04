@@ -19,11 +19,13 @@ import Instructions from '../templates/Instructions.vue';
 import Login from '../templates/auth/Login.vue';
 import Register from '../templates/auth/Register.vue';
 import OAuth from '../templates/auth/OAuth.vue';
+import QueryPlanningInstructions from '../templates/queryPlanning/Instructions.vue';
 import TaskDescription from '../templates/queryPlanning/TaskDescription.vue';
 import TaskReady from '../templates/queryPlanning/TaskReady.vue';
 import TaskForm from '../templates/queryPlanning/TaskForm.vue';
 import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
 import QueryWriter2 from '../templates/queryPlanning/QueryWriter2.vue';
+import SearchInstructions from '../templates/search/Instructions.vue';
 import SearchModule from '../templates/search/SearchModule.vue';
 import DisplayPage from '../templates/search/DisplayPage.vue'
 import Profile from '../templates/Profile.vue';
@@ -151,6 +153,11 @@ const router = new VueRouter({
       },
       children: [
         {
+          path: 'instructions',
+          name: 'query-planning-instructions',
+          component: QueryPlanningInstructions,
+        },
+        {
           path: 'ready',
           component: TaskReady,
         },
@@ -176,6 +183,11 @@ const router = new VueRouter({
         auth: false
       },
       children: [
+        {
+          path: 'instructions',
+          name: 'search-instructions',
+          component: SearchInstructions,
+        },
         {
           path: 'search',
           name: 'search',
