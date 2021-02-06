@@ -28,7 +28,9 @@ const store = new Vuex.Store({
     currentRoute: {},
     sessionFlow: {},
     hasAcceptedConsent: false,
-    lastVisitedPageUrl: null
+    lastVisitedDoc: null,
+    bookmarkList: [],
+    currentTask: null
   },
   getters: {
     userData: (state) => {
@@ -36,13 +38,16 @@ const store = new Vuex.Store({
         timerTime: state.timerTime,
         timerDuration: state.timerDuration,
         timerStatus: state.timerStatus,
-        currentRoute: state.currentRoute,
-        tasks: state.tasks,
-        stages: state.stages,
         stageIndex: state.stageIndex,
         flowIndex: state.flowIndex,
+        tasks: state.tasks,
+        stages: state.stages,
+        currentRoute: state.currentRoute,
+        //sessionFlow: state.sessionFlow,
         hasAcceptedConsent: state.hasAcceptedConsent,
-        lastVisitedPageUrl: state.lastVisitedPageUrl
+        lastVisitedDoc: state.lastVisitedDoc,
+        bookmarkList: state.bookmarkList,
+        currentTask: state.currentTask
       };
     },
     timer: (state) => {
@@ -67,8 +72,14 @@ const store = new Vuex.Store({
     sessionFlow: (state) => {
       return state.sessionFlow;
     },
-    lastVisitedPageUrl: (state) => {
-      return state.lastVisitedPageUrl;
+    lastVisitedDoc: (state) => {
+      return state.lastVisitedDoc;
+    },
+    bookmarks: (state) => {
+      return state.bookmarkList;
+    },
+    currentTask: (state) => {
+      return state.currentTask;
     }
   },
   mutations: {
@@ -120,13 +131,22 @@ const store = new Vuex.Store({
       state.tasks = payload.data.tasks;
       state.stages = payload.data.stages;
       state.currentRoute = payload.data.currentRoute;
+      //state.sessionFlow = payload.data.sessionFlow;
       state.hasAcceptedConsent = payload.data.hasAcceptedConsent;
+      state.lastVisitedDoc = payload.data.lastVisitedDoc;
+      bookmarkList = payload.data.bookmarkList;
     },
     setSessionFlow(state, payload) {
       state.sessionFlow = payload.sessionFlow;
     },
-    setLastVisitedPageUrl(state, payload) {
-      state.lastVisitedPageUrl = payload.url;
+    setLastVisitedDoc(state, payload) {
+      state.lastVisitedDoc = payload.doc;
+    },
+    setCurrentTask(state, payload) {
+      state.currentTask = payload.task;
+    },
+    setBookmarks(state, payload) {
+      state.bookmarkList = payload.list;
     },
     eraseAll(state) {
       state.timerTime = null;
@@ -139,7 +159,9 @@ const store = new Vuex.Store({
       state.currentRoute = {};
       state.sessionFlow = {};
       state.hasAcceptedConsent = false;
-      state.lastVisitedPageUrl = null;
+      state.lastVisitedDoc = null;
+      state.bookmarkList = [];
+      state.currentTask = null;
     }
   },
   actions: {

@@ -84,7 +84,7 @@
               <div>
                 <b-link
                   class="result-title"
-                  :to="{ name: 'page', query: { id: doc.docId_s }, params: { url: doc.path_s }}"
+                  :to="{ name: 'page', query: { id: doc.docId_s }, params: { doc: doc }}"
                   @auxclick.prevent.stop
                   @click="searchResultClick($event, doc)"
                 >
@@ -191,7 +191,7 @@ export default {
 
   methods: {
     doSearch() {
-      this.query = this.query || '';
+      this.query = this.query || this.$route.query.q || '';
       this.currentPage = this.$route.query.p || 1;
 
       if (this.query.length > 0) {

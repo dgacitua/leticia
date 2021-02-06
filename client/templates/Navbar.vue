@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b-navbar variant="dark" type="dark" class="d-flex justify-content-between">
+    <b-navbar variant="dark" type="dark" class="d-flex justify-content-between align-items-center">
       <router-link to="/">
-        <b-navbar-brand tag="h1" class="mb-0">LeTiCiA <sub>PILOT</sub></b-navbar-brand>
+        <b-navbar-brand tag="h1" class="mb-0">LeTiCiA <sub>v1.0</sub></b-navbar-brand>
       </router-link>
 
       <b-navbar-nav v-if="currentTimer">
@@ -11,9 +11,25 @@
         </b-nav-text>
       </b-navbar-nav>
 
-     <b-navbar-nav v-if="currentUser">
+      <b-navbar-nav v-if="currentUser">
+        <b-nav-text class="navbar-button" v-if="showBookmarkButtons">
+          <b-button variant="primary" v-if="showBookmarkDocument" @click="bookmark">
+            <font-awesome-icon :icon="['fas', 'bookmark']"></font-awesome-icon>
+            Marcar documento
+          </b-button>
+          <b-button variant="primary" v-else @click="unbookmark">
+            <font-awesome-icon :icon="['fas', 'file']"></font-awesome-icon>
+            Desmarcar documento
+          </b-button>
+        </b-nav-text>
+        <b-nav-text class="navbar-button" v-if="showEndSearch">
+          <b-button variant="success" @click="endSearch">
+            <font-awesome-icon :icon="['fas', 'check']"></font-awesome-icon>
+            Terminar búsqueda
+          </b-button>
+        </b-nav-text>
         <b-nav-item>
-          <font-awesome-icon icon="user"></font-awesome-icon>
+          <font-awesome-icon :icon="['fas', 'user']"></font-awesome-icon>
         </b-nav-item>
         <b-nav-text to="/profile" class="navbar-text">
           {{ currentUser.email || currentUser.username }}
@@ -28,6 +44,7 @@
 
 <script>
 import ActionSender from '../services/ActionSender';
+import BookmarkService from '../services/Bookmark';
 import EventBus from '../modules/eventBus';
 
 import Timer from '../services/Timer';
@@ -38,13 +55,23 @@ export default {
 
   data() {
     return {
-      timer: null
+      timer: null,
+      showEndSearch: false,
+      showBookmarkButtons: false,
+      currentDocument: null,
+      bmService: new BookmarkService()
     }
   },
 
   computed: {
     currentUser() {
       return this.$store.state.auth.user;
+    },
+    currentTask() {
+      return this.currentUser ? this.$store.getters.currentTask : '';
+    },
+    bookmarks() {
+      return this.currentUser ? this.$store.getters.bookmarks : [];
     },
     showAdminBoard() {
       if (this.currentUser && this.currentUser.roles) {
@@ -61,6 +88,18 @@ export default {
       else {
         return null;
       }
+    },
+    currentTask() {
+      let nextStage = (!!this.$store.getters.stages && !!this.$store.getters.stageIndex) ? this.$store.getters.stages[this.$store.getters.stageIndex] : null;
+      let stageName = nextStage ? nextStage.query.task : '';
+      return stageName;
+    },
+    showBookmarkDocument() {
+      let docId = this.currentDocument ? this.currentDocument.docId_s : null;
+      return this.bmService.fetchBookmarkStatus(this.bookmarks, docId);
+    },
+    bookmarkCount() {
+      return this.bmService.fetchBookmarkCount(this.bookmarks);
     }
   },
 
@@ -88,6 +127,11 @@ export default {
         this.timer.resume();
       }
     });
+
+    EventBus.$on('leticia-bookmark-button-status', (data) => {
+      this.showBookmarkButtons = data.status;
+      this.currentDocument = data.doc;
+    });
   },
 
   methods: {
@@ -100,6 +144,44 @@ export default {
       this.$store.dispatch('auth/logout');
       //this.$store.dispatch('eraseAll');
       this.$router.replace('/');
+    },
+    checkSearchTaskReady(status) {
+      this.showEndSearch = status;
+    },
+    bookmark(evt) {
+      let bmDoc = {
+        username: this.currentUser.username,
+        action: 'Bookmark',
+        task: this.currentTask,
+        docId: this.currentDocument.docId_s,
+        url: this.$router.currentRoute.fullPath,
+        clientTimestamp: Date.now()
+      };
+
+      this.bmService.bookmark(bmDoc);
+      this.showEndSearch = this.bmService.fetchMinBookmarks(this.bookmarks);
+      // TODO register action to backend
+    },
+    unbookmark(evt) {
+      let bmDoc = {
+        username: this.currentUser.username,
+        action: 'Unbookmark',
+        task: this.currentTask,
+        docId: this.currentDocument.docId_s,
+        url: this.$router.currentRoute.fullPath,
+        clientTimestamp: Date.now()
+      };
+
+      this.bmService.unbookmark(bmDoc);
+      this.showEndSearch = this.bmService.fetchMinBookmarks(this.bookmarks);
+      // TODO register action to backend
+    },
+    endSearch(evt) {
+      console.log('End Search Task!');
+      this.bmService.resetBookmarkList();
+      this.showEndSearch = false;
+      // TODO register action to backend
+      // TODO go to next stage
     }
   }
 }
@@ -108,5 +190,9 @@ export default {
 <style scoped>
 .navbar-text {
   color: white;
+}
+
+.navbar-button {
+  padding: 0px 8px 0px 8px;
 }
 </style>

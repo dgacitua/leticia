@@ -11,33 +11,41 @@
 
 <script>
 import * as Constants from '../../services/Constants';
+import EventBus from '../../modules/eventBus';
 
 export default {
   data() {
     return {
       pageUrl: '',
       pageId: '',
+      doc: {},
       renderPage: false
     }
   },
 
   mounted() {
     this.visitPage();
+    EventBus.$emit('leticia-bookmark-button-status', { status: true, doc: this.doc });
+  },
+
+  beforeDestroy() {
+    EventBus.$emit('leticia-bookmark-button-status', { status: false, doc: null });
   },
 
   methods: {
     visitPage() {
-      if (!!this.$route.query.id && !!this.$route.params.url) {
-        this.$store.commit({ type: 'setLastVisitedPageUrl', url: this.$route.params.url });
-        this.pageUrl = `${Constants.backendUrl}${this.$route.params.url}`;
+      if (!!this.$route.query.id && !!this.$route.params.doc) {
+        this.$store.commit({ type: 'setLastVisitedDoc', doc: this.$route.params.doc });
+        this.doc = this.$route.params.doc;
+        this.pageUrl = `${Constants.backendUrl}${this.doc.path_s}`;
         this.pageId = this.$route.query.id || '';
         this.renderPage = true;
       }
       else {
-        let lastPage = this.$store.getters.lastVisitedPageUrl;
+        let lastPage = this.$store.getters.lastVisitedDoc;
 
         if (!!lastPage) {
-          this.pageUrl = `${Constants.backendUrl}${lastPage}`;
+          this.pageUrl = `${Constants.backendUrl}${lastPage.path_s}`;
           this.pageId = this.$route.query.id || '';
           this.renderPage = true;
         }
