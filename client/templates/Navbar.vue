@@ -178,7 +178,7 @@ export default {
     },
     endSearch(evt) {
       console.log('End Search Task!');
-      this.bmService.resetBookmarkList();
+      //this.bmService.resetBookmarkList();
       this.showEndSearch = false;
       // TODO register action to backend
       // TODO go to next stage
