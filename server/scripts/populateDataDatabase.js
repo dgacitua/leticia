@@ -35,6 +35,10 @@ db.forms.insertMany([
   {
     "formId": "exit",
     "questions": [ "exit1", "exit2", "exit3", "exit4", "exit5", "exit6", "exit7", "exit8", "exit9", "exit10", "exitComment" ]
+  },
+  {
+    "formId": "nasatlx",
+    "questions": [ "nasatlx01", "nasatlx02", "nasatlx03", "nasatlx04", "nasatlx05", "nasatlx06" ]
   }
 ]);
 
@@ -243,6 +247,84 @@ db.questions.insertMany([
     "type": 'paragraph',
     "title": 'Escribe en el siguiente espacio cualquier comentario que quisieras realizar sobre el estudio en el que acabas de participar',
     "required": false,
+    "answer": null
+  },
+  {
+    "questionId": 'nasatlx01',
+    "type": 'anonlikert',
+    "title": 'Exigencia Mental',
+    "hint": '¿Que tan demandante mentalmente es la tarea?',
+    "start": 1,
+    "stop": 21,
+    "step": 1,
+    "minLabel": 'Muy baja',
+    "maxLabel": 'Muy alta',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'nasatlx02',
+    "type": 'anonlikert',
+    "title": 'Exigencia Física',
+    "hint": '¿Que tan demandante fisicamente es la tarea?',
+    "start": 1,
+    "stop": 21,
+    "step": 1,
+    "minLabel": 'Muy baja',
+    "maxLabel": 'Muy alta',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'nasatlx03',
+    "type": 'anonlikert',
+    "title": 'Exigencia Temporal',
+    "hint": '¿Que tan fuerte o rápido es el ritmo impuesto para hacer la tarea?',
+    "start": 1,
+    "stop": 21,
+    "step": 1,
+    "minLabel": 'Muy baja',
+    "maxLabel": 'Muy alta',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'nasatlx04',
+    "type": 'anonlikert',
+    "title": 'Rendimiento',
+    "hint": '¿Que tan exitoso ha sido para lograr lo que ha requerido?',
+    "start": 1,
+    "stop": 21,
+    "step": 1,
+    "minLabel": 'Perfecto',
+    "maxLabel": 'Fracaso',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'nasatlx05',
+    "type": 'anonlikert',
+    "title": 'Esfuerzo',
+    "hint": '¿Que tan duro tiene que trabajar para lograr un adecuado nivel de rendimiento?',
+    "start": 1,
+    "stop": 21,
+    "step": 1,
+    "minLabel": 'Muy bajo',
+    "maxLabel": 'Muy alto',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'nasatlx06',
+    "type": 'anonlikert',
+    "title": 'Frustración',
+    "hint": '¿Que tan inseguro, irritado o estresado y molesto está por la tarea?',
+    "start": 1,
+    "stop": 21,
+    "step": 1,
+    "minLabel": 'Muy baja',
+    "maxLabel": 'Muy alta',
+    "required": true,
     "answer": null
   }
 ]);

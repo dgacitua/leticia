@@ -1,0 +1,103 @@
+<template>
+  <b-row class="zero-margin">
+    <b-col>
+      <b-row>
+        <b>{{ props.title }} <span v-if="props.required" class="form-asterisk">*</span></b>
+      </b-row>
+      <b-row v-if="props.hint" class="help-block">
+        {{ props.hint }}
+      </b-row>
+      <b-row>
+        <b-col>
+          <table class="table table-borderless table-condensed table-nonfluid">
+            <tbody>
+              <tr>
+                <td class="table-nopadding text-right">{{ props.minLabel }}</td>
+                <td class="table-nopadding text-center scale-choice" v-for="op in scale" :key="op.value">
+                  <b-form-radio
+                    v-model="props.answer"
+                    :value="op.value"
+                    :required="props.required"
+                    :name="props.questionId">
+                  </b-form-radio>
+                </td>
+                <td class="table-nopadding text-left">{{ props.maxLabel }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </b-col>
+      </b-row>
+    </b-col>
+    <br>
+  </b-row>
+</template>
+
+<script>
+export default {
+  name: 'anonlikert',
+
+  props: [
+    'props'
+  ],
+
+  computed: {
+    scale() {
+      return this.generateScale(this.props.start, this.props.stop, this.props.step);
+    }
+  },
+
+  methods: {
+    generateScale(start, stop, step) {
+      if (isNaN(stop) || !stop) stop = start, start = 0;
+      if (isNaN(step) || !step) step = 1;
+      if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) return [];
+
+      let result = [];
+      for (let i = start; step > 0 ? i <= stop : i >= stop; i += step) { result.push({ text: '', value: i }) }
+      return result;
+    }
+  }
+}
+</script>
+
+<style scoped>
+.form-asterisk {
+  font-weight: bold;
+  color: #FF0000;
+}
+
+.table-nopadding {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.table-nonfluid {
+  width: auto !important;
+}
+
+.help-block {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.scale-choice {
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.zero-margin {
+  margin: 0px 0px 0px 0px;
+}
+</style>

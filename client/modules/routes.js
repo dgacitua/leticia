@@ -27,7 +27,8 @@ import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
 import QueryWriter2 from '../templates/queryPlanning/QueryWriter2.vue';
 import SearchInstructions from '../templates/search/Instructions.vue';
 import SearchModule from '../templates/search/SearchModule.vue';
-import DisplayPage from '../templates/search/DisplayPage.vue'
+import DisplayPage from '../templates/search/DisplayPage.vue';
+import TaskLoadIndex from '../templates/questionnaires/TaskLoadIndex.vue';
 import Profile from '../templates/Profile.vue';
 import ShortChallenge from '../templates/ShortChallenge.vue';
 import ExtendedChallenge from '../templates/ExtendedChallenge.vue';
@@ -197,6 +198,11 @@ const router = new VueRouter({
           path: 'page',
           name: 'page',
           component: DisplayPage,
+        },
+        {
+          path: 'nasa-tlx',
+          name: 'nasa-tlx',
+          component: TaskLoadIndex,
         },
         /*{
           path: 'ready',
