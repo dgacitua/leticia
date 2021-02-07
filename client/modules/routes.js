@@ -29,6 +29,7 @@ import SearchInstructions from '../templates/search/Instructions.vue';
 import SearchModule from '../templates/search/SearchModule.vue';
 import DisplayPage from '../templates/search/DisplayPage.vue';
 import TaskLoadIndex from '../templates/questionnaires/TaskLoadIndex.vue';
+import StroopTest from '../templates/questionnaires/StroopTest.vue';
 import Profile from '../templates/Profile.vue';
 import ShortChallenge from '../templates/ShortChallenge.vue';
 import ExtendedChallenge from '../templates/ExtendedChallenge.vue';
@@ -203,6 +204,11 @@ const router = new VueRouter({
           path: 'nasa-tlx',
           name: 'nasa-tlx',
           component: TaskLoadIndex,
+        },
+        {
+          path: 'stroop',
+          name: 'stroop',
+          component: StroopTest,
         },
         /*{
           path: 'ready',
