@@ -201,11 +201,20 @@ export default {
       this.$router.go(-1);
     },
     endSearch(evt) {
-      console.log('End Search Task!');
-      //this.bmService.resetBookmarkList();
-      this.showEndSearch = false;
-      // TODO register action to backend
-      // TODO go to next stage
+      let message = {
+        type: 'FinishSearchStage',
+        source: 'Search'
+      };
+
+      this.sender.sendGenericAction(message)
+        .then(res => {
+          console.log(res.data);
+          EventBus.$emit('leticia-next-challenge');
+        })
+        .catch(err => {
+          console.error(err);
+          alert('Ha ocurrido un error al terminar la búsqueda [Código 478]');
+        });
     }
   }
 }
