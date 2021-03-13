@@ -1,9 +1,34 @@
 <template>
   <b-container>
     <div id="stroop-instructions" v-if="state==='instructions'">
-      <!-- TODO Stroop Instructions -->
       <b-card>
-        TODO
+        <p>
+          En esta prueba, verás nombres de colores (amarillo, azul, rosa, naranja, rojo, verde) impresos en diferentes colores.
+        </p>
+        <p>
+          El objetivo de esta prueba es detectar si el nombre del color coincide con el color en el cual está impreso.
+        </p>
+        <p>
+          Por ejemplo, si ves:
+        </p>
+        <h1 class="text-center text-red">
+          VERDE
+        </h1>
+        <p>
+          Debes presionar el botón "No", ya que el nombre del color no coincide con el color impreso.
+        </p>
+        <p>
+          Por otro lado, si ves:
+        </p>
+        <h1 class="text-center text-blue">
+          AZUL
+        </h1>
+        <p>
+          Debes presionar el botón "Si", ya que el nombre del color y el color impreso coinciden.
+        </p>
+        <p>
+          Intenta responder lo más rápidamente posible esta prueba. Una vez que estés listo(a) para empezar, presiona el botón "Ir a la prueba".
+        </p>
       </b-card>
       <br>
       <b-row class="text-right">
@@ -55,11 +80,16 @@
 </template>
 
 <script>
+import Axios from 'axios';
 import ProgressBar from 'vue-simple-progress';
 
-const RESPONSE_TIME_MS = 1000;
+import * as Constants from '../../services/Constants';
+import { getVueArray, deepCopy } from '../../services/Utils';
+import EventBus from '../../modules/eventBus';
+
+const RESPONSE_TIME_MS = 1500;
 const REFRESH_TIME_MS = 100;
-const RESPONSE_LOCK_MS = 150;
+const RESPONSE_LOCK_MS = 250;
 const TRIALS_AMOUNT = 20;
 
 export default {
@@ -93,6 +123,12 @@ export default {
   computed: {
     completedPerc() {
       return Math.round((this.stroopTimerCounter / RESPONSE_TIME_MS) * 100);
+    },
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+    currentUser() {
+      return this.$store.state.auth.user;
     }
   },
   
@@ -196,9 +232,26 @@ export default {
       }, RESPONSE_LOCK_MS);
     },
     submitAnswers() {
-      // TODO save answers on backend
-      // TODO go to next stage
-      console.log('StroopResponses', this.answers);
+      if (this.loggedIn) {
+        let response = {
+          username: this.currentUser.username,
+          taskId: deepCopy(this.$route.query.task || 'NoTask'),
+          formId: deepCopy(this.$route.query.form || 'StroopTest'),
+          clientTimestamp: Date.now(),
+          answers: deepCopy(getVueArray(this.answers))
+        }
+
+        console.log('StroopResponses', response);
+
+        Axios.post(`${Constants.backendApiUrl}/answers`, response)
+          .then((res) => {
+            EventBus.$emit('leticia-next-challenge');
+          })
+          .catch((err) => {
+            console.error(err);
+            alert('Ha ocurrido un error al enviar las respuestas [Código 477]');
+          });
+      }
     },
     randomInt(min, max) {
       // Random integer between min and max (inclusive)
