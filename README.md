@@ -16,8 +16,8 @@ This is LeTiCiA's main repository.
 Run these commands for installing latest Node.js LTS on Ubuntu:
 
 ```
-curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-sudo apt-get install -y nodejs
+$ curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+$ sudo apt-get install -y nodejs
 ```
 
 #### Installing Solr for development
@@ -35,11 +35,20 @@ sudo apt-get install -y nodejs
 
 ### Production
 
-TODO
+You can run LeTiCiA in production mode following these instructions:
+
+1. Install the latest LTS version of Node.js
+2. Install and configure Solr for LeTiCiA (see instructions above)
+3. Install PM2 and http-server globally for Node.js: `npm install -g pm2 http-server`
+4. On LeTiCiA's repository root directory, copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
+5. On root directory, run `npm install` and then run `npm run clean && npm run build`
+6. On root directory, run LeTiCiA with PM2:
+
+        $ pm2 start ./build/server/index.js --name leticia-backend
+        $ pm2 start http-server --name leticia-frontend -- ./build/client -p 3000
 
 ## TODO List
 
-- Install Instructions
 - Extended Challenge
 - i18n Support
 
