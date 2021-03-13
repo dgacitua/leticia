@@ -23,6 +23,7 @@ import Document from './Document';
 import Query from './Query';
 import TaskRequest from './TaskRequest';
 import ServerConfig from './ServerConfig';
+import Bookmark from './Bookmark';
 
 const db = {};
 
@@ -50,6 +51,7 @@ db.document = Document;
 db.query = Query;
 db.taskrequest = TaskRequest;
 db.serverconfig = ServerConfig;
+db.bookmark = Bookmark;
 
 db.ROLES = [ 'user', 'admin' ];
 

@@ -17,6 +17,7 @@ import search from './routes/search';
 import document from './routes/document';
 import mouseaction from './routes/mouseactions';
 import scrollaction from './routes/scrollactions';
+import bookmarks from './routes/bookmarks';
 
 
 const router = express.Router();
@@ -38,5 +39,6 @@ router.use('/search', search);
 router.use('/documents', document);
 router.use('/mouseactions', mouseaction);
 router.use('/scrollactions', scrollaction);
+router.use('/bookmarks', bookmarks);
 
 export default router;

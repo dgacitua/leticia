@@ -1,9 +1,17 @@
 <template>
   <div>
     <b-navbar variant="dark" type="dark" class="d-flex justify-content-between align-items-center">
-      <router-link to="/">
-        <b-navbar-brand tag="h1" class="mb-0">LeTiCiA <sub>v1.0</sub></b-navbar-brand>
-      </router-link>
+      <b-navbar-nav>
+        <router-link to="/">
+          <b-navbar-brand tag="h1" class="mb-0">LeTiCiA <sub>v1.0</sub></b-navbar-brand>
+        </router-link>
+        <b-nav-text class="navbar-button" v-if="showBookmarkButtons">
+          <b-button variant="info" @click="goBack">
+            <font-awesome-icon :icon="['fas', 'arrow-left']"></font-awesome-icon>
+            Atrás
+          </b-button>
+        </b-nav-text>
+      </b-navbar-nav>
 
       <b-navbar-nav v-if="currentTimer">
         <b-nav-text class="navbar-text">
@@ -59,7 +67,8 @@ export default {
       showEndSearch: false,
       showBookmarkButtons: false,
       currentDocument: null,
-      bmService: new BookmarkService()
+      bmService: new BookmarkService(),
+      sender: new ActionSender('Bookmark')
     }
   },
 
@@ -160,7 +169,13 @@ export default {
 
       this.bmService.bookmark(bmDoc);
       this.showEndSearch = this.bmService.fetchMinBookmarks(this.bookmarks);
-      // TODO register action to backend
+
+      this.sender.sendBookmark(bmDoc)
+        .then((res) => {})
+        .catch((err) => {
+          console.error(err);
+          alert('Ha ocurrido un error al marcar el documento [Código 475]');
+        });
     },
     unbookmark(evt) {
       let bmDoc = {
@@ -174,7 +189,16 @@ export default {
 
       this.bmService.unbookmark(bmDoc);
       this.showEndSearch = this.bmService.fetchMinBookmarks(this.bookmarks);
-      // TODO register action to backend
+      
+      this.sender.sendBookmark(bmDoc)
+        .then((res) => {})
+        .catch((err) => {
+          console.error(err);
+          alert('Ha ocurrido un error al desmarcar el documento [Código 476]');
+       });
+    },
+    goBack(evt) {
+      this.$router.go(-1);
     },
     endSearch(evt) {
       console.log('End Search Task!');

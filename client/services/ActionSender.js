@@ -46,6 +46,11 @@ class ActionSenderService {
     return Axios.post(API_URL + '/actions', message);
   }
 
+  sendBookmark(bmDoc) {
+    let message = bmDoc;
+    return Axios.post(API_URL + '/bookmarks', message);
+  }
+
   userLog(isLogin = true) {
     let userAgent = navigator.userAgent;
     let parsedUserAgent = UAParser(userAgent);
