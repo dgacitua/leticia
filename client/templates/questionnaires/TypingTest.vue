@@ -82,7 +82,7 @@ export default {
 
   data() {
     return {
-      samples: TypingTestSamples,
+      samples: TypingTestSamples.slice(0, 7),
       sampleIndex: 0,
       ksHandler: new KeystrokeHandler('TypingTest'),
       actionHandler: new ActionHandler('TypingTest'),
@@ -176,6 +176,7 @@ export default {
       }
     },
     callHighlight(evt) {
+      // DEPRECATED
       // TODO fix highlight
       let value = evt.target.value;
       let cursorIdx = evt.target.selectionStart;
@@ -196,6 +197,7 @@ export default {
       this.highlightSampleText('', hl1, hl2);
     },
     highlightSampleText(snip, start = 0, length = 0) {
+      // DEPRECATED
       let snippet = snip || '';
       let searchables = document.querySelector('#sample-text');
       
