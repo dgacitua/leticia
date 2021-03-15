@@ -241,7 +241,8 @@ class DocumentDownloader {
         snippet: docObj.snippet || '',
         body: '',
         keywords: docObj.keywords || [],
-        url: docObj.url || ''
+        url: docObj.url || '',
+        relevant: docObj.relevant || []
       };
 
       let download = await this.downloadDocument(docMetadata.docId, docMetadata.url, true);
@@ -262,7 +263,8 @@ class DocumentDownloader {
         body_t: docMetadata.body,
         keywords_t: docMetadata.keywords,
         url_s: docMetadata.url,
-        path_s: docMetadata.path
+        path_s: docMetadata.path,
+        relevant_s: docMetadata.relevant
       }
       
       await Document.create(docMetadata);
@@ -290,7 +292,8 @@ class DocumentDownloader {
         snippet: docObj.snippet || '',
         body: '',
         keywords: docObj.keywords || [],
-        url: docObj.url || ''
+        url: docObj.url || '',
+        relevant: docObj.relevant || []
       };
 
       let download = await this.downloadDocument(docMetadata.docId, docMetadata.url, false);
@@ -354,7 +357,8 @@ class DocumentDownloader {
           body_t: element.body,
           keywords_t: element.keywords,
           url_s: element.url,
-          path_s: element.path
+          path_s: element.path,
+          relevant_s: element.relevant
         }
       });
 

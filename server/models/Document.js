@@ -27,10 +27,15 @@ const documentSchema = Mongoose.Schema({
     type: String
   },
   keywords: {
-    type: [ String ]
+    type: [ String ],
+    default: []
   },
   url: {
     type: String
+  },
+  relevant: {
+    type: [ String ],
+    default: []
   }
 });
 
