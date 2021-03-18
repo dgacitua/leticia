@@ -87,7 +87,7 @@ import * as Constants from '../../services/Constants';
 import { getVueArray, deepCopy } from '../../services/Utils';
 import EventBus from '../../modules/eventBus';
 
-const RESPONSE_TIME_MS = 1500;
+const RESPONSE_TIME_MS = 3000;
 const REFRESH_TIME_MS = 100;
 const RESPONSE_LOCK_MS = 250;
 const TRIALS_AMOUNT = 20;
@@ -235,8 +235,8 @@ export default {
       if (this.loggedIn) {
         let response = {
           username: this.currentUser.username,
-          taskId: deepCopy(this.$route.query.task || 'NoTask'),
-          formId: deepCopy(this.$route.query.form || 'StroopTest'),
+          taskId: deepCopy(this.$route.query.task || 'no-task'),
+          formId: deepCopy(this.$route.query.form || 'stroop'),
           clientTimestamp: Date.now(),
           answers: deepCopy(getVueArray(this.answers))
         }
