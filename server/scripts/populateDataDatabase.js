@@ -29,6 +29,14 @@ db.forms.insertMany([
     "questions": [ "posttask1", "posttask2", "posttask3" ]
   },
   {
+    "formId": "pretask-ex",
+    "questions": [ "pretask1", "pretask2", "pretask3", "pretask4", "pretask5", "pretask6", "pretask7" ]
+  },
+  {
+    "formId": "posttask-ex",
+    "questions": [ "posttask1", "posttask2", "posttask3", "posttask4", "posttask5", "posttask6", "posttask7" ]
+  },
+  {
     "formId": "query",
     "questions": [ "query" ]
   },
@@ -80,6 +88,54 @@ db.questions.insertMany([
     "answer": null
   },
   {
+    "questionId": 'pretask4',
+    "type": 'likert',
+    "title": 'Entender los resultados de búsqueda para esta tarea será difícil',
+    "start": 1,
+    "stop": 6,
+    "step": 1,
+    "minLabel": 'Muy en desacuerdo',
+    "maxLabel": 'Muy de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'pretask5',
+    "type": 'likert',
+    "title": 'Determinar lo útil que pueden ser los resultados de búsqueda de esta tarea será difícil',
+    "start": 1,
+    "stop": 6,
+    "step": 1,
+    "minLabel": 'Muy en desacuerdo',
+    "maxLabel": 'Muy de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'pretask6',
+    "type": 'likert',
+    "title": 'Resultará difícil determinar cuando terminar de buscar información para completar esta tarea',
+    "start": 1,
+    "stop": 6,
+    "step": 1,
+    "minLabel": 'Muy en desacuerdo',
+    "maxLabel": 'Muy de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'pretask7',
+    "type": 'likert',
+    "title": 'La tarea que voy a realizar es difícil',
+    "start": 1,
+    "stop": 6,
+    "step": 1,
+    "minLabel": 'Muy en desacuerdo',
+    "maxLabel": 'Muy de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
     "questionId": 'posttask1',
     "type": 'likert',
     "title": 'Mi desempeño en la tarea realizada fue bueno',
@@ -107,6 +163,54 @@ db.questions.insertMany([
     "questionId": 'posttask3',
     "type": 'likert',
     "title": 'Construir consultas de búsqueda para esta tarea fue difícil',
+    "start": 1,
+    "stop": 6,
+    "step": 1,
+    "minLabel": 'Muy en desacuerdo',
+    "maxLabel": 'Muy de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'posttask4',
+    "type": 'likert',
+    "title": 'Entender los resultados de búsqueda para esta tarea fue difícil',
+    "start": 1,
+    "stop": 6,
+    "step": 1,
+    "minLabel": 'Muy en desacuerdo',
+    "maxLabel": 'Muy de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'posttask5',
+    "type": 'likert',
+    "title": 'Determinar lo útil que pueden ser los resultados de búsqueda para esta tarea fue difícil',
+    "start": 1,
+    "stop": 6,
+    "step": 1,
+    "minLabel": 'Muy en desacuerdo',
+    "maxLabel": 'Muy de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'posttask6',
+    "type": 'likert',
+    "title": 'Determinar lo útil que pueden ser los resultados de búsqueda de esta tarea fue difícil',
+    "start": 1,
+    "stop": 6,
+    "step": 1,
+    "minLabel": 'Muy en desacuerdo',
+    "maxLabel": 'Muy de acuerdo',
+    "required": true,
+    "answer": null
+  },
+  {
+    "questionId": 'posttask7',
+    "type": 'likert',
+    "title": 'La tarea realizada fue difícil',
     "start": 1,
     "stop": 6,
     "step": 1,

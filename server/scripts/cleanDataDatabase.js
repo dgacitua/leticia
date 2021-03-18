@@ -18,3 +18,5 @@ db.documents.drop();
 db.queries.drop();
 db.taskrequests.drop();
 db.serverconfigs.drop();
+db.bookmarks.drop();
+db.tasks.drop();
