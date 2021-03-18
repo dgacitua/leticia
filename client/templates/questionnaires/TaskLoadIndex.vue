@@ -71,7 +71,7 @@ export default {
 
   data() {
     return {
-      formId: 'nasatlx',
+      formId: 'nasa-tlx',
       form: {},
       questions: []
     }
@@ -103,15 +103,14 @@ export default {
       evt.preventDefault();
 
       if (this.loggedIn) {
-        let formId = this.formId;
         let answers = getVueArray(this.questions).map(el => { return { questionId: el.questionId, answer: el.answer }});
         let partialScore = answers.map(el => (el.answer - 1) * 5);
         let finalScore = partialScore.reduce((a, b) => a + b, 0) / partialScore.length;
 
         let response = {
           username: this.currentUser.username,
-          taskId: formId,
-          formId: formId,
+          taskId: deepCopy(this.$route.query.task || 'no-task'),
+          formId: deepCopy(this.$route.query.form || this.formId),
           clientTimestamp: Date.now(),
           answers: answers,
           score: finalScore
