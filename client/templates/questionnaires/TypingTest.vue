@@ -16,7 +16,7 @@
     </b-row>
     <br>
     <b-card>
-      <b-form @submit="nextSample">
+      <b-form @submit.stop.prevent>
         <div id="sample-text">
           <i>{{ currentSample.text }}</i>
         </div>
@@ -49,7 +49,7 @@
             <b-button variant="primary" :disabled="!isValidInput" @click="nextSample">Siguiente</b-button>
           </b-col>
           <b-col v-if="isLastSlide" cols="3" class="text-right">
-            <b-button variant="success" :disabled="!isValidInput" type="submit">Finalizar</b-button>
+            <b-button variant="success" :disabled="!isValidInput" @click="nextSample">Finalizar</b-button>
           </b-col>
         </b-row>
       </b-form>
