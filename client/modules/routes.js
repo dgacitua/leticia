@@ -23,6 +23,7 @@ import QueryPlanningInstructions from '../templates/queryPlanning/Instructions.v
 import TaskDescription from '../templates/queryPlanning/TaskDescription.vue';
 import TaskReady from '../templates/queryPlanning/TaskReady.vue';
 import TaskForm from '../templates/queryPlanning/TaskForm.vue';
+import TaskFormEx from '../templates/search/TaskForm.vue';
 import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
 import QueryWriter2 from '../templates/queryPlanning/QueryWriter2.vue';
 import SearchInstructions from '../templates/search/Instructions.vue';
@@ -210,23 +211,14 @@ const router = new VueRouter({
           name: 'stroop',
           component: StroopTest,
         },
-        /*{
-          path: 'ready',
-          component: TaskReady,
-        },
         {
           path: 'description',
           component: TaskDescription,
         },
         {
           path: 'taskform',
-          component: TaskForm,
+          component: TaskFormEx,
         },
-        {
-          path: 'query',
-          component: QueryWriter,
-        }
-        */
       ]
     },
     {

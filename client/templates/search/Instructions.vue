@@ -7,7 +7,7 @@
     <b-row>
       <b-card :img-src="image" img-right>
         <b-card-text>
-          <p>En este desafío se te presentarán una serie de tareas de búsqueda, para lo cual deberás hacer consultas de búsqueda para encontrar documentos que puedan resolver dichas tareas. Una vez introducida la tarea, deberás llenar los cuestionarios para poder acceder al motor de búsqueda de LeTiCiA. Tienes 25 minutos para completar el desafío.</p>
+          <!-- TODO Task Description -->
           <p></p>
           <p></p>
           <p></p>
@@ -51,7 +51,7 @@ export default {
 
   methods: {
     nextStage() {
-      EventBus.$emit('leticia-next-stage');
+      EventBus.$emit('leticia-next-challenge');
     }
   }
 }

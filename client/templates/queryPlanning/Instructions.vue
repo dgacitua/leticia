@@ -7,6 +7,7 @@
     <b-row>
       <b-card :img-src="image" img-right>
         <b-card-text>
+          <!-- TODO Task Description -->
           <p>En este desafío se te presentarán una serie de tareas de búsqueda, para las cuales deberás crear al menos 3 consultas de búsqueda para cada una, como si fueras a plantearlas en un motor de búsqueda web. Tienes 15 minutos para realizar este desafío.</p>
           <p></p>
           <p></p>
