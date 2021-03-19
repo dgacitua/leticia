@@ -33,7 +33,14 @@ export default {
   data() {
     return {
       stageOrder: [
-        { path: '/extended-challenge/search', query: { task: '' }}
+        { path: '/extended-challenge/instructions', query: { task: '' }},
+        { path: '/extended-challenge/description', query: { task: '' }},
+        { path: '/extended-challenge/taskform', query: { task: '', form: Constants.pretaskFormEx }},
+        { path: '/extended-challenge/stroop', query: { task: '', form: `stroop-${Constants.pretaskForm}` }},
+        { path: '/extended-challenge/search', query: { task: '' }},
+        { path: '/extended-challenge/stroop', query: { task: '', form: `stroop-${Constants.posttaskForm}` }},
+        { path: '/extended-challenge/nasa-tlx', query: { task: '', form: 'nasa-tlx' }},
+        { path: '/extended-challenge/taskform', query: { task: '', form: Constants.posttaskForm }}
       ],
       currentTasks: this.$store.getters.tasks,
       currentStages: this.$store.getters.stages,
@@ -51,8 +58,10 @@ export default {
       return this.$store.state.auth.status.loggedIn;
     }
   },
-  
-  /*
+
+  // dgacitua definitions
+  // next-stage: Advance to the following global action (Consent, Demographic, TypingTest, ShortChallenge, etc.)
+  // next-challenge: Advance to the following step inside a challenge (Short or Extended)
   created() {
     EventBus.$on('leticia-next-challenge', () => {
       console.log('LeTiCiA Next Challenge!');
@@ -141,7 +150,6 @@ export default {
         .catch(err => console.error('Error while saving UserData on server', err));
     }
   }
-  */
 }
 </script>
 

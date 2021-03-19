@@ -60,6 +60,9 @@ export default {
     }
   },
 
+  // dgacitua definitions
+  // next-stage: Advance to the following global action (Consent, Demographic, TypingTest, ShortChallenge, etc.)
+  // next-challenge: Advance to the following step inside a challenge (Short or Extended)
   created() {
     EventBus.$on('leticia-next-challenge', () => {
       console.log('LeTiCiA Next Challenge!');
