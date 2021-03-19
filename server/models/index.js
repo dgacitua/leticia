@@ -55,7 +55,10 @@ db.bookmark = Bookmark;
 
 db.ROLES = [ 'user', 'admin' ];
 
-const initial = () => {
+const initial = async () => {
+  // dgacitua: Create Server configs
+  let trc = await ServerConfig.findOneAndUpdate({ configName: 'TaskRequestCount' }, { configName: 'TaskRequestCount' }, { new: true, upsert: true });
+
   // dgacitua: Create roles
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
@@ -79,9 +82,6 @@ const initial = () => {
         console.log("Added 'admin' to roles collection");
       });
     }
-
-    // dgacitua: Create Server configs
-    ServerConfig.findOneAndUpdate({ configName: 'TaskRequestCount' }, { configName: 'TaskRequestCount' }, { new: true, upsert: true });
   });
 };
 
