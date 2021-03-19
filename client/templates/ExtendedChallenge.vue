@@ -33,10 +33,11 @@ export default {
   data() {
     return {
       stageOrder: [
-        { path: '/extended-challenge/instructions', query: { task: '' }},
+        { path: '/extended-challenge/ready', query: { task: '' }},
         { path: '/extended-challenge/description', query: { task: '' }},
         { path: '/extended-challenge/taskform', query: { task: '', form: Constants.pretaskFormEx }},
         { path: '/extended-challenge/stroop', query: { task: '', form: `stroop-${Constants.pretaskForm}` }},
+        { path: '/extended-challenge/instructions', query: { task: '' }},
         { path: '/extended-challenge/search', query: { task: '' }},
         { path: '/extended-challenge/stroop', query: { task: '', form: `stroop-${Constants.posttaskForm}` }},
         { path: '/extended-challenge/nasa-tlx', query: { task: '', form: 'nasa-tlx' }},
