@@ -134,7 +134,7 @@ const store = new Vuex.Store({
       //state.sessionFlow = payload.data.sessionFlow;
       state.hasAcceptedConsent = payload.data.hasAcceptedConsent;
       state.lastVisitedDoc = payload.data.lastVisitedDoc;
-      bookmarkList = payload.data.bookmarkList;
+      state.bookmarkList = payload.data.bookmarkList;
     },
     setSessionFlow(state, payload) {
       state.sessionFlow = payload.sessionFlow;
