@@ -12,7 +12,7 @@ let exampleDocument = {
   keywords_t: [ 'lorem', 'elit' ],
   url_s: 'www.myexample.com',
   path_s: '',
-  relevant: []
+  relevant_s: []
 };
 
 const DOCS_PER_PAGE = 10;
