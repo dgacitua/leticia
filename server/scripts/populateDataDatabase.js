@@ -446,7 +446,7 @@ db.tasks.insertMany([
   },
   {
     "searchTaskId": 'task06',
-    "title": 'Punto Triple',
+    "title": 'Uso de smartphones por niños',
     "description": 'Tu hermana tiene dudas sobre si regalarle a su hijo de 8 años un smartphone para que pueda entretenerse y compartir con sus amigos. Ella te consulta a ti cual sería una buena decisión. Al respecto: ¿Cuales son los beneficios y desventajas de usar un smartphone a esa edad? ¿Como afectaría su desarrollo intelectual el uso frecuente de dicho dispositivo?'
   }
 ]);
