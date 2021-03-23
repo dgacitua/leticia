@@ -318,7 +318,7 @@ class DocumentDownloader {
   async deleteOne(docId) {
     try {
       let p1 = await Document.deleteOne({ docId: docId });
-      let p2 = await this.index.deleteOne();
+      let p2 = await this.index.deleteOne(docId);
 
       return true;
     }
