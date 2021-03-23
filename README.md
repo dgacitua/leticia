@@ -30,7 +30,7 @@ You can run LeTiCiA in production mode following these instructions:
 5. On root directory, run LeTiCiA with PM2:
 
         $ pm2 start ./build/server/index.js --name leticia-backend
-        $ pm2 start http-server --name leticia-frontend -- ./build/client -p 3000
+        $ pm2 start http-server --name leticia-frontend -- ./build/client -p 3000 --proxy http://localhost:3000?
 
 ### Installing required dependencies
 
