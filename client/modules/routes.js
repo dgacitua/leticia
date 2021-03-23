@@ -249,17 +249,17 @@ const router = new VueRouter({
       }
     },
     {
-      path: '*',
-      name: 'not-found',
-      component: NotFound,
-      meta: {
-        auth: true
-      }
-    },
-    {
       path: '/pdf',
       name: 'pdf',
       component: PdfRender,
+      meta: {
+        auth: false
+      }
+    },
+    {
+      path: '*',
+      name: 'not-found',
+      component: NotFound,
       meta: {
         auth: false
       }
