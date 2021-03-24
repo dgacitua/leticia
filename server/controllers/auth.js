@@ -224,8 +224,12 @@ export const googleLogin = async (req, res) => {
       let sessionFlowId = Constants.currentSessionFlow;
       let sessionFlow = await SessionFlow.findOne({ sessionFlowId: sessionFlowId }).exec();
       
+      let userdata = new UserData({ username: user.username, state: {}, sessionFlow: {} });
+      await userdata.save();
+
       res.cookie('jwt', JSON.stringify(jwtData));
       res.cookie('sessionflow', JSON.stringify(sessionFlow));
+      res.cookie('userdata', JSON.stringify(userdata.state));
       
       //consoleLog('OAuthRegister', 'Google', jwtData, sessionFlow);
 
@@ -344,12 +348,16 @@ export const facebookLogin = async (req, res) => {
   
       let token = jwt.sign({ data: jwtData }, config.secret, { expiresIn: '24h' });
       jwtData.accessToken = token;
-
+      
       let sessionFlowId = Constants.currentSessionFlow;
       let sessionFlow = await SessionFlow.findOne({ sessionFlowId: sessionFlowId }).exec();
       
+      let userdata = new UserData({ username: user.username, state: {}, sessionFlow: {} });
+      await userdata.save();
+
       res.cookie('jwt', JSON.stringify(jwtData));
       res.cookie('sessionflow', JSON.stringify(sessionFlow));
+      res.cookie('userdata', JSON.stringify(userdata.state));
 
       //consoleLog('OAuthRegister', 'Facebook', jwtData, sessionFlow);
       
