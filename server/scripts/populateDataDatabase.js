@@ -481,3 +481,10 @@ db.sessionflows.insertMany([
     ]
   },
 ]);
+
+db.serverconfigs.insertMany([
+  {
+    "configName": "TaskRequestCount",
+    "numberValue": 0
+  }
+]);
