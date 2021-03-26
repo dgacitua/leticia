@@ -6,9 +6,15 @@
           <b-navbar-brand tag="h1" class="mb-0">LeTiCiA <sub>v1.0</sub></b-navbar-brand>
         </router-link>
         <b-nav-text class="navbar-button" v-if="showBookmarkButtons">
-          <b-button variant="info" @click="goBack">
+          <b-button variant="secondary" @click="goBack">
             <font-awesome-icon :icon="['fas', 'arrow-left']"></font-awesome-icon>
             Atrás
+          </b-button>
+        </b-nav-text>
+        <b-nav-text class="navbar-button" v-if="showCurrentTask">
+          <b-button v-b-modal.current-task variant="info" @click="showTaskModal">
+            <font-awesome-icon :icon="['fas', 'tasks']"></font-awesome-icon>
+            Tarea actual
           </b-button>
         </b-nav-text>
       </b-navbar-nav>
@@ -47,6 +53,19 @@
         </b-nav-item>
       </b-navbar-nav>
     </b-navbar>
+
+    <b-modal
+      id="current-task"
+      ref="current-task"
+      size="lg"
+      title="Tarea actual"
+      hide-header-close
+      ok-only
+    >
+      <b-card :header="currentTask.title" class="text-center">
+        <b-card-text>{{ currentTask.description }}</b-card-text>
+      </b-card>
+    </b-modal>
   </div>
 </template>
 
@@ -66,6 +85,7 @@ export default {
       timer: null,
       showEndSearch: false,
       showBookmarkButtons: false,
+      showCurrentTask: false,
       currentDocument: null,
       bmService: new BookmarkService(),
       sender: new ActionSender('Bookmark')
@@ -141,6 +161,10 @@ export default {
       this.showBookmarkButtons = data.status;
       this.currentDocument = data.doc;
     });
+
+    EventBus.$on('leticia-current-task', (data) => {
+      this.showCurrentTask = data.currentTask;
+    });
   },
 
   methods: {
@@ -215,6 +239,9 @@ export default {
           console.error(err);
           alert('Ha ocurrido un error al terminar la búsqueda [Código 478]');
         });
+    },
+    showTaskModal() {
+      console.log('TODO');
     }
   }
 }

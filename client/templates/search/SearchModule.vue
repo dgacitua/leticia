@@ -141,6 +141,7 @@
 import Axios from 'axios';
 import { throttle } from 'lodash';
 
+import EventBus from '../../modules/eventBus';
 import * as Constants from '../../services/Constants';
 import { deepCopy } from '../../services/Utils';
 
@@ -203,12 +204,16 @@ export default {
     window.addEventListener('scroll', this.scrollListener);
     console.log('Scroll Tracker ON!');
 
+    EventBus.$emit('leticia-current-task', { currentTask: true });
+
     this.doSearch();
   },
 
   beforeDestroy() {
     window.removeEventListener('scroll', this.scrollListener);
     console.log('Scroll Tracker OFF!');
+
+    EventBus.$emit('leticia-current-task', { currentTask: false });
   },
 
   methods: {

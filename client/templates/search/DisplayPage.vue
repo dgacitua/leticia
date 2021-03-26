@@ -26,10 +26,12 @@ export default {
   mounted() {
     this.visitPage();
     EventBus.$emit('leticia-bookmark-button-status', { status: true, doc: this.doc });
+    EventBus.$emit('leticia-current-task', { currentTask: true });
   },
 
   beforeDestroy() {
     EventBus.$emit('leticia-bookmark-button-status', { status: false, doc: null });
+    EventBus.$emit('leticia-current-task', { currentTask: false });
   },
 
   methods: {
