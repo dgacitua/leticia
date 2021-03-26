@@ -193,7 +193,8 @@ class DocumentDownloader {
         urls: [ sourceUrl ],
         directory: downloadPath,
         filenameGenerator: 'bySiteStructure', //'byType',
-        recursive: false,
+        recursive: true,
+        maxRecursiveDepth: 1,
         httpResponseHandler: (response) => {
           const htmlBody = response.headers['content-type'].startsWith('text/html') && response.body;
           const re = /((https?:\/\/)(\w+)(.disqus.com))/;
