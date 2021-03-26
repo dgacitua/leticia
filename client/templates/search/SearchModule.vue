@@ -98,18 +98,31 @@
         </b-row>
         <b-row>
           <b-col>
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="numResults"
+              :per-page="perPage"
+              align="center"
+              @input="pagination"
+              @auxclick.native.prevent.stop
+              first-number
+              last-number
+              use-router
+            ></b-pagination>
+            <!--
             <b-pagination-nav
               v-model="currentPage"
               :link-gen="queryPage"
               :number-of-pages="numPages"
               align="center"
+              @input="pagination"
               @auxclick.native.prevent.stop
-              @click.native="pagination($event, currentPage)"
               first-number
               last-number
               use-router
             >
             </b-pagination-nav>
+            -->
           </b-col>
         </b-row>
       </div>
@@ -176,6 +189,15 @@ export default {
     }
   },
 
+  watch: {
+    '$route.query.q': function (query) {
+      this.doSearch();
+    },
+    '$route.query.p': function (page) {
+      this.doSearch();
+    }
+  },
+
   mounted() {
     this.scrollListener = throttle(this.scroll, 250);
     window.addEventListener('scroll', this.scrollListener);
@@ -195,9 +217,6 @@ export default {
       this.currentPage = this.$route.query.p || 1;
 
       if (this.query.length > 0) {
-        // dgacitua: https://stackoverflow.com/a/62125496
-        this.$router.push({ path: '/extended-challenge/search', query: { q: this.query, p: (this.currentPage || 1), t: Date.now() }});
-
         this.searchQuery();
         this.displayFullSearch = false;
       }
@@ -243,7 +262,7 @@ export default {
       }
     },
     queryPage(pageNum) {
-      return { path: '/extended-challenge/search', query: { q: this.query, p: pageNum, t: Date.now() }};
+      return { path: '/extended-challenge/search', query: { q: this.query, p: pageNum }};
     },
     scroll(evt) {
       let scr = this.scHandler.scroll(evt);
@@ -281,12 +300,14 @@ export default {
         .then(res => console.log(res.data))
         .catch(err => console.error(err));
     },
-    pagination(evt, page) {
-      let act = this.actionHandler.pagination(evt, page);
+    pagination(page) {
+      let act = this.actionHandler.pagination(null, page);
 
       this.sender.sendGenericAction(act)
         .then(res => console.log(res.data))
         .catch(err => console.error(err));
+
+      this.$router.push({ path: '/extended-challenge/search', query: { q: this.query, p: (this.currentPage || 1) }});
     },
     searchResultClick(evt, doc) {
       let act = this.actionHandler.searchResultClick(evt, doc);
