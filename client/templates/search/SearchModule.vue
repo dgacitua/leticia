@@ -18,13 +18,13 @@
               @blur="blur"
               @keydown="keydown"
               @keyup="keyup"
-              @keydown.enter="doSearch"
+              @keydown.enter="writeQuery"
               @paste.prevent
               v-model="query"
               type="text"
               autocomplete="off"
             ></b-form-input>
-            <b-button variant="success" @click="doSearch">
+            <b-button variant="success" @click="writeQuery">
               <font-awesome-icon :icon="['fas', 'search']"></font-awesome-icon>
               Buscar
             </b-button>
@@ -46,13 +46,13 @@
               @blur="blur"
               @keydown="keydown"
               @keyup="keyup"
-              @keydown.enter="doSearch"
+              @keydown.enter="writeQuery"
               @paste.prevent
               v-model="query"
               type="text"
               autocomplete="off"
             ></b-form-input>
-            <b-button variant="success" @click="doSearch">
+            <b-button variant="success" @click="writeQuery">
               <font-awesome-icon :icon="['fas', 'search']"></font-awesome-icon>
               Buscar
             </b-button>
@@ -195,11 +195,11 @@ export default {
   },
 
   watch: {
-    '$route.query.q': function (query) {
-      this.doSearch();
+    '$route.query.q': function(query) {
+      this.searchQuery();
     },
-    '$route.query.p': function (page) {
-      this.doSearch();
+    '$route.query.p': function(page) {
+      this.searchQuery();
     }
   },
 
@@ -220,7 +220,7 @@ export default {
 
     EventBus.$emit('leticia-current-task', { currentTask: true });
 
-    this.doSearch();
+    this.searchQuery();
   },
 
   beforeDestroy() {
@@ -235,17 +235,8 @@ export default {
   },
 
   methods: {
-    doSearch() {
-      this.query = this.query || this.$route.query.q || '';
-      this.currentPage = this.$route.query.p || 1;
-
-      if (this.query.length > 0) {
-        this.searchQuery();
-        this.displayFullSearch = false;
-      }
-      else {
-        this.displayFullSearch = true;
-      }
+    writeQuery() {
+      this.$router.push({ path: '/extended-challenge/search', query: { q: this.query, p: (this.currentPage || 1) }});
     },
     searchQuery() {
       // dgacitua: Send keystrokes and mouse actions
@@ -253,8 +244,12 @@ export default {
       this.sendMouseBuffer();
       
       // dgacitua: Send search request
+      this.query = this.query || this.$route.query.q || '';
+      this.currentPage = this.$route.query.p || 1;
+
       if (this.query.length > 0) {
         this.serpStatus = 'loading';
+        this.displayFullSearch = false;
 
         this.searchAction(this.query);
         
@@ -275,6 +270,9 @@ export default {
             alert('Ha ocurrido un error al hacer la búsqueda [Código 472]');
             this.serpStatus = 'empty'
           });
+      }
+      else {
+        this.displayFullSearch = true;
       }
     },
     queryPage(pageNum) {
