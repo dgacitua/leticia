@@ -19,6 +19,7 @@ import { consoleLog, consoleError } from './utils';
 import { redirectInteraction } from './websocketRouter';
 
 const app = express();
+const server = http.Server(app);
 const port = 3001;
 const wsPort = 3002;
 const echo = SockJS.createServer();
@@ -38,7 +39,16 @@ app.use(passport.initialize());
 app.set('trust proxy', true);
 
 // CORS support
-app.use(cors());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', req.get('Origin') || '*');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+  res.header('Access-Control-Expose-Headers', 'Content-Length');
+  res.header('Access-Control-Allow-Headers', 'Accept, Authorization, Content-Type, X-Requested-With, Range');
+  
+  if (req.method === 'OPTIONS') return res.send(200);
+  else return next();
+});
 
 // Static assets support
 app.use('/assets', express.static(Constants.assetPath));
@@ -59,8 +69,8 @@ echo.on('connection', (conn) => {
 });
 */
 
-const server = http.createServer();
+//const server = http.createServer();
 //echo.installHandlers(server, { prefix: '/ws' });
 
-app.listen(port, '0.0.0.0', () => consoleLog(`Backend REST API listening on port ${port}!`));
+server.listen(port, '0.0.0.0', () => consoleLog(`Backend REST API listening on port ${port}!`));
 // server.listen(wsPort, '0.0.0.0', () => consoleLog(`Backend WebSocket API listening on port ${wsPort}!`));
