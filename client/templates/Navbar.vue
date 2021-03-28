@@ -241,7 +241,14 @@ export default {
         });
     },
     showTaskModal() {
-      console.log('TODO');
+      let message = {
+        type: 'ShowTaskModal',
+        source: 'Search'
+      };
+
+      this.sender.sendGenericAction(message)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
     }
   }
 }
