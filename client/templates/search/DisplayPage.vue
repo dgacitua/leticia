@@ -1,7 +1,10 @@
 <template>
   <b-container fluid id="display-page" class="full-window">
+    <!--
+    <iframe id="page-iframe" ref="pageIframe" class="display-iframe" :src="pageUrl" @load="iframeLoaded"></iframe>
+    -->
     <div v-if="renderPage" id="container" class="container-iframe">
-      <iframe id="iframe" class="display-iframe" :src="pageUrl"></iframe>
+      <iframe id="page-iframe" ref="pageIframe" class="display-iframe" :src="pageUrl" sandbox="allow-same-origin"></iframe>
     </div>
     <div v-else>
       <h2>No se puede mostrar la página</h2>
@@ -10,8 +13,15 @@
 </template>
 
 <script>
+import { throttle } from 'lodash';
+
 import * as Constants from '../../services/Constants';
+import { deepCopy, getNestedValue } from '../../services/Utils';
 import EventBus from '../../modules/eventBus';
+
+import MouseHandler from '../../trackers/MouseHandler';
+import ScrollHandler from '../../trackers/ScrollHandler';
+import ActionSender from '../../services/ActionSender';
 
 export default {
   data() {
@@ -19,17 +29,74 @@ export default {
       pageUrl: '',
       pageId: '',
       doc: {},
-      renderPage: false
+      iframeElement: null,
+      renderPage: true,
+      mHandler: new MouseHandler('Page'),
+      scHandler: new ScrollHandler('Page'),
+      sender: new ActionSender('Page'),
+      mouseBuffer: [],
+      mouseBufferInterval: null,
+      mouseMoveListener: null,
+      mouseClickListener: null,
+      scrollListener: null
     }
   },
 
   mounted() {
     this.visitPage();
+
+    // TODO check if this can work
+    this.iframeElement = this.$refs.pageIframe;
+
+    this.mouseMoveListener = throttle(this.move, 250);
+    this.mouseClickListener = this.click;
+    this.scrollListener = throttle(this.scroll, 250);
+
+    this.iframeElement.onload = () => {
+
+    };
+
+ 
+    let idoc1 = this.iframeElement.contentWindow || this.iframeElement.contentDocument;
+    let idoc2 = idoc1; //idoc1.parent.document; //getNestedValue(idoc1, 'document');
+
+    console.log(this.iframeElement, idoc2);
+
+    if (!!this.iframeElement && !!idoc2) {
+      idoc2.addEventListener('mousemove', this.mouseMoveListener);
+      idoc2.addEventListener('click', this.mouseClickListener);
+      idoc2.addEventListener('scroll', this.scrollListener);
+
+      console.log('Trackers enabled!');
+    }
+
+    this.mouseBufferInterval = setInterval(() => {
+      console.log('Emptying Mouse Buffer!');
+      this.sendMouseBuffer();
+    }, 15000);
+
     EventBus.$emit('leticia-bookmark-button-status', { status: true, doc: this.doc });
     EventBus.$emit('leticia-current-task', { currentTask: true });
   },
 
   beforeDestroy() {
+    // TODO check if this can work
+    let idoc1 = this.iframeElement.contentWindow || this.iframeElement.contentDocument;
+    let idoc2 = getNestedValue(idoc1, 'document');
+
+    console.log(this.iframeElement, idoc2);
+
+    if (!!this.iframeElement && !!idoc2) {
+      idoc2.removeEventListener('mousemove', this.mouseMoveListener);
+      idoc2.removeEventListener('click', this.mouseClickListener);
+      idoc2.removeEventListener('scroll', this.scrollListener);
+
+      console.log('Trackers disabled!');
+    }
+
+    clearInterval(this.mouseBufferInterval);
+
+
     EventBus.$emit('leticia-bookmark-button-status', { status: false, doc: null });
     EventBus.$emit('leticia-current-task', { currentTask: false });
   },
@@ -60,6 +127,57 @@ export default {
     },
     goBack() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+    },
+    iframeLoaded() {
+      this.iframeElement = this.$refs.pageIframe;
+
+      this.mouseMoveListener = throttle(this.move, 250);
+      this.mouseClickListener = this.click;
+      this.scrollListener = throttle(this.scroll, 250);
+ 
+      let idoc1 = this.iframeElement.contentWindow || this.iframeElement.contentDocument;
+      let idoc2 = idoc1; //idoc1.parent.document; //getNestedValue(idoc1, 'document');
+
+      console.log(this.iframeElement, idoc2);
+
+      if (!!this.iframeElement && !!idoc2) {
+        idoc2.addEventListener('mousemove', this.mouseMoveListener);
+        idoc2.addEventListener('click', this.mouseClickListener);
+        idoc2.addEventListener('scroll', this.scrollListener);
+
+        console.log('Trackers enabled!');
+      }
+
+
+      this.mouseBufferInterval = setInterval(() => {
+        console.log('Emptying Mouse Buffer!');
+        this.sendMouseBuffer();
+      }, 15000);
+    },
+    move(evt) {
+      let mact = this.mHandler.move(evt);
+      this.mouseBuffer.push(mact);
+    },
+    click(evt) {
+      let mact = this.mHandler.click(evt);
+      this.mouseBuffer.push(mact);
+    },
+    scroll(evt) {
+      let scr = this.scHandler.scroll(evt);
+
+      this.sender.sendScrollAction(scr)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
+    },
+    sendMouseBuffer() {
+      if (this.mouseBuffer.length > 0) {
+        let tempBuffer = deepCopy(this.mouseBuffer);
+        this.mouseBuffer.length = 0;
+
+        this.sender.sendMouseBuffer(tempBuffer)
+          .then(res => console.log(res.data))
+          .catch(err => console.error(err));
+      }
     }
   }
 }

@@ -60,6 +60,10 @@ const mouseActionSchema = Mongoose.Schema({
   h_doc: {
     type: Number,
     required: false,
+  },
+  details: {
+    type: Object,
+    required: false,
   }
 });
 

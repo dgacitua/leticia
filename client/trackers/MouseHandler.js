@@ -8,7 +8,7 @@ class MouseHandler {
   click(evt) {
     let message = {
       type  : 'MouseClick',
-      source: this.handlerId,
+      source: this.handlerId || "Window",
       url   : window.document.URL,
       clientTimestamp: Date.now(),
       x_win : evt.clientX,
@@ -28,7 +28,7 @@ class MouseHandler {
   move(evt) {
     let message = {
       type  : 'MouseMovement',
-      source: 'Window',
+      source: this.handlerId || "Window",
       url   : window.document.URL,
       clientTimestamp: Date.now(),
       x_win : evt.clientX,
@@ -48,11 +48,9 @@ class MouseHandler {
   enter(evt, ranking = 0) {
     let message = {
       type  : 'MouseEnter',
-      source: 'Window',
+      source: this.handlerId || "Window",
       url   : window.document.URL,
       clientTimestamp: Date.now(),
-      target: evt.target.id,
-      ranking: ranking,
       x_win : evt.clientX,
       y_win : evt.clientY,
       w_win : window.innerWidth,
@@ -60,7 +58,11 @@ class MouseHandler {
       x_doc : evt.pageX,
       y_doc : evt.pageY,
       w_doc : document.documentElement.scrollWidth,
-      h_doc : document.documentElement.scrollHeight
+      h_doc : document.documentElement.scrollHeight,
+      details: {
+        target: evt.target.id,
+        ranking: ranking
+      }
     };
 
     //console.log(message.type, `ID: ${message.target}`, `RNK: ${message.ranking}`, `X: ${message.x_win}`, `Y: ${message.y_win}`, `TS: ${message.clientTimestamp}`);

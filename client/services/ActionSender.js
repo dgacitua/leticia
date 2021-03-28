@@ -20,6 +20,11 @@ class ActionSenderService {
     return Axios.post(API_URL + '/keystrokes', ksba);
   }
 
+  sendMouseBuffer(mBufferArray) {
+    let mba = mBufferArray.map(m => ({ ...m, username: this.username }));
+    return Axios.post(API_URL + '/mouseactions/buffer', mba);
+  }
+
   sendTypingTestResponses(textArray) {
     let message = {
       username: this.username,

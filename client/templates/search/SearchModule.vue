@@ -166,6 +166,10 @@ export default {
       actionHandler: new ActionHandler('Search'),
       sender: new ActionSender('Search'),
       keystrokeBuffer: [],
+      mouseBuffer: [],
+      mouseBufferInterval: null,
+      mouseMoveListener: null,
+      mouseClickListener: null,
       scrollListener: null,
       logo: Logo,
       query: '',
@@ -200,9 +204,19 @@ export default {
   },
 
   mounted() {
+    this.mouseMoveListener = throttle(this.move, 250);
+    this.mouseClickListener = this.click;
     this.scrollListener = throttle(this.scroll, 250);
+
+    window.addEventListener('mousemove', this.mouseMoveListener);
+    window.addEventListener('click', this.mouseClickListener);
     window.addEventListener('scroll', this.scrollListener);
-    console.log('Scroll Tracker ON!');
+    console.log('Trackers enabled!');
+
+    this.mouseBufferInterval = setInterval(() => {
+      console.log('Emptying Mouse Buffer!');
+      this.sendMouseBuffer();
+    }, 15000);
 
     EventBus.$emit('leticia-current-task', { currentTask: true });
 
@@ -210,8 +224,12 @@ export default {
   },
 
   beforeDestroy() {
+    window.removeEventListener('mousemove', this.mouseMoveListener);
+    window.removeEventListener('click', this.mouseClickListener);
     window.removeEventListener('scroll', this.scrollListener);
-    console.log('Scroll Tracker OFF!');
+    console.log('Trackers disabled!');
+
+    clearInterval(this.mouseBufferInterval);
 
     EventBus.$emit('leticia-current-task', { currentTask: false });
   },
@@ -230,17 +248,10 @@ export default {
       }
     },
     searchQuery() {
-      // dgacitua: Send keystrokes
-      if (this.keystrokeBuffer.length > 0) {
-        let buffer = deepCopy(this.keystrokeBuffer);
-        
-        this.sender.sendKeystrokeBuffer(buffer)
-          .then(res => console.log(res.data))
-          .catch(err => console.error(err));
-
-        this.keystrokeBuffer.length = 0;
-      }
-
+      // dgacitua: Send keystrokes and mouse actions
+      this.sendKeystrokeBuffer();
+      this.sendMouseBuffer();
+      
       // dgacitua: Send search request
       if (this.query.length > 0) {
         this.serpStatus = 'loading';
@@ -268,6 +279,24 @@ export default {
     },
     queryPage(pageNum) {
       return { path: '/extended-challenge/search', query: { q: this.query, p: pageNum }};
+    },
+    move(evt) {
+      let mact = this.mHandler.move(evt);
+      this.mouseBuffer.push(mact);
+      /*
+      this.sender.sendMouseAction(mact)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
+      */
+    },
+    click(evt) {
+      let mact = this.mHandler.click(evt);
+      this.mouseBuffer.push(mact);
+      /*
+      this.sender.sendMouseAction(mact)
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err));
+      */
     },
     scroll(evt) {
       let scr = this.scHandler.scroll(evt);
@@ -335,6 +364,26 @@ export default {
       this.sender.sendGenericAction(act)
         .then(res => console.log(res.data))
         .catch(err => console.error(err));
+    },
+    sendKeystrokeBuffer() {
+      if (this.keystrokeBuffer.length > 0) {
+        let buffer = deepCopy(this.keystrokeBuffer);
+        this.keystrokeBuffer.length = 0;
+
+        this.sender.sendKeystrokeBuffer(buffer)
+          .then(res => console.log(res.data))
+          .catch(err => console.error(err));
+      }
+    },
+    sendMouseBuffer() {
+      if (this.mouseBuffer.length > 0) {
+        let tempBuffer = deepCopy(this.mouseBuffer);
+        this.mouseBuffer.length = 0;
+
+        this.sender.sendMouseBuffer(tempBuffer)
+          .then(res => console.log(res.data))
+          .catch(err => console.error(err));
+      }
     }
   }
 }

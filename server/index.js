@@ -7,6 +7,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 import SockJS from 'sockjs';
 import passport from 'passport';
 
@@ -29,7 +30,8 @@ let corsOptions = {
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(cookieParser());
-app.use(passport.initialize()); 
+//app.use(helmet());
+app.use(passport.initialize());
 
 // Proxy support
 // https://stackoverflow.com/a/14631683

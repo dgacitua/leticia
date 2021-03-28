@@ -19,6 +19,23 @@ const storeMouseAction = async (request, response, next) => {
   }
 }
 
+const storeMouseBuffer = async (request, response, next) => {
+  try {
+    let mouseBuffer = request.body;
+    
+    mouseBuffer.forEach(async mact => {
+      await MouseAction.create(mact);  
+    });
+
+    response.status(200).send({ status: 'Mouse Buffer Saved!', timestamp: Date.now(), count: mouseBuffer.length });
+  }
+  catch (err) {
+    consoleError(err);
+    response.status(500).send({ statusCode: 500, errorMsg: 'Error while storing Mouse Buffer', errorObj: err });
+  }
+}
+
+router.post('/buffer', storeMouseBuffer);
 router.post('/', storeMouseAction);
 
 export default router;
