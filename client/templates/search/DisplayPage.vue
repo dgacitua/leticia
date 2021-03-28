@@ -4,7 +4,7 @@
     <iframe id="page-iframe" ref="pageIframe" class="display-iframe" :src="pageUrl" @load="iframeLoaded"></iframe>
     -->
     <div v-if="renderPage" id="container" class="container-iframe">
-      <iframe id="page-iframe" ref="pageIframe" class="display-iframe" :src="pageUrl" sandbox="allow-same-origin"></iframe>
+      <iframe id="page-iframe" ref="pageIframe" class="display-iframe" sandbox="allow-same-origin" :src="pageUrl"></iframe>
     </div>
     <div v-else>
       <h2>No se puede mostrar la página</h2>
@@ -46,29 +46,21 @@ export default {
     this.visitPage();
 
     // TODO check if this can work
-    this.iframeElement = this.$refs.pageIframe;
-
     this.mouseMoveListener = throttle(this.move, 250);
     this.mouseClickListener = this.click;
     this.scrollListener = throttle(this.scroll, 250);
 
+    this.iframeElement = this.$refs.pageIframe;
+    
     this.iframeElement.onload = () => {
-
-    };
-
- 
-    let idoc1 = this.iframeElement.contentWindow || this.iframeElement.contentDocument;
-    let idoc2 = idoc1; //idoc1.parent.document; //getNestedValue(idoc1, 'document');
-
-    console.log(this.iframeElement, idoc2);
-
-    if (!!this.iframeElement && !!idoc2) {
-      idoc2.addEventListener('mousemove', this.mouseMoveListener);
-      idoc2.addEventListener('click', this.mouseClickListener);
-      idoc2.addEventListener('scroll', this.scrollListener);
+      let iwin = this.iframeElement.contentWindow;
+      
+      iwin.addEventListener('mousemove', this.mouseMoveListener);
+      iwin.addEventListener('click', this.mouseClickListener);
+      iwin.addEventListener('scroll', this.scrollListener);
 
       console.log('Trackers enabled!');
-    }
+    };
 
     this.mouseBufferInterval = setInterval(() => {
       console.log('Emptying Mouse Buffer!');
@@ -95,7 +87,6 @@ export default {
     }
 
     clearInterval(this.mouseBufferInterval);
-
 
     EventBus.$emit('leticia-bookmark-button-status', { status: false, doc: null });
     EventBus.$emit('leticia-current-task', { currentTask: false });
@@ -127,32 +118,6 @@ export default {
     },
     goBack() {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
-    },
-    iframeLoaded() {
-      this.iframeElement = this.$refs.pageIframe;
-
-      this.mouseMoveListener = throttle(this.move, 250);
-      this.mouseClickListener = this.click;
-      this.scrollListener = throttle(this.scroll, 250);
- 
-      let idoc1 = this.iframeElement.contentWindow || this.iframeElement.contentDocument;
-      let idoc2 = idoc1; //idoc1.parent.document; //getNestedValue(idoc1, 'document');
-
-      console.log(this.iframeElement, idoc2);
-
-      if (!!this.iframeElement && !!idoc2) {
-        idoc2.addEventListener('mousemove', this.mouseMoveListener);
-        idoc2.addEventListener('click', this.mouseClickListener);
-        idoc2.addEventListener('scroll', this.scrollListener);
-
-        console.log('Trackers enabled!');
-      }
-
-
-      this.mouseBufferInterval = setInterval(() => {
-        console.log('Emptying Mouse Buffer!');
-        this.sendMouseBuffer();
-      }, 15000);
     },
     move(evt) {
       let mact = this.mHandler.move(evt);
