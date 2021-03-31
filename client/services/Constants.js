@@ -7,6 +7,8 @@ export const throttleTime = 250;
 
 export const pretaskForm = 'pretask';
 export const posttaskForm = 'posttask';
+export const pretaskFormEx = 'pretask-ex';
+export const posttaskFormEx = 'posttask-ex';
 export const queryForm = 'query';
 
 export const frontendUrl = `${location.protocol}//${leticiaHost}:${frontendPort}`;

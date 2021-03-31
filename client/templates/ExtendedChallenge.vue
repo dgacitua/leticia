@@ -40,8 +40,8 @@ export default {
         { path: '/extended-challenge/instructions', query: { task: '' }},
         { path: '/extended-challenge/search', query: { task: '' }},
         { path: '/extended-challenge/stroop', query: { task: '', form: `stroop-${Constants.posttaskForm}` }},
-        { path: '/extended-challenge/nasa-tlx', query: { task: '', form: 'nasa-tlx' }},
-        { path: '/extended-challenge/taskform', query: { task: '', form: Constants.posttaskForm }}
+        { path: '/extended-challenge/nasa-tlx', query: { task: '', form: 'nasatlx' }},
+        { path: '/extended-challenge/taskform', query: { task: '', form: Constants.posttaskFormEx }}
       ],
       currentTasks: this.$store.getters.tasks,
       currentStages: this.$store.getters.stages,

@@ -22,6 +22,7 @@ import OAuth from '../templates/auth/OAuth.vue';
 import QueryPlanningInstructions from '../templates/queryPlanning/Instructions.vue';
 import TaskDescription from '../templates/queryPlanning/TaskDescription.vue';
 import TaskReady from '../templates/queryPlanning/TaskReady.vue';
+import TaskReadyEx from '../templates/search/TaskReady.vue';
 import TaskForm from '../templates/queryPlanning/TaskForm.vue';
 import TaskFormEx from '../templates/search/TaskForm.vue';
 import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
@@ -218,6 +219,10 @@ const router = new VueRouter({
         {
           path: 'taskform',
           component: TaskFormEx,
+        },
+        {
+          path: 'ready',
+          component: TaskReadyEx,
         },
       ]
     },

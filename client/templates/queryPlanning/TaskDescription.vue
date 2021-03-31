@@ -35,7 +35,7 @@ export default {
 
   mounted() {
     this.currentTask = this.$store.getters.tasks.find((e) => { return e.searchTaskId === this.currentStage.query.task });
-    this.$store.commit({ type: 'setCurrentTask', task: this.currentStage.query.task });
+    this.$store.commit({ type: 'setCurrentTask', task: this.currentTask });
     console.log('CurrentTask', this.currentTask, this.currentStage.query.task);
     //let nextStage = this.$store.getters.stages[this.$store.getters.stageIndex];
     //this.$router.replace(nextStage);
