@@ -62,8 +62,8 @@
       hide-header-close
       ok-only
     >
-      <b-card :header="currentTask.title" class="text-center">
-        <b-card-text>{{ currentTask.description }}</b-card-text>
+      <b-card :header="currentTaskObj.title" class="text-center">
+        <b-card-text>{{ currentTaskObj.description }}</b-card-text>
       </b-card>
     </b-modal>
   </div>
@@ -96,7 +96,7 @@ export default {
     currentUser() {
       return this.$store.state.auth.user;
     },
-    currentTask() {
+    currentTaskObj() {
       return this.currentUser ? this.$store.getters.currentTask : '';
     },
     bookmarks() {

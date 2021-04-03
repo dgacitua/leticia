@@ -15,7 +15,7 @@
           VERDE
         </h1>
         <p>
-          Debes presionar el botón "No", ya que el nombre del color no coincide con el color impreso.
+          Debes presionar el botón "No", ya que el nombre del color (verde) no coincide con el color impreso (rojo).
         </p>
         <p>
           Por otro lado, si ves:
@@ -24,7 +24,7 @@
           AZUL
         </h1>
         <p>
-          Debes presionar el botón "Si", ya que el nombre del color y el color impreso coinciden.
+          Debes presionar el botón "Si", ya que el nombre del color y el color impreso coinciden (azul).
         </p>
         <p>
           Intenta responder lo más rápidamente posible esta prueba. Una vez que estés listo(a) para empezar, presiona el botón "Ir a la prueba".

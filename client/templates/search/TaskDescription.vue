@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <b-container>
     <b-row>
       <b-col>
         <b-card :header="currentTask.title" class="text-center">
@@ -13,7 +13,7 @@
         <b-button @click="nextStage" variant="success">Continuar</b-button>
       </b-col>
     </b-row>
-  </div>
+  </b-container>
 </template>
 
 <script>

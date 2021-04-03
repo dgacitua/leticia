@@ -71,7 +71,7 @@ export default {
 
   data() {
     return {
-      formId: 'nasa-tlx',
+      formId: this.$route.query.form || 'nasatlx',
       form: {},
       questions: []
     }
