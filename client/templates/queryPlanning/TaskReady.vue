@@ -2,7 +2,7 @@
   <b-container>
     <b-row>
       <b-card :img-src="image" img-right>
-        <b-card-text>A continuación se te presentará una nueva tarea de búsqueda. Léela con atención y realiza las actividades indicadas. Cuando estés listo(a), presiona Siguiente para continuar.</b-card-text>
+        <b-card-text>A continuación se te presentará una tarea de búsqueda. Léela con atención y realiza las actividades indicadas. Cuando estés listo(a), presiona Siguiente para continuar.</b-card-text>
       </b-card>
     </b-row>
     <br>
