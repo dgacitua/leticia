@@ -29,7 +29,12 @@ export default {
   methods: {
     nextStage(evt) {
       evt.preventDefault();
+      
+      this.resetBookmarks();
       EventBus.$emit('leticia-next-challenge');
+    },
+    resetBookmarks() {
+      this.$store.commit({ type: 'setBookmarks', list: [] });
     }
   }
 }

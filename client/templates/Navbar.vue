@@ -134,11 +134,8 @@ export default {
 
   created() {
     EventBus.$on('leticia-timer-create', (data) => {
-      // TODO Uncomment timer
-      /*
       this.timer = new Timer(data.totalTime);
       this.timer.start();
-      */
     });
 
     EventBus.$on('leticia-timer-stop', () => {

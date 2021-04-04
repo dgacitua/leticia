@@ -120,7 +120,7 @@ export default {
 
         Axios.post(`${Constants.backendApiUrl}/answers`, response)
           .then((res) => {
-            EventBus.$emit('leticia-next-stage');
+            EventBus.$emit('leticia-next-challenge');
           })
           .catch((err) => {
             console.error(err);

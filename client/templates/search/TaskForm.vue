@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO Extended -->
   <b-container>
     <b-row class="space-bottom">
       <b-col>
@@ -125,7 +124,7 @@ export default {
 
         Axios.post(`${Constants.backendApiUrl}/answers`, response)
           .then((res) => {
-            if (formId === Constants.pretaskForm) {
+            if (formId === Constants.pretaskFormEx) {
               // dgacitua: https://stackoverflow.com/a/57183854
               //this.$router.replace({ path: 'query', query: { task: this.$route.query.task, form: Constants.queryForm }});
             }
