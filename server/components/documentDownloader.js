@@ -6,6 +6,7 @@ import charset from 'charset';
 import cheerio from 'cheerio';
 import { htmlToText } from 'html-to-text';
 import scrape from 'website-scraper';
+import PhantomScrape from 'website-scraper-phantom';
 
 import * as Constants from '../constants';
 import { consoleLog, consoleError, isString } from '../utils';
@@ -188,13 +189,14 @@ class DocumentDownloader {
     try {
       let downloadPath = isIndexable ? path.join(Constants.documentPath, docName) : path.join(Constants.previewPath, 'currentDocument');
       let queryPath = isIndexable ? path.join(this.queryDocPath, docName) : path.join(this.queryPreviewPath, 'currentDocument');
+      let urlObject = new URL(sourceUrl);
+      let parsedUrl = urlObject.href;
 
       let options = {
-        urls: [ sourceUrl ],
+        urls: [ parsedUrl ],
         directory: downloadPath,
         filenameGenerator: 'bySiteStructure', //'byType',
-        recursive: true,
-        maxRecursiveDepth: 1,
+        recursive: false,
         httpResponseHandler: (response) => {
           const htmlBody = response.headers['content-type'].startsWith('text/html') && response.body;
           const re = /((https?:\/\/)(\w+)(.disqus.com))/;
@@ -208,7 +210,11 @@ class DocumentDownloader {
         },
         request: {
           headers: { 'User-Agent': this.userAgent }
-        }
+        },
+        urlFilter: (url) => {
+          return (url.indexOf(urlObject.host) !== -1 || this.detectImageUrl(url)) && (url.indexOf('data:image') === -1);
+        },
+        //plugins: [ new PhantomScrape() ]
       }
 
       fs.removeSync(downloadPath);
@@ -371,6 +377,14 @@ class DocumentDownloader {
       consoleError('Error while reindexing', err);
       throw new Error('Error while reindexing', err);
     }
+  }
+
+  detectImageUrl(url) {
+    return path.extname(url) === '.jpg' ||
+      path.extname(url) === '.jpeg' ||
+      path.extname(url) === '.webp' ||
+      path.extname(url) === '.png' ||
+      path.extname(url) === '.gif';
   }
 }
 
