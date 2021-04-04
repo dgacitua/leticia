@@ -72,16 +72,12 @@ export default {
   },
 
   beforeDestroy() {
-    // TODO check if this can work
-    let idoc1 = this.iframeElement.contentWindow || this.iframeElement.contentDocument;
-    let idoc2 = getNestedValue(idoc1, 'document');
+    let iwin = this.iframeElement.contentWindow;
 
-    console.log(this.iframeElement, idoc2);
-
-    if (!!this.iframeElement && !!idoc2) {
-      idoc2.removeEventListener('mousemove', this.mouseMoveListener);
-      idoc2.removeEventListener('click', this.mouseClickListener);
-      idoc2.removeEventListener('scroll', this.scrollListener);
+    if (!!this.iframeElement && !!iwin) {
+      iwin.removeEventListener('mousemove', this.mouseMoveListener);
+      iwin.removeEventListener('click', this.mouseClickListener);
+      iwin.removeEventListener('scroll', this.scrollListener);
 
       console.log('Trackers disabled!');
     }

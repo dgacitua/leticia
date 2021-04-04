@@ -82,6 +82,7 @@ const store = new Vuex.Store({
       return state.currentTask;
     }
   },
+  // Use "commit" to call mutations (sync)
   mutations: {
     setTimerTime(state, payload) {
       state.timerTime = payload.time;
