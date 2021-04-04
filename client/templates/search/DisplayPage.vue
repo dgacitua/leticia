@@ -45,7 +45,6 @@ export default {
   mounted() {
     this.visitPage();
 
-    // TODO check if this can work
     this.mouseMoveListener = throttle(this.move, 250);
     this.mouseClickListener = this.click;
     this.scrollListener = throttle(this.scroll, 250);

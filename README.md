@@ -78,7 +78,6 @@ $ sudo systemctl enable mongod
 
 ## TODO List
 
-- Extended Challenge
 - i18n Support
 - API documentation
 

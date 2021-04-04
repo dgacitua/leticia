@@ -28,7 +28,6 @@ import Timer from '../services/Timer';
 import * as Constants from '../services/Constants';
 import { deepCopy, isEmptyArray } from '../services/Utils';
 
-// TODO Change to Extended Challenge
 export default {
   data() {
     return {

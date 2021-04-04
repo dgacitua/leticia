@@ -5,7 +5,7 @@ import { dataDb, userDb } from '../db';
 const bookmarkSchema = Mongoose.Schema({
   username: {
     type: String,
-    required: false // TODO login required
+    required: true
   },
   action: {
     type: String,
@@ -14,7 +14,7 @@ const bookmarkSchema = Mongoose.Schema({
   },
   task: {
     type: String,
-    required: false // TODO flow required
+    required: true
   },
   docId: {
     type: String,

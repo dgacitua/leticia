@@ -5,7 +5,7 @@ import { dataDb, userDb } from '../db';
 const mouseActionSchema = Mongoose.Schema({
   username: {
     type: String,
-    required: false // TODO login required
+    required: true
   },
   type: {
     type: String,
