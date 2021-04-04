@@ -97,10 +97,10 @@ export default {
       return this.$store.state.auth.user;
     },
     currentTaskObj() {
-      return this.currentUser ? this.$store.getters.currentTask : '';
+      return this.currentUser && this.$store.getters.currentTask ? this.$store.getters.currentTask : {};
     },
     bookmarks() {
-      return this.currentUser ? this.$store.getters.bookmarks : [];
+      return this.currentUser && this.$store.getters.bookmarks ? this.$store.getters.bookmarks : [];
     },
     showAdminBoard() {
       if (this.currentUser && this.currentUser.roles) {
@@ -134,8 +134,11 @@ export default {
 
   created() {
     EventBus.$on('leticia-timer-create', (data) => {
+      // TODO Uncomment timer
+      /*
       this.timer = new Timer(data.totalTime);
       this.timer.start();
+      */
     });
 
     EventBus.$on('leticia-timer-stop', () => {
@@ -178,7 +181,7 @@ export default {
       //this.$store.dispatch('eraseAll');
       this.$router.replace('/');
     },
-    checkSearchTaskReady(status) {
+    setSearchTaskReady(status) {
       this.showEndSearch = status;
     },
     bookmark(evt) {
@@ -233,6 +236,7 @@ export default {
       this.sender.sendGenericAction(message)
         .then(res => {
           console.log(res.data);
+          this.setSearchTaskReady(false);
           EventBus.$emit('leticia-next-challenge');
         })
         .catch(err => {

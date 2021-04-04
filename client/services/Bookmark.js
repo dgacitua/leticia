@@ -1,11 +1,11 @@
 import { store } from '../modules/store';
-import { deepCopy } from '../services/Utils';
+import { deepCopy, isArray } from '../services/Utils';
 
 const MIN_BOOKMARKS = 3; // TODO unhardcode this value
 
 class BookmarkService {
   checkBookmark(bmList, bmDoc) {
-    return !!bmList.find(e => e.docId === bmDoc.docId);
+    return isArray(bmList) ? !!bmList.find(e => e.docId === bmDoc.docId) : false;
   }
 
   getBookmarkList() {
@@ -51,15 +51,15 @@ class BookmarkService {
   }
 
   fetchBookmarkStatus(bmList, docId) {
-    return !!bmList && !!docId && !(!!bmList.find(e => e.docId === docId));
+    return isArray(bmList) && !!docId && !(!!bmList.find(e => e.docId === docId));
   }
 
   fetchBookmarkCount(bmList) {
-    return !!bmList ? bmList.length : 0;
+    return isArray(bmList) ? bmList.length : 0;
   }
 
   fetchMinBookmarks(bmList) {
-    return !!bmList && (this.fetchBookmarkCount(bmList) >= MIN_BOOKMARKS);
+    return isArray(bmList) && (this.fetchBookmarkCount(bmList) >= MIN_BOOKMARKS);
   }
 }
 

@@ -25,6 +25,12 @@ export const shuffleArray = (a) => {
   return a;
 };
 
+// dgacitua: Check if variable is an array (empty or not)
+// https://stackoverflow.com/a/20956445
+export const isArray = (arr) => {
+  return Array.isArray(arr) && arr.length >= 0;
+};
+
 // dgacitua: Check if array doesn't exist or is empty
 // https://www.geeksforgeeks.org/check-if-an-array-is-empty-or-not-in-javascript/
 export const isEmptyArray = (arr) => {
@@ -51,7 +57,7 @@ export const getNestedValue = (obj, key) => {
   return key.split(".").reduce((o, x) => {
       return (typeof o == "undefined" || o === null) ? o : o[x];
   }, obj);
-}
+};
 
 // dgacitua: Get word bounds at position
 // https://stackoverflow.com/a/58403800
@@ -110,4 +116,4 @@ export const findNextWordPosition = (needle, haystack) => {
           return [0, 0];
       }
   }
-}
+};

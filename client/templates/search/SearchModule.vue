@@ -143,7 +143,7 @@ import { throttle } from 'lodash';
 
 import EventBus from '../../modules/eventBus';
 import * as Constants from '../../services/Constants';
-import { deepCopy } from '../../services/Utils';
+import { deepCopy, isArray } from '../../services/Utils';
 
 import ActionHandler from '../../trackers/ActionHandler';
 import MouseHandler from '../../trackers/MouseHandler';
@@ -221,6 +221,7 @@ export default {
     EventBus.$emit('leticia-current-task', { currentTask: true });
 
     this.searchQuery();
+    this.resetBookmarks();
   },
 
   beforeDestroy() {
@@ -237,6 +238,7 @@ export default {
   methods: {
     writeQuery() {
       this.$router.push({ path: '/extended-challenge/search', query: { q: this.query, p: (this.currentPage || 1) }});
+      this.searchAction(this.query);
     },
     searchQuery() {
       // dgacitua: Send keystrokes and mouse actions
@@ -251,7 +253,7 @@ export default {
         this.serpStatus = 'loading';
         this.displayFullSearch = false;
 
-        this.searchAction(this.query);
+        //this.searchAction(this.query);
         
         Axios.get(`${Constants.backendApiUrl}/search?q=${this.query}&p=${this.currentPage || 1}`)
           .then((res) => {
@@ -277,6 +279,9 @@ export default {
     },
     queryPage(pageNum) {
       return { path: '/extended-challenge/search', query: { q: this.query, p: pageNum }};
+    },
+    resetBookmarks() {
+      if (!isArray(this.$store.getters.bookmarks)) this.$store.commit({ type: 'setBookmarks', list: [] });
     },
     move(evt) {
       let mact = this.mHandler.move(evt);
