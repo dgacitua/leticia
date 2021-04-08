@@ -330,8 +330,8 @@ class DocumentDownloader {
       return true;
     }
     catch (err) {
-      consoleError('Error while deleting all documents!', err);
-      throw new Error('Error while deleting all documents!', err);
+      consoleError('Error while deleting document!', err);
+      throw new Error('Error while deleting document!', err);
     }
   }
 
