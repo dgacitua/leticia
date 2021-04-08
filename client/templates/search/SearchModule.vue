@@ -249,7 +249,7 @@ export default {
       this.query = this.query || this.$route.query.q || '';
       this.currentPage = this.$route.query.p || 1;
 
-      if (this.query.length > 0) {
+      if (this.query.length > 0 && this.query !== '*') {
         this.serpStatus = 'loading';
         this.displayFullSearch = false;
 
