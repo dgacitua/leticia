@@ -237,7 +237,7 @@ export default {
 
   methods: {
     writeQuery() {
-      this.$router.push({ path: '/extended-challenge/search', query: { q: this.query, p: (this.currentPage || 1) }});
+      this.$router.push({ path: '/extended-challenge/search', query: { q: this.query, p: 1 }});
       this.searchAction(this.query);
     },
     searchQuery() {
