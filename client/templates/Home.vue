@@ -24,6 +24,7 @@
         </div>
         <ul>
           <li>Debes ser mayor de edad (18+)</li>
+          <li>Debes tener conocimientos básicos acerca del uso de buscadores web</li>
           <li>Debes usar un computador de escritorio o laptop</li>
           <li>Sitio web no compatible con dispositivos móviles (teléfonos y tablets)</li>
           <li>Métodos de entrada compatibles: Teclado y ratón</li>
