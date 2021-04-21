@@ -7,7 +7,6 @@
     <b-row>
       <b-card :img-src="image" img-right>
         <b-card-text>
-          <!-- TODO Task Description -->
           <p>A continuación se te habilitará un motor de búsqueda en el cual podrás relizar consultas y buscar documentos (páginas web) adecuados para resolver la necesidad de información de la tarea indicada.</p>
           <p>Debes marcar 3 o más documentos que sean relevantes para la tarea.</p>
           <p>Para marcar o desmarcar documentos, ingresa al documento desde la lista de resultados de búsqueda y utiliza los botones de marcar/desmarcar documento en la barra superior.</p>
