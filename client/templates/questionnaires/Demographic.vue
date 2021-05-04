@@ -6,319 +6,361 @@
     <br>
     <b-row>
       <b-form id="demographic" @submit="submitDemographic">
+        <!-- Example -->
+        <!--
+        <div>
+          <b>{{ props.title }}</b>
+          <span v-if="props.required" class="form-asterisk">*</span>
+        </div>
+        <div v-if="props.hint" class="help-block">
+          {{ props.hint }}
+        </div>
+        <div>
+          <b-form-input
+            v-model="props.answer"
+            :required="props.required"
+            :id="`input-${props.questionId}`"
+            :name="`input-${props.questionId}`"
+            @focus="focus"
+            @blur="blur"
+            class="input-box">
+          </b-form-input>
+        -->
         <!-- Sex -->
-        <b-form-group
-          id="input-group-sex"
-          label="Sexo"
-          label-for="input-sex"
-          >
-          <b-form-radio-group
-            id="input-sex"
-            v-model="form.sex"
-            :options="sex"
-            required
-            >
-          </b-form-radio-group>
-        </b-form-group>
-        <br>
+        <div id="demo-sex">
+          <div>
+            <b>Sexo</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div>
+            <b-form-radio-group
+              id="input-sex"
+              v-model="form.sex"
+              :options="sex"
+              required>
+            </b-form-radio-group>
+          </div>
+          <br>
+        </div>
         <!-- Age -->
-        <b-form-group
-          id="input-group-age"
-          label="Edad"
-          label-for="input-age"
-          description="Edad actual (en años)"
-        >
-          <b-form-input
-            id="input-age"
-            v-model="form.age"
-            type="number"
-            min="0"
-            required
-            >
-          </b-form-input>
-        </b-form-group>
-        <br>
+        <div id="demo-age">
+          <div>
+            <b>Edad</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div class="help-block">
+            Edad actual (en años)
+          </div>
+          <div>
+            <b-form-input
+              id="input-age"
+              v-model="form.age"
+              type="number"
+              min="1"
+              required>
+            </b-form-input>
+          </div>
+          <br>
+        </div>
         <!-- Handedness -->
-        <b-form-group
-          id="input-group-handedness"
-          label="¿Cúal es su mano dominante al escribir?"
-          label-for="input-handedness"
-        >
-          <b-form-radio-group
-            id="input-handedness"
-            v-model="form.handedness"
-            :options="handedness"
-            required
-          >
-          </b-form-radio-group>
-        </b-form-group>
-        <br>
+        <div id="demo-handedness">
+          <div>
+            <b>¿Cúal es su mano dominante al escribir?</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div>
+            <b-form-radio-group
+              id="input-handedness"
+              v-model="form.handedness"
+              :options="handedness"
+              required>
+            </b-form-radio-group>
+          </div>
+          <br>
+        </div>
         <!-- NativeLanguage -->
-        <b-form-group
-          id="input-group-language"
-          label="¿Cúal es su idioma nativo?"
-          label-for="input-language"
-        >
-          <b-form-radio-group
-            id="input-language"
-            v-model="form.language"
-            :options="language"
-            required
-          >
-          </b-form-radio-group>
-        </b-form-group>
-        <b-form-group
-          v-if="form.language === 'Other'"
-          id="input-group-language-custom"
-          label="Indique su idioma nativo"
-          label-for="input-language-custom"
-        >
-          <b-form-input
-            id="input-language-custom"
-            v-model="form.customLanguage"
-            type="text"
-            required
-          >
-          </b-form-input>
-        </b-form-group>
-        <br>
+        <div id="demo-language">
+          <div>
+            <b>¿Cúal es su idioma nativo?</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div>
+            <b-form-radio-group
+              id="input-language"
+              v-model="form.language"
+              :options="language"
+              required>
+            </b-form-radio-group>
+          </div>
+          <br>
+        </div>
+        <div v-if="form.language === 'Other'" id="demo-custom-language">
+          <div>
+            <b>Indique su idioma nativo</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div>
+            <b-form-input
+              id="input-language-custom"
+              v-model="form.customLanguage"
+              type="text"
+              required>
+            </b-form-input>
+          </div>
+          <br>
+        </div>
         <!-- KeyboardLayout -->
-        <b-form-group
-          id="input-group-keyboard"
-          label="¿Cúal es la distribución de su teclado?"
-          label-for="input-keyboard"
-        >
-          <b-form-radio-group
-            id="input-keyboard"
-            v-model="form.keyboardLayout"
-            :options="keyboardLayout"
-            required
-          >
-          </b-form-radio-group>
-        </b-form-group>
-        <b-form-group
-          v-if="form.keyboardLayout === 'Other'"
-          id="input-group-keyboard-custom"
-          label="Indique su distribución de teclado"
-          label-for="input-keyboard-custom"
-        >
-          <b-form-input
-            id="input-keyboard-custom"
-            v-model="form.customKeyboardLayout"
-            type="text"
-            required
-          >
-          </b-form-input>
-        </b-form-group>
-        <br>
+        <div id="demo-keyboard">
+          <div>
+            <b>¿Cúal es la distribución de su teclado?</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div>
+            <b-form-radio-group
+              id="input-keyboard"
+              v-model="form.keyboardLayout"
+              :options="keyboardLayout"
+              required>
+            </b-form-radio-group>
+          </div>
+          <br>
+        </div>
+        <div v-if="form.keyboardLayout === 'Other'" id="demo-custom-keyboard">
+          <div>
+            <b>Indique su distribución de teclado</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div>
+            <b-form-input
+              id="input-keyboard-custom"
+              v-model="form.customKeyboardLayout"
+              type="text"
+              required>
+            </b-form-input>
+          </div>
+          <br>
+        </div>
         <!-- FavoriteSearchEngine -->
-        <b-form-group
-          id="input-group-searchengine"
-          label="¿Cual es su motor de búsqueda web preferido?"
-          label-for="input-searchengine"
-        >
-          <b-form-radio-group
-            id="input-searchengine"
-            v-model="form.searchEngine"
-            :options="searchEngine"
-            required
-          >
-          </b-form-radio-group>
-        </b-form-group>
-        <b-form-group
-          v-if="form.searchEngine === 'Other'"
-          id="input-group-searchengine-custom"
-          label="Indique su motor de búsqueda web preferido"
-          label-for="input-searchengine-custom"
-        >
-          <b-form-input
-            id="input-searchengine-custom"
-            v-model="form.customSearchEngine"
-            type="text"
-            required
-          >
-          </b-form-input>
-        </b-form-group>
-        <br>
+        <div id="demo-searchengine">
+          <div>
+            <b>¿Cual es su motor de búsqueda web preferido?</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div>
+            <b-form-radio-group
+              id="input-searchengine"
+              v-model="form.searchEngine"
+              :options="searchEngine"
+              required>
+            </b-form-radio-group>
+          </div>
+          <br>
+        </div>
+        <div v-if="form.searchEngine === 'Other'" id="demo-custom-searchengine">
+          <div>
+            <b>Indique su motor de búsqueda web preferido</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div>
+            <b-form-input
+              id="input-searchengine-custom"
+              v-model="form.customSearchEngine"
+              type="text"
+              required>
+            </b-form-input>
+          </div>
+          <br>
+        </div>
         <!-- Education -->
-        <b-form-group
-          id="input-group-education"
-          label="Nivel Educacional"
-          label-for="input-education"
-          description="Indicar último nivel cursado"
-        >
-          <b-form-select
-            id="input-education"
-            v-model="form.education"
-            :options="educationLevels"
-            required
-          >
-          </b-form-select>
-        </b-form-group>
-        <br>
+        <div id="demo-education">
+          <div>
+            <b>Nivel Educacional</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div class="help-block">
+            Indicar último nivel cursado o en curso
+          </div>
+          <div>
+            <b-form-select
+              id="input-education"
+              v-model="form.education"
+              :options="educationLevels"
+              required>
+            </b-form-select>
+          </div>
+          <br>
+        </div>
         <!-- Career -->
-        <b-form-group
-          id="input-group-career"
-          label="Carrera"
-          label-for="input-career"
-          description="(opcional) En caso de indicar nivel educacional Técnico-Profesional o Universitario, indicar la carrera en curso o cursada"
-        >
-          <b-form-input
-            id="input-career"
-            v-model="form.career"
-          >
-          </b-form-input>
-        </b-form-group>
-        <br>
+        <div id="demo-career">
+          <div>
+            <b>Carrera</b>
+          </div>
+          <div class="help-block">
+            (OPCIONAL) En caso de indicar nivel educacional Técnico-Profesional o Universitario, indicar la carrera en curso o cursada
+          </div>
+          <div>
+            <b-form-input
+              id="input-career"
+              v-model="form.career">
+            </b-form-input>
+          </div>
+          <br>
+        </div>
         <!-- IsStudent? -->
-        <b-form-group
-          id="input-group-student"
-          label="¿Está estudiando ahora?"
-          label-for="input-student"
-        >
-          <b-form-radio-group
-            id="input-student"
-            v-model="form.isStudent"
-            :options="isStudent"
-            required
-          >
-          </b-form-radio-group>
-        </b-form-group>
-        <br>
+        <div id="demo-student">
+          <div>
+            <b>¿Está estudiando ahora?</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div>
+            <b-form-radio-group
+              id="input-student"
+              v-model="form.isStudent"
+              :options="isStudent"
+              required>
+            </b-form-radio-group>
+          </div>
+          <br>
+        </div>
         <!-- HasDyslexia? -->
-        <b-form-group
-          id="input-group-dyslexia"
-          label="¿Usted tiene Dislexia?"
-          label-for="input-dyslexia"
-          >
-          <b-form-radio-group
-            id="input-dyslexia"
-            v-model="form.hasDyslexia"
-            :options="hasDyslexia"
-            required
-            >
-          </b-form-radio-group>
-        </b-form-group>
-        <br>
+        <div id="demo-dyslexia">
+          <div>
+            <b>¿Usted tiene Dislexia?</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div>
+            <b-form-radio-group
+              id="input-dyslexia"
+              v-model="form.hasDyslexia"
+              :options="hasDyslexia"
+              required>
+            </b-form-radio-group>
+          </div>
+          <br>
+        </div>
         <!-- HasColorBlindness -->
-        <b-form-group
-          id="input-group-colorblindness"
-          label="¿Usted tiene algún tipo de Daltonismo?"
-          label-for="input-colorblindness"
-          >
-          <b-form-radio-group
-            id="input-colorblindness"
-            v-model="form.hasColorBlindness"
-            :options="hasColorBlindness"
-            required
-            >
-          </b-form-radio-group>
-        </b-form-group>
-        <br>
+        <div id="demo-colorblindness">
+          <div>
+            <b>¿Usted tiene algún tipo de Daltonismo?</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div>
+            <b-form-radio-group
+              id="input-colorblindness"
+              v-model="form.hasColorBlindness"
+              :options="hasColorBlindness"
+              required>
+            </b-form-radio-group>
+          </div>
+          <br>
+        </div>
         <!-- Country -->
-        <b-form-group
-          id="input-group-country"
-          label="País de residencia"
-          label-for="input-country"
-        >
-          <v-select
-            id="input-country"
-            :options="countries"
-            :reduce="country => country.value"
-            label="text"
-            v-model="form.country">
-            <template #search="{attributes, events}">
-              <input
-                class="vs__search"
-                :required="!(form.country)"
-                v-bind="attributes"
-                v-on="events"
-              />
-            </template>
-          </v-select>
-        </b-form-group>
-        <br>
+        <div id="demo-country">
+          <div>
+            <b>País de residencia</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div>
+            <v-select
+              id="input-country"
+              :options="countries"
+              :reduce="country => country.value"
+              label="text"
+              v-model="form.country">
+              <template #search="{attributes, events}">
+                <input
+                  class="vs__search"
+                  :required="!(form.country)"
+                  v-bind="attributes"
+                  v-on="events" />
+              </template>
+            </v-select>
+          </div>
+          <br>
+        </div>
         <!-- Region -->
-        <b-form-group
-          id="input-group-region"
-          label="Región de residencia"
-          label-for="input-region"
-        >
-          <v-select
-            v-if="form.country === 'Chile'"
-            id="input-region"
-            :options="regions"
-            :reduce="region => region.value"
-            :required="!(form.region)"
-            label="text"
-            v-model="form.region">
-            <template #search="{attributes, events}">
-              <input
-                class="vs__search"
-                :required="!(form.region)"
-                v-bind="attributes"
-                v-on="events"
-              />
-            </template>
-          </v-select>
-          <b-form-input
-            v-else
-            id="input-region"
-            v-model="form.region"
-            type="text"
-            required
-          >
-          </b-form-input>
-        </b-form-group>
-        <br>
+        <div id="demo-region">
+          <div>
+            <b>Región/Estado/Provincia/Departamento de residencia</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div>
+            <v-select
+              v-if="form.country === 'Chile'"
+              id="input-region"
+              :options="regions"
+              :reduce="region => region.value"
+              :required="!(form.region)"
+              label="text"
+              v-model="form.region">
+              <template #search="{attributes, events}">
+                <input
+                  class="vs__search"
+                  :required="!(form.region)"
+                  v-bind="attributes"
+                  v-on="events" />
+              </template>
+            </v-select>
+            <b-form-input
+              v-else
+              id="input-region"
+              v-model="form.region"
+              type="text"
+              required>
+            </b-form-input>
+          </div>
+          <br>
+        </div>
         <!-- City -->
-        <b-form-group
-          id="input-group-city"
-          label="Ciudad/comuna de residencia"
-          label-for="input-city"
-        >
-          <v-select
-            v-if="form.country === 'Chile'"
-            id="input-city"
-            :options="citiesSelection"
-            :reduce="city => city.value"
-            :required="!(form.city)"
-            label="text"
-            v-model="form.city">
-            <template #search="{attributes, events}">
-              <input
-                class="vs__search"
-                :required="!(form.city)"
-                v-bind="attributes"
-                v-on="events"
-              />
-            </template>
-          </v-select>
-          <b-form-input
-            v-else
-            id="input-city"
-            v-model="form.city"
-            type="text"
-            required
-          >
-          </b-form-input>
-        </b-form-group>
-        <br>
+        <div id="demo-city">
+          <div>
+            <b>Ciudad/Comuna de residencia</b>
+            <span class="form-asterisk">*</span>
+          </div>
+          <div>
+            <v-select
+              v-if="form.country === 'Chile'"
+              id="input-city"
+              :options="citiesSelection"
+              :reduce="city => city.value"
+              :required="!(form.city)"
+              label="text"
+              v-model="form.city">
+              <template #search="{attributes, events}">
+                <input
+                  class="vs__search"
+                  :required="!(form.city)"
+                  v-bind="attributes"
+                  v-on="events" />
+              </template>
+            </v-select>
+            <b-form-input
+              v-else
+              id="input-city"
+              v-model="form.city"
+              type="text"
+              required>
+            </b-form-input>
+          </div>
+          <br>
+        </div>
         <!-- Town -->
-        <b-form-group
-          id="input-group-town"
-          label="Villa/Población"
-          label-for="input-town"
-          description="(opcional)"
-        >
-          <b-form-input
-            id="input-town"
-            v-model="form.town"
-            type="text"
-          >
-          </b-form-input>
-        </b-form-group>
-        <br>
+        <div id="demo-town">
+          <div>
+            <b>Villa/Población de residencia</b>
+          </div>
+          <div class="help-block">
+            (OPCIONAL)
+          </div>
+          <div>
+            <b-form-input
+              id="input-town"
+              v-model="form.town"
+              type="text">
+            </b-form-input>
+          </div>
+          <br>
+        </div>
         <!-- Submit -->
         <b-row>
           <b-col class="text-right">
@@ -471,8 +513,15 @@ export default {
   margin: 0px 0px 0px 0px;
 }
 
-.required {
+.form-asterisk {
   font-weight: bold;
-  color: red;
+  color: #FF0000;
+}
+
+.help-block {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: small;
+  color: #6c757d;
 }
 </style>
