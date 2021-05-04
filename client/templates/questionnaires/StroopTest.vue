@@ -267,7 +267,7 @@ export default {
 
 <style scoped>
 .text-yellow {
-  color: gold;
+  color: yellow;
 }
 
 .text-red {
@@ -283,7 +283,7 @@ export default {
 }
 
 .text-pink {
-  color: hotpink;
+  color: pink;
 }
 
 .text-green {
