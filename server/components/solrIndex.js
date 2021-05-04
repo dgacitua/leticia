@@ -138,6 +138,7 @@ class SolrIndex {
             docObj.searchSnippet = searchSnippet || docObj.snippet_t;
             docObj.ranking = searchStart + idx + 1;
             
+            delete docObj.snippet_t;
             delete docObj.body_t;
 
             respDocs.push(docObj);
