@@ -123,7 +123,7 @@ class ActionSenderService {
 
   sendGenericAction(originalMsg) {
     let message = {
-      username: this.username,
+      username: originalMsg.username || this.username,
       type: originalMsg.type || 'GenericAction',
       source: originalMsg.source || this.senderId,
       url: router.currentRoute.fullPath,

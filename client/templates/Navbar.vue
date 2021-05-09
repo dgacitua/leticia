@@ -227,7 +227,8 @@ export default {
     endSearch(evt) {
       let message = {
         type: 'FinishSearchStage',
-        source: 'Search'
+        source: 'Search',
+        username: this.currentUser.username,
       };
 
       this.sender.sendGenericAction(message)
@@ -244,7 +245,8 @@ export default {
     showTaskModal() {
       let message = {
         type: 'ShowTaskModal',
-        source: 'Search'
+        source: 'Search',
+        username: this.currentUser.username,
       };
 
       this.sender.sendGenericAction(message)
