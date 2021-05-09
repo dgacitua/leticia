@@ -90,7 +90,7 @@
                 >
                   {{ doc.title_t }}
                 </b-link>
-                </div>
+              </div>
               <div class="result-snippet" v-html="doc.searchSnippet"></div>
             </div>
             <br>
@@ -399,7 +399,14 @@ export default {
 .result-title {
   font-family: arial, sans-serif;
   font-size: 20px;
+}
+
+.result-title:link {
   color: #1a0dab;
+}
+
+.result-title:visited {
+  color: #609;
 }
 
 .result-url {
