@@ -50,7 +50,7 @@
           <div>
             ¿El texto coincide con el color?
           </div>
-          <div :class="`text-center ${currentColor}`">
+          <div :class="`text-center background ${currentColor}`">
             <h1 v-if="stroopLock"><br></h1>
             <h1 v-else>{{ currentText }}</h1>
           </div>
@@ -266,27 +266,37 @@ export default {
 </script>
 
 <style scoped>
+.background {
+  background-color: #eeeeee;
+}
+
 .text-yellow {
-  color: yellow;
+  font-weight: bold;
+  color: gold;
 }
 
 .text-red {
+  font-weight: bold;
   color: red;
 }
 
 .text-blue {
+  font-weight: bold;
   color: blue;
 }
 
 .text-orange {
+  font-weight: bold;
   color: darkorange;
 }
 
 .text-pink {
-  color: pink;
+  font-weight: bold;
+  color: hotpink;
 }
 
 .text-green {
+  font-weight: bold;
   color: green;
 }
 </style>
