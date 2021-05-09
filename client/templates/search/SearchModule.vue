@@ -281,7 +281,7 @@ export default {
       }
     },
     queryPage(pageNum) {
-      return { path: '/extended-challenge/search', query: { q: this.query, p: pageNum }};
+      return { path: '/extended-challenge/search', query: { task: this.taskId, q: this.query, p: pageNum }};
     },
     resetBookmarks() {
       if (!isArray(this.$store.getters.bookmarks)) this.$store.commit({ type: 'setBookmarks', list: [] });
