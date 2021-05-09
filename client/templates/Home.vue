@@ -34,6 +34,14 @@
       </b-col>
     </b-row>
     <br>
+    <b-row>
+      <b-col>
+        <b-alert show variant="secondary">
+          <b>IMPORTANTE:</b> En caso de presentar alguna dificultad con el sistema a la hora de realizar la actividad, puedes cerrar la pestaña (o cerrar la sesión) y luego ingresar nuevamente con las mismas credenciales para continuar la actividad en la etapa donde la dejaste.
+        </b-alert>
+      </b-col>
+    </b-row>
+    <br>
     <b-row class="text-center" align-v="center">
       <b-col>
         <b-row align-h="center">
