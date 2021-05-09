@@ -172,6 +172,7 @@ export default {
       mouseClickListener: null,
       scrollListener: null,
       logo: Logo,
+      taskId: '',
       query: '',
       displayFullSearch: true,
       serpStatus: 'loading',
@@ -204,6 +205,8 @@ export default {
   },
 
   mounted() {
+    this.taskId = this.$route.query.task;
+
     this.mouseMoveListener = throttle(this.move, 250);
     this.mouseClickListener = this.click;
     this.scrollListener = throttle(this.scroll, 250);
@@ -237,7 +240,7 @@ export default {
 
   methods: {
     writeQuery() {
-      this.$router.push({ path: '/extended-challenge/search', query: { q: this.query, p: 1 }});
+      this.$router.push({ path: '/extended-challenge/search', query: { task: this.taskId, q: this.query, p: 1 }});
       this.searchAction(this.query);
     },
     searchQuery() {
@@ -344,7 +347,7 @@ export default {
         .then(res => console.log(res.data))
         .catch(err => console.error(err));
 
-      this.$router.push({ path: '/extended-challenge/search', query: { q: this.query, p: (this.currentPage || 1) }});
+      this.$router.push({ path: '/extended-challenge/search', query: { task: this.taskId, q: this.query, p: (this.currentPage || 1) }});
     },
     searchResultClick(evt, doc) {
       let act = this.actionHandler.searchResultClick(evt, doc);
