@@ -439,19 +439,19 @@ db.questions.insertMany([
 
 db.tasks.insertMany([
   {
-    "searchTaskId": 'task02',
-    "title": 'Banderas',
-    "description": 'Cada bandera nacional del mundo comparte una característica geométrica común, excepto un país. ¿Qué pais es?'
+    "searchTaskId": 'task07',
+    "title": 'Computación Cuántica',
+    "description": 'Un amigo que estudia Ingeniería te cuenta que recientemente fue a una charla sobre Computación Cuántica, y que quedó soprendido por los usos de esta tecnología. Para poder discutir informadamente del tema, decides buscar información al respecto. ¿Como funciona (a grandes rasgos) la computación cuántica? ¿Cuáles son sus potenciales usos?'
   },
   {
-    "searchTaskId": 'task03',
-    "title": 'Redes 5G',
-    "description": 'Los vecinos de tu barrio están comentando que se está evaluando la opción de instalar una antena 5G en el sector, como parte de un programa piloto para mejorar el servicio de telefonía móvil. Para tener una opinión informada del tema, decides buscar al respecto: ¿Qué es una red 5G? ¿Cuáles son sus ventajas y desventajas? ¿Es seguro instalar una antena 5G en un barrio residencial?'
+    "searchTaskId": 'task11',
+    "title": 'Disolución',
+    "description": 'Es más fácil disolver el azúcar en una taza de café caliente que en una de café frío. ¿Qué ocurre al hacer el mismo ejercicio con sal y agua?'
   },
   {
-    "searchTaskId": 'task06',
-    "title": 'Uso de smartphones por niños',
-    "description": 'Tu hermana tiene dudas sobre si regalarle a su hijo de 8 años un smartphone para que pueda entretenerse y compartir con sus amigos. Ella te consulta a ti cual sería una buena decisión. Al respecto: ¿Cuales son los beneficios y desventajas de usar un smartphone a esa edad? ¿Como afectaría su desarrollo intelectual el uso frecuente de dicho dispositivo?'
+    "searchTaskId": 'task13',
+    "title": 'Agujeros Negros',
+    "description": 'Como parte del taller de "Astronomía para principiantes" en el cual participas, se te asignó realizar una breve exposición acerca de los agujeros negros, respondiendo las siguientes preguntas: ¿Pueden los agujeros negros "tragarse el Universo"? ¿Qué sucede en un agujero negro?'
   }
 ]);
 
