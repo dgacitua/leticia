@@ -1,7 +1,7 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
-import http from 'http';
+//import http from 'http';
 import path from 'path';
 import express from 'express';
 import cors from 'cors';
@@ -63,10 +63,12 @@ echo.on('connection', (conn) => {
   conn.on('data', (message) => { redirectInteraction(message) });
   conn.on('close', () => {});
 });
-*/
 
 const server = http.createServer();
-//echo.installHandlers(server, { prefix: '/ws' });
+echo.installHandlers(server, { prefix: '/ws' });
+*/
 
 app.listen(port, '0.0.0.0', () => consoleLog(`Backend REST API listening on port ${port}!`));
 // server.listen(wsPort, '0.0.0.0', () => consoleLog(`Backend WebSocket API listening on port ${wsPort}!`));
+
+consoleLog(`LeTiCiA Pilot Mode: ${Constants.isPilotMode}`);
