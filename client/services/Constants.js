@@ -1,4 +1,5 @@
 export const isProductionMode = (process.env.NODE_ENV === 'production');
+export const isPilotMode = (process.env.LETICIA_PILOT_MODE === 'true');
 export const leticiaHost = process.env.LETICIA_HOST || 'localhost';
 export const frontendPort = process.env.FRONTEND_PORT || 3000;
 export const restPort = process.env.REST_PORT || 3001;

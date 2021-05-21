@@ -4,7 +4,7 @@
       <h2>Encuesta de Salida</h2>
     </b-row>
     <b-row>
-      <div>Contesta las siguientes preguntas acerca de tu experiencia en la plataforma LeTiCiA</div>
+      <div>Contesta la(s) siguiente(s) pregunta(s) acerca de tu experiencia en la plataforma LeTiCiA</div>
     </b-row>
     <br>
     <b-row>
@@ -62,7 +62,7 @@ export default {
 
   data() {
     return {
-      formId: 'exit',
+      formId: Constants.isPilotMode ? 'exit' : 'exit-final',
       form: {},
       questions: []
     }

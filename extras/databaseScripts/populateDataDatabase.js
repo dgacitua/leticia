@@ -45,6 +45,10 @@ db.forms.insertMany([
     "questions": [ "exit1", "exit2", "exit3", "exit4", "exit5", "exit6", "exit7", "exit8", "exit9", "exit10", "exitComment" ]
   },
   {
+    "formId": "exit-final",
+    "questions": [ "exitComment" ]
+  },
+  {
     "formId": "nasatlx",
     "questions": [ "nasatlx01", "nasatlx02", "nasatlx03", "nasatlx04", "nasatlx05", "nasatlx06" ]
   }

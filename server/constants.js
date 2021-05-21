@@ -4,6 +4,7 @@ import path from 'path';
 dotenv.config();
 
 export const isProductionMode = (process.env.NODE_ENV === 'production');
+export const isPilotMode = (process.env.LETICIA_PILOT_MODE === 'true');
 export const leticiaHost = process.env.LETICIA_HOST || 'localhost';
 export const leticiaProtocol = process.env.LETICIA_PROTOCOL || 'http';
 export const frontendPort = process.env.FRONTEND_PORT || 3000;
