@@ -189,8 +189,11 @@ class SolrIndex {
         {
           "name": "relevant_s",
           "type": "string",
+          "indexed": false,
           "stored": true,
-          "multiValued": true
+          "multiValued": true,
+          "termVectors": false,
+          "termPositions": false
         }
       ]
     };
