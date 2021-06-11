@@ -96,14 +96,14 @@ class SolrIndex {
   }
 
   search(queryString, pageStart = 1) {
-    // dgacitua: IMPORTANT! Query strings must be URI encoded
     let start = (pageStart - 1) * DOCS_PER_PAGE;
-    let searchQuery = `title_t:${encodeURI(queryString)} OR body_t:${encodeURI(queryString)} OR keywords_t:${encodeURI(queryString)}`;
+    let searchQuery = `${queryString}`;
     let hlQuery = encodeURI(`hl=on&hl.q=${queryString}&hl.fl=body_t&hl.snippets=3&hl.simple.pre=<em class="hl">&hl.simple.post=</em>&hl.fragmenter=regex&hl.regex.slop=0.2`);
 
     let query = this.client.createQuery()
       .q(searchQuery)
-      //.q({ title_t: queryString, body_t: queryString, keywords_t: queryString })
+      .dismax()
+      .qf({ title_t: 1.5, body_t: 1.0, keywords_t: 2.0 })
       .set(hlQuery)
       .start(start)
       .rows(DOCS_PER_PAGE);
@@ -118,6 +118,7 @@ class SolrIndex {
           let respDocs = [];
 
           let searchResponse = res;
+          let searchQuery = searchResponse.responseHeader.params.q;
           let searchStart = searchResponse.response.start;
           let searchNum = searchResponse.response.numFound;
           let searchDocs = searchResponse.response.docs;
@@ -144,6 +145,7 @@ class SolrIndex {
             respDocs.push(docObj);
           });
 
+          finalResponse.query = searchQuery;
           finalResponse.numFound = searchNum;
           finalResponse.start = searchStart;
           finalResponse.docs = respDocs;
