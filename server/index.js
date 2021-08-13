@@ -1,14 +1,11 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
-//import http from 'http';
 import path from 'path';
 import express from 'express';
-import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import helmet from 'helmet';
-import SockJS from 'sockjs';
+import history from 'connect-history-api-fallback';
 import passport from 'passport';
 
 import { dataDb, userDb } from './db';
@@ -16,21 +13,13 @@ import * as Constants from './constants';
 
 import api1 from './api1';
 import { consoleLog, consoleError } from './utils';
-import { redirectInteraction } from './websocketRouter';
 
 const app = express();
-const port = 3001;
-const wsPort = 3002;
-const echo = SockJS.createServer();
-
-let corsOptions = {
-  origin: Constants.isProductionMode ? `${Constants.corsUrl}` : 'http://localhost:3000'
-};
+const port = 3000;
 
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(cookieParser());
-//app.use(helmet());
 app.use(passport.initialize());
 
 // Proxy support
@@ -48,27 +37,24 @@ app.use((req, res, next) => {
 
 // Static assets support
 app.use('/assets', express.static(Constants.assetPath));
+app.use('/assets/documents/*', (req, res) => {
+  res.status(404).send({ message: 'Document Not Found' });
+});
 
-// Add REST routes
+// LeTiCiA Public API (v1)
 app.use('/v1', api1);
 
-// simple route
+// LeTiCiA Frontend
+app.use(history());
+app.use(express.static(Constants.frontendPath));
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to LeTiCiA API!' });
+  res.sendFile(path.join(Constants.frontendPath, 'index.html'));
 });
 
-// WebSocket event handler
-/*
-echo.on('connection', (conn) => {
-  conn.on('data', (message) => { redirectInteraction(message) });
-  conn.on('close', () => {});
-});
+// Deploy LeTiCiA Application
+app.listen(port, '0.0.0.0', () => consoleLog(`LeTiCiA Web App deployed on port ${port}!`));
 
-const server = http.createServer();
-echo.installHandlers(server, { prefix: '/ws' });
-*/
-
-app.listen(port, '0.0.0.0', () => consoleLog(`Backend REST API listening on port ${port}!`));
-// server.listen(wsPort, '0.0.0.0', () => consoleLog(`Backend WebSocket API listening on port ${wsPort}!`));
-
+// Report LeTiCia config options
 consoleLog(`LeTiCiA Pilot Mode: ${Constants.isPilotMode}`);
+consoleLog(`LeTiCiA Asset Path: ${Constants.assetPath}`);
+consoleLog(`LeTiCiA Frontend Path: ${Constants.frontendPath}`);

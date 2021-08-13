@@ -1,3 +1,5 @@
+/* DEPRECATED */
+
 import SockJS from 'sockjs-client';
 
 import * as Constants from './Constants';

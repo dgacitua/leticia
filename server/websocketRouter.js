@@ -1,3 +1,5 @@
+/* DEPRECATED */
+
 import Keystroke from './models/Keystroke';
 import MouseAction from './models/MouseAction';
 import ScrollAction from './models/ScrollAction';
