@@ -1,9 +1,11 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
 
+import path from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import history from 'connect-history-api-fallback';
 import passport from 'passport';
 
 import { dataDb, userDb } from './db';
@@ -43,7 +45,11 @@ app.use('/assets/documents/*', (req, res) => {
 app.use('/v1', api1);
 
 // LeTiCiA Frontend
-app.get('*', express.static(Constants.frontendPath));
+app.use(history());
+app.use(express.static(Constants.frontendPath));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(Constants.frontendPath, 'index.html'));
+});
 
 // Deploy LeTiCiA Application
 app.listen(port, '0.0.0.0', () => consoleLog(`LeTiCiA Web App deployed on port ${port}!`));
