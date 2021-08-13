@@ -32,3 +32,4 @@ export const backendApiUrl = `${leticiaProtocol}://${leticiaHost}:${leticiaPort}
 export const assetPath = path.join(__dirname, '/assets');
 export const documentPath = path.join(__dirname, '/assets/documents');
 export const previewPath = path.join(__dirname, '/assets/preview');
+export const frontendPath = isProductionMode ? path.join(__dirname, '/frontend') : 'dist';

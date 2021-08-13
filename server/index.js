@@ -48,14 +48,15 @@ app.use((req, res, next) => {
 
 // Static assets support
 app.use('/assets', express.static(Constants.assetPath));
+app.use('/assets/documents/*', (req, res) => {
+  res.status(404).send({ message: 'Document Not Found' });
+});
 
-// Add REST routes
+// LeTiCiA Public API (v1)
 app.use('/v1', api1);
 
-// simple route
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to LeTiCiA API!' });
-});
+// LeTiCiA Frontend
+app.get('*', express.static(Constants.frontendPath));
 
 // WebSocket event handler
 /*
