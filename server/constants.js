@@ -7,9 +7,7 @@ export const isProductionMode = (process.env.NODE_ENV === 'production');
 export const isPilotMode = (process.env.LETICIA_PILOT_MODE === 'true');
 export const leticiaHost = process.env.LETICIA_HOST || 'localhost';
 export const leticiaProtocol = process.env.LETICIA_PROTOCOL || 'http';
-export const frontendPort = process.env.FRONTEND_PORT || 3000;
-export const leticiaPort = process.env.REST_PORT || 3001;
-export const websocketPort = process.env.WEBSOCKET_PORT || 3002;
+export const leticiaPort = process.env.LETICIA_PORT || 3000;
 
 export const solrHost = process.env.SOLR_HOST || 'localhost';
 export const solrPort = process.env.SOLR_PORT || 8983;
@@ -24,12 +22,9 @@ export const facebookClientId = process.env.FACEBOOK_CLIENT_ID || '';
 export const facebookClientSecret = process.env.FACEBOOK_CLIENT_SECRET || '';
 export const currentSessionFlow = process.env.CURRENT_SESSION_FLOW || 'short';
 
-export const corsPort = frontendPort === 80 ? '' : `:${frontendPort}`;
-export const corsUrl = `${leticiaProtocol}://${leticiaHost}${corsPort}`;
-
 export const backendApiUrl = `${leticiaProtocol}://${leticiaHost}:${leticiaPort}`;
 
 export const assetPath = path.join(__dirname, '/assets');
 export const documentPath = path.join(__dirname, '/assets/documents');
 export const previewPath = path.join(__dirname, '/assets/preview');
-export const frontendPath = isProductionMode ? path.join(__dirname, '/frontend') : 'dist';
+export const frontendPath = isProductionMode ? path.resolve(__dirname, '/frontend') : path.resolve('dist');

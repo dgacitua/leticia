@@ -173,7 +173,7 @@ export const googleLogin = async (req, res) => {
 
         //consoleLog('OAuthLogin', 'Google', jwtData, sessionFlow, userdata.state);
 
-        return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
+        return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.leticiaPort}`);
         //return res.status(200).send(jwtData);
       }
     }
@@ -233,7 +233,7 @@ export const googleLogin = async (req, res) => {
       
       //consoleLog('OAuthRegister', 'Google', jwtData, sessionFlow);
 
-      return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
+      return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.leticiaPort}`);
       //return res.status(200).send(jwtData);
     }
   }
@@ -299,7 +299,7 @@ export const facebookLogin = async (req, res) => {
 
         //consoleLog('OAuthLogin', 'Facebook', jwtData, sessionFlow, userdata.state);
 
-        return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
+        return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.leticiaPort}`);
         //return res.status(200).send(jwtData);
       }
     }
@@ -361,7 +361,7 @@ export const facebookLogin = async (req, res) => {
 
       //consoleLog('OAuthRegister', 'Facebook', jwtData, sessionFlow);
       
-      return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.frontendPort}`);
+      return res.redirect(`${req.protocol}://${Constants.leticiaHost}:${Constants.leticiaPort}`);
       //return res.status(200).send(jwtData);
     }
   }
