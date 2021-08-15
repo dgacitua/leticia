@@ -13,3 +13,7 @@ export const queryForm = 'query';
 export const frontendUrl = `${location.protocol}//${leticiaHost}:${leticiaPort}`;
 export const backendUrl = `${location.protocol}//${leticiaHost}:${leticiaPort}`;
 export const backendApiUrl = `${location.protocol}//${leticiaHost}:${leticiaPort}/v1`;
+
+export const enableGoogleLogin = (process.env.ENABLE_GOOGLE_LOGIN === 'true') || false;
+export const enableFacebookLogin = (process.env.ENABLE_FACEBOOK_LOGIN === 'true') || false;
+export const enableEmailLogin = (process.env.ENABLE_EMAIL_LOGIN === 'true') || true;

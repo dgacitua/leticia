@@ -1,86 +1,61 @@
 <template>
   <b-container>
     <b-row>
-      <b-col cols="6" offset="3">
+      <b-col cols="8" offset="2">
         <b-card>
           <img
             id="profile-img"
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
             class="profile-img-card"
           />
-          <b-form name="form" @submit.prevent="handleRegister">
-            <div v-if="!successful">
-              <!--
-              <div class="form-group">
-                <label for="username">Username</label>
-                <input
-                  v-model="user.username"
-                  v-validate="'min:3|max:20'"
-                  type="text"
-                  class="form-control"
-                  name="username"
-                />
-                <div
-                  v-if="submitted && errors.has('username')"
-                  class="alert-danger"
-                >{{errors.first('username')}}</div>
+          <div class="text-center">
+            <h3>Registrarse en LeTiCiA</h3>
+          </div>
+          <br>
+          <b-form name="register-form" @submit.prevent="handleRegister">
+            <div>
+              <!-- Email -->
+              <div id="register-email">
+                <div>
+                  <b>Correo Electrónico</b>
+                  <span class="form-asterisk">*</span>
+                </div>
+                <div>
+                  <b-form-input
+                    id="input-email"
+                    v-model="form.email"
+                    type="email"
+                    required>
+                  </b-form-input>
+                </div>
+                <br>
               </div>
-              -->
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input
-                  v-model="user.email"
-                  v-validate="'required|email|max:50'"
-                  type="email"
-                  class="form-control"
-                  name="email"
-                />
-                <div
-                  v-if="submitted && errors.has('email')"
-                  class="alert-danger"
-                >{{errors.first('email')}}</div>
+              <!-- Password -->
+              <div id="register-password">
+                <div>
+                  <b>Contraseña</b>
+                  <span class="form-asterisk">*</span>
+                </div>
+                <div>
+                  <b-form-input
+                    id="input-password"
+                    v-model="form.password"
+                    type="password"
+                    required>
+                  </b-form-input>
+                </div>
+                <br>
               </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input
-                  v-model="user.password"
-                  v-validate="'required|min:6|max:40'"
-                  type="password"
-                  class="form-control"
-                  name="password"
-                />
-                <div
-                  v-if="submitted && errors.has('password')"
-                  class="alert-danger"
-                >{{errors.first('password')}}</div>
+              <!-- Message -->
+              <div id="register-message" class="text-center" v-if="!!message">
+                {{ message }}
               </div>
+              <!-- Submit -->
               <div class="form-group">
-                <button class="btn btn-info btn-block">Sign Up</button>
+                <b-button block type="submit" variant="success">Registrarse</b-button>
               </div>
-
-                <b-button-group block vertical>
-                  <b-button block variant="danger" @click="googleLogin">
-                    <b-icon>
-                      <font-awesome-icon :icon="['fab', 'google']" />
-                    </b-icon>
-                    Registrarse con Google
-                  </b-button>
-                  <b-button block variant="primary" @click="facebookLogin">
-                    <b-icon>
-                      <font-awesome-icon :icon="['fab', 'facebook']" />
-                    </b-icon>
-                    Registrarse con Facebook
-                  </b-button>
-                </b-button-group>
-
             </div>
           </b-form>
-
-          <div
-            v-if="message"
-            class="alert"
-            :class="successful ? 'alert-success' : 'alert-danger'"
-          >{{message}}</div>
         </b-card>
       </b-col>
     </b-row>
@@ -101,7 +76,8 @@ export default {
       user: new User('', '', ''),
       submitted: false,
       successful: false,
-      message: ''
+      message: '',
+      form: {}
     };
   },
   computed: {
@@ -109,13 +85,29 @@ export default {
       return this.$store.state.auth.status.loggedIn;
     }
   },
-  mounted() {
+  created() {
     if (this.loggedIn) {
-      this.$router.push('/profile');
+      this.$router.push('/user-hub');
     }
   },
   methods: {
     handleRegister() {
+      console.log('Register user!', this.form.email, this.form.password);
+
+      this.$store.dispatch('auth/register', this.form)
+        .then((res) => {
+          console.log('User Registered Successfully!');
+          this.message = res.message;
+          this.successful = true;
+          this.$router.push('/');
+        })
+        .catch((err) => {
+          console.error(err);
+          this.message = err.message;
+          this.successful = false;
+        });
+      
+      /*
       this.message = '';
       this.submitted = true;
       this.$validator.validate().then(isValid => {
@@ -135,14 +127,7 @@ export default {
           );
         }
       });
-    },
-
-    googleLogin() {
-      window.location.href = `${Constants.backendApiUrl}/auth/google`;
-    },
-
-    facebookLogin() {
-      window.location.href = `${Constants.backendApiUrl}/auth/facebook`;
+      */
     }
   }
 };
@@ -184,5 +169,17 @@ label {
 
 .zero-margin {
   margin: 0px 0px 0px 0px;
+}
+
+.form-asterisk {
+  font-weight: bold;
+  color: #FF0000;
+}
+
+.help-block {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: small;
+  color: #6c757d;
 }
 </style>

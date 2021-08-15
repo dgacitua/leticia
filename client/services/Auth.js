@@ -1,5 +1,5 @@
 // Adapted from https://bezkoder.com/jwt-vue-vuex-authentication/
-import axios from 'axios';
+import Axios from 'axios';
 
 import * as Constants from './Constants';
 
@@ -7,7 +7,7 @@ const API_URL = `${Constants.backendApiUrl}/auth`;
 
 class AuthService {
   login(user) {
-    return axios
+    return Axios
       .post(API_URL + '/login', {
         email: user.email,
         password: user.password
@@ -40,7 +40,7 @@ class AuthService {
   }
 
   register(user) {
-    return axios.post(API_URL + '/register', {
+    return Axios.post(API_URL + '/register', {
       email: user.email,
       password: user.password
     });

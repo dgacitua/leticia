@@ -1,5 +1,67 @@
 <template>
-    <div class="col-md-12">
+    <b-container>
+    <b-row>
+      <b-col cols="8" offset="2">
+        <b-card>
+          <img
+            id="profile-img"
+            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+            class="profile-img-card"
+          />
+          <div class="text-center">
+            <h3>Inicar sesión en LeTiCiA</h3>
+          </div>
+          <br>
+          <b-form name="login-form" @submit.prevent="handleLogin">
+            <div>
+              <!-- Email -->
+              <div id="login-email">
+                <div>
+                  <b>Correo Electrónico</b>
+                  <span class="form-asterisk">*</span>
+                </div>
+                <div>
+                  <b-form-input
+                    id="login-email"
+                    v-model="form.email"
+                    type="email"
+                    required>
+                  </b-form-input>
+                </div>
+                <br>
+              </div>
+              <!-- Password -->
+              <div id="login-password">
+                <div>
+                  <b>Contraseña</b>
+                  <span class="form-asterisk">*</span>
+                </div>
+                <div>
+                  <b-form-input
+                    id="input-password"
+                    v-model="form.password"
+                    type="password"
+                    required>
+                  </b-form-input>
+                </div>
+                <br>
+              </div>
+              <!-- Message -->
+              <div id="register-message" class="text-center" v-if="!!message">
+                {{ message }}
+              </div>
+              <!-- Submit -->
+              <div class="form-group">
+                <b-button block type="submit" variant="success">Registrarse</b-button>
+              </div>
+            </div>
+          </b-form>
+        </b-card>
+      </b-col>
+    </b-row>
+  </b-container>
+  <!--
+  <div class="col-md-12">
     <div class="card card-container">
       <img
         id="profile-img"
@@ -49,6 +111,7 @@
       </form>
     </div>
   </div>
+  -->
 </template>
 
 <script>
@@ -60,9 +123,11 @@ export default {
   name: 'Login',
   data() {
     return {
-      user: new User('', ''),
-      loading: false,
-      message: ''
+      user: new User('', '', ''),
+      submitted: false,
+      successful: false,
+      message: '',
+      form: {}
     };
   },
   computed: {
@@ -72,11 +137,27 @@ export default {
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push('/profile');
+      this.$router.push('/user-hub');
     }
   },
   methods: {
     handleLogin() {
+      console.log('Login user!', this.form.email, this.form.password);
+      
+      this.$store.dispatch('auth/login', this.form)
+        .then((res) => {
+          console.log('User Logged In Successfully!');
+          this.message = res.message;
+          this.successful = true;
+          this.$router.push('/');
+        })
+        .catch((err) => {
+          console.error(err);
+          this.message = err.message;
+          this.successful = false;
+        });
+      
+      /*
       this.loading = true;
       this.$validator.validateAll().then(isValid => {
         if (!isValid) {
@@ -99,6 +180,7 @@ export default {
           );
         }
       });
+      */
     }
   }
 };
@@ -140,5 +222,17 @@ label {
 
 .zero-margin {
   margin: 0px 0px 0px 0px;
+}
+
+.form-asterisk {
+  font-weight: bold;
+  color: #FF0000;
+}
+
+.help-block {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: small;
+  color: #6c757d;
 }
 </style>

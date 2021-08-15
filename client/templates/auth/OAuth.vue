@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-row>
-      <b-col cols="6" offset="3">
+      <b-col cols="8" offset="2">
         <b-card>
           <b-row align-h="center">
             <b-col>
@@ -16,14 +16,35 @@
             </b-col>
           </b-row>
           <b-row align-h="center">
-            <b-button block variant="danger" @click="googleLogin">
-              <font-awesome-icon :icon="['fab', 'google']"></font-awesome-icon>
-              Registrarse con Google
-            </b-button>
-            <b-button block variant="primary" @click="facebookLogin">
-              <font-awesome-icon :icon="['fab', 'facebook']"></font-awesome-icon>
-              Registrarse con Facebook
-            </b-button>
+            <b-col>
+              <b-row>
+                <b-col>
+                  <b-button block variant="danger" @click="googleLogin" v-if="enableGoogleLogin">
+                    <font-awesome-icon :icon="['fab', 'google']"></font-awesome-icon>
+                    Registrarse con Google
+                  </b-button>
+                  <b-button block variant="primary" @click="facebookLogin" v-if="enableFacebookLogin">
+                    <font-awesome-icon :icon="['fab', 'facebook']"></font-awesome-icon>
+                    Registrarse con Facebook
+                  </b-button>
+                </b-col>
+              </b-row>
+              <br>
+              <b-row v-if="enableEmailLogin">
+                <b-col>
+                  <b-button block variant="info" to="register">
+                    <font-awesome-icon :icon="['fas', 'envelope']"></font-awesome-icon>
+                    Registrarse con Correo Electrónico
+                  </b-button>
+                </b-col>
+                <b-col>
+                  <b-button block variant="info" to="login">
+                    <font-awesome-icon :icon="['fas', 'sign-in-alt']"></font-awesome-icon>
+                    Ingresar con Correo Electrónico
+                  </b-button>
+                </b-col>
+              </b-row>
+            </b-col>
           </b-row>
         </b-card>
         <b-row class="text-center">
@@ -53,7 +74,10 @@ export default {
       user: new User('', '', ''),
       submitted: false,
       successful: false,
-      message: ''
+      message: '',
+      enableGoogleLogin: Constants.enableGoogleLogin,
+      enableFacebookLogin: Constants.enableFacebookLogin,
+      enableEmailLogin: Constants.enableEmailLogin
     };
   },
 
@@ -81,9 +105,14 @@ export default {
     googleLogin() {
       window.location.href = `${Constants.backendApiUrl}/auth/google`;
     },
-
     facebookLogin() {
       window.location.href = `${Constants.backendApiUrl}/auth/facebook`;
+    },
+    emailLogin() {
+      console.log('email login');
+    },
+    emailRegister() {
+      console.log('email register');
     }
   }
 };

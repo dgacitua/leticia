@@ -18,6 +18,81 @@ const SessionFlow = db.sessionflow;
 /* MANUAL REGISTER */
 export const register = async (req, res) => {
   try {
+    consoleLog('Redirected from LeTiCiA Register', req.body.email);
+
+    let emailUser = {
+      email: req.body.email,
+      password: req.body.password
+    };
+
+    let userExists = await checkUser(emailUser);
+
+    if (userExists) {
+      let err = 'Email already registered';
+      consoleError('EmailAuthError', err, emailUser.email);
+
+      return res.status(401).send({
+        accessToken: null,
+        message: err
+      });
+    }
+    else {
+      let user = new User({
+        username: hrrs(10),
+      });
+
+      let credential = new Credential({
+        email: emailUser.email,
+        password: bcrypt.hashSync(emailUser.password, 8),
+        username: user.username
+      });
+    
+      await user.save();
+      await credential.save();
+
+      if (Array.isArray(user.roles) && user.roles.length) {
+        let roles = await Role.find({ name: { $in: user.roles }}).exec();
+        user.roles = roles.map(role => role._id);
+        await user.save();
+      }
+      else {
+        let role = await Role.findOne({ name: 'user' }).exec();
+        user.roles = [ role._id ];
+        await user.save();
+      }
+
+      await user.populate('roles').execPopulate();
+
+      let authorities = [];
+  
+      for (let i = 0; i < user.roles.length; i++) {
+        authorities.push('ROLE_' + user.roles[i].name.toUpperCase());
+      }
+  
+      let jwtData = {
+        id: user._id,
+        username: user.username,
+        email: credential.email,
+        roles: authorities
+      };
+
+      let token = jwt.sign({ data: jwtData }, config.secret, { expiresIn: '24h' });
+      jwtData.accessToken = token;
+
+      let sessionFlowId = Constants.currentSessionFlow;
+      let sessionFlow = await SessionFlow.findOne({ sessionFlowId: sessionFlowId }).exec();
+      
+      let userdata = new UserData({ username: user.username, state: {}, sessionFlow: {} });
+      await userdata.save();
+
+      res.cookie('jwt', JSON.stringify(jwtData));
+      res.cookie('sessionflow', JSON.stringify(sessionFlow));
+      res.cookie('userdata', JSON.stringify(userdata.state));
+
+      res.status(201).send({ message: 'User Registered Successfully!', email: credential.email });
+    }
+
+    /*
     let user = new User({
       username: req.body.username || hrrs(10),
     });
@@ -62,6 +137,7 @@ export const register = async (req, res) => {
 
     //res.cookie('jwt', JSON.stringify(jwtData));
     return res.status(200).send(jwtData);
+    */
   }
   catch (err) {
     consoleError('RegisterError', err);
@@ -72,6 +148,67 @@ export const register = async (req, res) => {
 /* MANUAL LOGIN */
 export const login = async (req, res) => {
   try {
+    consoleLog('Redirected from LeTiCiA Login', req.body.email);
+
+    let emailUser = {
+      email: req.body.email,
+      password: req.body.password
+    };
+
+    let userExists = await checkUser(emailUser);
+
+    if (userExists) {
+      let credential = await Credential.findOne({ email: emailUser.email }).exec();
+
+      if (!credential) {
+        return res.status(404).send({ message: 'User Not Found' });
+      }
+      else {
+        //await credential.populate('user').execPopulate();
+        //await credential.user.populate('roles').execPopulate();
+
+        let user = await User.findOne({ username: credential.username });
+
+        await user.populate('roles').execPopulate();
+
+        let authorities = [];
+
+        for (let i = 0; i < user.roles.length; i++) {
+          authorities.push('ROLE_' + user.roles[i].name.toUpperCase());
+        }
+
+        let jwtData = {
+          id: user._id,
+          username: user.username,
+          email: credential.email,
+          roles: authorities
+        };
+
+        let token = jwt.sign({ data: jwtData }, config.secret, { expiresIn: '24h' });
+        jwtData.accessToken = token;
+
+        let sessionFlowId = Constants.currentSessionFlow;
+        let sessionFlow = await SessionFlow.findOne({ sessionFlowId: sessionFlowId }).exec();
+        let userdata = await UserData.findOne({ username: jwtData.username }).exec();
+
+        res.cookie('jwt', JSON.stringify(jwtData));
+        res.cookie('sessionflow', JSON.stringify(sessionFlow));
+        res.cookie('userdata', JSON.stringify(userdata.state));
+
+        res.status(201).send({ message: 'User Logged In Successfully!', email: credential.email });
+      }
+    }
+    else {
+      let err = 'Email is not registered';
+      consoleError('EmailAuthError', err, emailUser.email);
+
+      return res.status(401).send({
+        accessToken: null,
+        message: err
+      });
+    }
+
+    /*
     let credential = await Credential.findOne({ email: req.body.email }).exec();
     
     if (!credential) {
@@ -111,6 +248,7 @@ export const login = async (req, res) => {
         return res.status(200).send(jwtData);
       }
     }
+    */
   }
   catch (err) {
     consoleError('LoginError', err);
