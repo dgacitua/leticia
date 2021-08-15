@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
 });
 
 // Deploy LeTiCiA Application
-app.listen(port, '0.0.0.0', () => consoleLog(`LeTiCiA Web App deployed on port ${port}!`));
+app.listen(port, '0.0.0.0', () => consoleLog(`LeTiCiA Web App deployed on port ${port}`));
 
 // Report LeTiCia config options
 consoleLog(`LeTiCiA Pilot Mode: ${Constants.isPilotMode}`);
