@@ -24,13 +24,10 @@ This is LeTiCiA's main repository.
 You can run LeTiCiA in production mode following these instructions:
 
 1. Install the required dependencies (instructions are available below)
-2. Install PM2 and http-server globally for Node.js: `npm install -g pm2 http-server`
+2. Install PM2 globally for Node.js: `npm install -g pm2`
 3. On LeTiCiA's repository root directory, copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
 4. On root directory, run `npm install` and then run `npm run clean && npm run build`
-5. On root directory, run LeTiCiA with PM2:
-
-        $ pm2 start ./build/server/index.js --name leticia-backend
-        $ pm2 start http-server --name leticia-frontend -- ./build/client -p 3000 --proxy http://localhost:3000?
+5. On root directory, run LeTiCiA with PM2: `pm2 start ecosystem.config.js`
 
 ### Installing required dependencies
 
