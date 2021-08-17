@@ -10,8 +10,8 @@
           style="text-shadow: 3px 3px 3px #000;"
         >
           <b-carousel-slide :img-src="headerImage">
-            <h1>¡Bienvenido(a) a LeTiCiA!</h1>
-            <h5><i>tooL for Task diffiCulty Assessment</i></h5>
+            <h1>{{ $t("home.title") }}</h1>
+            <h5><i>{{ $t("home.subtitle") }}</i></h5>
           </b-carousel-slide>
         </b-carousel>
       </b-col>
@@ -20,7 +20,7 @@
     <b-row>
       <b-col>
         <div>
-          <b>Consideraciones para participar:</b>
+          <b>{{ $t("home.considerations") }}:</b>
         </div>
         <ul>
           <li>Debes ser mayor de edad (18+)</li>
@@ -46,14 +46,14 @@
       <b-col>
         <b-row align-h="center">
           <b-button-group>
-            <b-button to="oauth" variant="info">Participar en el estudio</b-button>
+            <b-button to="oauth" variant="info">{{ $t("home.participate") }}</b-button>
           </b-button-group>
         </b-row>
         <br>
         <!--
         <b-row align-h="center">
           <b-button-group>
-            <b-button to="admin-hub" variant="warning">Panel del Administrador</b-button>
+            <b-button to="admin-hub" variant="warning">Admin Panel</b-button>
           </b-button-group>
         </b-row>
         -->

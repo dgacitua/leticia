@@ -17,3 +17,5 @@ export const backendApiUrl = `${location.protocol}//${leticiaHost}:${leticiaPort
 export const enableGoogleLogin = (process.env.ENABLE_GOOGLE_LOGIN === 'true') || false;
 export const enableFacebookLogin = (process.env.ENABLE_FACEBOOK_LOGIN === 'true') || false;
 export const enableEmailLogin = (process.env.ENABLE_EMAIL_LOGIN === 'true') || true;
+
+export const locale = process.env.LETICIA_LOCALE || 'es';
