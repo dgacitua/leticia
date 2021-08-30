@@ -115,15 +115,15 @@ export default {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
     move(evt) {
-      let mact = this.mHandler.move(evt);
+      let mact = this.mHandler.moveElement(evt, this.iframeElement.contentDocument.documentElement);
       this.mouseBuffer.push(mact);
     },
     click(evt) {
-      let mact = this.mHandler.click(evt);
+      let mact = this.mHandler.clickElement(evt, this.iframeElement.contentDocument.documentElement);
       this.mouseBuffer.push(mact);
     },
     scroll(evt) {
-      let scr = this.scHandler.scroll(evt);
+      let scr = this.scHandler.scrollElement(evt, this.iframeElement.contentDocument.documentElement);
 
       this.sender.sendScrollAction(scr)
         .then(res => console.log(res.data))
