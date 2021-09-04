@@ -9,7 +9,7 @@
             class="profile-img-card"
           />
           <div class="text-center">
-            <h3>Inicar sesión en LeTiCiA</h3>
+            <h3>Inicar sesión en LETICIA</h3>
           </div>
           <br>
           <b-form name="login-form" @submit.prevent="handleLogin">

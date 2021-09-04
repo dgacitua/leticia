@@ -1,6 +1,6 @@
-# LeTiCiA: tooL for Task diffiCulty Assessment
+# LETICIA: simuLatEd Task and actIvity Capture Interactive plAtform
 
-This is LeTiCiA's main repository.
+This is LETICIA's main repository.
 
 ## Required dependencies
 
@@ -15,19 +15,19 @@ This is LeTiCiA's main repository.
 
 1. Install the required dependencies (instructions are available below)
 2. Download or clone this repository
-3. On LeTiCiA's repository root directory, copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
+3. On LETICIA's repository root directory, copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
 4. On root directory, run `npm install` to install Node.js dependencies
-5. On root directory, run `npm run dev` to start LeTiCiA in watch mode for development
+5. On root directory, run `npm run dev` to start LETICIA in watch mode for development
 
 ### Production
 
-You can run LeTiCiA in production mode following these instructions:
+You can run LETICIA in production mode following these instructions:
 
 1. Install the required dependencies (instructions are available below)
 2. Install PM2 globally for Node.js: `npm install -g pm2`
-3. On LeTiCiA's repository root directory, copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
+3. On LETICIA's repository root directory, copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
 4. On root directory, run `npm install` and then run `npm run clean && npm run build`
-5. On root directory, run LeTiCiA with PM2: `pm2 start ecosystem.config.js`
+5. On root directory, run LETICIA with PM2: `pm2 start ecosystem.config.js`
 
 ### Installing required dependencies
 
@@ -69,7 +69,7 @@ $ sudo systemctl enable mongod
         $ tar xzf solr-8.7.0.tgz solr-8.7.0/bin/install_solr_service.sh --strip-components=2
         $ sudo bash ./install_solr_service.sh solr-8.7.0.tgz
 
-3. Create a new core (collection) in Solr for LeTiCiA:
+3. Create a new core (collection) in Solr for LETICIA:
 
         $ sudo su - solr -c "/opt/solr/bin/solr create -c leticia -n data_driven_schema_configs"
 
@@ -80,6 +80,6 @@ $ sudo systemctl enable mongod
 
 ## License
 
-The source code of LeTiCiA is available under the GNU Affero General Public License version 3.
+The source code of LETICIA is available under the GNU Affero General Public License version 3.
 
 All dependencies are distibuted under their own licenses.
