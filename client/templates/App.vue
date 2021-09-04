@@ -38,7 +38,7 @@ export default {
 
   created() {
     EventBus.$on('leticia-next-stage', () => {
-      console.log('LeTiCiA Next Stage!');
+      console.log('LETICIA Next Stage!');
       if (this.$store.getters.flowIndex >= 0) this.$store.commit({ type: 'nextFlowIndex' });
       else this.$store.commit({ type: 'setFlowIndex', amount: 0 });
 

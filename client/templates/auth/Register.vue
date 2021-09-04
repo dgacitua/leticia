@@ -9,7 +9,7 @@
             class="profile-img-card"
           />
           <div class="text-center">
-            <h3>Registrarse en LeTiCiA</h3>
+            <h3>Registrarse en LETICIA</h3>
           </div>
           <br>
           <b-form name="register-form" @submit.prevent="handleRegister">

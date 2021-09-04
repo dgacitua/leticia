@@ -10,8 +10,8 @@
           style="text-shadow: 3px 3px 3px #000;"
         >
           <b-carousel-slide :img-src="headerImage">
-            <h1>¡Bienvenido(a) a LeTiCiA!</h1>
-            <h5><i>tooL for Task diffiCulty Assessment</i></h5>
+            <h1>¡Bienvenido(a) a LETICIA!</h1>
+            <h5><i>simuLatEd Task and actIvity Capture Interactive plAtform</i></h5>
           </b-carousel-slide>
         </b-carousel>
       </b-col>

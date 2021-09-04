@@ -4,7 +4,7 @@
       <h2>Encuesta de Salida</h2>
     </b-row>
     <b-row>
-      <div>Contesta la(s) siguiente(s) pregunta(s) acerca de tu experiencia en la plataforma LeTiCiA</div>
+      <div>Contesta la(s) siguiente(s) pregunta(s) acerca de tu experiencia en la plataforma LETICIA</div>
     </b-row>
     <br>
     <b-row>

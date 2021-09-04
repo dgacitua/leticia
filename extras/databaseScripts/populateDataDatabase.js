@@ -472,7 +472,7 @@ db.sessionflows.insertMany([
   },
   {
     "sessionFlowId": 'extended',
-    "instructions": 'En este desafío se te presentarán 3 tareas de búsqueda, para lo cual deberás hacer consultas de búsqueda (en idioma español y utilizando del motor de búsqueda de LeTiCiA) para encontrar documentos que puedan resolver dichas tareas. Una vez introducida la tarea, deberás llenar los cuestionarios para poder acceder al motor de búsqueda. Tienes 25 minutos para completar el desafío.',
+    "instructions": 'En este desafío se te presentarán 3 tareas de búsqueda, para lo cual deberás hacer consultas de búsqueda (en idioma español y utilizando del motor de búsqueda de LETICIA) para encontrar documentos que puedan resolver dichas tareas. Una vez introducida la tarea, deberás llenar los cuestionarios para poder acceder al motor de búsqueda. Tienes 25 minutos para completar el desafío.',
     "stages": [
       { path: '/consent', timeLimit: -1 },
       { path: '/demographic', timeLimit: -1 },

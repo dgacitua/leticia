@@ -10,7 +10,7 @@
               </div>
               <br>
               <div class="text-center">
-                LeTiCiA registrará únicamente el correo electrónico de la cuenta utlizada. No se almacenarán otros datos personales.
+                LETICIA registrará únicamente el correo electrónico de la cuenta utlizada. No se almacenarán otros datos personales.
               </div>
               <br>
             </b-col>

@@ -18,7 +18,7 @@ const SessionFlow = db.sessionflow;
 /* MANUAL REGISTER */
 export const register = async (req, res) => {
   try {
-    consoleLog('Redirected from LeTiCiA Register', req.body.email);
+    consoleLog('Redirected from LETICIA Register', req.body.email);
 
     let emailUser = {
       email: req.body.email,
@@ -148,7 +148,7 @@ export const register = async (req, res) => {
 /* MANUAL LOGIN */
 export const login = async (req, res) => {
   try {
-    consoleLog('Redirected from LeTiCiA Login', req.body.email);
+    consoleLog('Redirected from LETICIA Login', req.body.email);
 
     let emailUser = {
       email: req.body.email,
