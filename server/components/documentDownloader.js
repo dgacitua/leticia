@@ -65,7 +65,7 @@ class DocumentDownloader {
   readFile(path) {
     try {
       // dgacitua: http://stackoverflow.com/a/18711982
-      var htmlBuffer = fs.readFileSync(path),
+      let htmlBuffer = fs.readFileSync(path),
           htmlString = htmlBuffer.toString(),
             encoding = charset([], htmlString);   // || jschardet.detect(htmlString).encoding.toLowerCase();
 
@@ -73,7 +73,7 @@ class DocumentDownloader {
         return htmlString;
       }
       else {
-        var ic = new iconv.Iconv(encoding, 'UTF-8//TRANSLIT//IGNORE'),
+        let ic = new iconv.Iconv(encoding, 'UTF-8//TRANSLIT//IGNORE'),
            buf = ic.convert(htmlBuffer),
            str = buf.toString('utf-8');
 
@@ -172,7 +172,7 @@ class DocumentDownloader {
         $(elem).removeAttr('method');
       });
 
-      var cleanedHtml = $.html();
+      let cleanedHtml = $.html();
 
       fs.writeFileSync(path.join(fileDir, newFilename), cleanedHtml);
     
