@@ -65,17 +65,17 @@ class DocumentDownloader {
   readFile(path) {
     try {
       // dgacitua: http://stackoverflow.com/a/18711982
-      let htmlBuffer = fs.readFileSync(path),
-          htmlString = htmlBuffer.toString(),
-            encoding = charset([], htmlString);   // || jschardet.detect(htmlString).encoding.toLowerCase();
+      let htmlBuffer = fs.readFileSync(path);
+      let htmlString = htmlBuffer.toString();
+      let encoding = charset([], htmlString);   // || jschardet.detect(htmlString).encoding.toLowerCase();
 
       if (encoding === 'utf-8' || encoding === 'utf8' || !encoding) {
         return htmlString;
       }
       else {
-        let ic = new iconv.Iconv(encoding, 'UTF-8//TRANSLIT//IGNORE'),
-           buf = ic.convert(htmlBuffer),
-           str = buf.toString('utf-8');
+        let ic = new iconv.Iconv(encoding, 'UTF-8//TRANSLIT//IGNORE');
+        let buf = ic.convert(htmlBuffer);
+        let str = buf.toString('utf-8');
 
         return str;
       }
@@ -90,7 +90,7 @@ class DocumentDownloader {
   getTextFromHtml(path) {
     try {
       let htmlString = this.readFile(path);
- 
+
       let options = {
         wordwrap: false,
         tags: {
