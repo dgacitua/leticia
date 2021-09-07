@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-row>
-      <h1>Instrucciones del desafío</h1>
+      <h1>{{ $t("instructions.title") }}</h1>
     </b-row>
     <br>
     <b-row>
@@ -14,7 +14,7 @@
     <br>
     <b-row>
       <b-col class="text-right">
-        <b-button @click="nextStage" variant="success">Ir al desafío</b-button>
+        <b-button @click="nextStage" variant="success">{{ $t("instructions.continueButton") }}</b-button>
       </b-col>
     </b-row>
   </b-container>

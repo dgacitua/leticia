@@ -10,7 +10,7 @@
           class="text-carousel"
         >
           <b-carousel-slide :img-src="headerImage">
-            <h1>¡Gracias por participar!</h1>
+            <h1>{{ $t("end.message") }}</h1>
           </b-carousel-slide>
         </b-carousel>
       </b-col>

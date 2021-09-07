@@ -8,13 +8,13 @@
         <b-nav-text class="navbar-button" v-if="showBookmarkButtons">
           <b-button variant="secondary" @click="goBack">
             <font-awesome-icon :icon="['fas', 'arrow-left']"></font-awesome-icon>
-            Atrás
+            {{ $t("navbar.backButton") }}
           </b-button>
         </b-nav-text>
         <b-nav-text class="navbar-button" v-if="showCurrentTask">
           <b-button v-b-modal.current-task variant="info" @click="showTaskModal">
             <font-awesome-icon :icon="['fas', 'tasks']"></font-awesome-icon>
-            Tarea actual
+            {{ $t("navbar.currentTask") }}
           </b-button>
         </b-nav-text>
       </b-navbar-nav>
@@ -29,17 +29,17 @@
         <b-nav-text class="navbar-button" v-if="showBookmarkButtons">
           <b-button variant="primary" v-if="showBookmarkDocument" @click="bookmark">
             <font-awesome-icon :icon="['fas', 'bookmark']"></font-awesome-icon>
-            Marcar documento
+            {{ $t("navbar.bookmark") }}
           </b-button>
           <b-button variant="primary" v-else @click="unbookmark">
             <font-awesome-icon :icon="['fas', 'file']"></font-awesome-icon>
-            Desmarcar documento
+            {{ $t("navbar.unbookmark") }}
           </b-button>
         </b-nav-text>
         <b-nav-text class="navbar-button" v-if="showEndSearch">
           <b-button variant="success" @click="endSearch">
             <font-awesome-icon :icon="['fas', 'check']"></font-awesome-icon>
-            Terminar búsqueda
+            {{ $t("navbar.finishSearch") }}
           </b-button>
         </b-nav-text>
         <b-nav-item>
@@ -58,7 +58,7 @@
       id="current-task"
       ref="current-task"
       size="lg"
-      title="Tarea actual"
+      :title="$t('navbar.currentTask')"
       hide-header-close
       ok-only
     >

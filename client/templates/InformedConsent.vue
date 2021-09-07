@@ -3,10 +3,10 @@
     <b-row>
       <b-col>
         <div>
-          <h1>Consentimiento Informado</h1>
+          <h1>{{ $t("informedConsent.title") }}</h1>
         </div>
         <div>
-          Para participar de este estudio, debes leer el siguiente consentimiento informado.
+          {{ $t("informedConsent.instructions1") }}
         </div>
       </b-col>
     </b-row>
@@ -18,7 +18,7 @@
     <b-row>
       <b-col>
         <div>
-          Si estás de acuerdo con el Consentimiento Informado, ingresa los datos y pulsa Continuar para participar en el estudio.
+          {{ $t("informedConsent.instructions2") }}
         </div>
         <br>
         <b-form id="exit-survey" @submit="acceptConsent">
@@ -28,7 +28,7 @@
               <!-- Name -->
               <div class="zero-margin">
                 <div>
-                  <b>Nombre Completo</b>
+                  <b>{{ $t("informedConsent.fullName") }}</b>
                   <span class="form-asterisk">*</span>
                 </div>
                 <div>
@@ -43,7 +43,7 @@
               <!-- Email -->
               <div class="zero-margin">
                 <div>
-                  <b>Correo electrónico de contacto</b>
+                  <b>{{ $t("informedConsent.email") }}</b>
                   <span class="form-asterisk">*</span>
                 </div>
                 <div>
@@ -66,7 +66,7 @@
                   :value="true"
                   :unchecked-value="false"
                 >
-                  <b>Acepto participar en el estudio</b>
+                  <b>{{ $t("informedConsent.acceptance") }}</b>
                   <span class="form-asterisk">*</span>
                 </b-form-checkbox>
               </div>
@@ -76,10 +76,10 @@
           <!-- Buttons -->
           <b-row>
             <b-col cols="4" offset="2" class="text-center">
-              <b-button block to="/" variant="link">Volver</b-button>
+              <b-button block to="/" variant="link">{{ $t("informedConsent.backButton") }}</b-button>
             </b-col>
             <b-col cols="4" class="text-center">
-              <b-button block type="submit" variant="success">Continuar</b-button>
+              <b-button block type="submit" variant="success">{{ $t("informedConsent.continueButton") }}</b-button>
             </b-col>
           </b-row>
         </b-form>
