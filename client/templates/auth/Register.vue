@@ -9,7 +9,7 @@
             class="profile-img-card"
           />
           <div class="text-center">
-            <h3>Registrarse en LeTiCiA</h3>
+            <h3>{{ $t("emailAuth.registerTitle") }}</h3>
           </div>
           <br>
           <b-form name="register-form" @submit.prevent="handleRegister">
@@ -17,7 +17,7 @@
               <!-- Email -->
               <div id="register-email">
                 <div>
-                  <b>Correo Electrónico</b>
+                  <b>{{ $t("emailAuth.email") }}</b>
                   <span class="form-asterisk">*</span>
                 </div>
                 <div>
@@ -33,7 +33,7 @@
               <!-- Password -->
               <div id="register-password">
                 <div>
-                  <b>Contraseña</b>
+                  <b>{{ $t("emailAuth.password") }}</b>
                   <span class="form-asterisk">*</span>
                 </div>
                 <div>
@@ -52,7 +52,7 @@
               </div>
               <!-- Submit -->
               <div class="form-group">
-                <b-button block type="submit" variant="success">Registrarse</b-button>
+                <b-button block type="submit" variant="success">{{ $t("emailAuth.submitRegister") }}</b-button>
               </div>
             </div>
           </b-form>

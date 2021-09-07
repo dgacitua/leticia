@@ -1,20 +1,31 @@
 const translations = {
   es: {
-    auth: {
+    oauth: {
       title: "Para comenzar, inicia sesión con alguna cuenta",
-      disclaimer: "LeTiCiA registrará únicamente el correo electrónico de la cuenta utlizada. No se almacenarán otros datos personales.",
+      disclaimer: "LETICIA registrará únicamente el correo electrónico de la cuenta utlizada. No se almacenarán otros datos personales.",
       googleLogin: "Registrarse con Google",
       facebookLogin: "Registrarse con Facebook",
       register: "Registrarse con Correo Electrónico",
       login: "Ingresar con Correo Electrónico",
-      goBack: "Volver"
+      backButton: "Volver"
+    },
+    emailAuth: {
+      loginTitle: "Iniciar sesión en LETICIA",
+      registerTitle: "Registrarse en LETICIA",
+      email: "Correo electrónico",
+      password: "Contraseña",
+      submitLogin: "Iniciar sesión",
+      submitRegister: "Registrarse"
+    },
+    register: {
+
     },
     end: {
       message: "¡Gracias por participar!"
     },
     home: {
-      title: "¡Bienvenido(a) a LeTiCiA!",
-      subtitle: "tooL for Task diffiCulty Assessment",
+      title: "¡Bienvenido(a) a LETICIA!",
+      subtitle: "simuLatEd Task and actIvity Capture Interactive plAtform",
       considerations: "Consideraciones para participar",
       participate: "Participar en el estudio"
     },

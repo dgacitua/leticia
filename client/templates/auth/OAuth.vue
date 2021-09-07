@@ -6,11 +6,11 @@
           <b-row align-h="center">
             <b-col>
               <div class="text-center">
-                <b>Para comenzar, inicia sesión con alguna cuenta</b>
+                <b>{{ $t("oauth.title") }}</b>
               </div>
               <br>
               <div class="text-center">
-                LeTiCiA registrará únicamente el correo electrónico de la cuenta utlizada. No se almacenarán otros datos personales.
+                {{ $t("oauth.disclaimer") }}
               </div>
               <br>
             </b-col>
@@ -21,11 +21,11 @@
                 <b-col>
                   <b-button block variant="danger" @click="googleLogin" v-if="enableGoogleLogin">
                     <font-awesome-icon :icon="['fab', 'google']"></font-awesome-icon>
-                    Registrarse con Google
+                    {{ $t("oauth.googleLogin") }}
                   </b-button>
                   <b-button block variant="primary" @click="facebookLogin" v-if="enableFacebookLogin">
                     <font-awesome-icon :icon="['fab', 'facebook']"></font-awesome-icon>
-                    Registrarse con Facebook
+                    {{ $t("oauth.facebookLogin") }}
                   </b-button>
                 </b-col>
               </b-row>
@@ -34,13 +34,13 @@
                 <b-col>
                   <b-button block variant="info" to="register">
                     <font-awesome-icon :icon="['fas', 'envelope']"></font-awesome-icon>
-                    Registrarse con Correo Electrónico
+                    {{ $t("oauth.register") }}
                   </b-button>
                 </b-col>
                 <b-col>
                   <b-button block variant="info" to="login">
                     <font-awesome-icon :icon="['fas', 'sign-in-alt']"></font-awesome-icon>
-                    Ingresar con Correo Electrónico
+                    {{ $t("oauth.login") }}
                   </b-button>
                 </b-col>
               </b-row>
@@ -50,7 +50,7 @@
         <b-row class="text-center">
           <b-col>
             <b-button variant="link" to="/">
-              Volver
+              {{ $t("oauth.login") }}
             </b-button>
           </b-col>
         </b-row>
