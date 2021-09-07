@@ -1,6 +1,8 @@
 <template>
   <b-container fluid id="extended-challenge">
-    <router-view id="current-stage"></router-view>
+    <b-row>
+      <router-view id="current-stage"></router-view>
+    </b-row>
     <!--
     <hr>
     <b-row>
