@@ -23,7 +23,7 @@
           <br>
           <b-row class="zero-margin text-right">
             <b-col>
-              <b-button type="submit" variant="success">Enviar respuesta</b-button>
+              <b-button type="submit" variant="success">{{ $t("queryWriter.submitButton") }}</b-button>
             </b-col>
           </b-row>
         </b-form>

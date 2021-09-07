@@ -1,13 +1,13 @@
 <template>
   <b-container>
     <b-row>
-      <h1>Instrucciones del desafío</h1>
+      <h1>{{ $t("instructions.title") }}</h1>
     </b-row>
     <br>
     <b-row>
       <b-card :img-src="image" img-right>
         <b-card-text>
-          <!-- TODO Task Description (Short() -->
+          <!-- TODO Task Description (Short) -->
           <p></p>
           <p></p>
           <p></p>
@@ -17,7 +17,7 @@
     <br>
     <b-row>
       <b-col class="text-right">
-        <b-button @click="nextStage" variant="success">Ir al desafío</b-button>
+        <b-button @click="nextStage" variant="success">{{ $t("instructions.goButton") }}</b-button>
       </b-col>
     </b-row>
   </b-container>

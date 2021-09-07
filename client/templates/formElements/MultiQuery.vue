@@ -26,7 +26,7 @@
           </b-row>
           <b-row>
             <b-button @click="addQuery">
-              Ingresar otra consulta
+              {{ $t("formElements.addQuery") }}
             </b-button>
           </b-row>
         </b-col>

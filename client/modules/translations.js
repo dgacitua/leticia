@@ -17,8 +17,21 @@ const translations = {
       submitLogin: "Iniciar sesión",
       submitRegister: "Registrarse"
     },
-    register: {
-
+    formElements: {
+      addQuery: "Ingresar otra consulta"
+    },
+    userHub: {
+      title: "Panel del usuario",
+      completedPerc: "Porcentaje del desafío completado",
+      completedBar: "{0} completado",
+      goButton: "Ir a la prueba"
+    },
+    instructions: {
+      title: "Instrucciones del desafío",
+      goButton: "Ir al desafío"
+    },
+    queryWriter: {
+      submitButton: "Enviar respuesta"
     },
     end: {
       message: "¡Gracias por participar!"
