@@ -2,16 +2,16 @@
   <b-container>
     <div>
       <b-row>
-        <h2>Encuesta de Carga de Trabajo</h2>
+        <h2>{{ $t("taskLoadIndex.title") }}</h2>
       </b-row>
       <b-row>
-        <div>Contesta las siguientes preguntas acerca de tu experiencia en la tarea de búsqueda que acabas de realizar</div>
+        <div>{{ $t("taskLoadIndex.instructions") }}</div>
       </b-row>
     </div>
     <br>
     <div>
       <b-row>
-        <b-form id="exit-survey" @submit="onSubmit">
+        <b-form id="nasa-tlx" @submit="onSubmit">
           <!-- Questions -->
           <b-row v-for="q in questions" :key="q.questionId"  class="zero-margin">
             <b-col>
@@ -33,7 +33,7 @@
           <!-- Submit -->
           <b-row>
             <b-col class="text-right">
-              <b-button type="submit" variant="success">Enviar respuesta</b-button>
+              <b-button type="submit" variant="success">{{ $t("taskLoadIndex.submitButtton") }}</b-button>
             </b-col>
           </b-row>
         </b-form>

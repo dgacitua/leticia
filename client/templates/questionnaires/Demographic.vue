@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-row>
-      <h2>Cuestionario Demográfico</h2>
+      <h2>{{ $t("demographic.title") }}</h2>
     </b-row>
     <br>
     <b-row>
@@ -29,7 +29,7 @@
         <!-- Sex -->
         <div id="demo-sex">
           <div>
-            <b>Sexo</b>
+            <b>{{ $t("demographic.sex") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div>
@@ -45,11 +45,11 @@
         <!-- Age -->
         <div id="demo-age">
           <div>
-            <b>Edad</b>
+            <b>{{ $t("demographic.age") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div class="help-block">
-            Edad actual (en años)
+            {{ $t("demographic.ageHint") }}
           </div>
           <div>
             <b-form-input
@@ -65,7 +65,7 @@
         <!-- Handedness -->
         <div id="demo-handedness">
           <div>
-            <b>¿Cúal es su mano dominante al escribir?</b>
+            <b>{{ $t("demographic.handedness") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div>
@@ -81,7 +81,7 @@
         <!-- NativeLanguage -->
         <div id="demo-language">
           <div>
-            <b>¿Cúal es su idioma nativo?</b>
+            <b>{{ $t("demographic.nativeLanguage") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div>
@@ -96,7 +96,7 @@
         </div>
         <div v-if="form.language === 'Other'" id="demo-custom-language">
           <div>
-            <b>Indique su idioma nativo</b>
+            <b>{{ $t("demographic.nativeLanguageCustom") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div>
@@ -112,7 +112,7 @@
         <!-- KeyboardLayout -->
         <div id="demo-keyboard">
           <div>
-            <b>¿Cúal es la distribución de su teclado?</b>
+            <b>{{ $t("demographic.keyboardLayout") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div>
@@ -127,7 +127,7 @@
         </div>
         <div v-if="form.keyboardLayout === 'Other'" id="demo-custom-keyboard">
           <div>
-            <b>Indique su distribución de teclado</b>
+            <b>{{ $t("demographic.keyboardLayoutCustom") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div>
@@ -143,7 +143,7 @@
         <!-- FavoriteSearchEngine -->
         <div id="demo-searchengine">
           <div>
-            <b>¿Cual es su motor de búsqueda web preferido?</b>
+            <b>{{ $t("demographic.searchEngine") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div>
@@ -158,7 +158,7 @@
         </div>
         <div v-if="form.searchEngine === 'Other'" id="demo-custom-searchengine">
           <div>
-            <b>Indique su motor de búsqueda web preferido</b>
+            <b>{{ $t("demographic.searchEngineCustom") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div>
@@ -174,11 +174,11 @@
         <!-- Education -->
         <div id="demo-education">
           <div>
-            <b>Nivel Educacional</b>
+            <b>{{ $t("demographic.education") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div class="help-block">
-            Indicar último nivel cursado o en curso
+            {{ $t("demographic.educationHint") }}
           </div>
           <div>
             <b-form-select
@@ -193,10 +193,10 @@
         <!-- Career -->
         <div id="demo-career">
           <div>
-            <b>Carrera</b>
+            <b>{{ $t("demographic.career") }}/b>
           </div>
           <div class="help-block">
-            (OPCIONAL) En caso de indicar nivel educacional Técnico-Profesional o Universitario, indicar la carrera en curso o cursada
+            {{ $t("demographic.careerHint") }}
           </div>
           <div>
             <b-form-input
@@ -209,7 +209,7 @@
         <!-- IsStudent? -->
         <div id="demo-student">
           <div>
-            <b>¿Está estudiando ahora?</b>
+            <b>{{ $t("demographic.isStudent") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div>
@@ -225,7 +225,7 @@
         <!-- HasDyslexia? -->
         <div id="demo-dyslexia">
           <div>
-            <b>¿Usted tiene Dislexia?</b>
+            <b>{{ $t("demographic.hasDyslexia") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div>
@@ -241,7 +241,7 @@
         <!-- HasColorBlindness -->
         <div id="demo-colorblindness">
           <div>
-            <b>¿Usted tiene algún tipo de Daltonismo?</b>
+            <b>{{ $t("demographic.hasColorBlindness") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div>
@@ -257,7 +257,7 @@
         <!-- Country -->
         <div id="demo-country">
           <div>
-            <b>País de residencia</b>
+            <b>{{ $t("demographic.country") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div>
@@ -281,7 +281,7 @@
         <!-- Region -->
         <div id="demo-region">
           <div>
-            <b>Región/Estado/Provincia/Departamento de residencia</b>
+            <b>{{ $t("demographic.region") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div>
@@ -314,7 +314,7 @@
         <!-- City -->
         <div id="demo-city">
           <div>
-            <b>Ciudad/Comuna de residencia</b>
+            <b>{{ $t("demographic.city") }}</b>
             <span class="form-asterisk">*</span>
           </div>
           <div>
@@ -347,10 +347,10 @@
         <!-- Town -->
         <div id="demo-town">
           <div>
-            <b>Villa/Población de residencia</b>
+            <b>{{ $t("demographic.town") }}</b>
           </div>
           <div class="help-block">
-            (OPCIONAL)
+            {{ $t("demographic.townHint") }}
           </div>
           <div>
             <b-form-input
@@ -364,7 +364,9 @@
         <!-- Submit -->
         <b-row>
           <b-col class="text-right">
-            <b-button type="submit" variant="success">Enviar respuesta</b-button>
+            <b-button type="submit" variant="success">
+              {{ $t("demographic.submitButtton") }}
+            </b-button>
           </b-col>
         </b-row>
       </b-form>
@@ -397,58 +399,57 @@ export default {
       form: {},
       error: {},
       educationLevels: [
-        { text: 'Enseñanza Básica/Primaria', value: 'ElementarySchool' },
-        { text: 'Enseñanza Media/Secundaria', value: 'HighSchool' },
-        { text: 'Enseñanza Técnico-Profesional', value: 'Professional' },
-        { text: 'Enseñanza Universitaria (Pregrado)', value: 'Undergraduate' },
-        { text: 'Enseñanza Universitaria (Magíster)', value: 'Masters' },
-        { text: 'Enseñanza Universitaria (Doctorado)', value: 'PhD' },
-        { text: 'Ninguna de las anteriores', value: 'NA' }
+        { text: this.$i18n.t('demographic.options.educationLevel.elementary'), value: 'ElementarySchool' },
+        { text: this.$i18n.t('demographic.options.educationLevel.high'), value: 'HighSchool' },
+        { text: this.$i18n.t('demographic.options.educationLevel.professional'), value: 'Professional' },
+        { text: this.$i18n.t('demographic.options.educationLevel.undergraduate'), value: 'Undergraduate' },
+        { text: this.$i18n.t('demographic.options.educationLevel.masters'), value: 'Masters' },
+        { text: this.$i18n.t('demographic.options.educationLevel.phd'), value: 'PhD' },
+        { text: this.$i18n.t('demographic.options.common.noneOfTheAbove'), value: 'NA' }
       ],
       sex: [
-        { text: 'Masculino', value: 'Male' },
-        { text: 'Femenino', value: 'Female' }
+        { text: this.$i18n.t('demographic.options.sex.male'), value: 'Male' },
+        { text: this.$i18n.t('demographic.options.sex.female'), value: 'Female' }
       ],
       language: [
-        { text: 'Español', value: 'Spanish' },
-        { text: 'Inglés', value: 'English' },
-        { text: 'Otro', value: 'Other' }
+        { text: this.$i18n.t('demographic.options.language.spanish'), value: 'Spanish' },
+        { text: this.$i18n.t('demographic.options.language.english'), value: 'English' },
+        { text: this.$i18n.t('demographic.options.common.other'), value: 'Other' }
       ],
       handedness: [
-        { text: 'Diestro', value: 'Right' },
-        { text: 'Zurdo', value: 'Left' },
-        { text: 'Ambidiestro', value: 'Both' }
+        { text: this.$i18n.t('demographic.options.handedness.right'), value: 'Right' },
+        { text: this.$i18n.t('demographic.options.handedness.left'), value: 'Left' },
+        { text: this.$i18n.t('demographic.options.handedness.both'), value: 'Both' }
       ],
       keyboardLayout: [
-        { text: 'Español (Latinoamérica)', value: 'es-LA' },
-        { text: 'Español (España)', value: 'es-ES' },
-        { text: 'Inglés', value: 'en' },
-        { text: 'Otro', value: 'Other' },
-        { text: 'No lo sé', value: 'NA' }
+        { text: this.$i18n.t('demographic.options.keyboardLayout.spanishLatin'), value: 'es-LA' },
+        { text: this.$i18n.t('demographic.options.keyboardLayout.spanishSpain'), value: 'es-ES' },
+        { text: this.$i18n.t('demographic.options.keyboardLayout.english'), value: 'en' },
+        { text: this.$i18n.t('demographic.options.common.other'), value: 'Other' },
+        { text: this.$i18n.t('demographic.options.common.dontKnow'), value: 'NA' }
       ],
       searchEngine: [
         { text: 'Google', value: 'Google' },
         { text: 'Bing', value: 'Bing' },
         { text: 'Yahoo', value: 'Yahoo' },
         { text: 'DuckDuckGo', value: 'DuckDuckGo' },
-        { text: 'Otro', value: 'Other' }
+        { text: this.$i18n.t('demographic.options.common.other'), value: 'Other' }
       ],
       isStudent: [
-        { text: 'Si, soy estudiante', value: 'Yes' },
-        { text: 'No, ya egresé', value: 'No' }
+        { text: this.$i18n.t('demographic.options.isStudent.yes'), value: 'Yes' },
+        { text: this.$i18n.t('demographic.options.isStudent.no'), value: 'No' }
       ],
       hasDyslexia: [
-        { text: 'No', value: 'No' },
-        { text: 'Si', value: 'Yes' },
-        
+        { text: this.$i18n.t('demographic.options.common.no'), value: 'No' },
+        { text: this.$i18n.t('demographic.options.common.yes'), value: 'Yes' }
       ],
       hasColorBlindness: [
-        { text: 'No', value: 'No' },
-        { text: 'Si', value: 'Yes' }
+        { text: this.$i18n.t('demographic.options.common.no'), value: 'No' },
+        { text: this.$i18n.t('demographic.options.common.yes'), value: 'Yes' }
       ],
       country: [
         { text: 'Chile', value: 'Chile' },
-        { text: 'Otro', value: 'Other' }
+        { text: this.$i18n.t('demographic.options.common.other'), value: 'Other' }
       ],
       allCities: Cities,
       regions: Cities.map((r) => { return { value: r.region, text: r.region } }),

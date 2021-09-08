@@ -3,37 +3,37 @@
     <div id="stroop-instructions" v-if="state==='instructions'">
       <b-card>
         <p>
-          En esta prueba, verás nombres de colores (amarillo, azul, rosa, naranja, rojo, verde) impresos en diferentes colores.
+          {{ $t("stroopTest.instructions[0]") }}
         </p>
         <p>
-          El objetivo de esta prueba es detectar si el nombre del color coincide con el color en el cual está impreso.
+          {{ $t("stroopTest.instructions[1]") }}
         </p>
         <p>
-          Por ejemplo, si ves:
+          {{ $t("stroopTest.instructions[2]") }}
         </p>
         <h1 class="text-center text-red">
-          VERDE
+          {{ $t("stroopTest.instructions[3]") }}
         </h1>
         <p>
-          Debes presionar el botón "No", ya que el nombre del color (verde) no coincide con el color impreso (rojo).
+          {{ $t("stroopTest.instructions[4]") }}
         </p>
         <p>
-          Por otro lado, si ves:
+          {{ $t("stroopTest.instructions[5]") }}
         </p>
         <h1 class="text-center text-blue">
-          AZUL
+          {{ $t("stroopTest.instructions[6]") }}
         </h1>
         <p>
-          Debes presionar el botón "Si", ya que el nombre del color y el color impreso coinciden (azul).
+          {{ $t("stroopTest.instructions[7]") }}
         </p>
         <p>
-          Intenta responder lo más rápidamente posible esta prueba. Una vez que estés listo(a) para empezar, presiona el botón "Ir a la prueba".
+          {{ $t("stroopTest.instructions[8]") }}
         </p>
       </b-card>
       <br>
       <b-row class="text-right">
         <b-col>
-          <b-button @click="skipInstructions" variant="success">Ir a la prueba</b-button>
+          <b-button @click="skipInstructions" variant="success">{{ $t("stroopTest.skipInstructionsButton") }}</b-button>
         </b-col>
       </b-row>
     </div>
@@ -48,7 +48,7 @@
       <b-card>
         <b-form>
           <div>
-            ¿El texto coincide con el color?
+            {{ $t("stroopTest.matchQuestion") }}
           </div>
           <div :class="`text-center background ${currentColor}`">
             <h1 v-if="stroopLock"><br></h1>
@@ -62,8 +62,8 @@
           <br>
           <b-row>
             <b-col cols="6" offset="3" class="text-center">
-              <b-button variant="primary" :disabled="stroopLock" @click="selectAnswer($event, 'Match')">Si</b-button>
-              <b-button variant="primary" :disabled="stroopLock" @click="selectAnswer($event, 'Mismatch')">No</b-button>
+              <b-button variant="primary" :disabled="stroopLock" @click="selectAnswer($event, 'Match')">{{ $t("stroopTest.yes") }}</b-button>
+              <b-button variant="primary" :disabled="stroopLock" @click="selectAnswer($event, 'Mismatch')">{{ $t("stroopTest.no") }}</b-button>
             </b-col>
           </b-row> 
         </b-form>
@@ -114,7 +114,7 @@ export default {
       currentColor: '',
       lastTextIdx: null,
       lastColorIdx: null,
-      textColors: [ 'AMARILLO', 'AZUL', 'ROSA', 'NARANJA', 'ROJO', 'VERDE' ],
+      textColors: this.$i18n.t('stroopTest.textColors'),
       styleColors: [ 'text-yellow', 'text-blue', 'text-pink', 'text-orange', 'text-red', 'text-green' ],
       colorRef: [ 'Yellow', 'Blue', 'Pink', 'Orange', 'Red', 'Green' ],
     }

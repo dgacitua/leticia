@@ -3,13 +3,13 @@
     <b-row>
       <b-col>
         <div>
-          <h1>Test de Escritura</h1>
+          <h1>{{ $t("typingTest.title") }}</h1>
         </div>
         <div>
           <p>
-            Tipea cada extracto de texto que veas en el campo de texto tal cual como está escrito.<br>
-            Usa tu velocidad de tipeo natural, no te aceleres.<br>
-            Presiona Enter o Siguiente para continuar con el siguiente texto.
+            {{ $t("typingTest.instructions[1]") }}<br>
+            {{ $t("typingTest.instructions[2]") }}<br>
+            {{ $t("typingTest.instructions[3]") }}
           </p>
         </div>
       </b-col>
@@ -41,15 +41,17 @@
           <b-col cols="9">
             <b-progress :max="100" height="2rem">
               <b-progress-bar :value="completedPerc">
-                <span><strong>{{ completedPerc }}%</strong> completado</span>
+                <i18n path="typingTest.completedBar" tag="span">
+                  <strong>{{ completedPerc }}%</strong>
+                </i18n>
               </b-progress-bar>
             </b-progress>
           </b-col>
           <b-col v-if="!isLastSlide" cols="3" class="text-right">
-            <b-button variant="primary" :disabled="!isValidInput" @click="nextSample">Siguiente</b-button>
+            <b-button variant="primary" :disabled="!isValidInput" @click="nextSample">{{ $t("typingTest.nextButton") }}</b-button>
           </b-col>
           <b-col v-if="isLastSlide" cols="3" class="text-right">
-            <b-button variant="success" :disabled="!isValidInput" @click="nextSample">Finalizar</b-button>
+            <b-button variant="success" :disabled="!isValidInput" @click="nextSample">{{ $t("typingTest.finishButton") }}</b-button>
           </b-col>
         </b-row>
       </b-form>

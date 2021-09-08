@@ -1,10 +1,10 @@
 <template>
   <b-container>
     <b-row>
-      <h2>Encuesta de Salida</h2>
+      <h2>{{ $t("exitSurvey.title") }}</h2>
     </b-row>
     <b-row>
-      <div>Contesta la(s) siguiente(s) pregunta(s) acerca de tu experiencia en la plataforma LeTiCiA</div>
+      <p>{{ $t("exitSurvey.instructions") }}</p>
     </b-row>
     <br>
     <b-row>
@@ -27,7 +27,7 @@
         <!-- Submit -->
         <b-row>
           <b-col class="text-right">
-            <b-button type="submit" variant="success">Enviar respuesta</b-button>
+            <b-button type="submit" variant="success">{{ $t("exitSurvey.submitButtton") }}</b-button>
           </b-col>
         </b-row>
       </b-form>
