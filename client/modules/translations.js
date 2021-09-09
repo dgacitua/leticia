@@ -26,23 +26,57 @@ const translations = {
       completedBar: "{0} completado",
       goButton: "Ir a la prueba"
     },
-    instructions: {
-      title: "Instrucciones del desafío",
-      goButton: "Ir al desafío"
+    queryPlanning: {
+      instructions: {
+        title: "Instrucciones del desafío",
+        goButton: "Ir al desafío"
+      },
+      queryWriter: {
+        submitButton: "Enviar respuesta"
+      },
+      taskDescription: {
+        nextStageButton: "Continuar"
+      },
+      taskForm: {
+        instructions: "Respecto a la tarea asignada, responde las siguientes preguntas:",
+        submitButtton: "Enviar respuesta"
+      },
+      taskReady: {
+        instructions: "A continuación se te presentará una tarea de búsqueda. Léela con atención y realiza las actividades indicadas. Cuando estés listo(a), presiona Siguiente para continuar.",
+        nextStageButton: "Siguiente"
+      }
     },
-    queryWriter: {
-      submitButton: "Enviar respuesta"
-    },
-    taskDescription: {
-      nextStageButton: "Continuar"
-    },
-    taskForm: {
-      instructions: "Respecto a la tarea asignada, responde las siguientes preguntas:",
-      submitButtton: "Enviar respuesta"
-    },
-    taskReady: {
-      instructions: "A continuación se te presentará una tarea de búsqueda. Léela con atención y realiza las actividades indicadas. Cuando estés listo(a), presiona Siguiente para continuar.",
-      nextStageButton: "Siguiente"
+    search: {
+      displayPage: {
+        message: "No se puede mostrar la página"
+      },
+      instructions: {
+        title: "Instrucciones del desafío",
+        continueButton: "Continuar",
+        text: [
+          "A continuación se te habilitará un motor de búsqueda en el cual podrás relizar consultas y buscar documentos (páginas web) adecuados para resolver la necesidad de información de la tarea indicada.",
+          "Debes marcar {numDocs} o más documentos que sean relevantes para resolver la tarea (toma en cuenta factores como lo confiable que es la fuente y la calidad del contenido).",
+          "Para marcar o desmarcar documentos, ingresa al documento desde la lista de resultados de búsqueda y utiliza los botones de marcar/desmarcar documento en la barra superior.",
+          "Para volver al motor de búsqueda, utiliza el botón atrás en la barra superior.",
+          "Cuando tengas {numDocs} o más documentos marcados, puedes terminar la búsqueda con el botón \"Terminar búsqueda\" en la barra superior.",
+        ]
+      },
+      searchModule: {
+        searchButton: "Buscar",
+        noResultsFound: "No se han encontrado resultados de búsqueda",
+        loadingMessage: "Cargando..."
+      },
+      taskDescription: {
+        continueButton: "Continuar"
+      },
+      taskForm: {
+        instructions: "Respecto a la tarea asignada, responde las siguientes preguntas:",
+        submitButtton: "Enviar respuesta"
+      },
+      taskReady: {
+        instructions: "A continuación se te presentará una tarea de búsqueda. Léela con atención y realiza las actividades indicadas. Cuando estés listo(a), presiona Siguiente para continuar.",
+        nextStageButton: "Siguiente"
+      }
     },
     demographic: {
       title: "Cuestionario Demográfico",

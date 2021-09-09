@@ -10,7 +10,7 @@
     <br>
     <b-row class="text-right">
       <b-col>
-        <b-button @click="nextStage" variant="success">{{ $t("taskDescription.nextStageButton") }}</b-button>
+        <b-button @click="nextStage" variant="success">{{ $t("queryPlanning.taskDescription.nextStageButton") }}</b-button>
       </b-col>
     </b-row>
   </b-container>

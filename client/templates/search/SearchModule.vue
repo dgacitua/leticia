@@ -26,7 +26,7 @@
             ></b-form-input>
             <b-button variant="success" @click="writeQuery">
               <font-awesome-icon :icon="['fas', 'search']"></font-awesome-icon>
-              Buscar
+              {{ $t("search.searchModule.searchButton") }}
             </b-button>
           </b-input-group>
         </b-col>
@@ -54,7 +54,7 @@
             ></b-form-input>
             <b-button variant="success" @click="writeQuery">
               <font-awesome-icon :icon="['fas', 'search']"></font-awesome-icon>
-              Buscar
+              {{ $t("search.searchModule.searchButton") }}
             </b-button>
           </b-input-group>
         </b-col>
@@ -65,7 +65,7 @@
       <div id="serp-empty" v-if="serpStatus === 'empty'">
         <b-row class="text-center">
           <b-col>
-            <h3>No se han encontrado resultados de búsqueda</h3>
+            <h3>{{ $t("search.searchModule.noResultsFound") }}</h3>
           </b-col>
         </b-row>
       </div>
@@ -129,7 +129,7 @@
       <div id="serp-other" v-else>
         <b-row class="text-center">
           <b-col>
-            <h3>Cargando...</h3>
+            <h3>{{ $t("search.searchModule.loadingMessage") }}</h3>
           </b-col>
         </b-row>
       </div>

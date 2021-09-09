@@ -10,7 +10,7 @@
     <br>
     <b-row class="text-right">
       <b-col>
-        <b-button @click="nextStage" variant="success">Continuar</b-button>
+        <b-button @click="nextStage" variant="success">{{ $t("search.taskDescription.continueButton") }}</b-button>
       </b-col>
     </b-row>
   </b-container>

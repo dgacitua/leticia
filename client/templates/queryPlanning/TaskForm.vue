@@ -9,7 +9,7 @@
     </b-row>
     <br>
     <b-row class="space-bottom">
-      <div>{{ $t("taskForm.instructions") }}</div>
+      <div>{{ $t("queryPlanning.taskForm.instructions") }}</div>
     </b-row>
     <br>
     <b-row class="space-bottom">
@@ -38,7 +38,7 @@
           <br>
           <b-row>
             <b-col class="text-right zero-margin">
-              <b-button type="submit" variant="success">{{ $t("taskForm.submitButtton") }}</b-button>
+              <b-button type="submit" variant="success">{{ $t("queryPlanning.taskForm.submitButtton") }}</b-button>
             </b-col>
           </b-row>
         </b-form>

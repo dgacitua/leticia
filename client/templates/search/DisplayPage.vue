@@ -7,7 +7,7 @@
       <iframe id="page-iframe" ref="pageIframe" class="display-iframe" sandbox="allow-same-origin" :src="pageUrl"></iframe>
     </div>
     <div v-else>
-      <h2>No se puede mostrar la página</h2>
+      <h2>{{ $t("search.displayPage.message") }}</h2>
     </div>
   </b-container>
 </template>

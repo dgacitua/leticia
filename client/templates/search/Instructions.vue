@@ -1,39 +1,39 @@
 <template>
   <b-container>
     <b-row>
-      <h1>Instrucciones del desafío</h1>
+      <h1>{{ $t("search.instructions.title") }}</h1>
     </b-row>
     <br>
     <b-row>
       <b-card :img-src="image" img-right>
         <b-card-text>
-          <p>A continuación se te habilitará un motor de búsqueda en el cual podrás relizar consultas y buscar documentos (páginas web) adecuados para resolver la necesidad de información de la tarea indicada.</p>
-          <p>Debes marcar 3 o más documentos que sean relevantes para resolver la tarea (toma en cuenta factores como lo confiable que es la fuente y la calidad del contenido).</p>
-          <p>Para marcar o desmarcar documentos, ingresa al documento desde la lista de resultados de búsqueda y utiliza los botones de marcar/desmarcar documento en la barra superior.</p>
+          <p>{{ $t("search.instructions.text[0]") }}</p>
+          <p>{{ $t("search.instructions.text[1]", { numDocs: minDocs }) }}</p>
+          <p>{{ $t("search.instructions.text[2]") }}</p>
           <div class="text-center">
             <b-button variant="primary">
               <font-awesome-icon :icon="['fas', 'bookmark']"></font-awesome-icon>
-              Marcar documento
+              {{ $t("navbar.bookmark") }}
             </b-button>
             <b-button variant="primary">
               <font-awesome-icon :icon="['fas', 'file']"></font-awesome-icon>
-              Desmarcar documento
+              {{ $t("navbar.unbookmark") }}
             </b-button>
           </div>
           <br>
-          <p>Para volver al motor de búsqueda, utiliza el botón atrás en la barra superior.</p>
+          <p>{{ $t("search.instructions.text[3]") }}</p>
           <div class="text-center">
             <b-button variant="info">
               <font-awesome-icon :icon="['fas', 'arrow-left']"></font-awesome-icon>
-              Atrás
+              {{ $t("navbar.backButton") }}
             </b-button>
           </div>
           <br>
-          <p>Cuando tengas 3 o más documentos marcados, puedes terminar la búsqueda con el botón "Terminar búsqueda" en la barra superior.</p>
+          <p>{{ $t("search.instructions.text[4]", { numDocs: minDocs }) }}</p>
           <div class="text-center">
             <b-button variant="success">
               <font-awesome-icon :icon="['fas', 'check']"></font-awesome-icon>
-              Terminar búsqueda
+              {{ $t("navbar.finishSearch") }}
             </b-button>  
           </div>        
         </b-card-text>
@@ -42,7 +42,7 @@
     <br>
     <b-row>
       <b-col class="text-right">
-        <b-button @click="nextStage" variant="success">Continuar</b-button>
+        <b-button @click="nextStage" variant="success">{{ $t("search.instructions.continueButton") }}</b-button>
       </b-col>
     </b-row>
     <br>
@@ -61,7 +61,8 @@ export default {
   data() {
     return {
       instructions: '',
-      image: Image
+      image: Image,
+      minDocs: 0
     }
   },
 
@@ -73,6 +74,7 @@ export default {
 
   mounted() {
     this.instructions = this.$store.getters.sessionFlow.instructions || 'No hay instrucciones';
+    this.minDocs = this.$store.getters.sessionFlow.minDocs || 3;
   },
 
   methods: {

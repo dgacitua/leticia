@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-row>
-      <h1>{{ $t("instructions.title") }}</h1>
+      <h1>{{ $t("queryPlanning.instructions.title") }}</h1>
     </b-row>
     <br>
     <b-row>
@@ -17,7 +17,7 @@
     <br>
     <b-row>
       <b-col class="text-right">
-        <b-button @click="nextStage" variant="success">{{ $t("instructions.goButton") }}</b-button>
+        <b-button @click="nextStage" variant="success">{{ $t("queryPlanning.instructions.goButton") }}</b-button>
       </b-col>
     </b-row>
   </b-container>

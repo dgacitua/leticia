@@ -9,7 +9,7 @@
     </b-row>
     <br>
     <b-row class="space-bottom">
-      <div>Respecto a la tarea asignada, responde las siguientes preguntas:</div>
+      <div>{{ $t("search.taskForm.instructions") }}</div>
     </b-row>
     <br>
     <b-row class="space-bottom">
@@ -38,7 +38,7 @@
           <br>
           <b-row>
             <b-col class="text-right zero-margin">
-              <b-button type="submit" variant="success">Enviar respuesta</b-button>
+              <b-button type="submit" variant="success">{{ $t("search.taskForm.submitButtton") }}</b-button>
             </b-col>
           </b-row>
         </b-form>
