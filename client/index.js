@@ -36,6 +36,7 @@ Vue.router = router;
 
 const i18n = new VueI18n({
   locale: Constants.locale,
+  fallbackLocale: 'en',
   messages: translations
 });
 
