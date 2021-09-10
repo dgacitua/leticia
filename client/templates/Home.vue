@@ -23,13 +23,13 @@
           <b>{{ $t("home.considerations") }}:</b>
         </div>
         <ul>
-          <li>Debes ser mayor de edad (18+)</li>
-          <li>Debes tener conocimientos básicos acerca del uso de buscadores web</li>
-          <li>Debes usar un computador de escritorio o laptop</li>
-          <li>Sitio web no compatible con dispositivos móviles (teléfonos y tablets)</li>
-          <li>Métodos de entrada compatibles: Teclado y ratón</li>
-          <li>Se recomienda utilizar un navegador web actualizado (como puede ser Chrome, Firefox o Edge)</li>
-          <li>Resolución de pantalla recomedada: 1366x768 (o superior)</li>
+          <li>{{ $t("home.considerationsText[0]") }}</li>
+          <li>{{ $t("home.considerationsText[1]") }}</li>
+          <li>{{ $t("home.considerationsText[2]") }}</li>
+          <li>{{ $t("home.considerationsText[3]") }}</li>
+          <li>{{ $t("home.considerationsText[4]") }}</li>
+          <li>{{ $t("home.considerationsText[5]") }}</li>
+          <li>{{ $t("home.considerationsText[6]") }}</li>
         </ul>
       </b-col>
     </b-row>
@@ -37,7 +37,7 @@
     <b-row>
       <b-col>
         <b-alert show variant="secondary">
-          <b>IMPORTANTE:</b> En caso de presentar alguna dificultad con el sistema a la hora de realizar la actividad, puedes cerrar la pestaña (o cerrar la sesión) y luego ingresar nuevamente con las mismas credenciales para continuar la actividad en la etapa donde la dejaste.
+          <b>{{ $t("home.troubleshootingText[0]") }}</b> {{ $t("home.troubleshootingText[1]") }}
         </b-alert>
       </b-col>
     </b-row>

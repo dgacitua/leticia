@@ -192,7 +192,20 @@ const translations = {
       title: "Welcome to LETICIA!",
       subtitle: "simuLatEd Task and actIvity Capture Interactive plAtform",
       considerations: "Conisderations to participate",
-      participate: "Participate in the study"
+      participate: "Participate in the study",
+      considerationsText: [
+        "You must be of legal age (18+)",
+        "You must have basic knowledge about using web search engines",
+        "You must use a desktop or laptop computer",
+        "Website not compatible with mobile devices (smartphones and tablets)",
+        "Compatible input devices: Keyboard and mouse",
+        "It's highly recommended to use an updated web browser (such as Chrome. Firefox or Edge)",
+        "Recommended screen resolution: 1366x768 (or higher)"
+      ],
+      troubleshootingText: [
+        "IMPORTANT:",
+        "In case of presenting any difficulties with the system when carrying out the activity, you can close the tab (or close the session) and then log in again with the same credentials to continue the activity in the stage where you left it."
+      ]
     },
     informedConsent: {
       title: "Informed consent",
@@ -419,7 +432,20 @@ const translations = {
       title: "¡Bienvenido(a) a LETICIA!",
       subtitle: "simuLatEd Task and actIvity Capture Interactive plAtform",
       considerations: "Consideraciones para participar",
-      participate: "Participar en el estudio"
+      participate: "Participar en el estudio",
+      considerationsText: [
+        "Debes ser mayor de edad (18+)",
+        "Debes tener conocimientos básicos acerca del uso de buscadores web",
+        "Debes usar un computador de escritorio o laptop",
+        "Sitio web no compatible con dispositivos móviles (teléfonos y tablets)",
+        "Métodos de entrada compatibles: Teclado y ratón",
+        "Se recomienda utilizar un navegador web actualizado (como puede ser Chrome, Firefox o Edge)",
+        "Resolución de pantalla recomedada: 1366x768 (o superior)"
+      ],
+      troubleshootingText: [
+        "IMPORTANTE:",
+        "En caso de presentar alguna dificultad con el sistema a la hora de realizar la actividad, puedes cerrar la pestaña (o cerrar la sesión) y luego ingresar nuevamente con las mismas credenciales para continuar la actividad en la etapa donde la dejaste."
+      ]
     },
     informedConsent: {
       title: "Consentimiento Informado",
