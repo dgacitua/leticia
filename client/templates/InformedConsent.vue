@@ -145,7 +145,7 @@ export default {
           })
           .catch((err) => {
             console.error('ConsentError', err);
-            alert('Ha ocurrido un error al aceptar el Consentimiento Informado [Código 461]');
+            alert('An error ocurred while submitting the Informed Consent [Code 461]');
           });
       }
     }

@@ -198,7 +198,7 @@ export default {
         .then((res) => {})
         .catch((err) => {
           console.error(err);
-          alert('Ha ocurrido un error al marcar el documento [Código 475]');
+          alert('An error ocurred while bookmarking the document [Code 475]');
         });
     },
     unbookmark(evt) {
@@ -218,7 +218,7 @@ export default {
         .then((res) => {})
         .catch((err) => {
           console.error(err);
-          alert('Ha ocurrido un error al desmarcar el documento [Código 476]');
+          alert('An error ocurred while unbookmarking the document [Code 476]');
        });
     },
     goBack(evt) {
@@ -239,7 +239,7 @@ export default {
         })
         .catch(err => {
           console.error(err);
-          alert('Ha ocurrido un error al terminar la búsqueda [Código 478]');
+          alert('An error ocurred while finishing search [Code 478]');
         });
     },
     showTaskModal() {

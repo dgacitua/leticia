@@ -64,7 +64,7 @@ export default {
     });
 
     EventBus.$on('leticia-timeout', (detail) => {
-      alert('Se ha acabado el tiempo!')
+      alert(this.$i18n.t('error.timeout'));
       EventBus.$emit('leticia-next-stage');
     });
   }

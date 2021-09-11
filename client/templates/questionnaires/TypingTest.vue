@@ -133,7 +133,7 @@ export default {
         })
         .catch(err => {
           console.error(err);
-          alert('Ha ocurrido un error al guardar las respuestas [Código 471]');
+          alert('An error ocurred while submitting the answers [Code 471]');
         });
     },
     focus(evt) {

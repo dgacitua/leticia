@@ -84,7 +84,7 @@ export default {
       })
       .catch((err) => {
         console.error(err);
-        alert('Ha ocurrido un error al cargar la tarea [Código 463]');
+        alert('An error ocurred while loading the task [Code 463]');
       });
   },
 
@@ -119,20 +119,8 @@ export default {
         })
         .catch((err) => {
           console.error(err);
-          alert('Ha ocurrido un error al enviar las respuestas [Código 464]');
+          alert('An error ocurred while submitting the answers [Code 464]');
         });
-
-      /*
-      Axios.post(`${Constants.backendApiUrl}/answers`, response)
-        .then((res) => {
-          // dgacitua: https://stackoverflow.com/a/57183854
-          this.$router.replace({ path: 'taskform', query: { task: this.$route.query.task, form: Constants.posttaskForm }});
-        })
-        .catch((err) => {
-          console.error(err);
-          alert('Ha ocurrido un error');
-        });
-      */
     }
   }
 }

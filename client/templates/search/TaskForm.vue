@@ -99,7 +99,7 @@ export default {
       })
       .catch((err) => {
         console.error(err);
-        alert('Ha ocurrido un error al cargar las preguntas [Código 465]');
+        alert('An error ocurred while loading the questions [Code 465]');
       });
   },
 
@@ -138,7 +138,7 @@ export default {
           })
           .catch((err) => {
             console.error(err);
-            alert('Ha ocurrido un error al enviar las respuestas [Código 466]');
+            alert('An error ocurred while submitting the answers [Code 466]');
           });
       }
     }

@@ -99,7 +99,7 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-          alert('Ha ocurrido un error al cargar las tareas');
+          alert('An error ocurred while loading tasks [Code 462-E]');
           return Promise.reject();
         });
     },

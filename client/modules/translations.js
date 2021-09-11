@@ -237,6 +237,9 @@ const translations = {
       id: "Id",
       email: "Email",
       roles: "Roles"
+    },
+    error: {
+      timeout: "Time is over!"
     }
   },
   es: {
@@ -477,6 +480,9 @@ const translations = {
       id: "Id",
       email: "Correo electrónico",
       roles: "Roles"
+    },
+    error: {
+      timeout: "¡Se ha acabado el tiempo!"
     }
   }
 };

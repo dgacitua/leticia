@@ -501,7 +501,7 @@ export default {
           })
           .catch((err) => {
             console.error(err);
-            alert('Ha ocurrido un error al enviar las respuestas [Código 467]');
+            alert('An error ocurred while submitting the answers [Code 467]');
           });
       }
     }
