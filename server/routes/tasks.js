@@ -71,8 +71,37 @@ const getShuffledTasks = async (request, response, next) => {
   }
 }
 
-router.get('/', getAllTasks);
+const deleteSearchTask = async (request, response, next) => {
+  try {
+    const { id } = request.params;
+    const res = await SearchTask.deleteOne({ sessionFlowId: id });
+
+    response.status(200).send(res);
+  }
+  catch (err) {
+    consoleError(err);
+    response.status(500).send({ statusCode: 500, errorMsg: 'Error while deleting SearchTask', errorObj: err });
+  }
+}
+
+const addSearchTask = async (request, response, next) => {
+  try {
+    let st = response.body;
+    const res = await SearchTask.create(st);
+
+    response.status(200).send(res);
+  }
+  catch (err) {
+    consoleError(err);
+    response.status(500).send({ statusCode: 500, errorMsg: 'Error while adding SearchTask', errorObj: err });
+  }
+}
+
 router.get('/shuffle', getShuffledTasks);
 router.get('/:id', getTask);
+router.get('/', getAllTasks);
+router.delete('/:id', deleteSearchTask);
+router.post('/', addSearchTask);
+
 
 export default router;
