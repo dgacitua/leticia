@@ -73,10 +73,14 @@ $ sudo systemctl enable mongod
 
         $ sudo su - solr -c "/opt/solr/bin/solr create -c leticia -n data_driven_schema_configs"
 
-## TODO List
+### Example databases
 
-- i18n Support
-- API documentation
+After deploying LETICIA, is possible to install a pre-populated database as an example to create new experimental assets. You can do so by running the following commands from the project's root directory:
+
+```
+$ cd extras/databaseScripts/
+$ mongo leticia-data populateDataDatabase-en.js
+```
 
 ## License
 
