@@ -202,7 +202,7 @@ db.questions.insertMany([
   {
     "questionId": 'posttask6',
     "type": 'likert',
-    "title": 'Determinar lo útil que pueden ser los resultados de búsqueda de esta tarea fue difícil',
+    "title": 'Resultó difícil determinar cuando terminar de buscar información para completar esta tarea',
     "start": 1,
     "stop": 6,
     "step": 1,
@@ -439,19 +439,14 @@ db.questions.insertMany([
 
 db.tasks.insertMany([
   {
-    "searchTaskId": 'task07',
-    "title": 'Computación Cuántica',
-    "description": 'Un amigo que estudia Ingeniería te cuenta que recientemente fue a una charla sobre Computación Cuántica, y que quedó soprendido por los usos de esta tecnología. Para poder discutir informadamente del tema, decides buscar información al respecto. ¿Como funciona (a grandes rasgos) la computación cuántica? ¿Cuáles son sus potenciales usos?'
+    "searchTaskId": 'task01',
+    "title": 'Bandera especial',
+    "description": 'Toda bandera nacional en el mundo comparte una característica geométrica común, excepto por un país. ¿Cuál es ese país?'
   },
   {
-    "searchTaskId": 'task11',
-    "title": 'Disolución',
-    "description": 'Es más fácil disolver el azúcar en una taza de café caliente que en una de café frío. ¿Qué ocurre al hacer el mismo ejercicio con sal y agua?'
-  },
-  {
-    "searchTaskId": 'task13',
-    "title": 'Agujeros Negros',
-    "description": 'Como parte del taller de "Astronomía para principiantes" en el cual participas, se te asignó realizar una breve exposición acerca de los agujeros negros, respondiendo las siguientes preguntas: ¿Pueden los agujeros negros "tragarse el Universo"? ¿Qué sucede en un agujero negro?'
+    "searchTaskId": 'task02',
+    "title": 'Elemento radioactivo',
+    "description": 'Después de haber acuñado el término "radioactivo", ella descubrió dos elementos radioactivos, uno de ellos puede ser fácilmente encontrado en el humo del cigarrillo. ¿Cuál es ese elemento?'
   }
 ]);
 
