@@ -87,7 +87,7 @@ export default {
   },
 
   mounted() {
-    Axios.get(`${Constants.backendApiUrl}/forms/${this.formId}`)
+    Axios.get(`${Constants.backendApiUrl}/forms/fetch/${this.formId}`)
       .then((res) => {
         this.questions = res.data;
         console.log('NASA-TLX Questions Loaded!', this.questions);
