@@ -1,29 +1,57 @@
 <template>
-  <form id="app" @submit="onSubmit">
-    <div v-for="q in questions" :key="q.questionId">
-      <div v-if="q.type==='likert'">
-        <likertscale :props="q"></likertscale>
-      </div>
-      <div v-if="q.type==='paragraph'">
-        <paragraph :props="q"></paragraph>
-      </div>
-      <div v-if="q.type==='multiquery'">
-        <multiquery :props="q"></multiquery>
-      </div>
-    </div>
-    <div>
-      <input type="submit" value="Enviar respuesta">
-    </div>
-  </form>
+  <b-container>
+    <b-row class="space-bottom">
+      <div>{{ $t("questionnaire.instructions") }}</div>
+    </b-row>
+    <br>
+    <b-row class="space-bottom">
+      <b-col>
+        <b-form id="taskform" @submit="onSubmit" class="full-width">
+          <b-row v-for="q in questions" :key="q.questionId" class="zero-margin">
+            <b-col>
+              <b-row v-if="q.type==='input'" :id="q.questionId" class="zero-margin">
+                <b-col>
+                  <inputquestion :props="q"></inputquestion>
+                </b-col>
+              </b-row>
+              <b-row v-if="q.type==='likert'" :id="q.questionId" class="zero-margin">
+                <b-col>
+                  <likertscale :props="q"></likertscale>
+                </b-col>
+              </b-row>
+              <b-row v-if="q.type==='paragraph'" :id="q.questionId" class="zero-margin">
+                <b-col>
+                  <paragraph :props="q"></paragraph>
+                </b-col>
+              </b-row>
+              <b-row v-if="q.type==='multiquery'" :id="q.questionId" class="zero-margin">
+                <b-col>
+                  <multiquery :props="q"></multiquery>
+                </b-col>
+              </b-row>
+              <br>
+            </b-col>
+          </b-row>
+          <br>
+          <b-row>
+            <b-col class="text-right zero-margin">
+              <b-button type="submit" variant="success">{{ $t("questionnaire.submitButtton") }}</b-button>
+            </b-col>
+          </b-row>
+        </b-form>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
 import ActionSender from '../services/ActionSender';
 import { getVueArray } from '../services/Utils';
 
-import LikertScale from './formElements/LikertScale';
-import MultiQuery from './formElements/MultiQuery';
-import Paragraph from './formElements/Paragraph';
+import LikertScale from './formElements/LikertScale.vue';
+import MultiQuery from './formElements/MultiQuery.vue';
+import Input from './formElements/Input.vue';
+import Paragraph from './formElements/Paragraph.vue';
 
 export default {
   name: 'questionnaire',
@@ -31,54 +59,14 @@ export default {
   components: {
     likertscale: LikertScale,
     multiquery: MultiQuery,
+    input: Input,
     paragraph: Paragraph
   },
 
   data() {
     return {
-      questions: [
-        {
-          questionId: 'test1',
-          type: 'likert',
-          title: 'Q1?',
-          hint: 'T1!',
-          start: 1,
-          stop: 6,
-          step: 1,
-          minLabel: 'Lo',
-          maxLabel: 'Hi',
-          required: true,
-          answer: null
-        },
-        {
-          questionId: 'test2',
-          type: 'likert',
-          title: 'Q2?',
-          hint: 'T2!',
-          start: 0,
-          stop: 100,
-          step: 10,
-          minLabel: 'Lo',
-          maxLabel: 'Hi',
-          required: true,
-          answer: null
-        },
-        {
-          questionId: 'test3',
-          type: 'paragraph',
-          title: 'Q3?',
-          hint: 'T3!',
-          answer: ''
-        },
-        {
-          questionId: 'test4',
-          type: 'multiquery',
-          title: 'Q4?',
-          hint: 'T4!',
-          queries: 3,
-          answer: []
-        }
-      ],
+      task: {},
+      questions: []
     }
   },
 
@@ -88,17 +76,78 @@ export default {
     }
   },
 
+  mounted() {
+    let taskId = this.$route.query.task;
+    let formId = this.$route.query.form;
+
+    let p1 = Axios.get(`${Constants.backendApiUrl}/tasks/${taskId}`);
+    let p2 = Axios.get(`${Constants.backendApiUrl}/forms/fetch/${formId}`);
+
+    Promise.all([p1, p2])
+      .then((values) => { 
+        this.task = values[0].data;
+        this.questions = values[1].data;
+        console.log('TaskForm Questions Loaded!', this.questions);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert('An error ocurred while loading the questions [Code 465]');
+      });
+  },
+
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
 
-      let answers = getVueArray(this.questions).map(el => { return { questionId: el.questionId, answer: el.answer }});
-      console.log(answers);
+      if (this.loggedIn) {
+        let taskId = deepCopy(this.$route.query.task);
+        let formId = deepCopy(this.$route.query.form);
+        let answers = getVueArray(this.questions).map(el => { return { questionId: el.questionId, answer: el.answer }});
+
+        let response = {
+          username: this.currentUser.username,
+          taskId: taskId,
+          formId: formId,
+          clientTimestamp: Date.now(),
+          answers: answers
+        }
+
+        console.log('Form Answer', response);
+
+        Axios.post(`${Constants.backendApiUrl}/answers`, response)
+          .then((res) => {
+            if (formId === Constants.pretaskFormEx) {
+              // dgacitua: https://stackoverflow.com/a/57183854
+              //this.$router.replace({ path: 'query', query: { task: this.$route.query.task, form: Constants.queryForm }});
+            }
+            else {
+              // dgacitua: https://stackoverflow.com/a/57183854
+              this.$store.commit({ type: 'setTaskAsDone', id: taskId });
+              //this.$router.replace({ path: 'tasks' });
+            }
+
+            EventBus.$emit('leticia-next-challenge');
+          })
+          .catch((err) => {
+            console.error(err);
+            alert('An error ocurred while submitting the answers [Code 466]');
+          });
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+.space-bottom {
+  margin-bottom: 10px;
+}
 
+.zero-margin {
+  margin: 0px 0px 0px 0px;
+}
+
+.full-width {
+  max-width: 100%;
+}
 </style>

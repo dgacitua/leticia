@@ -238,6 +238,10 @@ const translations = {
       email: "Email",
       roles: "Roles"
     },
+    questionnaire: {
+      instructions: "Please answer the following questions",
+      submitButtton: "Submit answer"
+    },
     error: {
       timeout: "Time is over!"
     }
@@ -480,6 +484,10 @@ const translations = {
       id: "Id",
       email: "Correo electrónico",
       roles: "Roles"
+    },
+    questionnaire: {
+      instructions: "Por favor responde las siguientes preguntas",
+      submitButtton: "Enviar respuesta"
     },
     error: {
       timeout: "¡Se ha acabado el tiempo!"

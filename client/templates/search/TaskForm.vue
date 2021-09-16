@@ -17,6 +17,11 @@
         <b-form id="taskform" @submit="onSubmit" class="full-width">
           <b-row v-for="q in questions" :key="q.questionId" class="zero-margin">
             <b-col>
+              <b-row v-if="q.type==='input'" :id="q.questionId" class="zero-margin">
+                <b-col>
+                  <inputquestion :props="q"></inputquestion>
+                </b-col>
+              </b-row>
               <b-row v-if="q.type==='likert'" :id="q.questionId" class="zero-margin">
                 <b-col>
                   <likertscale :props="q"></likertscale>
@@ -57,6 +62,7 @@ import EventBus from '../../modules/eventBus';
 
 import LikertScale from '../formElements/LikertScale.vue';
 import MultiQuery from '../formElements/MultiQuery.vue';
+import Input from '../formElements/Input.vue';
 import Paragraph from '../formElements/Paragraph.vue';
 
 export default {
@@ -65,6 +71,7 @@ export default {
   components: {
     likertscale: LikertScale,
     multiquery: MultiQuery,
+    inputquestion: Input,
     paragraph: Paragraph
   },
 
