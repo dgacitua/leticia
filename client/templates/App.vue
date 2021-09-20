@@ -10,6 +10,7 @@ import Axios from 'axios';
 
 import * as Constants from '../services/Constants';
 import EventBus from '../modules/eventBus';
+import ActionSender from '../services/ActionSender';
 import Navbar from './Navbar';
 
 export default {
@@ -64,7 +65,12 @@ export default {
     });
 
     EventBus.$on('leticia-timeout', (detail) => {
-      alert('Se ha acabado el tiempo!')
+      alert('Se ha acabado el tiempo!');
+
+      const sender = new ActionSender('Timeout');
+      let msg = { type: 'TimeoutTriggered' };
+      sender.sendGenericAction(msg);
+
       EventBus.$emit('leticia-next-stage');
     });
   }
