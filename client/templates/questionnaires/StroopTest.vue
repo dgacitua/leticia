@@ -2,8 +2,14 @@
   <b-container>
     <div id="stroop-instructions" v-if="state==='instructions'">
       <b-card>
-        <p>
-          En esta prueba, verás nombres de colores (amarillo, azul, rosa, naranja, rojo, verde) impresos en diferentes colores.
+        <p v-if="formId===pretaskFormId">
+          Antes de dar inicio a la tarea de búsqueda, completa la siguiente prueba donde verás nombres de colores (amarillo, azul, rosa, naranja, rojo, verde) impresos en diferentes colores.
+        </p>
+        <p v-else-if="formId===posttaskFormId">
+          Ahora que has terminado la tarea de búsqueda, completa la siguiente prueba donde verás nombres de colores (amarillo, azul, rosa, naranja, rojo, verde) impresos en diferentes colores.
+        </p>
+        <p v-else>
+          En la siguiente prueba, verás nombres de colores (amarillo, azul, rosa, naranja, rojo, verde) impresos en diferentes colores.
         </p>
         <p>
           El objetivo de esta prueba es detectar si el nombre del color coincide con el color en el cual está impreso.
@@ -117,6 +123,8 @@ export default {
       textColors: [ 'AMARILLO', 'AZUL', 'ROSA', 'NARANJA', 'ROJO', 'VERDE' ],
       styleColors: [ 'text-yellow', 'text-blue', 'text-pink', 'text-orange', 'text-red', 'text-green' ],
       colorRef: [ 'Yellow', 'Blue', 'Pink', 'Orange', 'Red', 'Green' ],
+      pretaskFormId: `stroop-${Constants.pretaskForm}`,
+      posttaskFormId: `stroop-${Constants.posttaskForm}`
     }
   },
 
