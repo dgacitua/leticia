@@ -66,7 +66,7 @@ export default {
   // next-challenge: Advance to the following step inside a challenge (Short or Extended)
   created() {
     EventBus.$on('leticia-next-challenge', () => {
-      console.log('LeTiCiA Next Challenge!');
+      console.log('LETICIA Next Challenge!');
 
       this.nextChallenge();
       this.loadChallenge();

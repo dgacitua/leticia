@@ -3,7 +3,7 @@
     <b-navbar variant="dark" type="dark" class="d-flex justify-content-between align-items-center">
       <b-navbar-nav>
         <router-link to="/">
-          <b-navbar-brand tag="h1" class="mb-0">LeTiCiA <sub>v1.0</sub></b-navbar-brand>
+          <b-navbar-brand tag="h1" class="mb-0">LETICIA <sub>v1.0</sub></b-navbar-brand>
         </router-link>
         <b-nav-text class="navbar-button" v-if="showBookmarkButtons">
           <b-button variant="secondary" @click="goBack">

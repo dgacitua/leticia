@@ -10,6 +10,7 @@ import Axios from 'axios';
 
 import * as Constants from '../services/Constants';
 import EventBus from '../modules/eventBus';
+import ActionSender from '../services/ActionSender';
 import Navbar from './Navbar';
 
 export default {
@@ -38,7 +39,7 @@ export default {
 
   created() {
     EventBus.$on('leticia-next-stage', () => {
-      console.log('LeTiCiA Next Stage!');
+      console.log('LETICIA Next Stage!');
       if (this.$store.getters.flowIndex >= 0) this.$store.commit({ type: 'nextFlowIndex' });
       else this.$store.commit({ type: 'setFlowIndex', amount: 0 });
 
@@ -65,6 +66,11 @@ export default {
 
     EventBus.$on('leticia-timeout', (detail) => {
       alert(this.$i18n.t('error.timeout'));
+
+      const sender = new ActionSender('Timeout');
+      let msg = { type: 'TimeoutTriggered' };
+      sender.sendGenericAction(msg);
+
       EventBus.$emit('leticia-next-stage');
     });
   }

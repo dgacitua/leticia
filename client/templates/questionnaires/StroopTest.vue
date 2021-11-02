@@ -117,6 +117,8 @@ export default {
       textColors: this.$i18n.t('stroopTest.textColors'),
       styleColors: [ 'text-yellow', 'text-blue', 'text-pink', 'text-orange', 'text-red', 'text-green' ],
       colorRef: [ 'Yellow', 'Blue', 'Pink', 'Orange', 'Red', 'Green' ],
+      pretaskFormId: `stroop-${Constants.pretaskForm}`,
+      posttaskFormId: `stroop-${Constants.posttaskForm}`
     }
   },
 

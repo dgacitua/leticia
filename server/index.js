@@ -41,20 +41,20 @@ app.use('/assets/documents/*', (req, res) => {
   res.status(404).send({ message: 'Document Not Found' });
 });
 
-// LeTiCiA Public API (v1)
+// LETICIA Public API (v1)
 app.use('/v1', api1);
 
-// LeTiCiA Frontend
+// LETICIA Frontend
 app.use(history());
 app.use(express.static(Constants.frontendPath));
 app.get('/', (req, res) => {
   res.sendFile(path.join(Constants.frontendPath, 'index.html'));
 });
 
-// Deploy LeTiCiA Application
-app.listen(port, '0.0.0.0', () => consoleLog(`LeTiCiA Web App deployed on port ${port}`));
+// Deploy LETICIA Application
+app.listen(port, '0.0.0.0', () => consoleLog(`LETICIA Web App deployed on port ${port}`));
 
 // Report LeTiCia config options
-consoleLog(`LeTiCiA Pilot Mode: ${Constants.isPilotMode}`);
-consoleLog(`LeTiCiA Asset Path: ${Constants.assetPath}`);
-consoleLog(`LeTiCiA Frontend Path: ${Constants.frontendPath}`);
+consoleLog(`LETICIA Pilot Mode: ${Constants.isPilotMode}`);
+consoleLog(`LETICIA Asset Path: ${Constants.assetPath}`);
+consoleLog(`LETICIA Frontend Path: ${Constants.frontendPath}`);

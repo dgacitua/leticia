@@ -1,7 +1,7 @@
 {
   "name": "leticia-pilot",
-  "version": "1.0.3",
-  "description": "LeTiCiA Pilot Test",
+  "version": "1.0.7",
+  "description": "LETICIA Pilot Test",
   "author": "Daniel Gacitúa",
   "license": "AGPL-3.0",
   "main": "index.js",
