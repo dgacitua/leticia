@@ -59,6 +59,7 @@
     "sockjs-client": "^1.5.1",
     "solr-client": "^0.8.0",
     "string-similarity": "^4.0.4",
+    "swagger-ui-express": "^4.1.6",
     "tiny-timer": "^1.6.0",
     "ua-parser-js": "^0.7.28",
     "useragent": "^2.3.0",
