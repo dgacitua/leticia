@@ -7,15 +7,19 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import history from 'connect-history-api-fallback';
 import passport from 'passport';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
 
 import { dataDb, userDb } from './db';
 import * as Constants from './constants';
+import { openapiOptions } from './openapi';
 
 import api1 from './api1';
 import { consoleLog, consoleError } from './utils';
 
 const app = express();
 const port = 3000;
+const openapiSpec = swaggerJSDoc(openapiOptions);
 
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
@@ -43,6 +47,7 @@ app.use('/assets/documents/*', (req, res) => {
 
 // LETICIA Public API (v1)
 app.use('/v1', api1);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpec));
 
 // LETICIA Frontend
 app.use(history());
