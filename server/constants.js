@@ -22,7 +22,7 @@ export const facebookClientId = process.env.FACEBOOK_CLIENT_ID || '';
 export const facebookClientSecret = process.env.FACEBOOK_CLIENT_SECRET || '';
 export const currentSessionFlow = process.env.CURRENT_SESSION_FLOW || 'short';
 
-export const backendApiUrl = `${leticiaProtocol}://${leticiaHost}:${leticiaPort}`;
+export const backendApiUrl = isProductionMode ? `${leticiaProtocol}://${leticiaHost}:${leticiaPort}` : 'http://localhost:3000';
 
 export const assetPath = path.join(__dirname, '/assets');
 export const documentPath = path.join(__dirname, '/assets/documents');

@@ -25,7 +25,7 @@ const downloader = new DocumentDownloader();
  * /documents/preview:
  *    post:
  *      summary: Preview document
- *      description: Downloads the document for preview (no indexing is performed). Document access link is available on the `previewUrl` value on the response.
+ *      description: Downloads the document for preview (no indexing is performed). Document access link is available on the `previewUrl` value on the response. All links and forms are disabled in the document.
  *      tags: [Document]
  *      requestBody:
  *        required: true
@@ -95,7 +95,7 @@ const previewDocument = async (request, response, next) => {
  * /documents/index:
  *    post:
  *      summary: Download and index document
- *      description: Downloads the document indicated in the `url` parameter (using the web scraper), generates a representation of the document in the database and then indexes it on the inverted index. Document access link is available on the `previewUrl` value on the response.
+ *      description: Downloads the document indicated in the `url` parameter (using the web scraper), generates a representation of the document in the database and then indexes it on the inverted index. Document access link is available on the `previewUrl` value on the response. All links and forms are disabled in the document.
  *      tags: [Document]
  *      requestBody:
  *        required: true

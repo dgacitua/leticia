@@ -1,12 +1,42 @@
 import express from 'express';
 
-import { consoleError } from '../utils';
+import { consoleError, consoleLog } from '../utils';
 
 import Form from '../models/Form';
 import Question from '../models/Question';
 
 const router = express.Router();
 
+/**
+ * @openapi
+ * 
+ * tags:
+ *   name: Forms
+ *   description: LETICIA's Form Builder
+ * 
+ */
+
+/**
+ * @openapi
+ * 
+ * /forms/fetch/{formId}:
+ *    get:
+ *      summary: Fetch a form (by ID) and its questions
+ *      description: Given a form ID, this operation returns the respective form and its associated questions.
+ *      tags: [Forms]
+ *      parameters:
+ *        - in: path
+ *          name: formId
+ *          description: Form ID
+ *          schema:
+ *            type: string
+ *      responses:
+ *        200:
+ *          description: Returns fetch form operation status
+ *        500:
+ *          description: Error while fetching form
+ *
+ */
 const fetchForm = async (request, response, next) => {
   try {
     const { id } = request.params;
@@ -23,6 +53,27 @@ const fetchForm = async (request, response, next) => {
   }
 }
 
+/**
+ * @openapi
+ * 
+ * /forms/{formId}:
+ *    get:
+ *      summary: Get one form (by ID)
+ *      description: Given a form ID, this operation returns the respective form object from database.
+ *      tags: [Forms]
+ *      parameters:
+ *        - in: path
+ *          name: formId
+ *          description: Form ID
+ *          schema:
+ *            type: string
+ *      responses:
+ *        200:
+ *          description: Returns task object
+ *        500:
+ *          description: Error while getting form
+ *
+ */
 const getForm = async (request, response, next) => {
   try {
     const { id } = request.params;
@@ -36,6 +87,21 @@ const getForm = async (request, response, next) => {
   }
 }
 
+/**
+ * @openapi
+ * 
+ * /forms:
+ *    get:
+ *      summary: Get all forms
+ *      description: This operation returns all forms from database.
+ *      tags: [Forms]
+ *      responses:
+ *        200:
+ *          description: Returns all form objects
+ *        500:
+ *          description: Error while getting all forms
+ *
+ */
 const getAllForms = async (request, response, next) => {
   try {
     const res = await Form.find();
@@ -47,6 +113,27 @@ const getAllForms = async (request, response, next) => {
   }
 }
 
+/**
+ * @openapi
+ * 
+ * /forms/{formId}:
+ *    delete:
+ *      summary: Delete one form (by ID)
+ *      description: Given a form ID, this operation deletes the respective form object from database.
+ *      tags: [Forms]
+ *      parameters:
+ *        - in: path
+ *          name: formId
+ *          description: Form ID
+ *          schema:
+ *            type: string
+ *      responses:
+ *        200:
+ *          description: Returns delete form operation status
+ *        500:
+ *          description: Error while deleting form
+ *
+ */
 const deleteForm = async (request, response, next) => {
   try {
     const { id } = request.params;
@@ -60,9 +147,42 @@ const deleteForm = async (request, response, next) => {
   }
 }
 
+/**
+ * @openapi
+ * 
+ * /forms:
+ *    post:
+ *      summary: Add a new form
+ *      description: Add a new form object to database.
+ *      tags: [Forms]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                formId:
+ *                  description: Form identification string (must be unique among all forms)
+ *                  type: string
+ *                questions:
+ *                  type: array
+ *                  items:
+ *                    type: string
+ *                    description: A list of the `questionId`s that are part of this form.
+ *            example:
+ *              formId: form01
+ *              questions: [q01, q02, q03]
+ *      responses:
+ *        200:
+ *          description: Returns added form
+ *        500:
+ *          description: Error while adding form
+ *
+ */
 const addForm = async (request, response, next) => {
   try {
-    let form = response.body;
+    let form = request.body;
     const res = await Form.create(form);
 
     response.status(200).send(res);

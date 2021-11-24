@@ -6,6 +6,15 @@ import SessionFlow from '../models/SessionFlow';
 
 const router = express.Router();
 
+/**
+ * @openapi
+ * 
+ * tags:
+ *   name: Flows
+ *   description: LETICIA's Session Flow Builder
+ * 
+ */
+
 const listSessionFlows = async (request, response, next) => {
   try {
     const flows = await SessionFlow.find();
@@ -19,6 +28,27 @@ const listSessionFlows = async (request, response, next) => {
   }
 }
 
+/**
+ * @openapi
+ * 
+ * /flows/{flowId}:
+ *    get:
+ *      summary: Get one session flow (by ID)
+ *      description: Given a session flow ID, this operation returns the respective session flow object from database.
+ *      tags: [Flows]
+ *      parameters:
+ *        - in: path
+ *          name: flowId
+ *          description: Session Flow ID
+ *          schema:
+ *            type: string
+ *      responses:
+ *        200:
+ *          description: Returns session flow object
+ *        500:
+ *          description: Error while getting session flow
+ *
+ */
 const getSessionFlow = async (request, response, next) => {
   try {
     const { id } = request.params;
@@ -32,6 +62,21 @@ const getSessionFlow = async (request, response, next) => {
   }
 }
 
+/**
+ * @openapi
+ * 
+ * /flows:
+ *    get:
+ *      summary: Get all session flows
+ *      description: This operation returns all session flows from database.
+ *      tags: [Flows]
+ *      responses:
+ *        200:
+ *          description: Returns all session flow objects
+ *        500:
+ *          description: Error while getting all session flows
+ *
+ */
 const getAllSessionFlows = async (request, response, next) => {
   try {
     const res = await SessionFlow.find();
@@ -43,6 +88,27 @@ const getAllSessionFlows = async (request, response, next) => {
   }
 }
 
+/**
+ * @openapi
+ * 
+ * /flows/{flowId}:
+ *    delete:
+ *      summary: Delete one session flow (by ID)
+ *      description: Given a session flow ID, this operation deletes the respective session flow object from database.
+ *      tags: [Flows]
+ *      parameters:
+ *        - in: path
+ *          name: taskId
+ *          description: Session Flow ID
+ *          schema:
+ *            type: string
+ *      responses:
+ *        200:
+ *          description: Returns delete session flow operation status
+ *        500:
+ *          description: Error while deleting session flow
+ *
+ */
 const deleteSessionFlow = async (request, response, next) => {
   try {
     const { id } = request.params;
@@ -56,9 +122,42 @@ const deleteSessionFlow = async (request, response, next) => {
   }
 }
 
+/**
+ * @openapi
+ * 
+ * /flows:
+ *    post:
+ *      summary: Add a new session flow
+ *      description: Add a new session flow object to database. Session flows are ordered lists of stages that the user must complete to progress in the experiment.
+ *      tags: [Flows]
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                sessionFlowId:
+ *                  description: Search task identification string (must be unique among all tasks)
+ *                  type: string
+ *                stages:
+ *                  type: array
+ *                  items:
+ *                    type: object
+ *                    description: A list of stages that are part of this session flow
+ *            example:
+ *              sessionFlowId: flow01
+ *              stages: TODO FIX
+ *      responses:
+ *        200:
+ *          description: Returns added task
+ *        500:
+ *          description: Error while adding task
+ *
+ */
 const addSessionFlow = async (request, response, next) => {
   try {
-    let sf = response.body;
+    let sf = request.body;
     const res = await SessionFlow.create(sf);
 
     response.status(200).send(res);
