@@ -8,6 +8,10 @@ const sessionFlowSchema = Mongoose.Schema({
     required: true,
     unique: true
   },
+  instructions: {
+    type: String,
+    required: false
+  },
   stages: {
     type: [ Object ],
     required: true

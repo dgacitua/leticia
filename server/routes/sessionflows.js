@@ -140,14 +140,45 @@ const deleteSessionFlow = async (request, response, next) => {
  *                sessionFlowId:
  *                  description: Search task identification string (must be unique among all tasks)
  *                  type: string
+ *                instructions:
+ *                  description: Search task instructions for users
+ *                  type: string
  *                stages:
+ *                  description: A list of stages that are part of this session flow (as JSON object array)
  *                  type: array
  *                  items:
  *                    type: object
- *                    description: A list of stages that are part of this session flow
+ *                    properties:
+ *                      path:
+ *                        description: Relative path for the stage in the frontend, check LETICIA's wiki for the complete list of available stages
+ *                        type: string
+ *                      params:
+ *                        description: Optional URL params
+ *                        type: string
+ *                      timeLimit:
+ *                        description: Time limit (in minutes) of the stage, set it to `-1` for no time limit
+ *                        type: integer
  *            example:
  *              sessionFlowId: flow01
- *              stages: TODO FIX
+ *              instructions: "You must enter 3 queries for each one of the 3 search tasks presented. You have 15 minutes to complete the challenge."
+ *              stages:
+ *                - path: /consent
+ *                  timeLimit: -1
+ *                - path: /demographic
+ *                  timeLimit: -1
+ *                - path: /typing-instructions
+ *                  timeLimit: -1
+ *                - path: /typing
+ *                  timeLimit: -1
+ *                - path: /instructions
+ *                  params: short
+ *                  timeLimit: -1
+ *                - path: /short-challenge
+ *                  timeLimit: 15
+ *                - path: /exit-survey
+ *                  timeLimit: -1
+ *                - path: /end
+ *                  timeLimit: -1
  *      responses:
  *        200:
  *          description: Returns added task
