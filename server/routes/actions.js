@@ -34,10 +34,10 @@ const router = express.Router();
  *                  description: Username of the user performing the action
  *                  type: string
  *                source:
- *                  description: Action source or service that emits the action (e.g. Router, FormElement, TypingTest, QueryPlanning, Search)
+ *                  description: Source or service that emits the action (e.g. `Router`, `FormElement`, `TypingTest`, `QueryPlanning`, `Search`)
  *                  type: string
  *                type:
- *                  description: Action type according to the source (e.g. PageEnter, PageExit, QueryFocus, QueryBlur, TypingTestCompleted)
+ *                  description: Action type according to the source (e.g. `PageEnter`, `PageExit`, `QueryFocus`, `QueryBlur`, `TypingTestCompleted`)
  *                  type: string
  *                url:
  *                  description: Current URL of the user while performing the action
