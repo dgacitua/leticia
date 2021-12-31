@@ -132,6 +132,7 @@ export default {
           name: this.form.name || '',
           email: this.form.email || '',
           username: this.currentUser.username,
+          dateOfAcceptance: new Date(),
           clientTimestamp: Date.now()
         };
 
