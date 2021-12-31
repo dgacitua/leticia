@@ -219,7 +219,7 @@ export default {
         .catch((err) => {
           console.error(err);
           alert('An error ocurred while unbookmarking the document [Code 476]');
-       });
+        });
     },
     goBack(evt) {
       this.$router.go(-1);
@@ -229,6 +229,9 @@ export default {
         type: 'FinishSearchStage',
         source: 'Search',
         username: this.currentUser.username,
+        details: {
+          task: this.currentTask
+        }
       };
 
       this.sender.sendGenericAction(message)
