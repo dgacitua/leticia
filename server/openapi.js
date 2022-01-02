@@ -5,7 +5,7 @@ export const openapiOptions = {
     openapi: '3.0.0',
     info: {
       title: 'LETICIA',
-      description: 'REST API for LETICIA',
+      description: 'REST API documentation/sandbox for LETICIA',
       version: '1.0.0',
       license: {
         name: 'AGPL-3.0',
