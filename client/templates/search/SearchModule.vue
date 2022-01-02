@@ -11,6 +11,7 @@
       <b-row class="text-center" align-h="center">
         <b-col cols="10">
           <b-input-group size="lg">
+            <!-- Keyboard interaction capture on input (example start) -->
             <b-form-input
               id="query-box"
               name="query-box-full"
@@ -24,6 +25,7 @@
               type="text"
               autocomplete="off"
             ></b-form-input>
+            <!-- Keyboard interaction capture on input (example end) -->
             <b-button variant="success" @click="writeQuery">
               <font-awesome-icon :icon="['fas', 'search']"></font-awesome-icon>
               {{ $t("search.searchModule.searchButton") }}
@@ -39,6 +41,7 @@
         </b-col>
         <b-col cols="9">
           <b-input-group size="lg">
+            <!-- Keyboard interaction capture on input (example start) -->
             <b-form-input
               id="query-box"
               name="query-box-upper"
@@ -52,6 +55,7 @@
               type="text"
               autocomplete="off"
             ></b-form-input>
+            <!-- Keyboard interaction capture on input (example end) -->
             <b-button variant="success" @click="writeQuery">
               <font-awesome-icon :icon="['fas', 'search']"></font-awesome-icon>
               {{ $t("search.searchModule.searchButton") }}
@@ -207,19 +211,26 @@ export default {
   mounted() {
     this.taskId = this.$route.query.task;
 
+    /* Mouse interaction capture on window (example start) */
+
+    // Set listeners (throttled to 250ms)
     this.mouseMoveListener = throttle(this.move, 250);
     this.mouseClickListener = this.click;
     this.scrollListener = throttle(this.scroll, 250);
 
+    // Bind listeners to window
     window.addEventListener('mousemove', this.mouseMoveListener);
     window.addEventListener('click', this.mouseClickListener);
     window.addEventListener('scroll', this.scrollListener);
     console.log('Trackers enabled!');
 
+    // Set interval to empty the mouse actions buffer every 15s
     this.mouseBufferInterval = setInterval(() => {
       console.log('Emptying Mouse Buffer!');
       this.sendMouseBuffer();
     }, 15000);
+
+    /* Mouse interaction capture on window (example end) */
 
     EventBus.$emit('leticia-current-task', { currentTask: true });
 
