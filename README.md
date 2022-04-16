@@ -73,6 +73,33 @@ $ sudo systemctl enable mongod
 
         $ sudo su - solr -c "/opt/solr/bin/solr create -c leticia -n data_driven_schema_configs"
 
+### Environment variables
+
+To run LETICIA, a file with environment variables called `.env` is required on project's root directory. You can copy and rename the `.env.example` file to get the default settings, or you can customize this file to customize the deploy. The following environment variables are available on LETICIA:
+
+| Env Variable           | Default Value                          | Description                                       |
+|------------------------|----------------------------------------|---------------------------------------------------|
+| LETICIA_HOST           | localhost                              | IP address or DNS domain where LETICIA is running |
+| LETICIA_PROTOCOL       | http                                   | Protocol used by LETICIA (http or https)          |
+| LETICIA_PORT           | 3000                                   | Local port to deploy LETICIA's WebApp             |
+| MONGODB_DATA_URL       | mongodb://localhost:27017/leticia-data | URL for experimental data DB                      |
+| MONGODB_USER_URL       | mongodb://localhost:27017/leticia-user | URL for credentials DB                            |
+| SOLR_HOST              | localhost                              | URL for Solr (inverted index)                     |
+| SOLR_PORT              | 8983                                   | Port for Solr                                     |
+| SOLR_CORE              | leticia                                | Core/collection for Solr                          |
+| ENABLE_GOOGLE_LOGIN    | true                                   | Toggles Google SSO Login                          |
+| GOOGLE_CLIENT_ID       | insert-id                              | Google SSO Login client id                        |
+| GOOGLE_CLIENT_SECRET   | insert-secret                          | Google SSO Login client secret                    |
+| ENABLE_FACEBOOK_LOGIN  | true                                   | Toggles Facebook SSO Login                        |
+| FACEBOOK_CLIENT_ID     | insert-id                              | Facebook SSO Login client id                      |
+| FACEBOOK_CLIENT_SECRET | insert-secret                          | Facebook SSO Login client secret                  |
+| ENABLE_EMAIL_LOGIN     | true                                   | Toggles Email Login                               |
+| JWT_KEY                | secret                                 | String for JWT token generation                   |
+| LETICIA_PILOT_MODE     | false                                  | Toggles LETICIA's Pilot Mode (deprecated)         |
+| CURRENT_SESSION_FLOW   | short                                  | Activity flow to run with new participants        |
+| ENABLE_FRONTEND        | true                                   | Toggles deploy of LETICIA's Frontend              |
+| ENABLE_API_DOCS        | true                                   | Toggles deploy of LETICIA's OpenAPI Documentation |
+
 ### Example databases
 
 After deploying LETICIA, is possible to install a pre-populated database as an example to create new experimental assets. You can do so by running the following commands from the project's root directory:
