@@ -4,7 +4,9 @@ This is LETICIA's main repository.
 
 ## Required dependencies
 
-- Node.js (tested on latest LTS v14.x)
+LETICIA is designed to run on GNU/Linux distributions and it was tested on Ubuntu Server 20.04 LTS. The required software dependencies are listed as follows:
+
+- Node.js (tested on LTS v14.x)
 - MongoDB (tested on version 4.4)
 - Solr (tested on version 8.7.0)
 - Java JDK (tested on OpenJDK 11)
@@ -15,9 +17,9 @@ This is LETICIA's main repository.
 
 1. Install the required dependencies (instructions are available below)
 2. Download or clone this repository
-3. On LETICIA's repository root directory, copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
-4. On root directory, run `npm install` to install Node.js dependencies
-5. On root directory, run `npm run dev` to start LETICIA in watch mode for development
+3. On LETICIA's repository `src/` directory, copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
+4. On `src/` directory, run `npm install` to install Node.js dependencies
+5. On `src/` directory, run `npm run dev` to start LETICIA in watch mode for development
 
 ### Production
 
@@ -25,9 +27,9 @@ You can run LETICIA in production mode following these instructions:
 
 1. Install the required dependencies (instructions are available below)
 2. Install PM2 globally for Node.js: `npm install -g pm2`
-3. On LETICIA's repository root directory, copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
-4. On root directory, run `npm install` and then run `npm run clean && npm run build`
-5. On root directory, run LETICIA with PM2: `pm2 start ecosystem.config.js`
+3. On LETICIA's repository `src/` directory, copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
+4. On `src/` directory, run `npm install` and then run `npm run clean && npm run build`
+5. On `src/` directory, run LETICIA with PM2: `pm2 start ecosystem.config.js`, other actions that can be performed with PM2 to control the plaform on production are available on the [PM2 documentation](https://pm2.keymetrics.io/docs/usage/application-declaration/)
 
 ### Installing required dependencies
 
@@ -75,7 +77,7 @@ $ sudo systemctl enable mongod
 
 ### Environment variables
 
-To run LETICIA, a file with environment variables called `.env` is required on project's root directory. You can copy and rename the `.env.example` file to get the default settings, or you can customize this file to customize the deploy. The following environment variables are available on LETICIA:
+To run LETICIA, a file with environment variables called `.env` is required on project's `src/` directory. You can copy and rename the `.env.example` file to get the default settings, or you can customize this file to customize the deploy. The following environment variables are available on LETICIA:
 
 | Env Variable           | Default Value                          | Description                                       |
 |------------------------|----------------------------------------|---------------------------------------------------|
@@ -113,6 +115,4 @@ $ mongo leticia-data populateDataDatabase-en.js
 
 The source code of LETICIA is available under the GNU Affero General Public License version 3.
 
-All dependencies are distibuted under their own licenses.
-
-LETICIA's frontend uses some royalty-free images from [Pixabay](https://pixabay.com). They can be replaced with custom images under the `/client/assets` directory.
+LETICIA's frontend uses some royalty-free images from [Pixabay](https://pixabay.com). They can be replaced with custom images under the `src/client/assets/` directory.
