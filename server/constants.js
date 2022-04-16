@@ -22,6 +22,9 @@ export const facebookClientId = process.env.FACEBOOK_CLIENT_ID || '';
 export const facebookClientSecret = process.env.FACEBOOK_CLIENT_SECRET || '';
 export const currentSessionFlow = process.env.CURRENT_SESSION_FLOW || 'short';
 
+export const enableFrontend = (!(!!process.env.ENABLE_FRONTEND) || process.env.ENABLE_FRONTEND === 'true');
+export const enableApiDocs = (!(!!process.env.ENABLE_API_DOCS) || process.env.ENABLE_API_DOCS === 'true');
+
 export const backendApiUrl = isProductionMode ? `${leticiaProtocol}://${leticiaHost}:${leticiaPort}` : 'http://localhost:3000';
 
 export const assetPath = path.join(__dirname, '/assets');

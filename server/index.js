@@ -52,20 +52,26 @@ app1.use('/assets/documents/*', (req, res) => {
 app1.use('/v1', api1);
 
 // LETICIA Frontend
-app1.use(history());
-app1.use(express.static(Constants.frontendPath));
-app1.get('/', (req, res) => {
-  res.sendFile(path.join(Constants.frontendPath, 'index.html'));
-});
+if (Constants.enableFrontend) {
+  app1.use(history());
+  app1.use(express.static(Constants.frontendPath));
+  app1.get('/', (req, res) => {
+    res.sendFile(path.join(Constants.frontendPath, 'index.html'));
+  });
+}
 
 // Deploy LETICIA Application
 app1.listen(port, '0.0.0.0', () => consoleLog(`LETICIA Web App deployed on port ${port}`));
 
 // Deploy OpenAPI documentation for LETICIA's API
-app2.use('/openapi', swaggerUi.serve, swaggerUi.setup(openapiSpec));
-app2.listen(openapiPort, '0.0.0.0', () => consoleLog(`LETICIA's OpenAPI documentation deployed on port ${openapiPort}`));
+if (Constants.enableApiDocs) {
+  app2.use('/openapi', swaggerUi.serve, swaggerUi.setup(openapiSpec));
+  app2.listen(openapiPort, '0.0.0.0', () => consoleLog(`LETICIA's OpenAPI documentation deployed on port ${openapiPort}`));
+}
 
-// Report LeTiCia config options
+// Report LETICIA config options
 consoleLog(`LETICIA Pilot Mode: ${Constants.isPilotMode}`);
+consoleLog(`LETICIA Frontend Enabled: ${Constants.enableFrontend}`);
+consoleLog(`LETICIA OpenAPI Docs Enabled: ${Constants.enableApiDocs}`);
 consoleLog(`LETICIA Asset Path: ${Constants.assetPath}`);
 consoleLog(`LETICIA Frontend Path: ${Constants.frontendPath}`);
