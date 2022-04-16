@@ -11,7 +11,7 @@ const router = express.Router();
  * 
  * tags:
  *   name: UserActions
- *   description: User actions' storage in LETICIA
+ *   description: User actions' logging in LETICIA
  * 
  */
 

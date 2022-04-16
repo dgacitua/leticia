@@ -19,6 +19,7 @@ import mouseaction from './routes/mouseactions';
 import scrollaction from './routes/scrollactions';
 import bookmarks from './routes/bookmarks';
 import questions from './routes/questions';
+import events from './routes/browserevents';
 
 const router = express.Router();
 
@@ -41,5 +42,6 @@ router.use('/mouseactions', mouseaction);
 router.use('/scrollactions', scrollaction);
 router.use('/bookmarks', bookmarks);
 router.use('/questions', questions);
+router.use('/events', events);
 
 export default router;

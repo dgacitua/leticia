@@ -24,6 +24,7 @@ import Query from './Query';
 import TaskRequest from './TaskRequest';
 import ServerConfig from './ServerConfig';
 import Bookmark from './Bookmark';
+import BrowserEvent from './BrowserEvent';
 
 const db = {};
 
@@ -52,6 +53,7 @@ db.query = Query;
 db.taskrequest = TaskRequest;
 db.serverconfig = ServerConfig;
 db.bookmark = Bookmark;
+db.browserevent = BrowserEvent;
 
 db.ROLES = [ 'user', 'admin' ];
 
