@@ -87,3 +87,5 @@ $ mongo leticia-data populateDataDatabase-en.js
 The source code of LETICIA is available under the GNU Affero General Public License version 3.
 
 All dependencies are distibuted under their own licenses.
+
+LETICIA's frontend uses some royalty-free images from [Pixabay](https://pixabay.com). They can be replaced with custom images under the `/client/assets` directory.
