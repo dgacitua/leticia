@@ -17,7 +17,7 @@
     "build-client": "mkdirp ./build/frontend && cross-env NODE_ENV=production parcel build ./client/index.html --out-dir ./build/frontend",
     "build": "npm run build-server && npm run build-client && npm run build-assets",
     "prod": "mkdirp ./build && npm run build && cross-env NODE_ENV=production node ./build/index.js",
-    "clean": "rimraf ./.cache && rimraf ./build && rimraf ./dist"
+    "clean": "shx rm -rf ./.cache && shx rm -rf ./build && shx rm -rf ./dist"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -91,7 +91,7 @@
     "http-server": "^0.12.3",
     "mkdirp": "^1.0.4",
     "parcel-bundler": "^1.12.5",
-    "rimraf": "^3.0.2",
+    "shx": "^0.3.4",
     "vue-template-compiler": "^2.6.14"
   },
   "browserslist": [
