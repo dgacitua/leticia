@@ -193,7 +193,7 @@
         <!-- Career -->
         <div id="demo-career">
           <div>
-            <b>{{ $t("demographic.career") }}/b>
+            <b>{{ $t("demographic.career") }}</b>
           </div>
           <div class="help-block">
             {{ $t("demographic.careerHint") }}
