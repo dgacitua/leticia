@@ -1,0 +1,42 @@
+version: '3.5'
+
+services:
+  database:
+    image: mongo:5
+    restart: on-failure
+    networks:
+      - leticia-network
+    ports:
+      - ${DB_PORT:-3010}:27017
+    volumes:
+      - ${DB_PATH:-~/leticiaDatabase}:/data/db
+  index:
+    image: solr:8
+    restart: on-failure
+    networks:
+      - leticia-network
+    ports:
+      - ${INDEX_PORT:-3011}:8983
+    volumes:
+      - ${INDEX_PATH:-~/leticiaIndex}:/opt/solr/server/solr/mycores
+    entrypoint:
+      - solr-precreate
+      - ${INDEX_CORE:-leticia}
+  webapp:
+    build: .
+    image: dgacitua/leticia
+    restart: on-failure
+    networks:
+      - leticia-network
+    ports:
+      - ${WEBAPP_PORT:-3000}:3000
+      - ${OPENAPI_PORT:-3001}:3001
+    volumes:
+      - ${WEBAPP_ASSET_PATH:-~/leticiaAssets}:/leticia/build/assets
+    links:
+      - database
+      - index
+
+networks:
+  leticia-network:
+    name: leticia
