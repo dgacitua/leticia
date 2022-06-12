@@ -3,6 +3,8 @@
 # Base
 FROM node:16 AS base
 WORKDIR /app
+RUN groupmod -g 3000 node \
+  && usermod -u 3000 node
 
 # Builder
 FROM base AS builder
