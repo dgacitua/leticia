@@ -6,9 +6,9 @@ This is LETICIA's main repository.
 
 LETICIA is designed to run on GNU/Linux distributions and it was tested on Ubuntu Server 20.04 LTS. The required software dependencies are listed as follows:
 
-- Node.js (tested on LTS v14.x)
-- MongoDB (tested on version 4.4)
-- Solr (tested on version 8.7.0)
+- Node.js (tested on LTS v16.x)
+- MongoDB (tested on version 5.0)
+- Solr (tested on version 8.11.1)
 - Java JDK (tested on OpenJDK 11)
 
 ## Install Instructions
@@ -23,9 +23,24 @@ LETICIA is designed to run on GNU/Linux distributions and it was tested on Ubunt
 
 ### Production
 
-You can run LETICIA in production mode following these instructions:
+You can run LETICIA in production mode by one of these options: Docker or PM2.
 
-1. Install the required dependencies (instructions are available below)
+#### Docker deploy
+
+This setup is recommended for quick-and-easy deploys on high-performance servers. All dependencies are downloaded as Docker images.
+
+1. Install Docker and Docker Compose (instructions are available below)
+2. Download or clone this repository
+3. On LETICIA's repository `src/` directory, copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
+4. On `src/` directory, run `./leticia-build.sh` to download and generate all required dependencies
+5. On `src/` directory, run `./leticia-up.sh` to deploy LETICIA on background
+6. On `src/` directory, run `./leticia-down.sh` to stop running LETICIA
+
+#### PM2 deploy
+
+This setup uses less resources than the Docker option, but involves more steps and manual install of dependencies.
+
+1. Install Node.js, MongoDB, and Solr (instructions are available below)
 2. Install PM2 globally for Node.js: `npm install -g pm2`
 3. On LETICIA's repository `src/` directory, copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
 4. On `src/` directory, run `npm install` and then run `npm run clean && npm run build`
@@ -75,36 +90,68 @@ $ sudo systemctl enable mongod
 
         $ sudo su - solr -c "/opt/solr/bin/solr create -c leticia -n data_driven_schema_configs"
 
+#### Docker and Docker Compose
+
+This is required only for Docker production deploy.
+
+1. Install required dependencies for Docker
+
+        $ sudo apt-get update
+        $ sudo apt-get install ca-certificates curl gnupg lsb-release
+
+2. Add Docker's GPG key
+
+        $ sudo mkdir -p /etc/apt/keyrings
+        $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg 
+
+3. Set up Docker's repository
+
+        $ echo \
+          "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+          $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+4. Install Docker and Docker Compose
+
+        $ sudo apt-get update
+        $ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+5. Enable using Docker for current user (without requiring `sudo`):
+
+        $ sudo usermod -aG docker $(whoami)
+        $ logout
+
 ### Environment variables
 
 To run LETICIA, a file with environment variables called `.env` is required on project's `src/` directory. You can copy and rename the `.env.example` file to get the default settings, or you can customize this file to customize the deploy. The following environment variables are available on LETICIA:
 
-| Env Variable           | Default Value                          | Description                                       |
-|------------------------|----------------------------------------|---------------------------------------------------|
-| LETICIA_HOST           | localhost                              | IP address or DNS domain where LETICIA is running |
-| LETICIA_PROTOCOL       | http                                   | Protocol used by LETICIA (http or https)          |
-| LETICIA_PORT           | 3000                                   | Local port to deploy LETICIA's WebApp             |
-| MONGODB_DATA_URL       | mongodb://localhost:27017/leticia-data | URL for experimental data DB                      |
-| MONGODB_USER_URL       | mongodb://localhost:27017/leticia-user | URL for credentials DB                            |
-| SOLR_HOST              | localhost                              | URL for Solr (inverted index)                     |
-| SOLR_PORT              | 8983                                   | Port for Solr                                     |
-| SOLR_CORE              | leticia                                | Core/collection for Solr                          |
-| ENABLE_GOOGLE_LOGIN    | true                                   | Toggles Google SSO Login                          |
-| GOOGLE_CLIENT_ID       | insert-id                              | Google SSO Login client id                        |
-| GOOGLE_CLIENT_SECRET   | insert-secret                          | Google SSO Login client secret                    |
-| ENABLE_FACEBOOK_LOGIN  | true                                   | Toggles Facebook SSO Login                        |
-| FACEBOOK_CLIENT_ID     | insert-id                              | Facebook SSO Login client id                      |
-| FACEBOOK_CLIENT_SECRET | insert-secret                          | Facebook SSO Login client secret                  |
-| ENABLE_EMAIL_LOGIN     | true                                   | Toggles Email Login                               |
-| JWT_KEY                | secret                                 | String for JWT token generation                   |
-| LETICIA_PILOT_MODE     | false                                  | Toggles LETICIA's Pilot Mode (deprecated)         |
-| CURRENT_SESSION_FLOW   | short                                  | Activity flow to run with new participants        |
-| ENABLE_FRONTEND        | true                                   | Toggles deploy of LETICIA's Frontend              |
-| ENABLE_API_DOCS        | true                                   | Toggles deploy of LETICIA's OpenAPI Documentation |
+| Env Variable           | Default Value | Description                                       |
+|------------------------|---------------|---------------------------------------------------|
+| LETICIA_HOST           | localhost     | IP address or DNS domain where LETICIA is running |
+| LETICIA_PROTOCOL       | http          | Protocol used by LETICIA (http or https)          |
+| LETICIA_PORT           | 3000          | Local port to deploy LETICIA's WebApp             |
+| MONGODB_HOST           | localhost     | URL for MongoDB                                   |
+| MONGODB_PORT           | 27017         | Port for MongoDB                                  |
+| MONGODB_DATA_DB        | leticia-data  | Database name for experimental data               |
+| MONGODB_USER_DB        | leticia-user  | Database name for credential data                 |
+| SOLR_HOST              | localhost     | URL for Solr (inverted index)                     |
+| SOLR_PORT              | 8983          | Port for Solr                                     |
+| SOLR_CORE              | leticia       | Core/collection for Solr                          |
+| ENABLE_GOOGLE_LOGIN    | true          | Toggles Google SSO Login                          |
+| GOOGLE_CLIENT_ID       | insert-id     | Google SSO Login client id                        |
+| GOOGLE_CLIENT_SECRET   | insert-secret | Google SSO Login client secret                    |
+| ENABLE_FACEBOOK_LOGIN  | true          | Toggles Facebook SSO Login                        |
+| FACEBOOK_CLIENT_ID     | insert-id     | Facebook SSO Login client id                      |
+| FACEBOOK_CLIENT_SECRET | insert-secret | Facebook SSO Login client secret                  |
+| ENABLE_EMAIL_LOGIN     | true          | Toggles Email Login                               |
+| JWT_KEY                | secret        | String for JWT token generation                   |
+| LETICIA_PILOT_MODE     | false         | Toggles LETICIA's Pilot Mode (deprecated)         |
+| CURRENT_SESSION_FLOW   | short         | Activity flow to run with new participants        |
+| ENABLE_FRONTEND        | true          | Toggles deploy of LETICIA's Frontend              |
+| ENABLE_API_DOCS        | true          | Toggles deploy of LETICIA's OpenAPI Documentation |
 
 ### Example databases
 
-After deploying LETICIA, is possible to install a pre-populated database as an example to create new experimental assets. You can do so by running the following commands from the project's root directory:
+After deploying LETICIA either in development or PM2 deploy mode, is possible to install a pre-populated database as an example to create new experimental assets. You can do so by running the following commands from the project's root directory:
 
 ```
 $ cd extras/databaseScripts/
