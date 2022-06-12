@@ -68,3 +68,18 @@ export const roundRobinAllocation = (array, i) => {
 
   return itm;
 };
+
+// dgacitua: Report LETICIA's config options
+export const reportConfigStatus = (constantsObject) => {
+  consoleLog(`
+  >>> LETICIA Config Status Report <<<
+  | Pilot Mode: ${constantsObject.isPilotMode}
+  | Frontend Enabled: ${constantsObject.enableFrontend}
+  | OpenAPI Docs Enabled: ${constantsObject.enableApiDocs}
+  | Asset Path: ${constantsObject.assetPath}
+  | Frontend Path: ${constantsObject.frontendPath}
+  | DB Data URL: ${constantsObject.mongoDataUrl}
+  | DB User URL: ${constantsObject.mongoUserUrl}
+  | Index URL: ${constantsObject.solrUrl}
+  >>> End report <<<`);
+}

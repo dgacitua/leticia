@@ -15,7 +15,7 @@ import * as Constants from './constants';
 import { openapiOptions } from './openapi';
 
 import api1 from './api1';
-import { consoleLog, consoleError } from './utils';
+import { consoleLog, consoleError, reportConfigStatus } from './utils';
 
 const app1 = express();
 const app2 = express();
@@ -69,9 +69,5 @@ if (Constants.enableApiDocs) {
   app2.listen(openapiPort, '0.0.0.0', () => consoleLog(`LETICIA's OpenAPI documentation deployed on port ${openapiPort}`));
 }
 
-// Report LETICIA config options
-consoleLog(`LETICIA Pilot Mode: ${Constants.isPilotMode}`);
-consoleLog(`LETICIA Frontend Enabled: ${Constants.enableFrontend}`);
-consoleLog(`LETICIA OpenAPI Docs Enabled: ${Constants.enableApiDocs}`);
-consoleLog(`LETICIA Asset Path: ${Constants.assetPath}`);
-consoleLog(`LETICIA Frontend Path: ${Constants.frontendPath}`);
+// Report LETICIA's config options
+reportConfigStatus(Constants);
