@@ -13,7 +13,7 @@ import { consoleLog, consoleError, isString } from '../utils';
 import Document from '../models/Document';
 import SolrIndex from './solrIndex';
 
-let solrOptions = {
+const solrOptions = {
   host: Constants.solrHost,
   port: Constants.solrPort,
   core: Constants.solrCore

@@ -13,8 +13,16 @@ export const solrHost = process.env.SOLR_HOST || 'localhost';
 export const solrPort = process.env.SOLR_PORT || 8983;
 export const solrCore = process.env.SOLR_CORE || 'leticia';
 
-export const mongoDataUrl = process.env.MONGODB_DATA_URL || 'Your MongoDB URI here';
-export const mongoUserUrl = process.env.MONGODB_USER_URL || 'Your MongoDB URI here';
+export const solrUrl = `solr://${solrHost}:${solrPort}/${solrCore}`;
+
+export const mongoHost = process.env.MONGODB_HOST || 'localhost';
+export const mongoPort = process.env.MONGODB_PORT || 27017;
+export const mongoDataDB = process.env.MONGODB_DATA_DB || 'leticia-data';
+export const mongoUserDB = process.env.MONGODB_USER_DB || 'leticia-user';
+
+export const mongoDataUrl = process.env.MONGODB_DATA_URL || `mongodb://${mongoHost}:${mongoPort}/${mongoDataDB}`;
+export const mongoUserUrl = process.env.MONGODB_USER_URL || `mongodb://${mongoHost}:${mongoPort}/${mongoUserDB}`;
+
 export const jwtKey = process.env.JWT_KEY || 'none';
 export const googleClientId = process.env.GOOGLE_CLIENT_ID || '';
 export const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET || '';

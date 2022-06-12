@@ -9,7 +9,7 @@ services:
     ports:
       - ${DB_PORT:-3010}:27017
     volumes:
-      - ${DB_PATH:-~/leticiaDatabase}:/data/db
+      - ${LETICIA_DB_PATH:-~/leticiaDatabase}:/data/db
   index:
     image: solr:8
     restart: on-failure
@@ -18,7 +18,7 @@ services:
     ports:
       - ${INDEX_PORT:-3011}:8983
     volumes:
-      - ${INDEX_PATH:-~/leticiaIndex}:/opt/solr/server/solr/mycores
+      - ${LETICIA_INDEX_PATH:-~/leticiaIndex}:/opt/solr/server/solr/mycores
     entrypoint:
       - solr-precreate
       - ${INDEX_CORE:-leticia}
@@ -32,7 +32,15 @@ services:
       - ${WEBAPP_PORT:-3000}:3000
       - ${OPENAPI_PORT:-3001}:3001
     volumes:
-      - ${WEBAPP_ASSET_PATH:-~/leticiaAssets}:/leticia/build/assets
+      - ${LETICIA_ASSET_PATH:-~/leticiaAssets}:/app/build/assets
+    environment:
+      - MONGODB_HOST=database
+      - MONGODB_PORT=27017
+      - MONGODB_DATA_DB=${MONGODB_DATA_DB:-"leticia-data"}
+      - MONGODB_USER_DB=${MONGODB_USER_DB:-"leticia-user"}
+      - SOLR_HOST=index
+      - SOLR_PORT=8983
+      - SOLR_CORE=${SOLR_CORE:-leticia}
     links:
       - database
       - index
