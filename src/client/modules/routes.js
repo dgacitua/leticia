@@ -141,14 +141,16 @@ const router = new VueRouter({
         auth: true
       }
     },
+    // Generic challenge
     {
       path: '/challenge',
       name: 'challenge',
       component: GenericChallenge,
       meta: {
         auth: true
-      },
+      }
     },
+    // Short challenge
     {
       path: '/short-challenge',
       name: 'short-challenge',
@@ -180,6 +182,7 @@ const router = new VueRouter({
         }
       ]
     },
+    // Extended challenge
     {
       path: '/extended-challenge',
       name: 'extended-challenge',
@@ -260,6 +263,106 @@ const router = new VueRouter({
         auth: false
       }
     },
+    // Stages for generic challenge
+    {
+      path: '/qs-instructions',
+      name: 'query-planning-instructions',
+      component: QueryPlanningInstructions,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/ready',
+      component: TaskReady,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/description',
+      component: TaskDescription,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/taskform',
+      component: TaskForm,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/query',
+      name: 'query-writer',
+      component: QueryWriter,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/search-instructions',
+      name: 'search-instructions',
+      component: SearchInstructions,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: SearchModule,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/page',
+      name: 'page',
+      component: DisplayPage,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/nasa-tlx',
+      name: 'nasa-tlx',
+      component: TaskLoadIndex,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/stroop',
+      name: 'stroop',
+      component: StroopTest,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/description',
+      component: TaskDescriptionEx,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/taskform-ex',
+      component: TaskFormEx,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/ready-ex',
+      component: TaskReadyEx,
+      meta: {
+        auth: true
+      }
+    },
+    // If route is not found
     {
       path: '*',
       name: 'not-found',
