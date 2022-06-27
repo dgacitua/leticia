@@ -115,7 +115,7 @@ const deleteQuestion = async (request, response, next) => {
  * /questions:
  *    post:
  *      summary: Add a new question
- *      description: Add a new question object to database. Required fields are `questionId`, `type` and `required`. Other fields depend of the question type. See "Experiment Assets" section of LETICIA's wiki to get more info about other question fields.
+ *      description: Add a new question object to database. Required fields are `questionId`, `type` and `required`. Other fields depend of the question type. See "Experiment Assets" section of LETICIA's documentation to get more info about other question fields.
  *      tags: [Questions]
  *      requestBody:
  *        required: true

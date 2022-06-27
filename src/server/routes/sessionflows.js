@@ -150,7 +150,7 @@ const deleteSessionFlow = async (request, response, next) => {
  *                    type: object
  *                    properties:
  *                      path:
- *                        description: Relative path for the stage in the frontend, check LETICIA's wiki for the complete list of available stages
+ *                        description: Relative path for the stage in the frontend, check LETICIA's documentation for the complete list of available stages
  *                        type: string
  *                      params:
  *                        description: Optional URL params
@@ -158,6 +158,11 @@ const deleteSessionFlow = async (request, response, next) => {
  *                      timeLimit:
  *                        description: Time limit (in minutes) of the stage, set it to `-1` for no time limit
  *                        type: integer
+ *                      stages:
+ *                        description: (Optional) If `path` value is a `challenge`, this value is an array of stages that are part of that challenge
+ *                        type: array
+ *                        items:
+ *                          type: object
  *            example:
  *              sessionFlowId: flow01
  *              instructions: "You must enter 3 queries for each one of the 3 search tasks presented. You have 15 minutes to complete the challenge."
