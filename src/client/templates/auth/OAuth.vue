@@ -50,7 +50,7 @@
         <b-row class="text-center">
           <b-col>
             <b-button variant="link" to="/">
-              {{ $t("oauth.login") }}
+              {{ $t("oauth.backButton") }}
             </b-button>
           </b-col>
         </b-row>
