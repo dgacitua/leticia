@@ -98,7 +98,7 @@ export default {
           return Promise.resolve();
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
           alert('An error ocurred while loading tasks [Code 462-E]');
           return Promise.reject();
         });
