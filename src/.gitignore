@@ -105,6 +105,7 @@ dist
 
 # Parcel Bundler
 .cache/
+.parcel-cache/
 dist/
 
 # Node.js builds

@@ -21,6 +21,7 @@ jspm_packages/
 
 # Parcel Bundler
 .cache/
+.parcel-cache/
 dist/
 
 # Node.js builds
