@@ -33,6 +33,7 @@ import DisplayPage from '../templates/search/DisplayPage.vue';
 import TaskLoadIndex from '../templates/questionnaires/TaskLoadIndex.vue';
 import StroopTest from '../templates/questionnaires/StroopTest.vue';
 import Profile from '../templates/Profile.vue';
+import GenericChallenge from '../templates/Challenge.vue';
 import ShortChallenge from '../templates/ShortChallenge.vue';
 import ExtendedChallenge from '../templates/ExtendedChallenge.vue';
 import UserHub from '../templates/hubs/UserHub.vue';
@@ -139,6 +140,14 @@ const router = new VueRouter({
       meta: {
         auth: true
       }
+    },
+    {
+      path: '/challenge',
+      name: 'challenge',
+      component: GenericChallenge,
+      meta: {
+        auth: true
+      },
     },
     {
       path: '/short-challenge',
