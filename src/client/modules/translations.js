@@ -436,7 +436,7 @@ const translations = {
       message: "¡Gracias por participar!"
     },
     home: {
-      title: "¡Bienvenido(a) a LETICIA!",
+      title: "¡Bienvenido/a a LETICIA!",
       subtitle: "simuLatEd Task and actIvity Capture Interactive plAtform",
       considerations: "Consideraciones para participar",
       participate: "Participar en el estudio",
