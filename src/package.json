@@ -85,6 +85,7 @@
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
+    "@parcel/babel-preset-env": "^2.6.1",
     "@vue/component-compiler-utils": "^3.2.2",
     "babel-watch": "^7.5.0",
     "concurrently": "^5.3.0",
