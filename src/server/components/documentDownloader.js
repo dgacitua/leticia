@@ -321,7 +321,7 @@ class DocumentDownloader {
     }
   }
 
-  // Delete all documents from database and index
+  // Delete one document from database and index
   async deleteOne(docId) {
     try {
       let p1 = await Document.deleteOne({ docId: docId });
