@@ -96,8 +96,8 @@ export default {
           return Promise.resolve();
         })
         .catch((err) => {
-          console.log(err);
-          alert('An error ocurred while loading tasks [Code 462-S]');
+          console.error(err);
+          alert('An error ocurred while loading tasks [Code 462-G]');
           return Promise.reject();
         });
     },
