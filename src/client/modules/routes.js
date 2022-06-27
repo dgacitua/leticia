@@ -176,7 +176,7 @@ const router = new VueRouter({
       name: 'extended-challenge',
       component: ExtendedChallenge,
       meta: {
-        auth: false
+        auth: true
       },
       children: [
         {
@@ -223,10 +223,8 @@ const router = new VueRouter({
       name: 'admin-hub',
       component: AdminHub,
       meta: {
-        /*
         auth: true,
         admin: true
-        */
       }
     },
     {
