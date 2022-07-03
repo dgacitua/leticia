@@ -131,7 +131,7 @@ export default {
 
         Axios.post(`${Constants.backendApiUrl}/answers`, response)
           .then((res) => {
-            if (formId === Constants.pretaskForm) {
+            if (formId === Constants.pretaskForm || formId === 'pretask') {
               // dgacitua: https://stackoverflow.com/a/57183854
               //this.$router.replace({ path: 'query', query: { task: this.$route.query.task, form: Constants.queryForm }});
             }
