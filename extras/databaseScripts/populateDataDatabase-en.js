@@ -453,6 +453,7 @@ db.tasks.insertMany([
 db.sessionflows.insertMany([
   {
     "sessionFlowId": "short",
+    "flowName": "Short Challenge",
     "instructions": "In this challenge you will be presented with 3 search tasks, you must create at least 3 search queries for each one (in English), like you were entering them in a web search engine. You have 15 minutes to complete the challenge.",
     "minQueries": 3,
     "stages": [
@@ -468,6 +469,7 @@ db.sessionflows.insertMany([
   },
   {
     "sessionFlowId": "extended",
+    "flowName": "Extended Challenge",
     "instructions": "In this challenge you will be presented with 3 search tasks, you must create search queries (in English and using the LETICIA's search engine) to find relevant documents that can solve these tasks. Once you've been introduced to the task, you must fill the questionnaires to access the search engine. You have 25 minutes to solve the challenge.",
     "minDocs": 3,
     "stages": [
@@ -483,6 +485,7 @@ db.sessionflows.insertMany([
   },
   {
     "sessionFlowId": "challenge",
+    "flowName": "Standard Challenge",
     "instructions": "In this challenge you will be presented with 3 search tasks, you must create search queries (in English and using the LETICIA's search engine) to find relevant documents that can solve these tasks. Once you've been introduced to the task, you must fill the questionnaires to access the search engine. You have 25 minutes to complete all search tasks.",
     "minDocs": 3,
     "stages": [

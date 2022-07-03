@@ -140,9 +140,18 @@ const deleteSessionFlow = async (request, response, next) => {
  *                sessionFlowId:
  *                  description: Search task identification string (must be unique among all tasks)
  *                  type: string
+ *                flowName:
+ *                  description: Flow name (presented to user)
+ *                  type: string
  *                instructions:
  *                  description: Search task instructions for users
  *                  type: string
+ *                minQueries:
+ *                  description: (Optional) Minimum number of queries per task to formulate (for Query Planning)
+ *                  type: integer
+ *                minDocs:
+ *                  description: (Optional) Minimum documents to bookmark per task (for Search Engine)
+ *                  type: integer
  *                stages:
  *                  description: A list of stages that are part of this session flow (as JSON object array)
  *                  type: array
@@ -165,6 +174,8 @@ const deleteSessionFlow = async (request, response, next) => {
  *                          type: object
  *            example:
  *              sessionFlowId: flow01
+ *              flowName: "Activity 1"
+ *              minQueries: 3
  *              instructions: "You must enter 3 queries for each one of the 3 search tasks presented. You have 15 minutes to complete the challenge."
  *              stages:
  *                - path: /consent
