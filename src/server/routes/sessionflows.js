@@ -98,7 +98,7 @@ const getAllSessionFlows = async (request, response, next) => {
  *      tags: [Flows]
  *      parameters:
  *        - in: path
- *          name: taskId
+ *          name: flowId
  *          description: Session Flow ID
  *          schema:
  *            type: string

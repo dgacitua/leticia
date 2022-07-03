@@ -12,6 +12,14 @@ const sessionFlowSchema = Mongoose.Schema({
     type: String,
     required: false
   },
+  minQueries: {
+    type: Number,
+    required: false
+  },
+  minDocs: {
+    type: Number,
+    required: false
+  },
   stages: {
     type: [ Object ],
     required: true
