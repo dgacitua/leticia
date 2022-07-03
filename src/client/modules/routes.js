@@ -161,7 +161,6 @@ const router = new VueRouter({
       children: [
         {
           path: 'instructions',
-          name: 'query-planning-instructions',
           component: QueryPlanningInstructions,
         },
         {
@@ -193,27 +192,22 @@ const router = new VueRouter({
       children: [
         {
           path: 'instructions',
-          name: 'search-instructions',
           component: SearchInstructions,
         },
         {
           path: 'search',
-          name: 'search',
           component: SearchModule,
         },
         {
           path: 'page',
-          name: 'page',
           component: DisplayPage,
         },
         {
           path: 'nasa-tlx',
-          name: 'nasa-tlx',
           component: TaskLoadIndex,
         },
         {
           path: 'stroop',
-          name: 'stroop',
           component: StroopTest,
         },
         {
@@ -234,10 +228,12 @@ const router = new VueRouter({
       path: '/admin-hub',
       name: 'admin-hub',
       component: AdminHub,
+      /*
       meta: {
         auth: true,
         admin: true
       }
+      */
     },
     {
       path: '/exit-survey',
@@ -337,13 +333,6 @@ const router = new VueRouter({
       path: '/stroop',
       name: 'stroop',
       component: StroopTest,
-      meta: {
-        auth: true
-      }
-    },
-    {
-      path: '/description',
-      component: TaskDescriptionEx,
       meta: {
         auth: true
       }
