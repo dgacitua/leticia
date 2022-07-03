@@ -98,7 +98,7 @@ const translations = {
       hasDyslexia: "Do you have Dyslexia?",
       hasColorBlindness: "Do you have any type of color blindness?",
       country: "Country of residence",
-      region: "Región/State/Province of residence",
+      region: "Region/State/Province of residence",
       city: "City of residence",
       town: "Town of residence",
       townHint: "(OPTIONAL)",
@@ -138,7 +138,7 @@ const translations = {
           phd: "University (PhD)"
         },
         isStudent: {
-          yes: "Si, I'm a student",
+          yes: "Yes, I'm a student",
           no: "No, I've graduated already"
         }
       }
