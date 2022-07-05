@@ -276,6 +276,13 @@ const router = new VueRouter({
       }
     },
     {
+      path: '/ready-ex',
+      component: TaskReadyEx,
+      meta: {
+        auth: true
+      }
+    },
+    {
       path: '/description',
       component: TaskDescription,
       meta: {

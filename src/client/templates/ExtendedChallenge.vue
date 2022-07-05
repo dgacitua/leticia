@@ -48,7 +48,8 @@ export default {
       currentStages: this.$store.getters.stages,
       taskIndex: 0,
       stageIndex: 0,
-      newIndex: this.$store.getters.stageIndex
+      newIndex: this.$store.getters.stageIndex,
+      taskAmount: 3
     }
   },
 
@@ -91,7 +92,7 @@ export default {
 
   methods: {
     importTasks() {
-      return Axios.get(`${Constants.backendApiUrl}/tasks/shuffle?username=${this.currentUser.username}`)
+      return Axios.get(`${Constants.backendApiUrl}/tasks/shuffle?username=${this.currentUser.username}&num=${this.taskAmount}`)
         .then((res) => {
           this.$store.commit({ type: 'setTasks', tasks: res.data });
           console.log('Search Tasks loaded!');

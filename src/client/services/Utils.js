@@ -59,6 +59,20 @@ export const getNestedValue = (obj, key) => {
   }, obj);
 };
 
+// dgacitua: Get object from object array by key and value
+export const getObjectFromArray = (array, key, val) => {
+  let obj = null;
+
+  for (let el of array) {
+    if (el.hasOwnProperty(key) && el[key] === val) {
+      obj = el;
+      break;
+    }
+  }
+  
+  return obj;
+};
+
 // dgacitua: Get word bounds at position
 // https://stackoverflow.com/a/58403800
 export const getWordBoundsAtPosition = (str, position) => {
@@ -96,24 +110,24 @@ export const findNextWordPosition = (text, snippet) => {
 // https://stackoverflow.com/a/12661863
 export const findNextWordPosition = (needle, haystack) => {
   if (!needle || !haystack) {
-      return [0, 0];
+    return [0, 0];
   }
   else {
-      let re = new RegExp('((\\S+[\\b\\s]?)' + needle + '([\\b\\s]?\\S+))', 'i');
-      let matches = haystack.match(re);
+    let re = new RegExp('((\\S+[\\b\\s]?)' + needle + '([\\b\\s]?\\S+))', 'i');
+    let matches = haystack.match(re);
 
-      //console.log('matches', matches);
+    //console.log('matches', matches);
+    
+    if (matches) {
+      let foundWords = haystack.match(re)[0];
+      let lastWordPos = getWordBoundsAtPosition(haystack, foundWords.length);
       
-      if (matches) {
-          let foundWords = haystack.match(re)[0];
-          let lastWordPos = getWordBoundsAtPosition(haystack, foundWords.length);
-          
-          console.log('lwp', lastWordPos);
-
-          return lastWordPos;
-      }
-      else {
-          return [0, 0];
-      }
+      console.log('lwp', lastWordPos);
+      
+      return lastWordPos;
+    }
+    else {
+      return [0, 0];
+    }
   }
 };

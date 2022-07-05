@@ -72,7 +72,7 @@ export default {
 
   mounted() {
     let taskId = this.$route.query.task;
-    let formId = this.$route.query.form;
+    let formId = this.$route.query.form || 'query';
 
     let p1 = Axios.get(`${Constants.backendApiUrl}/tasks/${taskId}`);
     let p2 = Axios.get(`${Constants.backendApiUrl}/forms/fetch/${formId}`);

@@ -19,3 +19,4 @@ export const enableFacebookLogin = (process.env.ENABLE_FACEBOOK_LOGIN === 'true'
 export const enableEmailLogin = (process.env.ENABLE_EMAIL_LOGIN === 'true');
 
 export const locale = process.env.LETICIA_LOCALE || 'es';
+export const currentSessionFlow = process.env.CURRENT_SESSION_FLOW || 'none';
