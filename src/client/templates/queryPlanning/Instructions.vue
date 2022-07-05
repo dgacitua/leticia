@@ -46,7 +46,7 @@ export default {
   },
 
   mounted() {
-    this.instructions = this.$store.getters.sessionFlow.instructions || 'No hay instrucciones';
+    this.instructions = this.$store.getters.sessionFlow.instructions || "There's no instructions";
   },
 
   methods: {
