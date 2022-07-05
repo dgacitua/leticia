@@ -54,7 +54,7 @@ class TimerService {
   updateCallback(ms) {
     let remainingTime = Math.round(ms / UPDATE_INTERVAL);
     store.commit({ type: 'setTimerTime', time: remainingTime });
-    console.log(`Timer Update!`, `Remaining Time: ${remainingTime}`);
+    //console.log(`Timer Update!`, `Remaining Time: ${remainingTime}`);
   }
 
   statusChangedCallback(timerStatus) {
