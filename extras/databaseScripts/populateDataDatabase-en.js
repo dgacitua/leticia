@@ -417,8 +417,8 @@ db.questions.insertMany([
     "start": 1,
     "stop": 21,
     "step": 1,
-    "minLabel": "Muy bajo",
-    "maxLabel": "Muy alto",
+    "minLabel": "Very low",
+    "maxLabel": "Very high",
     "required": true,
     "answer": null
   },
@@ -486,23 +486,22 @@ db.sessionflows.insertMany([
   {
     "sessionFlowId": "challenge",
     "flowName": "Standard Challenge",
-    "instructions": "In this challenge you will be presented with 3 search tasks, you must create search queries (in English and using the LETICIA's search engine) to find relevant documents that can solve these tasks. Once you've been introduced to the task, you must fill the questionnaires to access the search engine. You have 25 minutes to complete all search tasks.",
+    "instructions": "In this challenge you will be presented with 3 search tasks, you must create at least 3 search queries for each one (in English), like you were entering them in a web search engine. You have 30 minutes to complete all search tasks.",
     "minDocs": 3,
     "stages": [
       { "path": "/consent", "timeLimit": -1 },
       { "path": "/demographic", "timeLimit": -1 },
-      { "path": "/instructions", "params": "short", "timeLimit": -1 },
+      { "path": "/instructions", "params": "challenge", "timeLimit": -1 },
       {
         "path": "/challenge",
-        "timeLimit": 25,
+        "timeLimit": 30,
         "stages": [
           { "path": "/ready" },
           { "path": "/description" },
-          { "path": "/taskform-ex", "query": { "form": "pretask" } },
-          { "path": "/search-instructions" },
-          { "path": "/search" },
+          { "path": "/taskform-ex", "query": { "form": "pretask-ex" } },
+          { "path": "/query", "query": { "form": "query" } },
           { "path": "/nasa-tlx", "query": { "form": "nasatlx" } },
-          { "path": "/taskform-ex", "query": { "form": "posttask" } }
+          { "path": "/taskform-ex", "query": { "form": "posttask-ex" } }
         ]
       },
       { "path": "/exit-survey", "timeLimit": -1 },
