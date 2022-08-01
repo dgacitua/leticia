@@ -1,3 +1,6 @@
+// Based on NEURONE implementation by Daniel Gacitúa
+// https://github.com/NEURONE-IL/neurone
+
 import Solr from 'solr-client';
 import Axios from 'axios';
 

@@ -1,3 +1,6 @@
+// Based on NEURONE implementation by Daniel Gacitúa
+// https://github.com/NEURONE-IL/neurone
+
 import fs from 'fs-extra';
 import url from 'url';
 import path from 'path';
