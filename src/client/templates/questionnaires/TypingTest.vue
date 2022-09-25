@@ -70,7 +70,7 @@ import Mark from 'mark.js';
 import StringSimilarity from 'string-similarity';   // Based on Sørensen–Dice coefficient
 // import { distance } from 'fastest-levenshtein';  // Based on Levenshtein distance
 
-import TypingTestSamples from '../../assets/typingTestSamples-es.json';
+import TypingTestSamples from '../../assets/typingTestSamples.json';  // Change this value to load a different JSON file for the typing test samples
 
 import ActionSender from '../../services/ActionSender';
 import ActionHandler from '../../trackers/ActionHandler';
@@ -84,7 +84,7 @@ export default {
 
   data() {
     return {
-      samples: TypingTestSamples.slice(0, 7),
+      samples: TypingTestSamples.slice(0, 7), // Change this value to select the amount of samples taken from the JSON file
       sampleIndex: 0,
       ksHandler: new KeystrokeHandler('TypingTest'),
       actionHandler: new ActionHandler('TypingTest'),
