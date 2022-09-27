@@ -40,7 +40,7 @@ class DocumentDownloader {
     }
     catch (err) {
       consoleError('Error while creating document directories!', err);
-      throw new Error('Error while creating document directories!', err);
+      throw err;
     }
   }
 
@@ -85,7 +85,7 @@ class DocumentDownloader {
     }
     catch (err) {
       consoleError('Error while reading HTML file!', err);
-      throw new Error('Error while reading HTML file!', err);
+      throw err;
     }
   }
 
@@ -108,7 +108,7 @@ class DocumentDownloader {
     }
     catch (err) {
       consoleError('Error while getting text from HTML file!', err);
-      throw new Error('Error while getting text from HTML file!', err);
+      throw err;
     }
   }
 
@@ -183,7 +183,7 @@ class DocumentDownloader {
     }
     catch (err) {
       consoleError('Error while cleaning document!', err);
-      throw new Error('Error while cleaning document!', err);
+      throw err;
     }
   }
 
@@ -235,7 +235,7 @@ class DocumentDownloader {
     }
     catch (err) {
       consoleError('Error while downloading document!', err);
-      throw new Error('Error while downloading document!', err);
+      throw err;
     }
   }
 
@@ -286,7 +286,7 @@ class DocumentDownloader {
     }
     catch (err) {
       consoleError('Error while indexing downloaded document!', err);
-      throw new Error('Error while indexing downloaded document!', err);
+      throw err;
     }
   }
 
@@ -320,7 +320,7 @@ class DocumentDownloader {
     }
     catch (err) {
       consoleError('Error while previewing downloaded document!', err);
-      throw new Error('Error while previewing downloaded document!', err);
+      throw err;
     }
   }
 
@@ -334,7 +334,7 @@ class DocumentDownloader {
     }
     catch (err) {
       consoleError('Error while deleting document!', err);
-      throw new Error('Error while deleting document!', err);
+      throw err;
     }
   }
 
@@ -348,7 +348,7 @@ class DocumentDownloader {
     }
     catch (err) {
       consoleError('Error while deleting all documents!', err);
-      throw new Error('Error while deleting all documents!', err);
+      throw err;
     }
   }
 
@@ -378,7 +378,7 @@ class DocumentDownloader {
     }
     catch (err) {
       consoleError('Error while reindexing', err);
-      throw new Error('Error while reindexing', err);
+      throw err;
     }
   }
 

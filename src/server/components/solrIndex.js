@@ -36,8 +36,8 @@ class SolrIndex {
       this.client.autoCommit = true;
     }
     catch (err) {
-      consoleError(err);
-      throw new Error(err);
+      consoleError('Error while connecting to Solr Index!', err);
+      throw err;
     }
   }
 

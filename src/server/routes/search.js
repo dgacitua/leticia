@@ -32,7 +32,7 @@ const add = async (request, response, next) => {
     response.status(200).send({ status: 'Documents Saved!', amount: docArray.length, timestamp: Date.now() });
   }
   catch (err) {
-    consoleError(err);
+    //consoleError(err);
     response.status(500).send({ statusCode: 500, errorMsg: 'Error while storing Documents', errorObj: err });
   }
 }
@@ -72,7 +72,7 @@ const search = async (request, response, next) => {
     response.status(200).send({ status: 'Search OK!', timestamp: Date.now(), result: searchResult });
   }
   catch (err) {
-    consoleError(err);
+    //consoleError(err);
     response.status(500).send({ statusCode: 500, errorMsg: 'Error while searching Documents', errorObj: err });
   }
 }
@@ -84,7 +84,7 @@ const deleteAll = async (request, response, next) => {
     response.status(200).send({ status: 'All documents deleted!', timestamp: Date.now() });
   }
   catch (err) {
-    consoleError(err);
+    //consoleError(err);
     response.status(500).send({ statusCode: 500, errorMsg: 'Error while deleting all documents', errorObj: err });
   }
 }
@@ -129,7 +129,7 @@ const changeLocale = async (request, response, next) => {
     response.status(200).send({ status: 'Index locale changed!', locale: locale, timestamp: Date.now() });
   }
   catch (err) {
-    consoleError(err);
+    //consoleError(err);
     response.status(500).send({ statusCode: 500, errorMsg: 'Error while changing index locale', errorObj: err });
   }
 }

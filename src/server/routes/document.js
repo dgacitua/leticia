@@ -84,7 +84,7 @@ const previewDocument = async (request, response, next) => {
     response.status(200).send({ status: 'Document downloaded for preview!', docId: docMetadata.docId, previewUrl: `${Constants.backendApiUrl}${docMetadata.path}` });
   }
   catch (err) {
-    consoleError(err);
+    //consoleError(err);
     response.status(500).send({ statusCode: 500, errorMsg: 'Error while previewing document!', errorObj: err });
   }
 }
@@ -154,7 +154,7 @@ const indexDocument = async (request, response, next) => {
     response.status(200).send({ status: 'Document downloaded for indexing!', docId: docMetadata.docId, previewUrl: `${Constants.backendApiUrl}${docMetadata.path}` });
   }
   catch (err) {
-    consoleError(err);
+    //consoleError(err);
     response.status(500).send({ statusCode: 500, errorMsg: 'Error while indexing document!', errorObj: err });
   }
 }
@@ -181,7 +181,7 @@ const reindex = async (request, response, next) => {
     response.status(200).send({ status: 'Documents reindexed!' });
   }
   catch (err) {
-    consoleError(err);
+    //consoleError(err);
     response.status(500).send({ statusCode: 500, errorMsg: 'Error while reindexing!', errorObj: err });
   }
 }
@@ -215,7 +215,7 @@ const deleteOne = async (request, response, next) => {
     response.status(200).send({ status: 'Document deleted!' });
   }
   catch (err) {
-    consoleError(err);
+    //consoleError(err);
     response.status(500).send({ statusCode: 500, errorMsg: 'Error while deleting document!', errorObj: err });
   }
 }
@@ -242,7 +242,7 @@ const deleteAll = async (request, response, next) => {
     response.status(200).send({ status: 'All documents deleted!'});
   }
   catch (err) {
-    consoleError(err);
+    //consoleError(err);
     response.status(500).send({ statusCode: 500, errorMsg: 'Error while deleting all documents!', errorObj: err });
   }
 }
