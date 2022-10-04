@@ -238,6 +238,7 @@ export default {
         .then(res => {
           console.log(res.data);
           this.setSearchTaskReady(false);
+          this.bmService.resetBookmarkList();
           EventBus.$emit('leticia-next-challenge');
         })
         .catch(err => {
