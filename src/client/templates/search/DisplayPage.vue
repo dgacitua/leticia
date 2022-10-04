@@ -146,7 +146,7 @@ export default {
 <style scoped>
 .full-window {
   width: 100%;
-  height: auto;
+  height: 100%;
   padding: 0;
 }
 
