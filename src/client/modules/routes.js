@@ -29,6 +29,7 @@ import TaskFormEx from '../templates/search/TaskForm.vue';
 import QueryWriter from '../templates/queryPlanning/QueryWriter.vue';
 import SearchInstructions from '../templates/search/Instructions.vue';
 import SearchModule from '../templates/search/SearchModule.vue';
+import SearchModule2 from '../templates/SearchModule.vue';
 import DisplayPage from '../templates/search/DisplayPage.vue';
 import TaskLoadIndex from '../templates/questionnaires/TaskLoadIndex.vue';
 import StroopTest from '../templates/questionnaires/StroopTest.vue';
@@ -315,7 +316,7 @@ const router = new VueRouter({
     {
       path: '/search',
       name: 'search',
-      component: SearchModule,
+      component: SearchModule2,
       meta: {
         auth: true
       }
