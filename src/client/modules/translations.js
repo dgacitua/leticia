@@ -190,7 +190,7 @@ const translations = {
     },
     home: {
       title: "Welcome to LETICIA!",
-      subtitle: "simuLatEd Task and actIvity Capture Interactive plAtform",
+      subtitle: "simuLated sEarch Task deploy and InteraCtIon cApture platform",
       considerations: "Conisderations to participate",
       participate: "Participate in the study",
       considerationsText: [
@@ -437,7 +437,7 @@ const translations = {
     },
     home: {
       title: "¡Bienvenido/a a LETICIA!",
-      subtitle: "simuLatEd Task and actIvity Capture Interactive plAtform",
+      subtitle: "simuLated sEarch Task deploy and InteraCtIon cApture platform",
       considerations: "Consideraciones para participar",
       participate: "Participar en el estudio",
       considerationsText: [

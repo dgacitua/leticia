@@ -1,4 +1,4 @@
-# LETICIA: simuLatEd Task and actIvity Capture Interactive plAtform
+# LETICIA: simuLated sEarch Task deploy and InteraCtIon cApture platform
 
 This is LETICIA's main repository.
 
