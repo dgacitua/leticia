@@ -4,7 +4,7 @@
 import Solr from 'solr-client';
 import Axios from 'axios';
 
-import { consoleLog, consoleError } from '../utils';
+import { consoleLog, consoleError } from '../utils.js';
 
 let exampleDocument = {
   docId_s: 'doc1',

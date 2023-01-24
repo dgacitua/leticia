@@ -1,8 +1,8 @@
 import express from 'express';
 
-import { consoleError } from '../utils';
+import { consoleError } from '../utils.js';
 
-import Keystroke from '../models/Keystroke';
+import Keystroke from '../models/Keystroke.js';
 
 const router = express.Router();
 

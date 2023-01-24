@@ -1,8 +1,8 @@
 import express from 'express';
 
-import { consoleError } from '../utils';
+import { consoleError } from '../utils.js';
 
-import SessionFlow from '../models/SessionFlow';
+import SessionFlow from '../models/SessionFlow.js';
 
 const router = express.Router();
 

@@ -1,11 +1,11 @@
 import express from 'express';
 
-import DocumentDownloader from '../components/documentDownloader';
+import DocumentDownloader from '../components/documentDownloader.js';
 
-import * as Constants from '../constants';
-import { consoleLog, consoleError } from '../utils';
+import * as Constants from '../constants.js';
+import { consoleLog, consoleError } from '../utils.js';
 
-import Document from '../models/Document';
+import Document from '../models/Document.js';
 
 const router = express.Router();
 const downloader = new DocumentDownloader();

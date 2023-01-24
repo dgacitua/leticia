@@ -1,5 +1,5 @@
 // Adapted from https://bezkoder.com/node-js-mongodb-auth-jwt/
-import db from '../models/index';
+import db from '../models/index.js';
 
 const ROLES = db.ROLES;
 const User = db.user;

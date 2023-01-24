@@ -1,5 +1,5 @@
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+import 'core-js/stable/index.js';
+import 'regenerator-runtime/runtime.js';
 
 import path from 'path';
 import express from 'express';
@@ -10,12 +10,12 @@ import passport from 'passport';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 
-import { dataDb, userDb } from './db';
-import * as Constants from './constants';
-import { openapiOptions } from './openapi';
+import { dataDb, userDb } from './db.js';
+import * as Constants from './constants.js';
+import { openapiOptions } from './openapi.js';
 
-import api1 from './api1';
-import { consoleLog, consoleError, reportConfigStatus } from './utils';
+import api1 from './api1.js';
+import { consoleLog, consoleError, reportConfigStatus } from './utils.js';
 
 const app1 = express();
 const app2 = express();

@@ -1,30 +1,30 @@
 // Adapted from https://bezkoder.com/node-js-mongodb-auth-jwt/
 import Mongoose from 'mongoose';
 
-import { dataDb, userDb } from '../db';
+import { dataDb, userDb } from '../db.js';
 
-import User from './User';
-import Role from './Role';
-import Action from './Action';
-import Answer from './Answer';
-import Demographic from './Demographic';
-import Form from './Form';
-import Keystroke from './Keystroke';
-import MouseAction from './MouseAction';
-import Question from './Question';
-import ScrollAction from './ScrollAction';
-import SearchTask from './SearchTask';
-import Credential from './Credential';
-import UserData from './UserData';
-import SessionFlow from './SessionFlow';
-import UserLog from './UserLog';
-import Consent from './Consent';
-import Document from './Document';
-import Query from './Query';
-import TaskRequest from './TaskRequest';
-import ServerConfig from './ServerConfig';
-import Bookmark from './Bookmark';
-import BrowserEvent from './BrowserEvent';
+import User from './User.js';
+import Role from './Role.js';
+import Action from './Action.js';
+import Answer from './Answer.js';
+import Demographic from './Demographic.js';
+import Form from './Form.js';
+import Keystroke from './Keystroke.js';
+import MouseAction from './MouseAction.js';
+import Question from './Question.js';
+import ScrollAction from './ScrollAction.js';
+import SearchTask from './SearchTask.js';
+import Credential from './Credential.js';
+import UserData from './UserData.js';
+import SessionFlow from './SessionFlow.js';
+import UserLog from './UserLog.js';
+import Consent from './Consent.js';
+import Document from './Document.js';
+import Query from './Query.js';
+import TaskRequest from './TaskRequest.js';
+import ServerConfig from './ServerConfig.js';
+import Bookmark from './Bookmark.js';
+import BrowserEvent from './BrowserEvent.js';
 
 const db = {};
 

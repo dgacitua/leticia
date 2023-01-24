@@ -1,6 +1,6 @@
 import Mongoose from 'mongoose';
 
-import { dataDb, userDb } from '../db';
+import { dataDb, userDb } from '../db.js';
 
 const mouseActionSchema = Mongoose.Schema({
   username: {

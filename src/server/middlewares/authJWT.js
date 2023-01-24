@@ -1,8 +1,8 @@
 // Adapted from https://bezkoder.com/node-js-mongodb-auth-jwt/
 import jwt from 'jsonwebtoken';
 
-import config from '../config/auth';
-import db from '../models/index';
+import config from '../config/auth.js';
+import db from '../models/index.js';
 
 const User = db.user;
 const Role = db.role;

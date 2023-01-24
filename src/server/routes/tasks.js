@@ -1,10 +1,10 @@
 import express from 'express';
 
-import { consoleLog, consoleError, shuffleArray, permute, roundRobinAllocation } from '../utils';
+import { consoleLog, consoleError, shuffleArray, permute, roundRobinAllocation } from '../utils.js';
 
-import SearchTask from '../models/SearchTask';
-import TaskRequest from '../models/TaskRequest';
-import ServerConfig from '../models/ServerConfig';
+import SearchTask from '../models/SearchTask.js';
+import TaskRequest from '../models/TaskRequest.js';
+import ServerConfig from '../models/ServerConfig.js';
 
 const router = express.Router();
 

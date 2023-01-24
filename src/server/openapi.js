@@ -1,4 +1,4 @@
-import { backendApiUrl, backendPath } from './constants';
+import { backendApiUrl, backendPath } from './constants.js';
 
 export const openapiOptions = {
   definition: {

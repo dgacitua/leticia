@@ -1,7 +1,7 @@
 // Adapted from https://bezkoder.com/node-js-mongodb-auth-jwt/
 import Mongoose from 'mongoose';
 
-import { dataDb, userDb } from '../db';
+import { dataDb, userDb } from '../db.js';
 
 const roleSchema = Mongoose.Schema({
   name: {

@@ -9,12 +9,11 @@ import charset from 'charset';
 import cheerio from 'cheerio';
 import { htmlToText } from 'html-to-text';
 import scrape from 'website-scraper';
-import PhantomScrape from 'website-scraper-phantom';
 
-import * as Constants from '../constants';
-import { consoleLog, consoleError, isString } from '../utils';
-import Document from '../models/Document';
-import SolrIndex from './solrIndex';
+import * as Constants from '../constants.js';
+import { consoleLog, consoleError, isString } from '../utils.js';
+import Document from '../models/Document.js';
+import SolrIndex from './solrIndex.js';
 
 const solrOptions = {
   host: Constants.solrHost,

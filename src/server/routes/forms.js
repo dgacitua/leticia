@@ -1,9 +1,9 @@
 import express from 'express';
 
-import { consoleError, consoleLog } from '../utils';
+import { consoleError, consoleLog } from '../utils.js';
 
-import Form from '../models/Form';
-import Question from '../models/Question';
+import Form from '../models/Form.js';
+import Question from '../models/Question.js';
 
 const router = express.Router();
 

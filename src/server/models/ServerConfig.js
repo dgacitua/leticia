@@ -1,6 +1,6 @@
 import Mongoose from 'mongoose';
 
-import { dataDb, userDb } from '../db';
+import { dataDb, userDb } from '../db.js';
 
 const serverConfigSchema = Mongoose.Schema({
   configName: {   // Use UpperCamelCase for this value

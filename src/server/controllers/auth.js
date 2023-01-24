@@ -3,11 +3,11 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import hrrs from 'human-readable-random-string';
 
-import config from '../config/auth';
-import db from '../models/index';
+import config from '../config/auth.js';
+import db from '../models/index.js';
 
-import * as Constants from '../constants';
-import { consoleError, consoleLog } from '../utils';
+import * as Constants from '../constants.js';
+import { consoleError, consoleLog } from '../utils.js';
 
 const User = db.user;
 const UserData = db.userdata;

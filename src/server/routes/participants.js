@@ -1,9 +1,9 @@
 import express from 'express';
 import UserAgent from 'useragent';
 
-import { consoleError } from '../utils';
+import { consoleError } from '../utils.js';
 
-//import Participant from '../models/Participant';
+//import Participant from '../models/Participant.js';
 
 const router = express.Router();
 

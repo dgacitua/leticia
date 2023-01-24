@@ -1,8 +1,8 @@
 import express from 'express';
 
-import { consoleError } from '../utils';
+import { consoleError } from '../utils.js';
 
-import Demographic from '../models/Demographic';
+import Demographic from '../models/Demographic.js';
 
 const router = express.Router();
 

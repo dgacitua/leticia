@@ -1,7 +1,12 @@
 import dotenv from 'dotenv';
 import path from 'path';
+import * as url from 'url';
 
 dotenv.config();
+
+// https://blog.logrocket.com/alternatives-dirname-node-js-es-modules/
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 export const isProductionMode = (process.env.NODE_ENV === 'production');
 export const isPilotMode = (process.env.LETICIA_PILOT_MODE === 'true');

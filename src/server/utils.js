@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import formatDate from 'date-fns/format';
+import formatDate from 'date-fns/format/index.js';
 
 export const currentDate = () => { return formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss z') };
 export const cloneObject = (...obj) => { return Object.assign({}, ...obj) };

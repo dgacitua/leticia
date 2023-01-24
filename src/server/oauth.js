@@ -5,8 +5,8 @@ import PassportJwt from 'passport-jwt';
 import PassportGoogle from 'passport-google-oauth20';
 import PassportFacebook from 'passport-facebook';
 
-import * as Constants from './constants';
-import { checkUser } from './controllers/auth';
+import * as Constants from './constants.js';
+import { checkUser } from './controllers/auth.js';
 
 const JwtStrategy = PassportJwt.Strategy;
 const ExtractJwt = PassportJwt.ExtractJwt;

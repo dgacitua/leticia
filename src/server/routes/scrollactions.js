@@ -1,8 +1,8 @@
 import express from 'express';
 
-import { consoleError } from '../utils';
+import { consoleError } from '../utils.js';
 
-import ScrollAction from '../models/ScrollAction';
+import ScrollAction from '../models/ScrollAction.js';
 
 const router = express.Router();
 

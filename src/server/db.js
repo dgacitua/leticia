@@ -1,7 +1,7 @@
 import Mongoose from 'mongoose';
 
-import { consoleLog, consoleError } from './utils';
-import { mongoDataUrl, mongoUserUrl } from './constants';
+import { consoleLog, consoleError } from './utils.js';
+import { mongoDataUrl, mongoUserUrl } from './constants.js';
 
 const dataDb = Mongoose.createConnection(mongoDataUrl, {
   useNewUrlParser: true,

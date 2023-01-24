@@ -1,9 +1,9 @@
 import express from 'express';
 
-import * as Constants from '../constants';
-import { consoleError, consoleLog } from '../utils';
+import * as Constants from '../constants.js';
+import { consoleError, consoleLog } from '../utils.js';
 
-import SolrIndex from '../components/solrIndex';
+import SolrIndex from '../components/solrIndex.js';
 
 let solrOptions = {
   host: Constants.solrHost,

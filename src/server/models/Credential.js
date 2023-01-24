@@ -1,7 +1,7 @@
 // Adapted from https://medium.com/@rustyonrampage/using-oauth-2-0-along-with-jwt-in-node-express-9e0063d911ed
 import Mongoose from 'mongoose';
 
-import { dataDb, userDb } from '../db';
+import { dataDb, userDb } from '../db.js';
 
 const credentialSchema = Mongoose.Schema({
   email: {

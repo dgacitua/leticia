@@ -1,8 +1,8 @@
 import express from 'express';
 
-import { consoleError } from '../utils';
+import { consoleError } from '../utils.js';
 
-import Consent from '../models/Consent';
+import Consent from '../models/Consent.js';
 
 const router = express.Router();
 

@@ -1,8 +1,8 @@
 import express from 'express';
 
-import { consoleError } from '../utils';
+import { consoleError } from '../utils.js';
 
-import MouseAction from '../models/MouseAction';
+import MouseAction from '../models/MouseAction.js';
 
 const router = express.Router();
 

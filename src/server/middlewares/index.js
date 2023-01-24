@@ -1,6 +1,6 @@
 // Adapted from https://bezkoder.com/node-js-mongodb-auth-jwt/
-import authJWT from './authJWT';
-import verifySignup from './verifySignup';
+import authJWT from './authJWT.js';
+import verifySignup from './verifySignup.js';
 
 const checkHeader = (request, response, next) => {
   response.header(

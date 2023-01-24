@@ -1,10 +1,10 @@
 // Adapted from https://bezkoder.com/node-js-mongodb-auth-jwt/
 import express from 'express';
 
-import middlewares from '../middlewares/index';
-import * as controller from '../controllers/auth';
+import middlewares from '../middlewares/index.js';
+import * as controller from '../controllers/auth.js';
 
-import oauth from '../oauth';
+import oauth from '../oauth.js';
 
 const router = express.Router();
 

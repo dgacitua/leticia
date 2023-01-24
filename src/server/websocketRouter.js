@@ -1,8 +1,8 @@
 /* DEPRECATED */
 
-import Keystroke from './models/Keystroke';
-import MouseAction from './models/MouseAction';
-import ScrollAction from './models/ScrollAction';
+import Keystroke from './models/Keystroke.js';
+import MouseAction from './models/MouseAction.js';
+import ScrollAction from './models/ScrollAction.js';
 
 const VERBOSE_REDIRECT = false;
 

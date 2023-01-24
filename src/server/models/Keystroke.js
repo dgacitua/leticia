@@ -1,6 +1,6 @@
 import Mongoose from 'mongoose';
 
-import { dataDb, userDb } from '../db';
+import { dataDb, userDb } from '../db.js';
 
 const keystrokeSchema = Mongoose.Schema({
   username: {
