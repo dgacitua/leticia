@@ -7,7 +7,7 @@ import path from 'path';
 import iconv from 'iconv';
 import charset from 'charset';
 import cheerio from 'cheerio';
-import { htmlToText } from 'html-to-text';
+import { convert } from 'html-to-text';
 import scrape from 'website-scraper';
 
 import * as Constants from '../constants.js';
@@ -95,14 +95,14 @@ class DocumentDownloader {
 
       let options = {
         wordwrap: false,
-        tags: {
-          'a': { options: { ignoreHref: true } },
-          'img': { format: 'skip' },
-          'ul': { options: { itemPrefix: ' ' } }
-        }
+        selectors: [
+          { selector: 'a', options: { ignoreHref: true } },
+          { selector: 'img', format: 'skip' },
+          { selector: 'ul', options: { itemPrefix: ' ' } }
+        ]
       };
 
-      let extractedText = htmlToText(htmlString, options);
+      let extractedText = convert(htmlString, options);
       return this.escapeString(extractedText);
     }
     catch (err) {
