@@ -11,7 +11,7 @@ import Axios from 'axios';
 import * as Constants from '../services/Constants';
 import EventBus from '../modules/eventBus';
 import ActionSender from '../services/ActionSender';
-import Navbar from './Navbar';
+import Navbar from './Navbar.vue';
 
 export default {
   components: {

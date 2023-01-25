@@ -43,5 +43,5 @@ export const backendApiUrl = isProductionMode ? `${leticiaProtocol}://${leticiaH
 export const assetPath = path.join(__dirname, '/assets');
 export const documentPath = path.join(__dirname, '/assets/documents');
 export const previewPath = path.join(__dirname, '/assets/preview');
-export const frontendPath = isProductionMode ? path.join(__dirname, '/frontend') : path.resolve('dist');
+export const frontendPath = isProductionMode ? path.join(__dirname, '/frontend') : path.resolve('dev-build/frontend');
 export const backendPath = isProductionMode ? path.join(__dirname, '/') : path.resolve('server');

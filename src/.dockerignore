@@ -24,6 +24,9 @@ jspm_packages/
 .parcel-cache/
 dist/
 
+# Vite Bundler
+dev-build/
+
 # Node.js builds
 build/
 

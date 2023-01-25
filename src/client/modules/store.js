@@ -4,7 +4,7 @@ import VuexPersistence from 'vuex-persist';
 import Axios from 'axios';
 
 import * as Constants from '../services/Constants';
-import { generateUserId, findIndexInArray, shuffleArray, deepCopy } from '../services/Utils';
+import { findIndexInArray, shuffleArray, deepCopy } from '../services/Utils';
 
 import { auth } from './auth';
 import Timer from '../services/Timer';
