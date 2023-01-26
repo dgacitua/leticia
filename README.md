@@ -7,7 +7,7 @@ LETICIA is a web platform intended to be an open-source solution to deploy study
 To install and test LETICIA, follow these steps:
  
 1. Clone this repository or download it as ZIP
-2. Install required dependencies ([Docker](#docker-install))
+2. Install required dependencies ([Docker](#Docker-and-Docker-Compose))
 3. Open the `src/` directory on your local version of this repository
     1. Copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
     2. Run `leticia-build.sh` to build the Docker image of LETICIA
@@ -28,7 +28,7 @@ LETICIA is designed to run on GNU/Linux distributions and it was tested on Ubunt
 
 ## Install Instructions
 
-### Development {#leticia-dev}
+### Development
 
 1. Install the required dependencies (instructions are available below)
 2. Download or clone this repository
@@ -40,7 +40,7 @@ LETICIA is designed to run on GNU/Linux distributions and it was tested on Ubunt
 
 You can run LETICIA in production mode by one of these options: Docker or PM2.
 
-#### Docker deploy {#leticia-docker}
+#### Docker deploy
 
 This setup is recommended for quick-and-easy deploys on high-performance servers. All dependencies are downloaded as Docker images.
 
@@ -51,7 +51,7 @@ This setup is recommended for quick-and-easy deploys on high-performance servers
 5. On `src/` directory, run `./leticia-up.sh` to deploy LETICIA on background
 6. On `src/` directory, run `./leticia-down.sh` to stop running LETICIA
 
-#### PM2 deploy {#leticia-pm2}
+#### PM2 deploy
 
 This setup uses less resources than the Docker option, but involves more steps and manual install of dependencies.
 
@@ -61,11 +61,11 @@ This setup uses less resources than the Docker option, but involves more steps a
 4. On `src/` directory, run `npm install` and then run `npm run clean && npm run build`
 5. On `src/` directory, run LETICIA with PM2: `pm2 start ecosystem.config.js`, other actions that can be performed with PM2 to control the plaform on production are available on the [PM2 documentation](https://pm2.keymetrics.io/docs/usage/application-declaration/)
 
-### Installing required dependencies {#deps-install}
+### Installing required dependencies
 
 The following instructions are designed for Ubuntu 20.04 LTS. Adapt them if you are using another GNU/Linux distribution.
 
-#### Node.js {#node-install}
+#### Node.js
 
 Run these commands to install latest Node.js LTS:
 
@@ -74,7 +74,7 @@ $ curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
 ```
 
-#### MongoDB {#mongo-install}
+#### MongoDB
 
 Run these commands to install MongoDB:
 
@@ -87,7 +87,7 @@ $ sudo systemctl start mongod
 $ sudo systemctl enable mongod
 ```
 
-#### Solr {#solr-install}
+#### Solr
 
 1. Solr requires Java 8 JDK or greater to run. Run these commands to install OpenJDK:
 
@@ -105,7 +105,7 @@ $ sudo systemctl enable mongod
 
         $ sudo su - solr -c "/opt/solr/bin/solr create -c leticia -n data_driven_schema_configs"
 
-#### Docker and Docker Compose {#docker-install}
+#### Docker and Docker Compose
 
 This is required only for Docker production deploy.
 
@@ -135,7 +135,7 @@ This is required only for Docker production deploy.
         $ sudo usermod -aG docker $(whoami)
         $ logout
 
-### Environment variables {#env-vars}
+### Environment variables
 
 To run LETICIA, a file with environment variables called `.env` is required on project's `src/` directory. You can copy and rename the `.env.example` file to get the default settings, or you can customize this file to customize the deploy. The following environment variables are available on LETICIA:
 
@@ -164,7 +164,7 @@ To run LETICIA, a file with environment variables called `.env` is required on p
 | ENABLE_FRONTEND        | true          | Toggles deploy of LETICIA's Frontend              |
 | ENABLE_API_DOCS        | true          | Toggles deploy of LETICIA's OpenAPI Documentation |
 
-### Example databases {#populate-db}
+### Example databases
 
 After deploying LETICIA either in development or PM2 deploy mode, is possible to install a pre-populated database as an example to create new experimental assets. You can do so by running the following commands from the project's root directory:
 
@@ -173,7 +173,7 @@ $ cd extras/databaseScripts/
 $ mongo leticia-data populateDataDatabase-en.js
 ```
 
-## License {#license}
+## License
 
 The source code of LETICIA is available under the GNU Affero General Public License version 3.
 
