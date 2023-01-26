@@ -1,6 +1,21 @@
 # LETICIA: simuLated sEarch Task deploy and InteraCtIon cApture platform
 
-This is LETICIA's main repository.
+LETICIA is a web platform intended to be an open-source solution to deploy study designs in the Interactive Information Retrieval (IIR) field. Besides deploying these studies, LETICIA can conduct them and collect various types of data from user's interactions. LETICIA presents several features out of the box that can be customized to researchers' needs: A built-in search engine, a tool to build document collections, an interactive application programming interface (API), a data logger, and a session flow manager.
+
+## Quick Start
+
+To install and test LETICIA, follow these steps:
+ 
+1. Clone this repository or download it as ZIP
+2. Install required dependencies ([Docker](#docker-install))
+3. Open the `src/` directory on your local version of this repository
+    1. Copy `.env.example`, rename it as `.env` and edit the file to customize Environment Variables (if needed)
+    2. Run `leticia-build.sh` to build the Docker image of LETICIA
+    3. Run `leticia-up.sh` to run LETICIA as a Docker container
+4. Open the `extras/` directory on your local version of this repository
+    1. Run `load-example-content.sh`, this will populate the database with some assets to test the platform
+
+Now you can test the platform on `localhost:3000` in a web browser. You can access to OpenAPI documentation on `localhost:3001/openapi`. The MongoDB Database can be reached at `localhost:3010` and the Solr Inverted Index can be accessed at `localhost:3011`. To stop the LETICIA platform, run `leticia-down.sh` located on the `src/` directory. 
 
 ## Required dependencies
 
@@ -13,7 +28,7 @@ LETICIA is designed to run on GNU/Linux distributions and it was tested on Ubunt
 
 ## Install Instructions
 
-### Development
+### Development {#leticia-dev}
 
 1. Install the required dependencies (instructions are available below)
 2. Download or clone this repository
@@ -25,7 +40,7 @@ LETICIA is designed to run on GNU/Linux distributions and it was tested on Ubunt
 
 You can run LETICIA in production mode by one of these options: Docker or PM2.
 
-#### Docker deploy
+#### Docker deploy {#leticia-docker}
 
 This setup is recommended for quick-and-easy deploys on high-performance servers. All dependencies are downloaded as Docker images.
 
@@ -36,7 +51,7 @@ This setup is recommended for quick-and-easy deploys on high-performance servers
 5. On `src/` directory, run `./leticia-up.sh` to deploy LETICIA on background
 6. On `src/` directory, run `./leticia-down.sh` to stop running LETICIA
 
-#### PM2 deploy
+#### PM2 deploy {#leticia-pm2}
 
 This setup uses less resources than the Docker option, but involves more steps and manual install of dependencies.
 
@@ -46,11 +61,11 @@ This setup uses less resources than the Docker option, but involves more steps a
 4. On `src/` directory, run `npm install` and then run `npm run clean && npm run build`
 5. On `src/` directory, run LETICIA with PM2: `pm2 start ecosystem.config.js`, other actions that can be performed with PM2 to control the plaform on production are available on the [PM2 documentation](https://pm2.keymetrics.io/docs/usage/application-declaration/)
 
-### Installing required dependencies
+### Installing required dependencies {#deps-install}
 
 The following instructions are designed for Ubuntu 20.04 LTS. Adapt them if you are using another GNU/Linux distribution.
 
-#### Node.js
+#### Node.js {#node-install}
 
 Run these commands to install latest Node.js LTS:
 
@@ -59,7 +74,7 @@ $ curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
 ```
 
-#### MongoDB
+#### MongoDB {#mongo-install}
 
 Run these commands to install MongoDB:
 
@@ -72,7 +87,7 @@ $ sudo systemctl start mongod
 $ sudo systemctl enable mongod
 ```
 
-#### Solr
+#### Solr {#solr-install}
 
 1. Solr requires Java 8 JDK or greater to run. Run these commands to install OpenJDK:
 
@@ -90,7 +105,7 @@ $ sudo systemctl enable mongod
 
         $ sudo su - solr -c "/opt/solr/bin/solr create -c leticia -n data_driven_schema_configs"
 
-#### Docker and Docker Compose
+#### Docker and Docker Compose {#docker-install}
 
 This is required only for Docker production deploy.
 
@@ -120,7 +135,7 @@ This is required only for Docker production deploy.
         $ sudo usermod -aG docker $(whoami)
         $ logout
 
-### Environment variables
+### Environment variables {#env-vars}
 
 To run LETICIA, a file with environment variables called `.env` is required on project's `src/` directory. You can copy and rename the `.env.example` file to get the default settings, or you can customize this file to customize the deploy. The following environment variables are available on LETICIA:
 
@@ -149,7 +164,7 @@ To run LETICIA, a file with environment variables called `.env` is required on p
 | ENABLE_FRONTEND        | true          | Toggles deploy of LETICIA's Frontend              |
 | ENABLE_API_DOCS        | true          | Toggles deploy of LETICIA's OpenAPI Documentation |
 
-### Example databases
+### Example databases {#populate-db}
 
 After deploying LETICIA either in development or PM2 deploy mode, is possible to install a pre-populated database as an example to create new experimental assets. You can do so by running the following commands from the project's root directory:
 
@@ -158,7 +173,7 @@ $ cd extras/databaseScripts/
 $ mongo leticia-data populateDataDatabase-en.js
 ```
 
-## License
+## License {#license}
 
 The source code of LETICIA is available under the GNU Affero General Public License version 3.
 
