@@ -2,9 +2,11 @@
 
 LETICIA is a web platform intended to be an open-source solution to deploy study designs in the Interactive Information Retrieval (IIR) field. Besides deploying these studies, LETICIA can conduct them and collect various types of data from user's interactions. LETICIA presents several features out of the box that can be customized to researchers' needs: A built-in search engine, a tool to build document collections, an interactive application programming interface (API), a data logger, and a session flow manager.
 
+![LETICIA Showcase](/extras/leticia-showcase.gif)
+
 ## Quick Start
 
-To install and test LETICIA, follow these steps:
+For a quick deploy to test LETICIA's features, use the Docker deploy described below:
  
 1. Clone this repository or download it as ZIP
 2. Install required dependencies ([Docker](#Docker-and-Docker-Compose))
