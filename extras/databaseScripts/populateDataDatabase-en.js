@@ -426,7 +426,7 @@ db.questions.insertMany([
     "questionId": "nasatlx06",
     "type": "anonlikert",
     "title": "Frustration",
-    "hint": "How insecure, irritated or stressed did yoy feel by the task?",
+    "hint": "How insecure, irritated or stressed did you feel by the task?",
     "start": 1,
     "stop": 21,
     "step": 1,
