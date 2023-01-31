@@ -13,27 +13,27 @@ navbar_entries:
 
 project_entries:
   - title: Session flow manager
-    url: overview-post
+    url:
     desc: LETICIA has a customizable set of stages that can be ensembled to offer different experiences to participants
 
   - title: Built-in search engine
-    url: overview-post
+    url:
     desc: LETICIA brings its own inverted index as a local search system (powered by Apache Solr)
 
   - title: Document downloader
-    url: overview-post
+    url:
     desc: LETICIA can download and index HTML pages from the local network or the internet (if available)
 
   - title: Interaction data logger
-    url: overview-post
+    url:
     desc: Participants' interactions on LETICIA are registered from their web browser
 
   - title: Web Client
-    url: overview-post
+    url:
     desc: LETICIA is a web platform based on Node.js and Vue.js, participants can interact with the platform remotely from their web browser (no installation required)
 
   - title: Interactive API
-    url: overview-post
+    url:
     desc: LETICIA has an interactive API interface (powered by the OpenAPI Standard) where researchers can modify the platform behaviors for their needs
 
 old_project_entries:
