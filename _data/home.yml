@@ -1,39 +1,40 @@
 navbar_entries:
-  - title: about
+  - title: About
     url: about
 
-  - title: blog
-    url: blog
+  - title: News
+    url: news
 
-  - title: website
-    url: https://www.abhinav.co
+  - title: Download
+    url: https://github.com/dgacitua/leticia/releases
+
+  - title: GitHub Repository
+    url: https://github.com/dgacitua/leticia
 
 project_entries:
-  - title: Project 1
+  - title: Session flow manager
     url: overview-post
-    desc: This is an example project, configured in _data/home.yml
+    desc: LETICIA has a customizable set of stages that can be ensembled to offer different experiences to participants
 
-  - title: Project 2
+  - title: Built-in search engine
     url: overview-post
-    desc: Projects are shown in card layout
+    desc: LETICIA brings its own inverted index as a local search system (powered by Apache Solr)
 
-  - title: Project 3
+  - title: Document downloader
     url: overview-post
-    desc: You can control visibility from _config.yml file
+    desc: LETICIA can download and index HTML pages from the local network or the internet (if available)
 
-  - title: Project 4
+  - title: Interaction data logger
     url: overview-post
-    desc: This project uses highlight markup, configured in _data/home.yml
-    highlight: WIP
+    desc: Participants' interactions on LETICIA are registered from their web browser
 
-  - title: Project 5
+  - title: Web Client
     url: overview-post
-    desc: Moonwalk also has horizontal list (used in header and footer)
-    highlight: WIP
+    desc: LETICIA is a web platform based on Node.js and Vue.js, participants can interact with the platform remotely from their web browser (no installation required)
 
-  - title: Project 6
+  - title: Interactive API
     url: overview-post
-    desc: It also has a scalable vertical list (in case you need it)
+    desc: LETICIA has an interactive API interface (powered by the OpenAPI Standard) where researchers can modify the platform behaviors for their needs
 
 old_project_entries:
   - title: Soopr
@@ -54,16 +55,13 @@ old_project_entries:
     desc: The better people know you, the better they collaborate
 
 footer_entries:
-  - title: abhinav's homepage
-    url: https://www.abhinav.co
+  - title: Daniel Gacitúa's Homepage
+    url: https://dgacitua.info
 
-  - title: twitter
-    url: https://twitter.com/abhinav
+  - title: GitHub
+    url: https://github.com/dgacitua
 
-  - title: github
-    url: https://github.com/abhinavs
-
-  - title: feed
+  - title: Feed
     url: feed.xml
 
 misc_entries:
