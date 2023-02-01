@@ -2,11 +2,11 @@ navbar_entries:
   - title: Features
     url: features
 
+  - title: Screenshots
+    url: screenshots
+
   - title: News
     url: news
-
-  - title: About
-    url: about
 
   - title: Download
     url: https://github.com/dgacitua/leticia/releases
