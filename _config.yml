@@ -2,7 +2,10 @@ title: LETICIA
 author: Daniel Gacitúa
 url: https://dgacitua.github.io/leticia/ # root address of the site
 description: > # description of the site (multiple lines allowed)
-  LETICIA is a web platform provided as an open-source solution to deploy study designs in the Interactive Information Retrieval (IIR) field. Besides deploying these studies, LETICIA can conduct them and collect various types of data from user's interactions. LETICIA presents several features out of the box that can be customized to researchers' needs: A built-in search engine, a tool to build document collections, an interactive application programming interface (API), a data logger, and a session flow manager.
+  LETICIA is a web platform provided as an open-source solution to deploy study designs in the Interactive Information Retrieval (IIR) field.
+  Besides deploying these studies, LETICIA can conduct them and collect various types of data from user's interactions.
+  LETICIA presents several features out of the box that can be customized to researchers' needs: A built-in search engine, a tool to build document collections, an interactive application programming interface (API), a data logger, and a session flow manager.
+  The source code of LETICIA is available under the GNU Affero General Public License version 3.
 
 permalink: /:slug
 
@@ -18,7 +21,7 @@ remote_theme: abhinavs/moonwalk
 theme_config:
   appearance: "dark" # can be "light", "dark" or "auto"
   appearance_toggle: true # if appearance can be switched by user
-  back_home_text: "home.." # customize text for homepage link in post layout
+  back_home_text: "Home" # customize text for homepage link in post layout
   date_format: "%Y-%m-%d" # customize how date is formatted
   show_description: true # show blog description
   show_navbar: true # show horizontal navbar
