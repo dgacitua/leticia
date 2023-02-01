@@ -2,7 +2,7 @@ title: LETICIA
 author: Daniel Gacitúa
 url: https://dgacitua.github.io/leticia/ # root address of the site
 description: > # description of the site (multiple lines allowed)
-  LETICIA is a web platform provided as an open-source solution to deploy study designs in the Interactive Information Retrieval (IIR) field.
+  LETICIA (simuLated sEarch Task deploy and InteraCtIon cApture platform) is a web platform provided as an open-source solution to deploy study designs in the Interactive Information Retrieval (IIR) field.
   Besides deploying these studies, LETICIA can conduct them and collect various types of data from user's interactions.
   LETICIA presents several features out of the box that can be customized to researchers' needs: A built-in search engine, a tool to build document collections, an interactive application programming interface (API), a data logger, and a session flow manager.
   The source code of LETICIA is available under the GNU Affero General Public License version 3.

@@ -8,7 +8,7 @@ navbar_entries:
   - title: News
     url: news
 
-  - title: Download
+  - title: Downloads
     url: https://github.com/dgacitua/leticia/releases
 
   - title: GitHub Repository
