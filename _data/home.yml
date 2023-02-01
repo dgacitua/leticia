@@ -1,9 +1,12 @@
 navbar_entries:
-  - title: About
-    url: about
+  - title: Features
+    url: features
 
   - title: News
     url: news
+
+  - title: About
+    url: about
 
   - title: Download
     url: https://github.com/dgacitua/leticia/releases
@@ -13,27 +16,27 @@ navbar_entries:
 
 project_entries:
   - title: Session flow manager
-    url:
+    url: features
     desc: LETICIA has a customizable set of stages that can be ensembled to offer different experiences to participants
 
   - title: Built-in search engine
-    url:
+    url: features
     desc: LETICIA brings its own inverted index as a local search system (powered by Apache Solr)
 
   - title: Document downloader
-    url:
+    url: features
     desc: LETICIA can download and index HTML pages from the local network or the internet (if available)
 
   - title: Interaction data logger
-    url:
+    url: features
     desc: Participants' interactions on LETICIA are registered from their web browser
 
   - title: Web Client
-    url:
+    url: features
     desc: LETICIA is a web platform based on Node.js and Vue.js, participants can interact with the platform remotely from their web browser (no installation required)
 
   - title: Interactive API
-    url:
+    url: features
     desc: LETICIA has an interactive API interface (powered by the OpenAPI Standard) where researchers can modify the platform behaviors for their needs
 
 old_project_entries:

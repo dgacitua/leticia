@@ -1,8 +1,6 @@
 ---
 layout: post
-title: About
+title: About LETICIA
 ---
 
-This is an example page!
-
-Actually, it has the same layout of a post...
+About
