@@ -29,5 +29,5 @@ LETICIA is built as an effort to ease study creation for IIR researchers and off
 
 ## Install Instructions
 
-Instructions for deploy (for development or production) are available on the README file of [LETICIA's GitHub Repository](https://github.com/dgacitua/leticia).
+To use LETICIA, you need to clone (or download as ZIP) the source code from [LETICIA's GitHub Repository](https://github.com/dgacitua/leticia). Up-to-date instructions for deploy (either on development or production mode) are available on the `README.md` file. Source code is available on `src/` directory. Full documentation can be found on the `docs/` directory.
 
